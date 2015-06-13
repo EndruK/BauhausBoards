@@ -31,7 +31,14 @@ app.get('/', function (req, res) {
   //express provides render and renders the view
   //.render('viewname',ProbertyObject)
   res.render('index',
-  { title : 'Home' }
+  { title : 'Home',
+    condition : true }
   );
+});
+app.get('/test', function (req, res) {
+  res.render('test',
+  {
+
+  });
 });
 app.listen(3000);

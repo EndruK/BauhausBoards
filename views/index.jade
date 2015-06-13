@@ -2,9 +2,10 @@ extend layout
 block heading
   p header
 block sidebar
-  p sidebar
-  p link1
-  p link2
+  a(href='/') link1
+  br
+  a(href='test') link2
+  p link3
 block content
   ul
     li
@@ -21,3 +22,5 @@ block content
       p
         | wenn jetzt eine andere Auflösung genutzt wird muss der content
         | gescaled werden
+  br
+  include includes/header
