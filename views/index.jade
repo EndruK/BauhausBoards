@@ -1,0 +1,23 @@
+extend layout
+block heading
+  p header
+block sidebar
+  p sidebar
+  p link1
+  p link2
+block content
+  ul
+    li
+      p
+        | Wenn die sidebar ausgeklappt ist soll
+        | diese einfach nur absolut über dem Content
+        | stehen css: z-index
+    li
+      p
+        | Wenn Editor-ratio muss immer die selbe sein,
+        | Tablet-ratio muss daher beim initialisieren ausgelesen und
+        | abgespeichert werden (spätere anpassung möglich)
+    li
+      p
+        | wenn jetzt eine andere Auflösung genutzt wird muss der content
+        | gescaled werden
