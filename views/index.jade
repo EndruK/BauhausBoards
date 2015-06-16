@@ -1,11 +1,8 @@
 extend layout
 block heading
-  p header
+  h2 Main View
 block sidebar
-  a(href='/') link1
-  br
-  a(href='message') link2
-  p link3
+  include includes/sidebars/sidebarMainView
 block content
   ul
     li
@@ -23,4 +20,3 @@ block content
         | wenn jetzt eine andere Auflösung genutzt wird muss der content
         | gescaled werden
   br
-  include includes/header
