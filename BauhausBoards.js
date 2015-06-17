@@ -3,6 +3,7 @@ var stylus  = require('stylus');
 var nib     = require('nib');
 
 //Liberation Mono 12 :)
+//http://www.onextrapixel.com/2013/06/24/creating-a-swipeable-side-menu-for-the-web/
 
 //define to use the express framework
 var app = express();

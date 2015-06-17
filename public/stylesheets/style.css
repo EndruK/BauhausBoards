@@ -95,15 +95,16 @@ body {
   height: 100%;
 }
 header {
-  height: 150px;
+  height: 100px;
   text-align: center;
   background-color: #aaa;
 }
 .sidebar {
   position: absolute;
   z-index: 1;
+  left: -125px;
   float: left;
-  width: 250px;
+  width: 150px;
   height: 100%;
   background-color: #777;
 }
@@ -114,12 +115,11 @@ content {
 .main-content {
   position: absolute;
   z-index: 0;
-  top: 150px;
-  width: calc(100% - (250px + 25px));
-  height: calc(100% - 150px);
-  background-color: #ccc;
-  padding-left: 275px;
+  width: 100%;
+  height: calc(100% - 100px);
+  background-color: #ddd;
 }
-li {
+.main-content ul {
+  padding-left: 75px;
   list-style: disc;
 }

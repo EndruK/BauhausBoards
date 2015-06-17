@@ -3,8 +3,10 @@
 @import url ('http://fonts.googleapis.com/css?family=Quicksand')
 global-reset()
 
-header-height = 150px
-sidebar-width = 250px
+header-height = 100px
+sidebar-width = 150px
+//sidebar-left-index = 0px
+sidebar-left-index = -125px
 
 html,body
   height 100%
@@ -15,6 +17,9 @@ header
 .sidebar
   position absolute
   z-index 1
+  
+  left sidebar-left-index
+  
   float left
   width sidebar-width
   height 100%
@@ -24,11 +29,13 @@ content
   height 100%
 .main-content
   position absolute
+  //display inline-block
   z-index 0
-  top header-height
-  width "calc(100% - (%s + 25px))" %sidebar-width
+  //top header-height
+  //width  "calc(100% - %s)" %sidebar-width
+  width 100%
   height "calc(100% - %s)" %header-height
-  background-color #cccccc
-  padding-left 275px
-li
+  background-color #dddddd
+.main-content ul
+  padding-left sidebar-left-index + sidebar-width + 50px
   list-style disc
