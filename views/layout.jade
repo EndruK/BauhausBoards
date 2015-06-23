@@ -1,17 +1,7 @@
-doctype
+doctype html
 html
   head
-    title BauhausBoards
+    title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    .sidebar
-      block sidebar
-    content
-      - if (condition == true)
-        header
-          block heading
-      -else
-        header
-          block heading
-      .main-content
-        block content
+    block content
