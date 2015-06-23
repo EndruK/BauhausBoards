@@ -1,0 +1,20 @@
+@import 'nib'
+global-reset()
+
+header-hight = 100px
+
+html,body,#wrapper
+  height 100%
+#header
+  background-color #aaaaaa
+  text-align right
+  height header-hight
+#content
+  background-color #777777
+  text-align center
+  height "calc(100% - %s)" %header-hight
+#sidebar
+  background-color #999999
+  position absolute
+  height 100%
+  width 200px
