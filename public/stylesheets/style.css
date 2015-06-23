@@ -102,7 +102,7 @@ header {
 .sidebar {
   position: absolute;
   z-index: 1;
-  left: -125px;
+  left: 0px;
   float: left;
   width: 150px;
   height: 100%;
@@ -120,6 +120,6 @@ content {
   background-color: #ddd;
 }
 .main-content ul {
-  padding-left: 75px;
+  padding-left: 200px;
   list-style: disc;
 }
