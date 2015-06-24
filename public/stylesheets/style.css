@@ -96,17 +96,48 @@ body,
 }
 #header {
   background-color: #aaa;
-  text-align: right;
+  padding-left: calc(35px + 10px);
   height: 100px;
 }
 #content {
   background-color: #777;
-  text-align: center;
   height: calc(100% - 100px);
 }
-#sidebar {
-  background-color: #999;
+.sidebar {
   position: absolute;
+  left: -200px;
   height: 100%;
+  -webkit-transition: left 0.4s ease-in-out;
+  -moz-transition: left 0.4s ease-in-out;
+  -ms-transition: left 0.4s ease-in-out;
+  -o-transition: left 0.4s ease-in-out;
+  -webkit-transition: left 0.4s ease-in-out;
+  -moz-transition: left 0.4s ease-in-out;
+  -o-transition: left 0.4s ease-in-out;
+  -ms-transition: left 0.4s ease-in-out;
+  transition: left 0.4s ease-in-out;
+  background-color: rgba(150,150,150,0.8);
+}
+#sidebarContent {
   width: 200px;
+  text-align: center;
+  float: left;
+  height: 100%;
+}
+#sidebarSwiper {
+  width: 35px;
+  height: 100%;
+  left: 200px;
+  text-align: center;
+  vertical-align: middle;
+  float: left;
+  background-color: rgba(150,150,150,0.4);
+}
+#sidebarLower {
+  width: 200px;
+  position: absolute;
+  bottom: 0;
+}
+.open-sidebar {
+  left: 0;
 }
