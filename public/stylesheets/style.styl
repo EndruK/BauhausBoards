@@ -14,30 +14,19 @@ border-transition(n)
 
 html,body,#wrapper
   height 100%
-#header
-  background-color #aaaaaa
-  padding-left "calc(%s + 10px)" %swiper-width
-  //text-align right
-  height header-hight
-#content
-  background-color #777777
-  //text-align center
-  height "calc(100% - %s)" %header-hight
-
-//sidebar Stuff
+  
+//CLASSES
 .sidebar
   position absolute
-  left -200px
   height 100%
   border-transition(0.4s)
   background-color rgba(150,150,150,0.8)
-#sidebarContent
-  //background-color #999999
+.sidebarContent
   width sidebar-width
   text-align center
   float left
   height 100%
-#sidebarSwiper
+.sidebarSwiper
   width swiper-width
   height 100%
   left sidebar-width
@@ -45,9 +34,29 @@ html,body,#wrapper
   vertical-align middle
   float left
   background-color rgba(150,150,150,0.4)
-#sidebarLower
+.sidebarLower
   width sidebar-width
   position absolute
   bottom 0
+
+.close-sidebar
+  left -200px
 .open-sidebar
-  left 0
+  left 0px
+  
+
+
+//IDs
+#sidebarMain
+  visibility visible
+#sidebarBackend
+  position absolute
+  visibility hidden
+#header
+  background-color #aaaaaa
+  padding-left "calc(%s + 10px)" %swiper-width
+  height header-hight
+#content
+  background-color #777777
+  text-align center
+  height "calc(100% - %s)" %header-hight
