@@ -1,5 +1,5 @@
 var pos = 'index';
-var sideBarTimeout = 5000; //sidebar timeout in ms
+var sideBarTimeout = 10000; //sidebar timeout in ms
 var sidebarTimeoutHandler;
 //###DOM#######################################
 $('.sidebar').on('click', '.btnUser', loadMain);
