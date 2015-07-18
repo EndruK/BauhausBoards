@@ -5,7 +5,8 @@ var sidebarTimeoutHandler;
 $('.sidebar').on('click', '.btnUser', loadMain);
 $('.sidebar').on('click', '#btnMessage', loadMessageLanding);
 $('.sidebar').on('click', '#btnBackend', loadBackend);
-$('.sidebar').on('click', '.btnBack', loadMain)
+$('.sidebar').on('click', '.btnBack', loadMain);
+$('.sidebar').on('click', '.btnBackendSettings', loadSettings);
 $('.sidebarSwiper').swipe({
   swipeStatus:function(event,phase,direction,distance,duration,fingers) {
     //console.log(direction);
@@ -41,6 +42,11 @@ function loadBackend(event) {
   //$('#sidebarMain').css('visibility', 'hidden');
   //$('#sidebarBackend').css('visibility', 'visible');
 }
+function loadSettings(event) {
+  $('#header').text('Settings');
+  showSidebar('sidebarSettings');
+  updateTimer();
+}
 
 function openSidebar(){
   updateTimer();
@@ -68,6 +74,10 @@ function showSidebar(sidebar) {
       hideAll();
       $('#sidebarMessages').css('visibility', 'visible');
       break;
+    case 'sidebarSettings':
+      hideAll();
+      $('#sidebarBackendSettings').css('visibility','visible');
+      break;
     default:
       //nothing or main???
       break;
@@ -81,4 +91,5 @@ function hideAll() {
   $('#sidebarMain').css('visibility', 'hidden');
   $('#sidebarBackend').css('visibility', 'hidden');
   $('#sidebarMessages').css('visibility', 'hidden');
+  $('#sidebarBackendSettings').css('visibility', 'hidden');
 }
