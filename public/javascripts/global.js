@@ -3,8 +3,8 @@ var sideBarTimeout = 10000; //sidebar timeout in ms
 var sidebarTimeoutHandler;
 //###DOM#######################################
 $('.sidebar').on('click', '.btnUser', loadMain);
-$('.sidebar').on('click', '#btnMessage', loadMessageLanding);
-$('.sidebar').on('click', '#btnBackend', loadBackend);
+$('.sidebar').on('click', '.btnMessage', loadMessageLanding);
+$('.sidebar').on('click', '.btnBackend', loadBackend);
 $('.sidebar').on('click', '.btnBack', loadMain);
 $('.sidebar').on('click', '.btnBackendSettings', loadSettings);
 $('.sidebarSwiper').swipe({
