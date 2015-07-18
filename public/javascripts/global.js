@@ -28,7 +28,8 @@ function loadMain(event) {
   $('#header').text('header');
 }
 function loadMessageLanding(event) {
-  closeSidebar();
+  //closeSidebar();
+  showSidebar('sidebarMessages');
   console.log('goTo: message landing');
   $('#header').text('Message Landingpage');
   //TODO: change the sidebar to the create Message sidebar
@@ -56,12 +57,17 @@ function showSidebar(sidebar) {
   switch(sidebar){
     case 'sidebarMain':
       //all contents
+      hideAll();
       $('#sidebarMain').css('visibility', 'visible');
-      $('#sidebarBackend').css('visibility', 'hidden');
       break;
     case 'sidebarBackend':
-      $('#sidebarMain').css('visibility', 'hidden');
+      hideAll();
       $('#sidebarBackend').css('visibility', 'visible');
+      break;
+    case 'sidebarMessages':
+      hideAll();
+      $('#sidebarMessages').css('visibility', 'visible');
+      break;
     default:
       //nothing or main???
       break;
@@ -70,4 +76,9 @@ function showSidebar(sidebar) {
 function updateTimer() {
   clearTimeout(sidebarTimeoutHandler);
   sidebarTimeoutHandler = setTimeout(closeSidebar, sideBarTimeout);
+}
+function hideAll() {
+  $('#sidebarMain').css('visibility', 'hidden');
+  $('#sidebarBackend').css('visibility', 'hidden');
+  $('#sidebarMessages').css('visibility', 'hidden');
 }
