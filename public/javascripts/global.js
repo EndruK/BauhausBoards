@@ -7,6 +7,11 @@ $('.sidebar').on('click', '.btnMessage', loadMessageLanding);
 $('.sidebar').on('click', '.btnBackend', loadBackend);
 $('.sidebar').on('click', '.btnBack', loadMain);
 $('.sidebar').on('click', '.btnBackendSettings', loadSettings);
+$('.sidebar').on('click', '.btnCreateMessage', loadCreateMessage);
+$('.sidebar').on('click', '.btnFeedback', loadFeedback);
+$('.sidebar').on('click', '.btnSetStatus', loadChangeStatus);
+$('.sidebar').on('click', '.btnChangeContent', loadChangeContent);
+$('.sidebar').on('click', '.btnViewMessages', loadViewMessages);
 $('.sidebarSwiper').swipe({
   swipeStatus:function(event,phase,direction,distance,duration,fingers) {
     //console.log(direction);
@@ -23,28 +28,49 @@ $('.sidebarSwiper').swipe({
 
 //###FUNCTIONS#################################
 function loadMain(event) {
-  //closeSidebar();
   showSidebar('sidebarMain');
   console.log('goTo: main page');
   $('#header').text('header');
 }
 function loadMessageLanding(event) {
-  //closeSidebar();
   showSidebar('sidebarMessages');
   console.log('goTo: message landing');
   $('#header').text('Message Landingpage');
-  //TODO: change the sidebar to the create Message sidebar
+  updateTimer();
 }
 function loadBackend(event) {
   $('#header').text('Backend');
   showSidebar('sidebarBackend');
   updateTimer();
-  //$('#sidebarMain').css('visibility', 'hidden');
-  //$('#sidebarBackend').css('visibility', 'visible');
 }
 function loadSettings(event) {
   $('#header').text('Settings');
   showSidebar('sidebarSettings');
+  updateTimer();
+}
+function loadCreateMessage(event) {
+  $('#header').text('Compose Message');
+  showSidebar('sidebarCreateMessage');
+  updateTimer();
+}
+function loadFeedback(event) {
+  $('#header').text('Feedback');
+  showSidebar('sidebarFeedback');
+  updateTimer();
+}
+function loadChangeStatus(event) {
+  $('#header').text('change Status');
+  showSidebar('sidebarChangeStatus');
+  updateTimer();
+}
+function loadChangeContent(event) {
+  $('#header').text('change Content');
+  showSidebar('sidebarChangeContent');
+  updateTimer();
+}
+function loadViewMessages(event) {
+  $('#header').text('View Messages');
+  showSidebar('sidebarViewMessages');
   updateTimer();
 }
 
@@ -62,7 +88,6 @@ function closeSidebar() {
 function showSidebar(sidebar) {
   switch(sidebar){
     case 'sidebarMain':
-      //all contents
       hideAll();
       $('#sidebarMain').css('visibility', 'visible');
       break;
@@ -78,6 +103,24 @@ function showSidebar(sidebar) {
       hideAll();
       $('#sidebarBackendSettings').css('visibility','visible');
       break;
+    case 'sidebarCreateMessage':
+      hideAll();
+      $('#sidebarCreateMessage').css('visibility','visible');
+      break;
+    case 'sidebarFeedback':
+      hideAll();
+      $('#sidebarFeedback').css('visibility','visible');
+      break;
+    case 'sidebarChangeStatus':
+      hideAll();
+      $('#sidebarChangeStatus').css('visibility','visible');
+      break;
+    case 'sidebarChangeContent':
+      hideAll();
+      $('#sidebarChangeContent').css('visibility','visible');
+    case 'sidebarViewMessages':
+      hideAll();
+      $('#sidebarViewMessages').css('visibility','visible');
     default:
       //nothing or main???
       break;
@@ -92,4 +135,9 @@ function hideAll() {
   $('#sidebarBackend').css('visibility', 'hidden');
   $('#sidebarMessages').css('visibility', 'hidden');
   $('#sidebarBackendSettings').css('visibility', 'hidden');
+  $('#sidebarCreateMessage').css('visibility','hidden');
+  $('#sidebarFeedback').css('visibility','hidden');
+  $('#sidebarChangeStatus').css('visibility','hidden');
+  $('#sidebarChangeContent').css('visibility','hidden');
+  $('#sidebarViewMessages').css('visibility','hidden');
 }

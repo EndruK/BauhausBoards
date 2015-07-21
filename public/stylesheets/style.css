@@ -145,6 +145,26 @@ body,
   position: absolute;
   visibility: hidden;
 }
+#sidebarCreateMessage {
+  position: absolute;
+  visibility: hidden;
+}
+#sidebarFeedback {
+  position: absolute;
+  visibility: hidden;
+}
+#sidebarChangeStatus {
+  position: absolute;
+  visibility: hidden;
+}
+#sidebarChangeContent {
+  position: absolute;
+  visibility: hidden;
+}
+#sidebarViewMessages {
+  position: absolute;
+  visibility: hidden;
+}
 #header {
   background-color: #aaa;
   padding-left: calc(35px + 10px);

@@ -1,10 +1,15 @@
 extends layout
 
 block content
-  include sidebarMain
-  include sidebarMessages
-  include sidebarBackend
-  include sidebarSettings
+  include sidebars/sidebarMain
+  include sidebars/sidebarMessages
+  include sidebars/sidebarBackend
+  include sidebars/sidebarSettings
+  include sidebars/sidebarCreateMessage
+  include sidebars/sidebarFeedback
+  include sidebars/sidebarChangeStatus
+  include sidebars/sidebarChangeContent
+  include sidebars/sidebarViewMessages
   #wrapper
     #header
       p header
