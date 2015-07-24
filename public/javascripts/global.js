@@ -12,6 +12,9 @@ $('.sidebar').on('click', '.btnFeedback', loadFeedback);
 $('.sidebar').on('click', '.btnSetStatus', loadChangeStatus);
 $('.sidebar').on('click', '.btnChangeContent', loadChangeContent);
 $('.sidebar').on('click', '.btnViewMessages', loadViewMessages);
+$('.sidebar').on('click', '.btnUserSettings', loadUserSettings);
+$('.sidebar').on('click', '.btnRoomSettings', loadRoomSettings);
+$('.sidebar').on('click', '.btnLogs', loadLogs);
 $('.sidebarSwiper').swipe({
   swipeStatus:function(event,phase,direction,distance,duration,fingers) {
     //console.log(direction);
@@ -73,6 +76,21 @@ function loadViewMessages(event) {
   showSidebar('sidebarViewMessages');
   updateTimer();
 }
+function loadUserSettings(event) {
+  $('#header').text('User Settings');
+  showSidebar('loadUserSettings');
+  updateTimer();
+}
+function loadRoomSettings(event) {
+  $('#header').text('Room Settings');
+  showSidebar('loadRoomSettings');
+  updateTimer();
+}
+function loadLogs(event) {
+  $('#header').text('Logs');
+  showSidebar('loadLogs');
+  updateTimer();
+}
 
 function openSidebar(){
   updateTimer();
@@ -118,9 +136,23 @@ function showSidebar(sidebar) {
     case 'sidebarChangeContent':
       hideAll();
       $('#sidebarChangeContent').css('visibility','visible');
+      break;
     case 'sidebarViewMessages':
       hideAll();
       $('#sidebarViewMessages').css('visibility','visible');
+      break;
+    case 'loadUserSettings':
+      hideAll();
+      $('#sidebarBackendUserSettings').css('visibility','visible');
+      break;
+    case 'loadRoomSettings':
+      hideAll();
+      $('#sidebarBackendRoomSettings').css('visibility','visible');
+      break;
+    case 'loadLogs':
+      hideAll();
+      $('#sidebarBackendLogs').css('visibility','visible');
+      break;
     default:
       //nothing or main???
       break;
@@ -140,4 +172,7 @@ function hideAll() {
   $('#sidebarChangeStatus').css('visibility','hidden');
   $('#sidebarChangeContent').css('visibility','hidden');
   $('#sidebarViewMessages').css('visibility','hidden');
+  $('#sidebarBackendUserSettings').css('visibility','hidden');
+  $('#sidebarBackendRoomSettings').css('visibility','hidden');
+  $('#sidebarBackendLogs').css('visibility','hidden');
 }

@@ -165,6 +165,18 @@ body,
   position: absolute;
   visibility: hidden;
 }
+#sidebarBackendUserSettings {
+  position: absolute;
+  visibility: hidden;
+}
+#sidebarBackendRoomSettings {
+  position: absolute;
+  visibility: hidden;
+}
+#sidebarBackendLogs {
+  position: absolute;
+  visibility: hidden;
+}
 #header {
   background-color: #aaa;
   padding-left: calc(35px + 10px);
