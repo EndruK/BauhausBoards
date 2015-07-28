@@ -10,6 +10,8 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/bauhausboards');
 
+var paper = require('paper');
+
 var routes = require('./routes/index');
 var functions = require('./routes/functions');
 
@@ -20,6 +22,7 @@ function compile(str, path) {
     .set('filename', path)
     .use(nib());
 };
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,6 +41,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/node_modules/paper', express.static(__dirname + '/node_modules/paper'));
+app.use('/node_modules/jquery', express.static(__dirname + '/node_modules/jquery'));
+app.use('/node_modules/jquery-touchswipe', express.static(__dirname + '/node_modules/jquery-touchswipe'));
+app.use('/node_modules/paper', express.static(__dirname + '/node_modules/paper'));
 
 app.use('/', routes);
 app.use('/functions', functions);
@@ -48,6 +55,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
 
 // error handlers
 
@@ -74,4 +82,6 @@ app.use(function(err, req, res, next) {
 });
 
 
+
+module.exports = paper;
 module.exports = app;
