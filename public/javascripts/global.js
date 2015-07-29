@@ -16,10 +16,6 @@ $('.sidebar').on('click', '.btnUserSettings', loadUserSettings);
 $('.sidebar').on('click', '.btnRoomSettings', loadRoomSettings);
 $('.sidebar').on('click', '.btnLogs', loadLogs);
 
-
-$('.sidebar').on('click', '.test', test);
-
-
 $('.sidebarSwiper').swipe({
   swipeStatus:function(event,phase,direction,distance,duration,fingers) {
     //console.log(direction);
@@ -180,15 +176,4 @@ function hideAll() {
   $('#sidebarBackendUserSettings').css('visibility','hidden');
   $('#sidebarBackendRoomSettings').css('visibility','hidden');
   $('#sidebarBackendLogs').css('visibility','hidden');
-}
-function test() {
-  console.log("drawing test");
-  var canvas = document.getElementById('myCanvas');
-  paper.setup(canvas);
-  var path = new paper.Path();
-  path.strokeColor = 'black';
-  var start = new paper.Point(100,100);
-  path.moveTo(start);
-  path.lineTo(start.add([ 200, -50 ]));
-  paper.view.draw();
 }
