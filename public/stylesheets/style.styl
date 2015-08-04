@@ -21,6 +21,7 @@ html,body,#wrapper
   height 100%
   border-transition(0.4s)
   background-color rgba(150,150,150,0.8)
+  z-index 10
 .sidebarContent
   width sidebar-width
   text-align center
@@ -34,6 +35,7 @@ html,body,#wrapper
   vertical-align middle
   float left
   background-color rgba(150,150,150,0.4)
+  z-index 10
 .sidebarLower
   width sidebar-width
   position absolute
@@ -92,3 +94,9 @@ html,body,#wrapper
 #sidebarBackendSettings
   position absolute
   visibility hidden
+#myCanvas
+  position absolute
+  left 0
+  width 100%
+  height inherit
+  height "calc(100% - %s)" %header-hight

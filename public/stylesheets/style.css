@@ -107,6 +107,7 @@ body,
   -ms-transition: left 0.4s ease-in-out;
   transition: left 0.4s ease-in-out;
   background-color: rgba(150,150,150,0.8);
+  z-index: 10;
 }
 .sidebarContent {
   width: 200px;
@@ -122,6 +123,7 @@ body,
   vertical-align: middle;
   float: left;
   background-color: rgba(150,150,150,0.4);
+  z-index: 10;
 }
 .sidebarLower {
   width: 200px;
@@ -190,4 +192,11 @@ body,
 #sidebarBackendSettings {
   position: absolute;
   visibility: hidden;
+}
+#myCanvas {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: inherit;
+  height: calc(100% - 100px);
 }

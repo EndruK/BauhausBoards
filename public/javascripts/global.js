@@ -109,10 +109,12 @@ function showSidebar(sidebar) {
     case 'sidebarMain':
       hideAll();
       $('#sidebarMain').css('visibility', 'visible');
+      $('#myCanvas').css('visibility','visible');
       break;
     case 'sidebarBackend':
       hideAll();
       $('#sidebarBackend').css('visibility', 'visible');
+      $('#myCanvas').css('visibility','hidden');
       break;
     case 'sidebarMessages':
       hideAll();

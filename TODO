@@ -1,4 +1,9 @@
 TODO:
 - Datenbank einrichten - Ordentliches Schema austüfteln
 - Editor einbauen
-- LaTeX template für BA austesten
+  * paperjs
+    # ausprobieren und lernen damit umzugehen
+  * auf main view nur anzeige -> db get all for room
+  * eigenes canvas auf new message -> db post new message
+  * auf change content -> haupt interaktion mit content
+- BA anfangen zu schreiben (damit ich nicht diverse sachen vergesse)
