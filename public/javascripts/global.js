@@ -1,7 +1,9 @@
 var pos = 'index';
 var sideBarTimeout = 10000; //sidebar timeout in ms
 var sidebarTimeoutHandler;
-//###DOM#######################################
+var sidebarStatus = false;
+
+//###DOM########################################################################
 $('.sidebar').on('click', '.btnUser', loadMain);
 $('.sidebar').on('click', '.btnMessage', loadMessageLanding);
 $('.sidebar').on('click', '.btnBackend', loadBackend);
@@ -29,8 +31,18 @@ $('.sidebarSwiper').swipe({
     }
   }
 });
+$('.sidebarSwiper').click(function(){
+  console.log("clicked on sidebarSwiper");
+  if(!sidebarStatus) {
+    openSidebar();
+  }
+  else {
+    closeSidebar();
+  }
+  return false;
+});
 
-//###FUNCTIONS#################################
+//###FUNCTIONS##################################################################
 function loadMain(event) {
   showSidebar('sidebarMain');
   console.log('goTo: main page');
@@ -95,10 +107,12 @@ function loadLogs(event) {
 
 function openSidebar(){
   updateTimer();
+  sidebarStatus = true;
   $('.sidebar').removeClass('close-sidebar');
   $('.sidebar').addClass("open-sidebar");
 };
 function closeSidebar() {
+  sidebarStatus = false;
   $('.sidebar').removeClass('open-sidebar');
   $('.sidebar').addClass("close-sidebar");
   clearTimeout(sidebarTimeoutHandler);
