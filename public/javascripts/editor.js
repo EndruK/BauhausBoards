@@ -4,9 +4,9 @@ $('.sidebar').on('click', '.refresh', refreshCanvas);
 
 paper.install(window);
 $(document).ready(function() {
-  paper.setup('myCanvas');
+  paper.setup('drawMessage');
   var tool = new Tool();
-  var path;
+  //var path;
   var text = new PointText({
     point: [240,30],
     content: 'Draw Something :)',
@@ -26,5 +26,5 @@ $(document).ready(function() {
   }
 });
 function refreshCanvas(event) {
-  paper.setup('myCanvas');
+  paper.setup('drawMessage');
 }

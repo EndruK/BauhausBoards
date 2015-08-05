@@ -54,6 +54,13 @@ function loadMessageLanding(event) {
   $('#header').text('Message Landingpage');
   updateTimer();
 }
+function loadCreateMessage(event) {
+  $('#header').text('Compose Message');
+  showSidebar('sidebarCreateMessage');
+  clearTimeout(5000);
+  refreshCanvas();
+  updateTimer();
+}
 function loadBackend(event) {
   $('#header').text('Backend');
   showSidebar('sidebarBackend');
@@ -62,11 +69,6 @@ function loadBackend(event) {
 function loadSettings(event) {
   $('#header').text('Settings');
   showSidebar('sidebarSettings');
-  updateTimer();
-}
-function loadCreateMessage(event) {
-  $('#header').text('Compose Message');
-  showSidebar('sidebarCreateMessage');
   updateTimer();
 }
 function loadFeedback(event) {
@@ -141,6 +143,7 @@ function showSidebar(sidebar) {
     case 'sidebarCreateMessage':
       hideAll();
       $('#sidebarCreateMessage').css('visibility','visible');
+      $('#drawMessage').css('visibility','visible');
       break;
     case 'sidebarFeedback':
       hideAll();
@@ -192,4 +195,5 @@ function hideAll() {
   $('#sidebarBackendUserSettings').css('visibility','hidden');
   $('#sidebarBackendRoomSettings').css('visibility','hidden');
   $('#sidebarBackendLogs').css('visibility','hidden');
+  $('#drawMessage').css('visibility','hidden');
 }
