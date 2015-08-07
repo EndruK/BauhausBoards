@@ -1,30 +1,50 @@
-//$('.sidebar').on('click', '.test', test);
-//$('.sidebar').on('click', '.test2', test2);
-$('.sidebar').on('click', '.refresh', refreshCanvas);
-
+//set up the global paper scope
 paper.install(window);
+var selectedMethod = 'btnEditorSelector';
+var path;
+$('.sidebar').on('click', '.btnEditorSelector', doClick);
+$('.sidebar').on('click', '.btnEditorPen', doClick);
+$('.sidebar').on('click', '.btnEditorText', doClick);
+$('.sidebar').on('click', '.btnEditorEraser', doClick);
+$('.sidebar').on('click', '.btnEditorStrokeSize', doClick);
+$('.sidebar').on('click', '.btnEditorColor', doClick);
+$('.sidebar').on('click', '.btnEditorUndo', doClick);
+$('.sidebar').on('click', '.btnEditorRedo', doClick);
 $(document).ready(function() {
-  paper.setup('drawMessage');
+  //get the editor canvas
+  paper.setup('EditorCanvas');
   var tool = new Tool();
-  //var path;
-  var text = new PointText({
-    point: [240,30],
-    content: 'Draw Something :)',
-    fillColor: 'black',
-    font: 'arial',
-    fontWeight: 'bold',
-    fontSize: 30
-  });
-
-  tool.onMouseDown = function(event) {
-    path = new Path();
-    path.strokeColor = 'black';
-    path.add(event.point);
-  }
-  tool.onMouseDrag = function(event) {
-    path.add(event.point);
-  }
+  //add mouse listeners
+  tool.onMouseDown = penMouseDown;
+  tool.onMouseDrag = penMouseDrag;
+  tool.onMouseUp   = penMosueUp;
 });
-function refreshCanvas(event) {
-  paper.setup('drawMessage');
+
+function penMouseDown(event) {
+  //only execute if pen mode activated
+  if(selectedMethod != 'btnEditorPen')
+    return;
+  path = new Path();
+  path.strokeColor = 'black';
+  drag = true;
+}
+
+function penMouseDrag(event) {
+  //only execute if pen mode activated
+  if(selectedMethod != 'btnEditorPen')
+    return;
+  path.add(event.point);
+}
+
+function penMosueUp(event) {
+  //only execute if pen mode activated
+  if(selectedMethod != 'btnEditorPen')
+    return;
+  drag = false;
+  path.simplify();
+}
+
+function doClick(event) {
+  selectedMethod = $(this).attr('class');
+  updateTimer();
 }

@@ -55,10 +55,10 @@ function loadMessageLanding(event) {
   updateTimer();
 }
 function loadCreateMessage(event) {
-  $('#header').text('Compose Message');
+  var tmp  = $('#header').text('Compose Message\nall selected persons have to be displayed here');
+  tmp.html(tmp.html().replace(/\n/g,'<br>'));
   showSidebar('sidebarCreateMessage');
   clearTimeout(5000);
-  refreshCanvas();
   updateTimer();
 }
 function loadBackend(event) {
@@ -143,7 +143,7 @@ function showSidebar(sidebar) {
     case 'sidebarCreateMessage':
       hideAll();
       $('#sidebarCreateMessage').css('visibility','visible');
-      $('#drawMessage').css('visibility','visible');
+      $('#EditorCanvas').css('visibility','visible');
       break;
     case 'sidebarFeedback':
       hideAll();
@@ -195,5 +195,5 @@ function hideAll() {
   $('#sidebarBackendUserSettings').css('visibility','hidden');
   $('#sidebarBackendRoomSettings').css('visibility','hidden');
   $('#sidebarBackendLogs').css('visibility','hidden');
-  $('#drawMessage').css('visibility','hidden');
+  $('#EditorCanvas').css('visibility','hidden');
 }
