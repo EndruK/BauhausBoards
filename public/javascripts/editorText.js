@@ -1,5 +1,6 @@
 //set up the global paper scope
 paper.install(window);
+//button click listener
 $('.sidebar').on('click', '.btnEditorText', activateTextTool);
 $(document).ready(function() {
   //initialize the text event handler tool
@@ -23,6 +24,8 @@ function drawText(event) {
     console.log(input);
     var text = new PointText(event.point);
     text.fillColor = 'black';
+    text.fontFamily = 'Arial';
+    text.fontSize = '20px';
     text.content = input;
     //TODO: add the text to the set of canvas objects
   }

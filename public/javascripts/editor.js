@@ -5,7 +5,6 @@ var selectorTool;
 var penTool;
 var textTool;
 $('.sidebar').on('click', '.btnEditorEraser', doClick);
-$('.sidebar').on('click', '.btnEditorStrokeSize', doClick);
 $('.sidebar').on('click', '.btnEditorColor', doClick);
 $('.sidebar').on('click', '.btnEditorUndo', doClick);
 $('.sidebar').on('click', '.btnEditorRedo', doClick);

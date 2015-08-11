@@ -1,5 +1,6 @@
 //set up the global paper scope
 paper.install(window);
+//button click listener
 $('.sidebar').on('click', '.btnEditorPen', activatePenTool);
 $(document).ready(function() {
   //initialize the pen event handler tool

@@ -1,5 +1,6 @@
 //set up the global paper scope
 paper.install(window);
+//button click listener
 $('.sidebar').on('click', '.btnEditorSelector', activateSelectorTool);
 $(document).ready(function() {
   //initialize the selector event handler tool
