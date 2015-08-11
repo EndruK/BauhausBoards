@@ -7,3 +7,14 @@ TODO:
   * eigenes canvas auf new message -> db post new message
   * auf change content -> haupt interaktion mit content
 - BA anfangen zu schreiben (damit ich nicht diverse sachen vergesse)
+- Icons machen/heraussuchen:
+  * Editor
+    # selector
+     -> move/resize/delete/move-layer-up/move-layer-down
+    # pen
+    # text
+    # eraser
+    # stroke-size (3-4)
+    # Color ???
+    # Undo
+    # Redo

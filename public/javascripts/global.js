@@ -1,3 +1,5 @@
+//set up the global paper scope
+paper.install(window);
 var pos = 'index';
 var sideBarTimeout = 10000; //sidebar timeout in ms
 var sidebarTimeoutHandler;
@@ -56,6 +58,8 @@ function loadMessageLanding(event) {
 }
 function loadCreateMessage(event) {
   var tmp  = $('#header').text('Compose Message\nall selected persons have to be displayed here');
+  paper.setup('EditorCanvas');
+  activatePenTool();
   tmp.html(tmp.html().replace(/\n/g,'<br>'));
   showSidebar('sidebarCreateMessage');
   clearTimeout(5000);
