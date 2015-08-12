@@ -11,6 +11,7 @@ function penMouseDown(event) {
   //create a new path
   path = new Path();
   path.strokeColor = 'black';
+  path.strokeWidth = strokeSize*3;
 }
 
 function penMouseDrag(event) {

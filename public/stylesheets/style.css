@@ -130,12 +130,6 @@ body,
   position: absolute;
   bottom: 0;
 }
-.popupStrokeSize {
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  background-color: #121212;
-}
 .close-sidebar {
   left: -200px;
 }
@@ -143,61 +137,51 @@ body,
   left: 0px;
 }
 .strokeContainer {
-  width: inherit;
   overflow: auto;
+  height: 22px;
   padding: 5px;
   margin: 0 auto;
 }
 .stroke {
   float: left;
   width: 25%;
+  height: 100%;
   margin: inherit;
   overflow: auto;
   visibility: hidden;
   position: absolute;
   background-color: rgba(255,255,255,0.2);
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 .strokeSelected {
   visibility: inherit;
   position: inherit;
   float: none;
 }
-.strokeMin {
+.strokeBar {
   margin-top: 3px;
   width: 90%;
-  height: 4px;
   background-color: #d3d3d3;
   margin: 0 auto;
-  -webkit-border-radius: 1px;
-  border-radius: 1px;
+  margin: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  border: solid 1px;
+  border-color: rgba(0,0,0,0.5);
+  background-color: #808080;
+}
+.strokeMin {
+  height: 4px;
 }
 .strokeSmall {
-  width: 90%;
   height: 8px;
-  background-color: #808080;
-  margin: inherit;
-  margin-top: 3px;
-  -webkit-border-radius: 1px;
-  border-radius: 1px;
 }
 .strokeBig {
-  width: 90%;
   height: 12px;
-  background-color: #808080;
-  margin: inherit;
-  margin-top: 3px;
-  -webkit-border-radius: 1px;
-  border-radius: 1px;
 }
 .strokeMax {
-  width: 90%;
   height: 16px;
-  background-color: #808080;
-  margin: inherit;
-  margin-top: 3px;
-  margin-bottom: 3px;
-  -webkit-border-radius: 1px;
-  border-radius: 1px;
 }
 #sidebarMain {
   visibility: visible;
