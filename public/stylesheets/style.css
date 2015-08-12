@@ -136,52 +136,44 @@ body,
 .open-sidebar {
   left: 0px;
 }
-.strokeContainer {
+.strokeSizes {
+  width: inherit;
   overflow: auto;
-  height: 22px;
-  padding: 5px;
-  margin: 0 auto;
+  background-color: rgba(255,255,255,0.2);
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 .stroke {
   float: left;
-  width: 25%;
-  height: 100%;
-  margin: inherit;
-  overflow: auto;
-  visibility: hidden;
-  position: absolute;
-  background-color: rgba(255,255,255,0.2);
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-}
-.strokeSelected {
-  visibility: inherit;
-  position: inherit;
-  float: none;
+  margin: 2px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: solid 1px;
+  border-color: #808080;
+  width: calc(25% - 6px);
+  height: 25px;
 }
 .strokeBar {
-  margin-top: 3px;
-  width: 90%;
-  background-color: #d3d3d3;
-  margin: 0 auto;
-  margin: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  border: solid 1px;
-  border-color: rgba(0,0,0,0.5);
+  width: 100%;
   background-color: #808080;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
 }
 .strokeMin {
-  height: 4px;
+  height: 25%;
 }
 .strokeSmall {
-  height: 8px;
+  height: 50%;
 }
 .strokeBig {
-  height: 12px;
+  height: 75%;
 }
 .strokeMax {
-  height: 16px;
+  height: 100%;
 }
 #sidebarMain {
   visibility: visible;

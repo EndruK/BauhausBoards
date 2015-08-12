@@ -1,3 +1,4 @@
+$('.sidebar').on('click', '.showStrokeSizes', handlePopup);
 $('.sidebar').on('click', '.stroke', handlePopup);
 var strokeSize;
 var containerOpen;
@@ -22,44 +23,34 @@ function handlePopup(event) {
   }
   //container is open
   else {
-    switch($(this).attr("id")) {
-      case "strokeA":
-        strokeSize = 1;
-        break;
-      case "strokeB":
-        strokeSize = 2;
-        break;
-      case "strokeC":
-        strokeSize = 3;
-        break;
-      case "strokeD":
-        strokeSize = 4;
-        break;
+    console.log($(this));
+    if($(this).find("div.strokeMin").length != 0) {
+      strokeSize = 1;
     }
-    //$("#header").text(strokeSize);
-    $(".strokeSelected").removeClass("strokeSelected");
-    $(this).addClass("strokeSelected");
+    else if($(this).find("div.strokeSmall").length != 0) {
+      strokeSize = 2;
+    }
+    else if($(this).find("div.strokeBig").length != 0) {
+      strokeSize = 3;
+    }
+    else if($(this).find("div.strokeMax").length != 0) {
+      strokeSize = 4;
+    }
+    $(".showStrokeSizes").text("Stroke: " + strokeSize);
     clearTimeout(containerTimeoutHandler);
     closeContainer();
-    containerOpen = false;
   }
 }
 function openContainer() {
-  var container = $(".stroke");
-  var selected  = $(".strokeSelected");
-  container.css("position","relative");
+  var container = $(".strokeSizes");
   container.css("visibility","visible");
-  selected.css("float","left");
+  container.css("position","relative");
 }
 function closeContainer() {
-  var container = $(".stroke");
-  var selected  = $(".strokeSelected");
-  container.css("position","absolute");
+  var container = $(".strokeSizes");
   container.css("visibility","hidden");
-  selected.css("float","none");
-  //selected.css("background-color","rgba(0,0,0,0)");
-  selected.css("visibility","inherit");
-  selected.css("position","inherit");
+  container.css("position","absolute");
+  containerOpen = false;
 }
 function updateContainerTimeout() {
   clearTimeout(containerTimeoutHandler);
