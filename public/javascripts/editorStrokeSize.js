@@ -1,4 +1,4 @@
-$('.sidebar').on('click', '.showStrokeSizes', handlePopup);
+$('.sidebar').on('click', '.btnStroke', handlePopup);
 $('.sidebar').on('click', '.stroke', handlePopup);
 var strokeSize;
 var containerOpen;
@@ -36,7 +36,7 @@ function handlePopup(event) {
     else if($(this).find("div.strokeMax").length != 0) {
       strokeSize = 4;
     }
-    $(".showStrokeSizes").text("Stroke: " + strokeSize);
+    $(".btnStroke").text("Stroke: " + strokeSize);
     clearTimeout(containerTimeoutHandler);
     closeContainer();
   }

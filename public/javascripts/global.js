@@ -148,6 +148,8 @@ function showSidebar(sidebar) {
       hideAll();
       $('#sidebarCreateMessage').css('visibility','visible');
       $('#EditorCanvas').css('visibility','visible');
+      strokeSize = 1;
+      $(".btnStroke").text("Stroke: 1");
       break;
     case 'sidebarFeedback':
       hideAll();
@@ -200,4 +202,5 @@ function hideAll() {
   $('#sidebarBackendRoomSettings').css('visibility','hidden');
   $('#sidebarBackendLogs').css('visibility','hidden');
   $('#EditorCanvas').css('visibility','hidden');
+  closeContainer();
 }
