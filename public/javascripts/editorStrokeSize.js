@@ -36,6 +36,7 @@ function handlePopup(event) {
     else if($(this).find("div.strokeMax").length != 0) {
       strokeSize = 4;
     }
+    activatePenTool();
     $(".btnStroke").text("Stroke: " + strokeSize);
     clearTimeout(containerTimeoutHandler);
     closeContainer();
