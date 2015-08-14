@@ -94,6 +94,9 @@ body,
 #wrapper {
   height: 100%;
 }
+.clear {
+  clear: both;
+}
 .sidebar {
   position: absolute;
   height: 100%;
@@ -198,6 +201,11 @@ body,
 }
 .activeColor {
   border-color: #f00;
+}
+.btnColor {
+  background-color: #000;
+  color: #fff;
+  border: 1px;
 }
 #sidebarMain {
   visibility: visible;
@@ -321,6 +329,6 @@ body,
 #blue {
   background-color: #4169e1;
 }
-#violett {
+#darkblue {
   background-color: #000080;
 }

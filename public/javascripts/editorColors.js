@@ -1,24 +1,24 @@
 var colors = {
-  "white" : [255,255,255],
-  "lightgrey" : [170,170,170],
-  "darkgrey" : [85,85,85],
-  "black" : [0,0,0],
-  "pink" : [255,105,180],
-  "lightred" : [231,76,60],
-  "red" : [255,0,0],
-  "darkred" : [128,0,0],
-  "yellow" : [255,255,0],
-  "orange" : [255,165,0],
-  "darkorange" : [255,140,0],
-  "brown" : [139,69,19],
-  "yellowgreen" : [173,255,47],
-  "lightgreen" : [124,252,0],
-  "green" : [0,255,0],
-  "darkgreen" : [0,100,0],
-  "greenblue" : [0,250,154],
-  "lightblue" : [135,206,250],
-  "blue" : [65,105,225],
-  "violett" : [0,0,128]
+  "white" :       [255,255,255],
+  "lightgrey" :   [170,170,170],
+  "darkgrey" :    [85 ,85 ,85 ],
+  "black" :       [0  ,0  ,0  ],
+  "pink" :        [255,105,180],
+  "lightred" :    [231,76 ,60 ],
+  "red" :         [255,0  ,0  ],
+  "darkred" :     [128,0  ,0  ],
+  "yellow" :      [255,255,0  ],
+  "orange" :      [255,165,0  ],
+  "darkorange" :  [255,140,0  ],
+  "brown" :       [139,69 ,19 ],
+  "yellowgreen" : [173,255,47 ],
+  "lightgreen" :  [124,252,0  ],
+  "green" :       [0  ,255,0  ],
+  "darkgreen" :   [0  ,100,0  ],
+  "greenblue" :   [0  ,250,154],
+  "lightblue" :   [135,206,250],
+  "blue" :        [65 ,105,225],
+  "darkblue" :     [0  ,0  ,128]
 }
 var activeColor
 var colorContainerOpen;
@@ -28,7 +28,6 @@ $(".sidebar").on("click",".btnColor",handleButtonClick);
 $(".sidebar").on("click",".colorContainer",switchColor);
 
 $(document).ready(function() {
-  //initialize stroke size with 2
   colorContainerOpen = false;
   activeColor = colors["black"];
 });
@@ -61,15 +60,25 @@ function closeColorContainer() {
 function switchColor(event) {
   var clicked = $(this).attr("id");
   var previous = $(".activeColor");
-  previous.removeClass("activeColor");
-  $(this).addClass("activeColor");
-  //clicked.css("border-color","rgba(255,0,0,1)");
-  //console.log($(this).attr("id"));
-  activeColor = colors[clicked];
-  //console.log(activeColor);
-  updateTimer();
-  updateColorContainerTimeout();
-  //console.log(rgbToHex(activeColor));
+  if(clicked != previous.attr("id")) {
+    previous.removeClass("activeColor");
+    $(this).addClass("activeColor");
+    //clicked.css("border-color","rgba(255,0,0,1)");
+    //console.log($(this).attr("id"));
+    activeColor = colors[clicked];
+    //console.log(activeColor);
+    updateTimer();
+    updateColorContainerTimeout();
+    var button = $(".btnColor");
+    if(clicked == "black" || clicked == "darkblue") {
+      button.css("color","white");
+    }
+    else {
+      button.css("color","black");
+    }
+    var buttonColor = "rgba("+activeColor[0]+","+activeColor[1]+","+activeColor[2]+",1)";
+    button.css("background-color",buttonColor);
+  }
 }
 function updateColorContainerTimeout() {
   clearTimeout(colorContainerTimeoutHandler);
