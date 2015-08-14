@@ -196,6 +196,9 @@ body,
   height: 25px;
   background-color: #fff;
 }
+.activeColor {
+  border-color: #f00;
+}
 #sidebarMain {
   visibility: visible;
 }

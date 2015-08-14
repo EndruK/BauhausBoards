@@ -60,6 +60,10 @@ function closeColorContainer() {
 
 function switchColor(event) {
   var clicked = $(this).attr("id");
+  var previous = $(".activeColor");
+  previous.removeClass("activeColor");
+  $(this).addClass("activeColor");
+  //clicked.css("border-color","rgba(255,0,0,1)");
   //console.log($(this).attr("id"));
   activeColor = colors[clicked];
   //console.log(activeColor);
@@ -72,6 +76,7 @@ function updateColorContainerTimeout() {
   colorContainerTimeoutHandler = setTimeout(closeColorContainer,colorContainerTimeout);
 }
 
+
 function colorToHex(color) {
   var hexColor = color.toString(16);
   if(hexColor.length == 1) {
@@ -79,6 +84,13 @@ function colorToHex(color) {
   }
   return hexColor;
 }
+
 function rgbToHex(rgb) {
   return "#" + colorToHex(rgb[0])+colorToHex(rgb[1])+colorToHex(rgb[2]);
+}
+function resetColor() {
+  var previous = $(".activeColor");
+  previous.removeClass("activeColor");
+  var black = $("#black");
+  black.addClass("activeColor");
 }

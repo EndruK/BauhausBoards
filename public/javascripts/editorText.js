@@ -23,7 +23,7 @@ function drawText(event) {
   if(input) {
     console.log(input);
     var text = new PointText(event.point);
-    text.fillColor = 'black';
+    text.fillColor = rgbToHex(activeColor);
     text.fontFamily = 'Arial';
     text.fontSize = '20px';
     text.content = input;

@@ -204,4 +204,6 @@ function hideAll() {
   $('#sidebarBackendLogs').css('visibility','hidden');
   $('#EditorCanvas').css('visibility','hidden');
   closeContainer();
+  closeColorContainer();
+  resetColor();
 }
