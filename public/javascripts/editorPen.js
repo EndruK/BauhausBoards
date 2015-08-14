@@ -10,7 +10,7 @@ $(document).ready(function() {
 function penMouseDown(event) {
   //create a new path
   path = new Path();
-  path.strokeColor = 'black';
+  path.strokeColor = rgbToHex(activeColor);
   path.strokeWidth = strokeSize*3;
 }
 

@@ -60,6 +60,7 @@ function loadCreateMessage(event) {
   var tmp  = $('#header').text('Compose Message\nall selected persons have to be displayed here');
   paper.setup('EditorCanvas');
   activatePenTool();
+  activeColor = colors["black"];
   tmp.html(tmp.html().replace(/\n/g,'<br>'));
   showSidebar('sidebarCreateMessage');
   clearTimeout(5000);
