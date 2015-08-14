@@ -102,4 +102,7 @@ function resetColor() {
   previous.removeClass("activeColor");
   var black = $("#black");
   black.addClass("activeColor");
+  var button = $(".btnColor");
+  button.css("color","white");
+  button.css("background-color","black");
 }
