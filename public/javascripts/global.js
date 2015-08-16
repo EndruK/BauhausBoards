@@ -58,10 +58,10 @@ function loadMessageLanding(event) {
 }
 function loadCreateMessage(event) {
   var tmp  = $('#header').text('Compose Message\nall selected persons have to be displayed here');
+  tmp.html(tmp.html().replace(/\n/g,'<br>'));
   paper.setup('EditorCanvas');
   activatePenTool();
   activeColor = colors["black"];
-  tmp.html(tmp.html().replace(/\n/g,'<br>'));
   showSidebar('sidebarCreateMessage');
   clearTimeout(5000);
   updateTimer();
@@ -149,8 +149,6 @@ function showSidebar(sidebar) {
       hideAll();
       $('#sidebarCreateMessage').css('visibility','visible');
       $('#EditorCanvas').css('visibility','visible');
-      strokeSize = 1;
-      $(".btnStroke").text("Stroke: 1");
       break;
     case 'sidebarFeedback':
       hideAll();
@@ -206,4 +204,5 @@ function hideAll() {
   closeContainer();
   closeColorContainer();
   resetColor();
+  resetStrokeSize();
 }

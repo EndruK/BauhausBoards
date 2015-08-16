@@ -18,7 +18,7 @@ var colors = {
   "greenblue" :   [0  ,250,154],
   "lightblue" :   [135,206,250],
   "blue" :        [65 ,105,225],
-  "darkblue" :     [0  ,0  ,128]
+  "darkblue" :    [0  ,0  ,128]
 }
 var activeColor
 var colorContainerOpen;
@@ -78,6 +78,8 @@ function switchColor(event) {
     }
     var buttonColor = "rgba("+activeColor[0]+","+activeColor[1]+","+activeColor[2]+",1)";
     button.css("background-color",buttonColor);
+    var strokeBar = $(".strokeBar");
+    strokeBar.css("background-color",buttonColor);
   }
 }
 function updateColorContainerTimeout() {

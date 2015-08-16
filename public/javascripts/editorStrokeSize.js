@@ -57,3 +57,9 @@ function updateContainerTimeout() {
   clearTimeout(containerTimeoutHandler);
   containerTimeoutHandler = setTimeout(closeContainer,containerTimeout);
 }
+function resetStrokeSize() {
+  strokeSize = 1;
+  $(".btnStroke").text("Stroke: 1");
+  var strokeBar = $(".strokeBar");
+  strokeBar.css("background-color","black");
+}
