@@ -23,6 +23,7 @@ function penMosueUp(event) {
   //simplify the path to lower the ammount of points
   path.simplify();
   //TODO: add this path to the set of canvas objects
+  console.log(path);
 }
 function activatePenTool(event) {
   console.log($(this).attr('class'));

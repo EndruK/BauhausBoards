@@ -2,6 +2,9 @@
 paper.install(window);
 //button click listener
 $('.sidebar').on('click', '.btnEditorSelector', activateSelectorTool);
+
+
+
 $(document).ready(function() {
   //initialize the selector event handler tool
   selectorTool = new Tool();
@@ -24,6 +27,10 @@ function selectorMouseDown(event) {
   // if no hit
   if(!hit) {
     project.deselectAll();
+  }
+  else {
+    //console.log(hit);
+    hit.item.selected = true;
   }
 }
 function selectorMouseUp(event) {
