@@ -18,7 +18,10 @@ function activateSelectorTool(event) {
   selectorTool.onMouseDown = selectorMouseDown;
   selectorTool.onMouseUp   = selectorMouseUp;
   selectorTool.onMouseMove = selectorMouseMove;
+  selectorTool.onMouseDrag = selectorMouseDrag;
 }
+//var mouseDown;
+//var rect;
 
 function selectorMouseDown(event) {
   //console.log("selector mouse down");
@@ -29,13 +32,23 @@ function selectorMouseDown(event) {
     project.deselectAll();
   }
   else {
-    //console.log(hit);
+    project.deselectAll();
     hit.item.selected = true;
   }
+  //mouseDown = event.point;
+  //rect = new Rectangle(event.point,event.point);
+  //rect.
 }
 function selectorMouseUp(event) {
   //console.log("selector mouse up");
+  //rect = new Rectangle(mouseDown,event.point);
+  //console.log(mouseDown);
+  //console.log(event.point);
 }
 function selectorMouseMove(event) {
   //console.log("selector mouse move");
+  //rect = new Rectangle(mouseDown,event.point);
+}
+function selectorMouseDrag() {
+  //console.log("mouse was dragged");
 }
