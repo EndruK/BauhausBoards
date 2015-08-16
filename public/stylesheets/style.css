@@ -142,7 +142,6 @@ body,
 .strokeSizes {
   width: inherit;
   overflow: auto;
-  background-color: rgba(255,255,255,0.2);
   -webkit-border-radius: 3px;
   border-radius: 3px;
   visibility: hidden;
@@ -156,13 +155,14 @@ body,
   -webkit-border-radius: 3px;
   border-radius: 3px;
   border: solid 1px;
-  border-color: #808080;
+  border-color: #000;
   width: calc(25% - 6px);
   height: 25px;
 }
 .strokeBar {
   width: 100%;
   background-color: #000;
+  border-bottom: solid 1px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
