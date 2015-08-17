@@ -65,9 +65,9 @@ function makeBox() {
   boundingBox.fillColor.alpha = 0.1;
   boundingBox.dashArray = [10,12];
 }
-function testPos(pos) {
+/*function testPos(pos) {
   return selectionPath.bounds.intersects(pos);
-}
+}*/
 function selectorMouseDrag(event) {
   selectionRect = new Rectangle(mousePoint,event.point);
   if(selectionPath != null) {
@@ -86,16 +86,17 @@ function selectItems() {
     class: Path
   });
   var textItems = project.getItems({
-    class: PointText,
-    position: testPos
+    class: PointText
   });
   pathItems.forEach(function(key) {
-    if(selectionPath.intersects(key)) {
+    if(selectionPath.intersects(key) || selectionPath.bounds.contains(key.bounds)) {
       key.selected = true;
     }
   });
   textItems.forEach(function(key) {
-    key.selected = true;
+    if(selectionPath.intersects(key) || selectionPath.bounds.contains(key.bounds)) {
+      key.selected = true;
+    }
   });
 }
 function deactivateSelector() {
