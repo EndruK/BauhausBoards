@@ -47,15 +47,23 @@ function selectorMouseUp(event) {
       position: testPos,
       class: Path
     });
-    for (var i = 0; i < pathItems.length; ++i) {
-      //console.log(items[i]);
-      pathItems[i].selected = true;
-    }
+    var textItems = project.getItems({
+      position: testPos,
+      class: PointText
+    });
+    pathItems.forEach(function(key) {
+      //console.log(key);
+      key.selected = true;
+    });
+    textItems.forEach(function(key) {
+      //console.log(key);
+      key.selected = true;
+    });
     //console.log(paths);
     selectionPath.remove();
   }
-  console.log(selectionPath);
-  console.log(selectionRect);
+  //console.log(selectionPath);
+  //console.log(selectionRect);
 }
 function testPos(pos) {
   return selectionPath.bounds.contains(pos);
