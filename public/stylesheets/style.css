@@ -331,3 +331,9 @@ body,
 #darkblue {
   background-color: #000080;
 }
+#popupSelector {
+  visibility: hidden;
+  position: absolute;
+  overflow: auto;
+  background-color: #fff;
+}

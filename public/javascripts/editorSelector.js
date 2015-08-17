@@ -22,6 +22,7 @@ var selectionPath = null;
 var selectionRect = null;
 
 function selectorMouseDown(event) {
+  removeSelectionPopup();
   var hit = project.hitTest(event.point);
   //console.log(hit);
   // if no hit
@@ -43,27 +44,9 @@ function selectorMouseDown(event) {
 }
 function selectorMouseUp(event) {
   if(selectionPath != null) {
-    var pathItems = project.getItems({
-      position: testPos,
-      class: Path
-    });
-    var textItems = project.getItems({
-      position: testPos,
-      class: PointText
-    });
-    pathItems.forEach(function(key) {
-      //console.log(key);
-      key.selected = true;
-    });
-    textItems.forEach(function(key) {
-      //console.log(key);
-      key.selected = true;
-    });
-    //console.log(paths);
+    addSelectionPopup()
     selectionPath.remove();
   }
-  //console.log(selectionPath);
-  //console.log(selectionRect);
 }
 function testPos(pos) {
   return selectionPath.bounds.contains(pos);
@@ -81,10 +64,50 @@ function selectorMouseDrag(event) {
   selectionPath.fillColor = "black";
   selectionPath.fillColor.alpha = 0.1;
   selectionPath.dashArray = [10,12];
+  var pathItems = project.getItems({
+    position: testPos,
+    class: Path
+  });
+  var textItems = project.getItems({
+    position: testPos,
+    class: PointText
+  });
+  pathItems.forEach(function(key) {
+    //console.log(key);
+    key.selected = true;
+  });
+  textItems.forEach(function(key) {
+    //console.log(key);
+    key.selected = true;
+  });
 }
 function deactivateSelector() {
   if(selectionPath != null) {
     selectionPath.remove();
     view.update();
   }
+  removeSelectionPopup();
+}
+function addSelectionPopup() {
+  var headerHight = $("#header").height();
+  console.log(headerHight);
+  var upperLeft = selectionRect.topLeft;
+  var upperRight = selectionRect.topRight;
+  var lowerLeft = selectionRect.bottomLeft;
+  var lowerRight = selectionRect.bottomRight;
+  console.log(lowerLeft);
+  console.log(lowerRight);
+
+  $("#content").append("<div id='popupSelector'></div>");
+  var popup = $("#popupSelector");
+  popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupRemove'>Delete</button>");
+  popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupLayerUp'>LayerUp</button>");
+  popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupLayerDown'>LayerDown</button>");
+  popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupCopy'>Copy</button>");
+  popup.css("visibility","visible");
+  popup.css("left",lowerLeft.x);
+  popup.css("top",lowerLeft.y+headerHight);
+}
+function removeSelectionPopup() {
+  $("#popupSelector").remove();
 }
