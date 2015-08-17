@@ -14,7 +14,7 @@ function activateSelectorTool(event) {
   selectorTool = new Tool();
   selectorTool.onMouseDown = selectorMouseDown;
   selectorTool.onMouseUp   = selectorMouseUp;
-  selectorTool.onMouseMove = selectorMouseMove;
+  //selectorTool.onMouseMove = selectorMouseMove;
   selectorTool.onMouseDrag = selectorMouseDrag;
 }
 var mousePoint;
@@ -25,10 +25,9 @@ var boundingBox = null;
 function selectorMouseDown(event) {
   removeSelectionPopup();
   removeBoundingBox();
-  var hit = project.hitTest(event.point);
-  //console.log(hit);
-  // if no hit
   project.deselectAll();
+  var hit = project.hitTest(event.point);
+  // if no hit
   if(!hit) {
     if(selectionPath != null) {
       selectionPath.remove();
@@ -38,6 +37,8 @@ function selectorMouseDown(event) {
   else {
     project.deselectAll();
     hit.item.selected = true;
+    //makeBox();
+    //addSelectionPopup();
   }
   mousePoint = event.point;
   if(selectionPath != null) {
@@ -45,26 +46,29 @@ function selectorMouseDown(event) {
   }
 }
 function selectorMouseUp(event) {
-  if(selectionPath != null) {
-    selectionPath.remove();
-    //var tmp = new Rectangle(makeSelectionRectangle());
+  if(project.selectedItems.length != 0) {
+    if(selectionPath != null) {
+      selectionPath.remove();
+    }
     if(boundingBox != null) {
       boundingBox.remove();
     }
-    boundingBox = new Shape.Rectangle(makeBoundingBox());
-    boundingBox.strokeColor = "black";
-    boundingBox.fillColor = "black";
-    boundingBox.fillColor.alpha = 0.1;
-    boundingBox.dashArray = [10,12];
+    makeBox();
     addSelectionPopup();
   }
-
+  if(selectionPath != null) {
+    selectionPath.remove();
+  }
+}
+function makeBox() {
+  boundingBox = new Shape.Rectangle(getBoundingBox());
+  boundingBox.strokeColor = "black";
+  boundingBox.fillColor = "black";
+  boundingBox.fillColor.alpha = 0.1;
+  boundingBox.dashArray = [10,12];
 }
 function testPos(pos) {
   return selectionPath.bounds.contains(pos);
-}
-function selectorMouseMove(event) {
-
 }
 function selectorMouseDrag(event) {
   selectionRect = new Rectangle(mousePoint,event.point);
@@ -102,12 +106,13 @@ function deactivateSelector() {
 }
 function addSelectionPopup() {
   var headerHight = $("#header").height();
-  //console.log(headerHight);
   var upperLeft = boundingBox.bounds.topLeft;
   var upperRight = boundingBox.bounds.topRight;
   var lowerLeft = boundingBox.bounds.bottomLeft;
   var lowerRight = boundingBox.bounds.bottomRight;
-
+  //console.log(boundingBox.bounds);
+  var middleX = boundingBox.bounds.x + Math.round(boundingBox.bounds.width/2);
+  var middleY = boundingBox.bounds.y + Math.round(boundingBox.bounds.height/2);
 
   $("#content").append("<div id='popupSelector'></div>");
   var popup = $("#popupSelector");
@@ -115,14 +120,26 @@ function addSelectionPopup() {
   popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupLayerUp'>LayerUp</button>");
   popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupLayerDown'>LayerDown</button>");
   popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupCopy'>Copy</button>");
+
+  var left = middleX - Math.round(popup.width()/2);
+  var top  = middleY - Math.round(popup.height()/2)+headerHight;
+
   popup.css("visibility","visible");
-  popup.css("left",lowerLeft.x);
-  popup.css("top",lowerLeft.y+headerHight);
+  //popup.css("left",lowerLeft.x);
+  //popup.css("top",lowerLeft.y+headerHight);
+  popup.css("top",top);
+  popup.css("left",left);
 }
 function removeSelectionPopup() {
-  $("#popupSelector").remove();
+  var popup = $("#popupSelector");
+  if(popup) {
+    popup.remove();
+  }
 }
 function makeBoundingBox() {
+
+}
+function getBoundingBox() {
   var items = project.selectedItems;
   var left = Number.MAX_VALUE;
   var right = 0;
@@ -149,4 +166,5 @@ function removeBoundingBox() {
   if(boundingBox != null) {
     boundingBox.remove();
   }
+  var popup = $("#popupSelector");
 }
