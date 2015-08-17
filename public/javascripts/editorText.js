@@ -27,6 +27,5 @@ function drawText(event) {
     text.fontFamily = 'Arial';
     text.fontSize = '20px';
     text.content = input;
-    //TODO: add the text to the set of canvas objects
   }
 }

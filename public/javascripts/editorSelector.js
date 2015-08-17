@@ -94,7 +94,7 @@ function selectItems() {
     }
   });
   textItems.forEach(function(key) {
-    if(selectionPath.intersects(key) || selectionPath.bounds.contains(key.bounds)) {
+    if(selectionPath.bounds.intersects(key.bounds) || selectionPath.bounds.contains(key.bounds)) {
       key.selected = true;
     }
   });
@@ -127,6 +127,13 @@ function addSelectionPopup() {
 
   var left = middleX - Math.round(popup.width()/2);
   var top  = middleY - Math.round(popup.height()/2)+headerHight;
+
+  if(left+popup.width() >= $("#EditorCanvas").width()) {
+    left = left-popup.width();
+  }
+  if(top+popup.height() >= $("#EditorCanvas").width()) {
+    top = top-popup.height();
+  }
 
   popup.css("visibility","visible");
   //popup.css("left",lowerLeft.x);
