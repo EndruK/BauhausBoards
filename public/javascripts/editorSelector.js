@@ -46,7 +46,6 @@ function selectorMouseDown(event) {
 }
 function selectorMouseUp(event) {
   if(selectionPath != null) {
-    addSelectionPopup();
     selectionPath.remove();
     //var tmp = new Rectangle(makeSelectionRectangle());
     if(boundingBox != null) {
@@ -57,6 +56,7 @@ function selectorMouseUp(event) {
     boundingBox.fillColor = "black";
     boundingBox.fillColor.alpha = 0.1;
     boundingBox.dashArray = [10,12];
+    addSelectionPopup();
   }
 
 }
@@ -103,12 +103,11 @@ function deactivateSelector() {
 function addSelectionPopup() {
   var headerHight = $("#header").height();
   //console.log(headerHight);
-  var upperLeft = selectionRect.topLeft;
-  var upperRight = selectionRect.topRight;
-  var lowerLeft = selectionRect.bottomLeft;
-  var lowerRight = selectionRect.bottomRight;
-  //console.log(lowerLeft);
-  //console.log(lowerRight);
+  var upperLeft = boundingBox.bounds.topLeft;
+  var upperRight = boundingBox.bounds.topRight;
+  var lowerLeft = boundingBox.bounds.bottomLeft;
+  var lowerRight = boundingBox.bounds.bottomRight;
+
 
   $("#content").append("<div id='popupSelector'></div>");
   var popup = $("#popupSelector");
