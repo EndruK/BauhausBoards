@@ -18,15 +18,19 @@ function activateSelectorTool(event) {
   selectorTool.onMouseDrag = selectorMouseDrag;
 }
 var mousePoint;
-var selectionRect = null;
 var selectionPath = null;
+var selectionRect = null;
 
 function selectorMouseDown(event) {
   var hit = project.hitTest(event.point);
-  console.log(hit);
+  //console.log(hit);
   // if no hit
+  project.deselectAll();
   if(!hit) {
-    project.deselectAll();
+    if(selectionPath != null) {
+      selectionPath.remove();
+      selectionPath = null;
+    }
   }
   else {
     project.deselectAll();
@@ -39,16 +43,22 @@ function selectorMouseDown(event) {
 }
 function selectorMouseUp(event) {
   if(selectionPath != null) {
-    var items = project.getItems({
-      overlapping: selectionRect
+    var pathItems = project.getItems({
+      position: testPos,
+      class: Path
     });
-    for (var i = 0; i < items.length; ++i) {
-      console.log(items[i]);
-      items[i].selected = true;
+    for (var i = 0; i < pathItems.length; ++i) {
+      //console.log(items[i]);
+      pathItems[i].selected = true;
     }
-    //console.log(items);
+    //console.log(paths);
     selectionPath.remove();
   }
+  console.log(selectionPath);
+  console.log(selectionRect);
+}
+function testPos(pos) {
+  return selectionPath.bounds.contains(pos);
 }
 function selectorMouseMove(event) {
 
