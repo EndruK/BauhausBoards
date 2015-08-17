@@ -24,4 +24,5 @@ function removeListeners() {
   penTool.remove();
   textTool.remove();
   selectorTool.remove();
+  deactivateSelector();
 }

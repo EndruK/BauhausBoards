@@ -22,7 +22,6 @@ var selectionRect = null;
 var selectionPath = null;
 
 function selectorMouseDown(event) {
-  //console.log("selector mouse down");
   var hit = project.hitTest(event.point);
   console.log(hit);
   // if no hit
@@ -34,41 +33,40 @@ function selectorMouseDown(event) {
     hit.item.selected = true;
   }
   mousePoint = event.point;
-  if(selectionPath) {
+  if(selectionPath != null) {
     selectionPath.remove();
   }
 }
 function selectorMouseUp(event) {
-  mouseDown = false;
-  //console.log("selector mouse up");
-  //selectionRect = new Rectangle(mousePoint,event.point);
-  //selectionPath.remove();
-  //selectionPath = new Path.Rectangle(selectionRect);
-  //console.log(mouseDown);
-  //console.log(event.point);
-  /*var TL = new Point(100,100);
-  var BR = new Point(500,500);
-  var rect = new Rectangle(TL,BR);
-  var path = new Path.Rectangle(rect);
-  path.strokeColor = "black";
-  path.selected = true;*/
+  if(selectionPath != null) {
+    var items = project.getItems({
+      overlapping: selectionRect
+    });
+    for (var i = 0; i < items.length; ++i) {
+      console.log(items[i]);
+      items[i].selected = true;
+    }
+    //console.log(items);
+    selectionPath.remove();
+  }
 }
 function selectorMouseMove(event) {
-  /*console.log(mouseDown);
-  if(mouseDown) {
-    console.log("make rect");
-  }*/
+
 }
 function selectorMouseDrag(event) {
-  //console.log("mouse was dragged");
-  /*if(selectionPath) {
-    selectionPath.remove();
-  }*/
   selectionRect = new Rectangle(mousePoint,event.point);
   if(selectionPath != null) {
     selectionPath.remove();
   }
   selectionPath = new Shape.Rectangle(selectionRect);
   selectionPath.strokeColor = "black";
+  selectionPath.fillColor = "black";
+  selectionPath.fillColor.alpha = 0.1;
   selectionPath.dashArray = [10,12];
+}
+function deactivateSelector() {
+  if(selectionPath != null) {
+    selectionPath.remove();
+    view.update();
+  }
 }
