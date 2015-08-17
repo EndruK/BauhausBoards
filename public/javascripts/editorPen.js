@@ -12,6 +12,7 @@ function penMouseDown(event) {
   path = new Path();
   path.strokeColor = rgbToHex(activeColor);
   path.strokeWidth = strokeSize*3;
+  path.strokeJoin = 'round';
 }
 
 function penMouseDrag(event) {
@@ -22,7 +23,6 @@ function penMouseDrag(event) {
 function penMosueUp(event) {
   //simplify the path to lower the ammount of points
   path.simplify();
-  //TODO: add this path to the set of canvas objects
   console.log(path);
 }
 function activatePenTool(event) {

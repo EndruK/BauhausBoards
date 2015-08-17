@@ -37,8 +37,6 @@ function selectorMouseDown(event) {
   else {
     project.deselectAll();
     hit.item.selected = true;
-    //makeBox();
-    //addSelectionPopup();
   }
   mousePoint = event.point;
   if(selectionPath != null) {
@@ -68,7 +66,7 @@ function makeBox() {
   boundingBox.dashArray = [10,12];
 }
 function testPos(pos) {
-  return selectionPath.bounds.contains(pos);
+  return selectionPath.bounds.intersects(pos);
 }
 function selectorMouseDrag(event) {
   selectionRect = new Rectangle(mousePoint,event.point);
@@ -81,16 +79,20 @@ function selectorMouseDrag(event) {
   selectionPath.fillColor.alpha = 0.1;
   selectionPath.dashArray = [10,12];
   project.deselectAll();
+  selectItems();
+}
+function selectItems() {
   var pathItems = project.getItems({
-    position: testPos,
     class: Path
   });
   var textItems = project.getItems({
-    position: testPos,
-    class: PointText
+    class: PointText,
+    position: testPos
   });
   pathItems.forEach(function(key) {
-    key.selected = true;
+    if(selectionPath.intersects(key)) {
+      key.selected = true;
+    }
   });
   textItems.forEach(function(key) {
     key.selected = true;
@@ -99,10 +101,11 @@ function selectorMouseDrag(event) {
 function deactivateSelector() {
   if(selectionPath != null) {
     selectionPath.remove();
-    view.update();
   }
   removeSelectionPopup();
   removeBoundingBox();
+  project.deselectAll();
+  view.update();
 }
 function addSelectionPopup() {
   var headerHight = $("#header").height();
@@ -136,9 +139,6 @@ function removeSelectionPopup() {
     popup.remove();
   }
 }
-function makeBoundingBox() {
-
-}
 function getBoundingBox() {
   var items = project.selectedItems;
   var left = Number.MAX_VALUE;
@@ -166,5 +166,4 @@ function removeBoundingBox() {
   if(boundingBox != null) {
     boundingBox.remove();
   }
-  var popup = $("#popupSelector");
 }
