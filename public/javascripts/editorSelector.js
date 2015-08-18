@@ -22,8 +22,18 @@ var mousePoint;
 var selectionPath = null;
 var selectionRect = null;
 var boundingBox = null;
+var dragElement = false;
+var pOld = null;
 
 function selectorMouseDown(event) {
+  //get the actual click point
+  mousePoint = event.point;
+  console.log(boundingBox);
+  //check if there is a bounding box and click point was in bounding box
+  if(boundingBox != null && boundingBox.bounds.contains(event.point)) {
+    dragElement = true;
+    return;
+  }
   //remove the popup of the selection if there is one
   removeSelectionPopup();
   //remove the bounding box if there is one
@@ -45,14 +55,18 @@ function selectorMouseDown(event) {
     //select the one which was hit
     hit.item.selected = true;
   }
-  //get the actual click point
-  mousePoint = event.point;
   //remove the bounding rect from the canvas
   if(selectionPath != null) {
     selectionPath.remove();
   }
 }
 function selectorMouseUp(event) {
+  if(dragElement) {
+    dragElement = false;
+    pOld = null;
+  }
+  removeSelectionPopup();
+  removeBoundingBox();
   //only if there are selected items
   if(project.selectedItems.length != 0) {
     //remove the former selection box
@@ -81,6 +95,30 @@ function makeBox() {
   boundingBox.dashArray = [10,12];
 }
 function selectorMouseDrag(event) {
+  //if user drags an element
+  if(dragElement == true) {
+    //get the point where the user started the drag
+    if(pOld == null){
+      pOld = mousePoint;
+    }
+    //get the actual point of the mouse
+    pNow = event.point;
+    //calculate the translation vector
+    var vec    = pNow.subtract(pOld);
+    //get all selected items
+    var items  = project.selectedItems;
+    //remove the bounding box and the popup
+    removeSelectionPopup();
+    removeBoundingBox();
+    //translate the objects
+    items.forEach(function(key) {
+      key.translate(vec);
+    });
+    //set the old point for the next drag iteration
+    pOld = pNow;
+    //dont do anything else
+    return;
+  }
   //refresh the rectangle the user is actually drawing
   selectionRect = new Rectangle(mousePoint,event.point);
   if(selectionPath != null) {
@@ -161,21 +199,23 @@ function addSelectionPopup() {
 
   $("#btnSelectorPopupRemove").on("click",btnRemove);
   $("#btnSelectorPopupCopy").on("click",btnCopy);
+  $("#btnSelectorPopupLayerUp").on("click",btnLayerUp);
+  $("#btnSelectorPopupLayerDown").on("click",btnLayerDown);
 
-  //center the popup in the bounding box
+  //center the popup in the bounding box (with additional horizonal space)
+  var horSpace = 20;
   var left = middleX - Math.round(popup.width()/2);
-  var top  = middleY - Math.round(popup.height()/2)+headerHight;
+  var top  = middleY - Math.round(popup.height()/2)+headerHight + horSpace;
 
   //bugfix if the bounding box goes over the canvas sizes
   //the popup have to be in the view
   if(left+popup.width() >= $("#EditorCanvas").width()) {
-    left = left-popup.width();
+    left = $("#EditorCanvas").width()-popup.width();
   }
-  if(top+popup.height() >= $("#EditorCanvas").width()) {
-    top = top-popup.height();
+  if(top+popup.height() >= $("#EditorCanvas").height()) {
+    top = $("#EditorCanvas").height()+headerHight-popup.height();
   }
   //add the attributes to the css of the popup
-  popup.css("visibility","visible");
   popup.css("top",top);
   popup.css("left",left);
 }
@@ -216,34 +256,49 @@ function removeBoundingBox() {
   //remove the bound box
   if(boundingBox != null) {
     boundingBox.remove();
+    boundingBox = null;
   }
 }
 function btnRemove(event) {
   //console.log("delete element");
+  //get all selected items
   var items = project.selectedItems;
+  //remove all selected items
   items.forEach(function(key) {
     key.remove();
   });
+  //temove bounding box and popup
   removeBoundingBox();
   removeSelectionPopup();
+  //refresh the view
   view.update();
 }
 function btnCopy(event) {
+  //get all selected items
   var items = project.selectedItems;
+  //initialize the array for the copies
   var copies = new Array();
+  //deselect all, remove bounding box and the popup
   project.deselectAll();
   removeBoundingBox();
   removeSelectionPopup();
+  //clone all items which were selected
   items.forEach(function(key) {
     var copy = key.clone()
     copy.position.x += 25;
     copy.position.y += 25;
+    copy.selected = true;
     copies.push(copy);
   });
-  copies.forEach(function(key) {
-    key.selected = true;
-  });
+  //add the bounding box and the popupt
   makeBox();
   addSelectionPopup();
+  //refresh the view
   view.update();
+}
+function btnLayerUp() {
+  //TODO
+}
+function btnLayerDown() {
+  //TODO
 }
