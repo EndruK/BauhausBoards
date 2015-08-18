@@ -84,7 +84,7 @@ function switchColor(event) {
   var items = project.selectedItems;
   if(items.length > 0) {
     items.forEach(function(key) {
-      key.strokeColor = rgbToHex(activeColor);
+      key.fillColor = rgbToHex(activeColor);
     });
     view.update();
   }

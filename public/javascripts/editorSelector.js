@@ -146,7 +146,7 @@ function selectItems() {
   //iterate over all Path Items
   pathItems.forEach(function(key) {
     //check if the items intersect or are inside of the selection rect
-    if(selectionPath.intersects(key) || selectionPath.bounds.contains(key.bounds)) {
+    if(selectionPath.bounds.intersects(key.bounds) || selectionPath.bounds.contains(key.bounds)) {
       //if true: mark them as selected
       key.selected = true;
     }
@@ -214,6 +214,12 @@ function addSelectionPopup() {
   }
   if(top+popup.height() >= $("#EditorCanvas").height()) {
     top = $("#EditorCanvas").height()+headerHight-popup.height();
+  }
+  if(left <= 0) {
+    left = 0;
+  }
+  if(top <= headerHight) {
+    top = headerHight;
   }
   //add the attributes to the css of the popup
   popup.css("top",top);
@@ -297,8 +303,16 @@ function btnCopy(event) {
   view.update();
 }
 function btnLayerUp() {
-  //TODO
+  var items = project.selectedItems;
+  items.forEach(function(key) {
+    key.bringToFront();
+  });
+  view.update();
 }
 function btnLayerDown() {
-  //TODO
+  var items = project.selectedItems;
+  items.forEach(function(key) {
+    key.sendToBack();
+  });
+  view.update();
 }
