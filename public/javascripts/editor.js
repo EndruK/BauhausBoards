@@ -1,9 +1,5 @@
 //set up the global paper scope
 paper.install(window);
-var path;
-var selectorTool;
-var penTool;
-var textTool;
 $('.sidebar').on('click', '.btnEditorEraser', doClick);
 $('.sidebar').on('click', '.btnEditorColor', doClick);
 $('.sidebar').on('click', '.btnEditorUndo', doClick);

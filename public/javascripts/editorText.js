@@ -2,6 +2,7 @@
 paper.install(window);
 //button click listener
 $('.sidebar').on('click', '.btnEditorText', activateTextTool);
+var textTool;
 $(document).ready(function() {
   //initialize the text event handler tool
   textTool = new Tool();

@@ -2,6 +2,8 @@
 paper.install(window);
 //button click listener
 $('.sidebar').on('click', '.btnEditorPen', activatePenTool);
+var penTool;
+var path;
 $(document).ready(function() {
   //initialize the pen event handler tool
   penTool = new Tool();

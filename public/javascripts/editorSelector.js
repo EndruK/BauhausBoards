@@ -2,6 +2,7 @@
 paper.install(window);
 //button click listener
 $('.sidebar').on('click', '.btnEditorSelector', activateSelectorTool);
+var selectorTool;
 $(document).ready(function() {
   //initialize the selector event handler tool
   selectorTool = new Tool();
@@ -15,7 +16,6 @@ function activateSelectorTool(event) {
   selectorTool = new Tool();
   selectorTool.onMouseDown = selectorMouseDown;
   selectorTool.onMouseUp   = selectorMouseUp;
-  //selectorTool.onMouseMove = selectorMouseMove;
   selectorTool.onMouseDrag = selectorMouseDrag;
 }
 var mousePoint;
@@ -23,15 +23,28 @@ var selectionPath = null;
 var selectionRect = null;
 var boundingBox = null;
 var dragElement = false;
+var scaleElement = false;
 var pOld = null;
+var scaleRectContainer = new Array();
+var anchor;
 
 function selectorMouseDown(event) {
   //get the actual click point
   mousePoint = event.point;
-  console.log(boundingBox);
+  //console.log(boundingBox);
+  
   //check if there is a bounding box and click point was in bounding box
   if(boundingBox != null && boundingBox.bounds.contains(event.point)) {
     dragElement = true;
+    return;
+  }
+  if(scaleRectContainer.length > 0) {
+    scaleRectContainer.forEach(function(key) {
+      if(key.contains(event.point)) {
+        //TODO: change the mouse apperance
+        scaleElement = true;
+      }
+    });
     return;
   }
   //remove the popup of the selection if there is one
@@ -54,6 +67,7 @@ function selectorMouseDown(event) {
     project.deselectAll();
     //select the one which was hit
     hit.item.selected = true;
+    dragElement = true;
   }
   //remove the bounding rect from the canvas
   if(selectionPath != null) {
@@ -64,6 +78,9 @@ function selectorMouseUp(event) {
   if(dragElement) {
     dragElement = false;
     pOld = null;
+  }
+  if(scaleElement) {
+    scaleElement = false;
   }
   removeSelectionPopup();
   removeBoundingBox();
@@ -93,16 +110,37 @@ function makeBox() {
   boundingBox.fillColor = "black";
   boundingBox.fillColor.alpha = 0.1;
   boundingBox.dashArray = [10,12];
+  //TODO: add rotation and scale listener
+  // add the scale rects at the corners of the bounding box
+  var rectSize = 50;
+  var upperLeft  = new Point(boundingBox.bounds.x-rectSize,
+    boundingBox.bounds.y-rectSize);
+  var upperRight = new Point(boundingBox.bounds.x+boundingBox.bounds.width,
+    boundingBox.bounds.y-rectSize);
+  var lowerLeft  = new Point(boundingBox.bounds.x-rectSize,
+    boundingBox.bounds.y+boundingBox.bounds.height);
+  var lowerRight = new Point(boundingBox.bounds.x+boundingBox.bounds.width,
+    boundingBox.bounds.y+boundingBox.bounds.height);
+  var upperLeftRect  = new Rectangle(upperLeft,new Size(rectSize,rectSize));
+  var upperRightRect = new Rectangle(upperRight,new Size(rectSize,rectSize));
+  var lowerLeftRect  = new Rectangle(lowerLeft,new Size(rectSize,rectSize));
+  var lowerRightRect = new Rectangle(lowerRight,new Size(rectSize,rectSize));
+  scaleRectContainer = new Array();
+  scaleRectContainer.push(upperLeftRect);
+  scaleRectContainer.push(upperRightRect);
+  scaleRectContainer.push(lowerLeftRect);
+  scaleRectContainer.push(lowerRightRect);
 }
 function selectorMouseDrag(event) {
   //if user drags an element
   if(dragElement == true) {
+    console.log("drag");
     //get the point where the user started the drag
     if(pOld == null){
       pOld = mousePoint;
     }
     //get the actual point of the mouse
-    pNow = event.point;
+    var pNow = event.point;
     //calculate the translation vector
     var vec    = pNow.subtract(pOld);
     //get all selected items
@@ -116,6 +154,58 @@ function selectorMouseDrag(event) {
     });
     //set the old point for the next drag iteration
     pOld = pNow;
+    //dont do anything else
+    return;
+  }
+  else if(scaleElement == true) {
+    console.log("scale");
+    //TODO: get anchor point
+    //TODO: get vector between anchor point and event.point
+    //TODO: scale relative to this
+    
+
+    //TODO:  maybe change the position of the clcik points for the scale?????
+
+    var anchorIndex;
+    for(var i=0; i<scaleRectContainer.length; ++i) {
+      if(scaleRectContainer[i].contains(event.point)) {
+        anchorIndex = 3-i;
+      }
+    }
+    switch(anchorIndex) {
+      case 0:
+        anchor = boundingBox.bounds.topLeft;
+        break;
+      case 1:
+        anchor = boundingBox.bounds.topRight;
+        break;
+      case 2:
+        anchor = boundingBox.bounds.bottomLeft;
+        break;
+      case 3:
+        anchor = boundingBox.bounds.bottomRight;
+        break;
+    };
+    var pStart = mousePoint;
+    var pNow   = event.point;
+    var vecStart = anchor.subtract(pStart);
+    var vecNow = anchor.subtract(pNow);
+
+    var original = pStart.subtract(anchor); //100%
+    var newScale = pNow.subtract(anchor); //new scale
+    // x/100 = newScale/original
+    var scaleVal = (1/original.length)*newScale.length;
+
+
+    //var scaleVal    = Math.min(vecNow.x/vecStart.x,vecNow.y/vecStart.y);
+    //get all selected items
+    var items = project.selectedItems;
+
+    items.forEach(function(key) {
+      var tmp = key.scale(scaleVal,anchor);
+    });
+    removeBoundingBox();
+    makeBox();
     //dont do anything else
     return;
   }
@@ -146,7 +236,7 @@ function selectItems() {
   //iterate over all Path Items
   pathItems.forEach(function(key) {
     //check if the items intersect or are inside of the selection rect
-    if(selectionPath.bounds.intersects(key.bounds) || selectionPath.bounds.contains(key.bounds)) {
+    if(selectionPath.intersects(key) || selectionPath.bounds.contains(key.bounds)) {
       //if true: mark them as selected
       key.selected = true;
     }
@@ -172,6 +262,7 @@ function deactivateSelector() {
   removeBoundingBox();
   //unselect all items
   project.deselectAll();
+  scaleRectContainer = new Array();
   //refresh the view
   view.update();
 }
@@ -241,7 +332,6 @@ function getBoundingBox() {
   var bottom = 0;
   //get dimensions of all selected items
   items.forEach(function(key) {
-    //console.log(key.bounds);
     if(key.bounds.x < left) {
       left = key.bounds.x;
     }
@@ -264,6 +354,7 @@ function removeBoundingBox() {
     boundingBox.remove();
     boundingBox = null;
   }
+  scaleRectContainer = new Array();
 }
 function btnRemove(event) {
   //console.log("delete element");
@@ -302,6 +393,7 @@ function btnCopy(event) {
   //refresh the view
   view.update();
 }
+//brings all selected items in front
 function btnLayerUp() {
   var items = project.selectedItems;
   items.forEach(function(key) {
@@ -309,6 +401,7 @@ function btnLayerUp() {
   });
   view.update();
 }
+//brings all selected items to back
 function btnLayerDown() {
   var items = project.selectedItems;
   items.forEach(function(key) {
