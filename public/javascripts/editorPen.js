@@ -10,18 +10,27 @@ $(document).ready(function() {
 function penMouseDown(event) {
   //create a new path
   path = new Path();
-  path.strokeColor = rgbToHex(activeColor);
-  path.strokeWidth = strokeSize*3;
-  path.strokeJoin = 'round';
+  path.fillColor = rgbToHex(activeColor);
+  //path.strokeWidth = strokeSize*5;
+  //path.strokeJoin = 'round';
 }
 
 function penMouseDrag(event) {
   //add a point to the new path
-  path.add(event.point);
+  //path.add(event.point);
+  var step = event.delta.divide(2);
+  step.angle += 90;
+  step.length = strokeSize*5;
+  var top = event.middlePoint.add(step);
+  //console.log(top);
+  var bottom = event.middlePoint.subtract(step);
+  path.add(top);
+  path.insert(0,bottom);
 }
 
 function penMosueUp(event) {
   //simplify the path to lower the ammount of points
+  path.closed = true;
   path.simplify();
   console.log(path);
 }
@@ -36,4 +45,5 @@ function activatePenTool(event) {
   penTool.onMouseDrag = penMouseDrag;
   penTool.onMouseUp   = penMosueUp;
   penTool.activate();
+  tool.minDistance = 10;
 }
