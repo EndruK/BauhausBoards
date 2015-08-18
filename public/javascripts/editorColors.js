@@ -81,6 +81,13 @@ function switchColor(event) {
     var strokeBar = $(".strokeBar");
     strokeBar.css("background-color",buttonColor);
   }
+  var items = project.selectedItems;
+  if(items.length > 0) {
+    items.forEach(function(key) {
+      key.strokeColor = rgbToHex(activeColor);
+    });
+    view.update();
+  }
 }
 function updateColorContainerTimeout() {
   clearTimeout(colorContainerTimeoutHandler);
