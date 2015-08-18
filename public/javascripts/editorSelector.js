@@ -159,6 +159,7 @@ function addSelectionPopup() {
   popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupLayerDown'>LayerDown</button>");
   popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupCopy'>Copy</button>");
 
+  $("#btnSelectorPopupRemove").on("click",btnRemove);
 
   //center the popup in the bounding box
   var left = middleX - Math.round(popup.width()/2);
@@ -215,4 +216,14 @@ function removeBoundingBox() {
   if(boundingBox != null) {
     boundingBox.remove();
   }
+}
+function btnRemove(event) {
+  //console.log("delete element");
+  var items = project.selectedItems;
+  items.forEach(function(key) {
+    key.remove();
+  });
+  removeBoundingBox();
+  removeSelectionPopup();
+  view.update();
 }
