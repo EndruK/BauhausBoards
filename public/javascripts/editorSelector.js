@@ -160,6 +160,7 @@ function addSelectionPopup() {
   popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupCopy'>Copy</button>");
 
   $("#btnSelectorPopupRemove").on("click",btnRemove);
+  $("#btnSelectorPopupCopy").on("click",btnCopy);
 
   //center the popup in the bounding box
   var left = middleX - Math.round(popup.width()/2);
@@ -225,5 +226,24 @@ function btnRemove(event) {
   });
   removeBoundingBox();
   removeSelectionPopup();
+  view.update();
+}
+function btnCopy(event) {
+  var items = project.selectedItems;
+  var copies = new Array();
+  project.deselectAll();
+  removeBoundingBox();
+  removeSelectionPopup();
+  items.forEach(function(key) {
+    var copy = key.clone()
+    copy.position.x += 25;
+    copy.position.y += 25;
+    copies.push(copy);
+  });
+  copies.forEach(function(key) {
+    key.selected = true;
+  });
+  makeBox();
+  addSelectionPopup();
   view.update();
 }
