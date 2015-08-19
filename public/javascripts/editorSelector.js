@@ -26,8 +26,8 @@ var dragElement = false;
 var scaleElement = false;
 var pOld = null;
 var scaleCircles = new Array();
-var anchor;
-var clickAnchor;
+var anchAtClick;
+var selectionScale;
 
 function selectorMouseDown(event) {
   //get the actual click point
@@ -41,10 +41,19 @@ function selectorMouseDown(event) {
         //TODO: change the mouse apperance
         scaleElement = true;
         breakOut = true;
+        //TODO: get the original vector
+        for(var i=0; i<scaleCircles.length; ++i) {
+          if(scaleCircles[i].contains(event.point)) {
+            anchAtClick = scaleCircles[i].position;
+            selectionScale = mousePoint.subtract(boundingBox.bounds.center).length/selectionPath.scaling.x;
+          }
+        }
         return;
       }
     });
-    if(breakOut) return;
+    if(breakOut) {
+      return;
+    }
   }
   //check if there is a bounding box and click point was in bounding box
   if(boundingBox != null && boundingBox.bounds.contains(event.point)) {
@@ -114,8 +123,11 @@ function makeBox() {
   boundingBox.fillColor = "black";
   boundingBox.fillColor.alpha = 0.1;
   boundingBox.dashArray = [10,12];
-  //TODO: add rotation and scale listener
   // add the scale circles at the corners of the bounding box
+  addScaleCircles();
+  //TODO: add rotation listener
+}
+function addScaleCircles() {
   var circleSize = 20;
 
   var topLeft     = boundingBox.bounds.topLeft;
@@ -126,20 +138,25 @@ function makeBox() {
   var topLeftCircle  = new Shape.Circle(topLeft,circleSize);
   topLeftCircle.fillColor = 'black';
   topLeftCircle.fillColor.alpha = 0.2;
+  //topLeftCircle.visible = false;
   var topRightCircle = new Shape.Circle(topRight,circleSize);
   topRightCircle.fillColor = 'black';
   topRightCircle.fillColor.alpha = 0.2;
+  //topRightCircle.visible = false;
   var bottomLeftCircle  = new Shape.Circle(bottomLeft,circleSize);
   bottomLeftCircle.fillColor = 'black';
   bottomLeftCircle.fillColor.alpha = 0.2;
+  //bottomLeftCircle.visible = false;
   var bottomRightCircle = new Shape.Circle(bottomRight,circleSize);
   bottomRightCircle.fillColor = 'black';
   bottomRightCircle.fillColor.alpha = 0.2;
+  //bottomRightCircle.visible = false;
   
+  //remove all previous circles
   scaleCircles.forEach(function(key) {
     key.remove();
   });
-
+  //add the new circles to the array
   scaleCircles.push(topLeftCircle);
   scaleCircles.push(topRightCircle);
   scaleCircles.push(bottomLeftCircle);
@@ -175,36 +192,15 @@ function selectorMouseDrag(event) {
   }
   else if(scaleElement == true) {
     console.log("scale");
-    //TODO: get anchor point
-    //TODO. get anchor of click point
-    //TODO: get vector between anchor point and event.point
-    //TODO: scale relative to this
-    
 
-    //TODO:  maybe change the position of the clcik points for the scale?????
+    var ratio = event.point.subtract(boundingBox.bounds.center).length/selectionScale;
+    var scaling = new Point(ratio,ratio);
 
-
-    //get the anchor point
-    for(var i=0; i<scaleCircles.length; ++i) {
-      if(scaleCircles[i].contains(event.point)) {
-        anchor = scaleCircles[3-i].position;
-        clickAnchor = scaleCircles[i].position;
-      }
-    }
-    var clickPoint = event.point;
-    //TODO: translate the clickAnchor to the clickPoint
-    vecAnchorToClick  = clickPoint.subtract(anchor);
-    vecAnchorToAnchor = clickAnchor.subtract(anchor);
-
-    var scaleFactor = vecAnchorToClick.length/vecAnchorToAnchor.length;
-
-    //get all selected items
     var items = project.selectedItems;
-    console.log(scaleFactor);
     items.forEach(function(key) {
-      var tmp = key.scale(scaleFactor,anchor);
+      key.scaling = scaling;
     });
-    view.update();
+    removeSelectionPopup();
     removeBoundingBox();
     makeBox();
     //dont do anything else
