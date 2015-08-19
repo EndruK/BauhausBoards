@@ -4,7 +4,7 @@ paper.install(window);
 $('.sidebar').on('click', '.btnEditorEraser', activateEraserTool);
 var eraserTool;
 $(document).ready(function() {
-  //initialize the selector event handler tool
+  //initialize the eraser event handler tool
   eraserTool = new Tool();
 });
 function activateEraserTool(event) {
@@ -20,6 +20,5 @@ function eraserMouseDrag(event) {
   var hit = project.hitTest(event.point);
   if(hit) {
     hit.item.remove();
-    console.log(hit);
   }
 }

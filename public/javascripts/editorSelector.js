@@ -219,7 +219,8 @@ function selectorMouseDrag(event) {
   }
   else if(scaleElement == true) {
     console.log("scale");
-
+    //TODO: rebuild this function with pOld and anchor point
+    //TODO: always add the distance between pOld and pNew to anchorToAnchorVec and divide by this
     var ratio = event.point.subtract(boundingBox.bounds.center).length/selectionScale;
     var scaling = new Point(ratio,ratio);
 
@@ -252,6 +253,10 @@ function selectorMouseDrag(event) {
     var items = project.selectedItems;
     //makeBox()
     boundingBox.rotate(angle,pCenter);
+    rotationCircle.rotate(angle,pCenter);
+    scaleCircles.forEach(function(key) {
+      key.rotate(angle,pCenter);
+    });
     items.forEach(function(key) {
       key.rotate(angle,pCenter);
     });
