@@ -24,9 +24,10 @@ var selectionRect = null;
 var boundingBox = null;
 var dragElement = false;
 var scaleElement = false;
+var rotateElement = false;
 var pOld = null;
 var scaleCircles = new Array();
-var anchAtClick;
+var rotationCircle = null;
 var selectionScale;
 
 function selectorMouseDown(event) {
@@ -43,7 +44,6 @@ function selectorMouseDown(event) {
         breakOut = true;
         for(var i=0; i<scaleCircles.length; ++i) {
           if(scaleCircles[i].contains(event.point)) {
-            anchAtClick = scaleCircles[i].position;
             selectionScale = mousePoint.subtract(boundingBox.bounds.center).length/selectionPath.scaling.x;
           }
         }
@@ -53,6 +53,10 @@ function selectorMouseDown(event) {
     if(breakOut) {
       return;
     }
+  }
+  if(rotationCircle != null && rotationCircle.contains(event.point)) {
+    rotateElement = true;
+    return;
   }
   //check if there is a bounding box and click point was in bounding box
   if(boundingBox != null && boundingBox.bounds.contains(event.point)) {
@@ -94,6 +98,10 @@ function selectorMouseUp(event) {
   if(scaleElement) {
     scaleElement = false;
   }
+  if(rotateElement) {
+    rotateElement = false;
+    pOld = null;
+  }
   removeSelectionPopup();
   removeBoundingBox();
   //only if there are selected items
@@ -127,12 +135,24 @@ function makeBox() {
   var width = topRight.x-topLeft.x;
   var middle = topLeft.x + width/2;
   var top = topLeft.y-25;
+  var point = new Point(middle,top);
   // add the scale circles at the corners of the bounding box
   addScaleCircles();
   boundingBox.insert(2, new Point(topLeft.x+width/2,topLeft.y));
-  boundingBox.insert(2, new Point(middle,top));
+  boundingBox.insert(2, point);
   boundingBox.insert(2, new Point(topLeft.x+width/2,topLeft.y));
-  //TODO: add rotation click areas
+  addRotationCircle(point);
+}
+function addRotationCircle(point) {
+  var circleSize = 20;
+  if(rotationCircle) {
+    rotationCircle.remove();
+  }
+  rotationCircle = new Shape.Circle(point,circleSize);
+  rotationCircle.fillColor = 'black';
+  rotationCircle.fillColor.alpha = 0.2;
+  //rotationCircle.visible = false;
+
 }
 function addScaleCircles() {
   var circleSize = 20;
@@ -175,6 +195,7 @@ function selectorMouseDrag(event) {
     console.log("drag");
     //get the point where the user started the drag
     if(pOld == null){
+      console.log("reset pOld");
       pOld = mousePoint;
     }
     //get the actual point of the mouse
@@ -211,6 +232,34 @@ function selectorMouseDrag(event) {
     removeBoundingBox();
     makeBox();
     //dont do anything else
+    return;
+  }
+  else if(rotateElement == true) {
+    console.log("rotate");
+    if(pOld == null){
+      pOld = mousePoint;
+    }
+    var pCenter = boundingBox.bounds.center;
+    var pClick  = mousePoint;
+    var pMouse  = event.point;
+    var pLast = pOld;
+
+    var vecPMouse = pCenter.subtract(pMouse)
+    //var vecPClick = pCenter.subtract(pClick);
+    var vecPLast = pCenter.subtract(pLast);
+
+    //var angle = pMouse.subtract(pCenter).angle + 90;
+    var angle = vecPMouse.angle - vecPLast.angle;
+    var items = project.selectedItems;
+    //makeBox()
+    boundingBox.rotate(angle,pCenter);
+    items.forEach(function(key) {
+      key.rotate(angle,pCenter);
+    });
+    removeSelectionPopup();
+    pOld = pMouse;
+    view.update();
+    //console.log(pCenter);
     return;
   }
   //refresh the rectangle the user is actually drawing
@@ -266,7 +315,6 @@ function deactivateSelector() {
   removeBoundingBox();
   //unselect all items
   project.deselectAll();
-  scaleRectContainer = new Array();
   //refresh the view
   view.update();
 }
@@ -363,6 +411,10 @@ function removeBoundingBox() {
     key.remove();
   });
   scaleCircles = new Array();
+  if(rotationCircle) {
+    rotationCircle.remove();
+  }
+  rotationCircle = null;
 }
 function btnRemove(event) {
   //console.log("delete element");
