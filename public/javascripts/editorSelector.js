@@ -33,13 +33,11 @@ var selectionScale;
 function selectorMouseDown(event) {
   //get the actual click point
   mousePoint = event.point;
-  //console.log(boundingBox);
-  //TODO: add rotation listener
   if(scaleCircles.length > 0) {
     var breakOut = false;
     scaleCircles.forEach(function(key) {
       if(key.contains(event.point)) {
-        //TODO: change the mouse apperance
+        //TODO: change the mouse apperance?
         scaleElement = true;
         breakOut = true;
         for(var i=0; i<scaleCircles.length; ++i) {
@@ -164,21 +162,22 @@ function addScaleCircles() {
   
   var topLeftCircle  = new Shape.Circle(topLeft,circleSize);
   topLeftCircle.fillColor = 'black';
-  topLeftCircle.fillColor.alpha = 0.2;
-  //topLeftCircle.visible = false;
+  topLeftCircle.fillColor.alpha = 0.1;
   var topRightCircle = new Shape.Circle(topRight,circleSize);
   topRightCircle.fillColor = 'black';
-  topRightCircle.fillColor.alpha = 0.2;
-  //topRightCircle.visible = false;
+  topRightCircle.fillColor.alpha = 0.1;
   var bottomLeftCircle  = new Shape.Circle(bottomLeft,circleSize);
   bottomLeftCircle.fillColor = 'black';
-  bottomLeftCircle.fillColor.alpha = 0.2;
-  //bottomLeftCircle.visible = false;
+  bottomLeftCircle.fillColor.alpha = 0.1;
   var bottomRightCircle = new Shape.Circle(bottomRight,circleSize);
   bottomRightCircle.fillColor = 'black';
-  bottomRightCircle.fillColor.alpha = 0.2;
-  //bottomRightCircle.visible = false;
-  
+  bottomRightCircle.fillColor.alpha = 0.1;
+  /*
+  topLeftCircle.visible = false;
+  topRightCircle.visible = false;
+  bottomLeftCircle.visible = false;
+  bottomRightCircle.visible = false;
+  */
   //remove all previous circles
   scaleCircles.forEach(function(key) {
     key.remove();

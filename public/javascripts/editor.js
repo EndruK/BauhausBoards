@@ -20,5 +20,6 @@ function removeListeners() {
   penTool.remove();
   textTool.remove();
   selectorTool.remove();
+  eraserTool.remove();
   deactivateSelector();
 }
