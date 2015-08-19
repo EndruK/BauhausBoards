@@ -25,26 +25,30 @@ var boundingBox = null;
 var dragElement = false;
 var scaleElement = false;
 var pOld = null;
-var scaleRectContainer = new Array();
+var scaleCircles = new Array();
 var anchor;
+var clickAnchor;
 
 function selectorMouseDown(event) {
   //get the actual click point
   mousePoint = event.point;
   //console.log(boundingBox);
   
-  //check if there is a bounding box and click point was in bounding box
-  if(boundingBox != null && boundingBox.bounds.contains(event.point)) {
-    dragElement = true;
-    return;
-  }
-  if(scaleRectContainer.length > 0) {
-    scaleRectContainer.forEach(function(key) {
+  if(scaleCircles.length > 0) {
+    var breakOut = false;
+    scaleCircles.forEach(function(key) {
       if(key.contains(event.point)) {
         //TODO: change the mouse apperance
         scaleElement = true;
+        breakOut = true;
+        return;
       }
     });
+    if(breakOut) return;
+  }
+  //check if there is a bounding box and click point was in bounding box
+  if(boundingBox != null && boundingBox.bounds.contains(event.point)) {
+    dragElement = true;
     return;
   }
   //remove the popup of the selection if there is one
@@ -111,25 +115,35 @@ function makeBox() {
   boundingBox.fillColor.alpha = 0.1;
   boundingBox.dashArray = [10,12];
   //TODO: add rotation and scale listener
-  // add the scale rects at the corners of the bounding box
-  var rectSize = 50;
-  var upperLeft  = new Point(boundingBox.bounds.x-rectSize,
-    boundingBox.bounds.y-rectSize);
-  var upperRight = new Point(boundingBox.bounds.x+boundingBox.bounds.width,
-    boundingBox.bounds.y-rectSize);
-  var lowerLeft  = new Point(boundingBox.bounds.x-rectSize,
-    boundingBox.bounds.y+boundingBox.bounds.height);
-  var lowerRight = new Point(boundingBox.bounds.x+boundingBox.bounds.width,
-    boundingBox.bounds.y+boundingBox.bounds.height);
-  var upperLeftRect  = new Rectangle(upperLeft,new Size(rectSize,rectSize));
-  var upperRightRect = new Rectangle(upperRight,new Size(rectSize,rectSize));
-  var lowerLeftRect  = new Rectangle(lowerLeft,new Size(rectSize,rectSize));
-  var lowerRightRect = new Rectangle(lowerRight,new Size(rectSize,rectSize));
-  scaleRectContainer = new Array();
-  scaleRectContainer.push(upperLeftRect);
-  scaleRectContainer.push(upperRightRect);
-  scaleRectContainer.push(lowerLeftRect);
-  scaleRectContainer.push(lowerRightRect);
+  // add the scale circles at the corners of the bounding box
+  var circleSize = 20;
+
+  var topLeft     = boundingBox.bounds.topLeft;
+  var topRight    = boundingBox.bounds.topRight;
+  var bottomLeft  = boundingBox.bounds.bottomLeft;
+  var bottomRight = boundingBox.bounds.bottomRight;
+  
+  var topLeftCircle  = new Shape.Circle(topLeft,circleSize);
+  topLeftCircle.fillColor = 'black';
+  topLeftCircle.fillColor.alpha = 0.2;
+  var topRightCircle = new Shape.Circle(topRight,circleSize);
+  topRightCircle.fillColor = 'black';
+  topRightCircle.fillColor.alpha = 0.2;
+  var bottomLeftCircle  = new Shape.Circle(bottomLeft,circleSize);
+  bottomLeftCircle.fillColor = 'black';
+  bottomLeftCircle.fillColor.alpha = 0.2;
+  var bottomRightCircle = new Shape.Circle(bottomRight,circleSize);
+  bottomRightCircle.fillColor = 'black';
+  bottomRightCircle.fillColor.alpha = 0.2;
+  
+  scaleCircles.forEach(function(key) {
+    key.remove();
+  });
+
+  scaleCircles.push(topLeftCircle);
+  scaleCircles.push(topRightCircle);
+  scaleCircles.push(bottomLeftCircle);
+  scaleCircles.push(bottomRightCircle);
 }
 function selectorMouseDrag(event) {
   //if user drags an element
@@ -154,56 +168,43 @@ function selectorMouseDrag(event) {
     });
     //set the old point for the next drag iteration
     pOld = pNow;
+    makeBox();
+    view.update();
     //dont do anything else
     return;
   }
   else if(scaleElement == true) {
     console.log("scale");
     //TODO: get anchor point
+    //TODO. get anchor of click point
     //TODO: get vector between anchor point and event.point
     //TODO: scale relative to this
     
 
     //TODO:  maybe change the position of the clcik points for the scale?????
 
-    var anchorIndex;
-    for(var i=0; i<scaleRectContainer.length; ++i) {
-      if(scaleRectContainer[i].contains(event.point)) {
-        anchorIndex = 3-i;
+
+    //get the anchor point
+    for(var i=0; i<scaleCircles.length; ++i) {
+      if(scaleCircles[i].contains(event.point)) {
+        anchor = scaleCircles[3-i].position;
+        clickAnchor = scaleCircles[i].position;
       }
     }
-    switch(anchorIndex) {
-      case 0:
-        anchor = boundingBox.bounds.topLeft;
-        break;
-      case 1:
-        anchor = boundingBox.bounds.topRight;
-        break;
-      case 2:
-        anchor = boundingBox.bounds.bottomLeft;
-        break;
-      case 3:
-        anchor = boundingBox.bounds.bottomRight;
-        break;
-    };
-    var pStart = mousePoint;
-    var pNow   = event.point;
-    var vecStart = anchor.subtract(pStart);
-    var vecNow = anchor.subtract(pNow);
+    var clickPoint = event.point;
+    //TODO: translate the clickAnchor to the clickPoint
+    vecAnchorToClick  = clickPoint.subtract(anchor);
+    vecAnchorToAnchor = clickAnchor.subtract(anchor);
 
-    var original = pStart.subtract(anchor); //100%
-    var newScale = pNow.subtract(anchor); //new scale
-    // x/100 = newScale/original
-    var scaleVal = (1/original.length)*newScale.length;
+    var scaleFactor = vecAnchorToClick.length/vecAnchorToAnchor.length;
 
-
-    //var scaleVal    = Math.min(vecNow.x/vecStart.x,vecNow.y/vecStart.y);
     //get all selected items
     var items = project.selectedItems;
-
+    console.log(scaleFactor);
     items.forEach(function(key) {
-      var tmp = key.scale(scaleVal,anchor);
+      var tmp = key.scale(scaleFactor,anchor);
     });
+    view.update();
     removeBoundingBox();
     makeBox();
     //dont do anything else
@@ -354,7 +355,10 @@ function removeBoundingBox() {
     boundingBox.remove();
     boundingBox = null;
   }
-  scaleRectContainer = new Array();
+  scaleCircles.forEach(function(key) {
+    key.remove();
+  });
+  scaleCircles = new Array();
 }
 function btnRemove(event) {
   //console.log("delete element");
