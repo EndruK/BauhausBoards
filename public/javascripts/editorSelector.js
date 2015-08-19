@@ -33,7 +33,7 @@ function selectorMouseDown(event) {
   //get the actual click point
   mousePoint = event.point;
   //console.log(boundingBox);
-  
+  //TODO: add rotation listener
   if(scaleCircles.length > 0) {
     var breakOut = false;
     scaleCircles.forEach(function(key) {
@@ -41,7 +41,6 @@ function selectorMouseDown(event) {
         //TODO: change the mouse apperance
         scaleElement = true;
         breakOut = true;
-        //TODO: get the original vector
         for(var i=0; i<scaleCircles.length; ++i) {
           if(scaleCircles[i].contains(event.point)) {
             anchAtClick = scaleCircles[i].position;
@@ -118,14 +117,22 @@ function selectorMouseUp(event) {
 }
 function makeBox() {
   //create a new box arround all selected items
-  boundingBox = new Shape.Rectangle(getBoundingBox());
+  boundingBox = new Path.Rectangle(getBoundingBox());
   boundingBox.strokeColor = "black";
   boundingBox.fillColor = "black";
   boundingBox.fillColor.alpha = 0.1;
   boundingBox.dashArray = [10,12];
+  var topLeft = boundingBox.bounds.topLeft;
+  var topRight = boundingBox.bounds.topRight;
+  var width = topRight.x-topLeft.x;
+  var middle = topLeft.x + width/2;
+  var top = topLeft.y-25;
   // add the scale circles at the corners of the bounding box
   addScaleCircles();
-  //TODO: add rotation listener
+  boundingBox.insert(2, new Point(topLeft.x+width/2,topLeft.y));
+  boundingBox.insert(2, new Point(middle,top));
+  boundingBox.insert(2, new Point(topLeft.x+width/2,topLeft.y));
+  //TODO: add rotation click areas
 }
 function addScaleCircles() {
   var circleSize = 20;
@@ -343,7 +350,8 @@ function getBoundingBox() {
     }
   });
   //return the bounding box rectangle
-  return new Rectangle(new Point(left,top), new Point(right,bottom));
+  var rect = new Rectangle(new Point(left,top), new Point(right,bottom));
+  return rect;
 }
 function removeBoundingBox() {
   //remove the bound box
