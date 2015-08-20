@@ -28,7 +28,6 @@ var rotateElement = false;
 var pOld = null;
 var scaleCircles = new Array();
 var rotationCircle = null;
-var selectionScale;
 var anchor = null;
 var anchorOld = null;
 
@@ -45,7 +44,6 @@ function selectorMouseDown(event) {
         for(var i=0; i<scaleCircles.length; ++i) {
           if(scaleCircles[i].contains(event.point)) {
             anchor = scaleCircles[3-i].bounds.center;
-            selectionScale = mousePoint.subtract(boundingBox.bounds.center).length/selectionPath.scaling.x;
           }
         }
         return;
@@ -224,12 +222,9 @@ function selectorMouseDrag(event) {
   }
   else if(scaleElement == true) {
     console.log("scale");
-    //TODO: rebuild this function with pOld and anchor point
-    //TODO: always add the distance between pOld and pNew to anchorToAnchorVec and divide by this
     if(pOld == null){
       pOld = mousePoint;
     }
-    //var anchor;
     var clickAnchor;
     for(var i=0; i<scaleCircles.length; ++i) {
       if(scaleCircles[i].contains(event.point)) {
@@ -244,12 +239,9 @@ function selectorMouseDrag(event) {
     var ratio = vecNew.length/vecOld.length;
 
 
-    //var ratio = event.point.subtract(boundingBox.bounds.center).length/selectionScale;
-    var scaling = new Point(ratio,ratio);
 
     var items = project.selectedItems;
     items.forEach(function(key) {
-      //key.scaling = scaling;
       key.scale(ratio,anchor);
     });
     removeSelectionPopup();
