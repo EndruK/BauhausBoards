@@ -34,12 +34,12 @@ function penMosueUp(event) {
   //simplify the path to lower the ammount of points
   path.closed = true;
   path.simplify();
-  //console.log(path);
-  //interaction.push({"addPath",path.exportJSON(),false});
+  //create undo-redo object
   var obj = new Object();
   obj.type = "addPath";
   obj.content = [path.id,path.exportJSON()];
   obj.undo = false;
+  //if user already undoed something
   removeAllUndoed();
   interaction.push(obj);
 }

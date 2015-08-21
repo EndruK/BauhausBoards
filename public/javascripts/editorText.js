@@ -28,5 +28,13 @@ function drawText(event) {
     text.fontFamily = 'Arial';
     text.fontSize = '20px';
     text.content = input;
+    //create undo-redo object
+    var obj = new Object();
+    obj.type = "addText";
+    obj.content = [text.id,text.exportJSON()];
+    obj.undo = false;
+    //if user already undoed something
+    removeAllUndoed();
+    interaction.push(obj);
   }
 }
