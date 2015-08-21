@@ -34,7 +34,14 @@ function penMosueUp(event) {
   //simplify the path to lower the ammount of points
   path.closed = true;
   path.simplify();
-  console.log(path);
+  //console.log(path);
+  //interaction.push({"addPath",path.exportJSON(),false});
+  var obj = new Object();
+  obj.type = "addPath";
+  obj.content = [path.id,path.exportJSON()];
+  obj.undo = false;
+  removeAllUndoed();
+  interaction.push(obj);
 }
 function activatePenTool(event) {
   console.log($(this).attr('class'));

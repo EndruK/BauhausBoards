@@ -14,6 +14,7 @@ function activateEraserTool(event) {
   removeListeners();
   eraserTool = new Tool();
   eraserTool.onMouseDrag = eraserMouseDrag;
+  eraserTool.onMouseDown = eraserMouseDrag;
   eraserTool.activate();
 }
 function eraserMouseDrag(event) {

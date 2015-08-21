@@ -34,16 +34,20 @@ var anchorOld = null;
 function selectorMouseDown(event) {
   //get the actual click point
   mousePoint = event.point;
+  //check for scale
   if(scaleCircles.length > 0) {
     var breakOut = false;
+    //does the user has clied in a scale circle?
     scaleCircles.forEach(function(key) {
       if(key.contains(event.point)) {
         //TODO: change the mouse apperance?
         scaleElement = true;
         breakOut = true;
+        //what is the opposite circle of the circle the user clicked on
         for(var i=0; i<scaleCircles.length; ++i) {
           if(scaleCircles[i].contains(event.point)) {
             anchor = scaleCircles[3-i].bounds.center;
+            return;
           }
         }
         return;
@@ -53,6 +57,7 @@ function selectorMouseDown(event) {
       return;
     }
   }
+  //check for rotation
   if(rotationCircle != null && rotationCircle.contains(event.point)) {
     rotateElement = true;
     return;
@@ -237,9 +242,6 @@ function selectorMouseDrag(event) {
     var vecOld = anchorOld.subtract(anchor);
     var vecNew = event.point.subtract(anchor);
     var ratio = vecNew.length/vecOld.length;
-
-
-
     var items = project.selectedItems;
     items.forEach(function(key) {
       key.scale(ratio,anchor);
