@@ -21,6 +21,7 @@ $('.sidebar').on('click', '.btnEditorRedo', redo);
 // delete:    {delete,   [id,JSON],false}
 // itemUp:    {itemUp,   [id,originalJSON,newJSON],false}
 // itemDown:  {itemDown, [id,originalJSON,newJSON],false}
+// copy:      {copy,     [id,JSON],false}
 var interaction = new Array();
 function undo(event) {
   console.log(interaction);

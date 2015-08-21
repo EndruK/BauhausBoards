@@ -54,17 +54,20 @@ function selectorMouseDown(event) {
       }
     });
     if(breakOut) {
+      //TODO: undo click down
       return;
     }
   }
   //check for rotation
   if(rotationCircle != null && rotationCircle.contains(event.point)) {
     rotateElement = true;
+    //TODO: undo click down
     return;
   }
   //check if there is a bounding box and click point was in bounding box
   if(boundingBox != null && boundingBox.bounds.contains(event.point)) {
     dragElement = true;
+    //TODO: undo click down
     return;
   }
   //remove the popup of the selection if there is one
@@ -98,15 +101,18 @@ function selectorMouseUp(event) {
   if(dragElement) {
     dragElement = false;
     pOld = null;
+    //TODO:undo clickup
   }
   if(scaleElement) {
     scaleElement = false;
     anchorOld = null;
     pOld = null;
+    //TODO:undo clickup
   }
   if(rotateElement) {
     rotateElement = false;
     pOld = null;
+    //TODO:undo clickup
   }
   removeSelectionPopup();
   removeBoundingBox();
@@ -475,6 +481,7 @@ function btnCopy(event) {
   addSelectionPopup();
   //refresh the view
   view.update();
+  //TODO:undo
 }
 //brings all selected items in front
 function btnLayerUp() {
@@ -483,6 +490,7 @@ function btnLayerUp() {
     key.bringToFront();
   });
   view.update();
+  //TODO:undo
 }
 //brings all selected items to back
 function btnLayerDown() {
@@ -491,4 +499,5 @@ function btnLayerDown() {
     key.sendToBack();
   });
   view.update();
+  //TODO:undo
 }
