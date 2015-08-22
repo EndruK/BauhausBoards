@@ -68,6 +68,16 @@ function selectorMouseDown(event) {
   if(boundingBox != null && boundingBox.bounds.contains(event.point)) {
     dragElement = true;
     //TODO: undo click down
+    var items = project.selectedItems;
+    var obj = new Object();
+    obj.type = "translate";
+    obj.content = new Array();
+    for(var i=0; i<items.length; i++) {
+      obj.content.push([items[i].id,items[i].exportJSON()]);
+    }
+    obj.undo = false;
+    interaction.push(obj);
+    console.log(obj);
     return;
   }
   //remove the popup of the selection if there is one
@@ -102,6 +112,17 @@ function selectorMouseUp(event) {
     dragElement = false;
     pOld = null;
     //TODO:undo clickup
+    var obj = interaction.pop();
+    
+    obj.content.forEach(function(key) {
+      var item = project.getItems({
+        id: key[0]
+      })
+      key[2] = item[0].exportJSON();
+    });
+    //console.log(obj);
+    removeAllUndoed();
+    interaction.push(obj);
   }
   if(scaleElement) {
     scaleElement = false;

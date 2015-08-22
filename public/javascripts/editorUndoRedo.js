@@ -25,10 +25,12 @@ $('.sidebar').on('click', '.btnEditorRedo', redo);
 var interaction = new Array();
 function undo(event) {
   console.log(interaction);
-  for(var i=interaction.length-1; i>=0; --i) {
-    if(interaction[i].undo == false) {
-      undoAction(interaction[i]);
-      return;
+  if(interaction.length > 0) {
+    for(var i=interaction.length-1; i>=0; --i) {
+      if(interaction[i].undo == false) {
+        undoAction(interaction[i]);
+        return;
+      }
     }
   }
 }
@@ -45,6 +47,9 @@ function redo(event) {
 
 function undoAction(action) {
   action.undo = true;
+  removeSelectionPopup();
+  removeBoundingBox();
+  project.deselectAll();
   switch(action.type) {
     case "addPath":
       console.log("undo add path");
@@ -62,11 +67,26 @@ function undoAction(action) {
       });
       text[0].remove();
       break;
+    case "translate":
+      console.log("undo translate objects");
+      action.content.forEach(function(key) {
+        var item = project.getItems({
+          id: key[0]
+        });
+        item[0].remove();
+        var itemUndo = new Path();
+        itemUndo.importJSON(key[1]);
+        key[0] = itemUndo.id;
+      });
+      break;
   };
   view.update();
 }
 function redoAction(action) {
   action.undo = false;
+  removeSelectionPopup();
+  removeBoundingBox();
+  project.deselectAll();
   switch(action.type){
     case "addPath":
       console.log("redo add path");
