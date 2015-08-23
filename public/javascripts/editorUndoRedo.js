@@ -40,6 +40,7 @@ $(function() {
     return input;
   };
   undo_saveState = function() {
+    removeBoundingBox();
     var newState = JSON.stringify(tidyJSONProject(project.exportJSON({asString:false})));
     var prevState =  undo_undoStack.pop();
     if (typeof prevState != "undefined") { // was there even a previous state?
@@ -58,6 +59,7 @@ $(function() {
       undo_redoStack = new FixedQueue(undo_stackLength);
     }
     undo_updateButtons();
+    makeBox();
   };
   undo_performUndo = function() {
     var lastState =  undo_undoStack.pop();
@@ -126,10 +128,6 @@ $(function() {
     if(onCanvas) {
       undo_saveState();
     }
-
-    /*if ($(event.target).attr(id) == "EditorCanvas".parents("#controls").length == 0) {
-      undo_saveState();
-    }*/
   });
   /* Bind to undo button in controls
    */
@@ -139,28 +137,3 @@ $(function() {
    */
   $(".sidebar").on("click", '.btnEditorRedo', undo_performRedo);
 });
-//button click listener
-//$('.sidebar').on('click', '.btnEditorUndo', undo);
-//$('.sidebar').on('click', '.btnEditorRedo', redo);
-/*
-- pen add
-- text add
-- change color
-- selection-translation
-- selection-scale
-- selection-rotation
-- selection keep an eye on item sets which were transformed
-*/
-// interaction container:{action,[action-parameters],undoBool}
-// add path:  {addPath,  [id,JSON],false}                 - done
-// add text:  {addText,  [id,JSON],false}                 - done
-// translate: {translate,[id,originalJSON,newJSON],false}
-// scale:     {scale,    [id,originalJSON,newJSON],false}
-// rotation:  {rotation, [id,originalJSON,newJSON],false}
-// delete:    {delete,   [id,JSON],false}
-// itemUp:    {itemUp,   [id,originalJSON,newJSON],false}
-// itemDown:  {itemDown, [id,originalJSON,newJSON],false}
-// copy:      {copy,     [id,JSON],false}
-// NEW IDEA:
-// save the global state of the project when the user presses on the board
-// maybe this is a little bit more resource consuming ... 
