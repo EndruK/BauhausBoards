@@ -37,7 +37,7 @@ function selectorMouseDown(event) {
   //check for scale
   if(scaleCircles.length > 0) {
     var breakOut = false;
-    //does the user has clied in a scale circle?
+    //does the user has clicked in a scale circle?
     scaleCircles.forEach(function(key) {
       if(key.contains(event.point)) {
         //TODO: change the mouse apperance?
@@ -54,30 +54,17 @@ function selectorMouseDown(event) {
       }
     });
     if(breakOut) {
-      //TODO: undo click down
       return;
     }
   }
   //check for rotation
   if(rotationCircle != null && rotationCircle.contains(event.point)) {
     rotateElement = true;
-    //TODO: undo click down
     return;
   }
   //check if there is a bounding box and click point was in bounding box
   if(boundingBox != null && boundingBox.bounds.contains(event.point)) {
     dragElement = true;
-    //TODO: undo click down
-    var items = project.selectedItems;
-    var obj = new Object();
-    obj.type = "translate";
-    obj.content = new Array();
-    for(var i=0; i<items.length; i++) {
-      obj.content.push([items[i].id,items[i].exportJSON()]);
-    }
-    obj.undo = false;
-    interaction.push(obj);
-    console.log(obj);
     return;
   }
   //remove the popup of the selection if there is one
@@ -111,29 +98,15 @@ function selectorMouseUp(event) {
   if(dragElement) {
     dragElement = false;
     pOld = null;
-    //TODO:undo clickup
-    var obj = interaction.pop();
-    
-    obj.content.forEach(function(key) {
-      var item = project.getItems({
-        id: key[0]
-      })
-      key[2] = item[0].exportJSON();
-    });
-    //console.log(obj);
-    removeAllUndoed();
-    interaction.push(obj);
   }
   if(scaleElement) {
     scaleElement = false;
     anchorOld = null;
     pOld = null;
-    //TODO:undo clickup
   }
   if(rotateElement) {
     rotateElement = false;
     pOld = null;
-    //TODO:undo clickup
   }
   removeSelectionPopup();
   removeBoundingBox();
@@ -502,7 +475,6 @@ function btnCopy(event) {
   addSelectionPopup();
   //refresh the view
   view.update();
-  //TODO:undo
 }
 //brings all selected items in front
 function btnLayerUp() {
@@ -511,7 +483,6 @@ function btnLayerUp() {
     key.bringToFront();
   });
   view.update();
-  //TODO:undo
 }
 //brings all selected items to back
 function btnLayerDown() {
@@ -520,5 +491,4 @@ function btnLayerDown() {
     key.sendToBack();
   });
   view.update();
-  //TODO:undo
 }
