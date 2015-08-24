@@ -59,9 +59,13 @@ $(function() {
       undo_redoStack = new FixedQueue(undo_stackLength);
     }
     undo_updateButtons();
-    makeBox();
+    if(project.selectedItems.length > 0) {
+      makeBox();
+    }
   };
   undo_performUndo = function() {
+    updateTimer();
+    removeBoundingBox();
     var lastState =  undo_undoStack.pop();
     if (lastState) { // Only attempt to undo if there is actually an undo state
       var current = JSON.stringify(tidyJSONProject(project.exportJSON({asString:false})));
@@ -79,8 +83,12 @@ $(function() {
     } else {
     }
     undo_updateButtons();
+    if(project.selectedItems.length > 0) {
+      makeBox();
+    }
   };
   undo_performRedo = function() {
+    updateTimer();
     var nextState =  undo_redoStack.pop();
     if (nextState) { // Only attempt to undo if there is actually an undo state
       var current = JSON.stringify(tidyJSONProject(project.exportJSON({asString:false})));
@@ -122,18 +130,18 @@ $(function() {
     // Ignore clicks on the controls (but do pay attention to floatie clicks as these can change the board)
     
     var target = $(event.target);
-    var onMessageSidebar = target.parents(".sidebarUpper").parents("#sidebarCreateMessage").length > 0;
-    //TODO: handle the bounding box stuff
     var onCanvas = target.attr("id") == "EditorCanvas";
-    if(onCanvas) {
+    var onPopup = target.attr("id") == "btnSelectorPopupLayerDown" ||
+        target.attr("id") == "btnSelectorPopupLayerUp";
+    if(onCanvas || onPopup) {
       undo_saveState();
     }
   });
-  /* Bind to undo button in controls
+  /* Bind to undo button on sidebar
    */
   $(".sidebar").on("click", '.btnEditorUndo', undo_performUndo);
   
-  /* Bind to redo button in controls
+  /* Bind to redo button on sidebar
    */
   $(".sidebar").on("click", '.btnEditorRedo', undo_performRedo);
 });

@@ -434,7 +434,7 @@ function removeBoundingBox() {
     key.remove();
   });
   scaleCircles = new Array();
-  if(rotationCircle) {
+  if(rotationCircle != null) {
     rotationCircle.remove();
   }
   rotationCircle = null;

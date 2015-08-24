@@ -58,6 +58,8 @@ function loadMessageLanding(event) {
 }
 function loadCreateMessage(event) {
   var tmp  = $('#header').text('Compose Message\nall selected persons have to be displayed here');
+  undo_undoStack = FixedQueue(undo_stackLength);
+  undo_redoStack = FixedQueue(undo_stackLength);
   tmp.html(tmp.html().replace(/\n/g,'<br>'));
   paper.setup('EditorCanvas');
   activatePenTool();
