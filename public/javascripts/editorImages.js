@@ -4,12 +4,15 @@ $('.sidebar').on('click', '.imgTEST', imageTest);
 
 function imageTest(event) {
   console.log("imageTest");
-  /*var raster = new Raster('images/monkey.jpg');
-  raster.position = view.center;
-  raster.scale(0.5);*/
-  var raster2 = new Raster('images/jack.gif');
-  raster2.position = view.center;
-  //raster2.scale(0.5);
+  var url = prompt("Enter an image URL");
+  if(url){
+    undo_saveState();
+    var raster = new Raster(url);
+    raster.position = view.center;
+    if(raster.width > view.width) {
+      raster2.scale(0.3);
+    }
+  }
 }
 var gifUpdate = null;
  /* 
@@ -40,7 +43,7 @@ function update_gifs(){
   });
   // then for each gif raster, make an HTML image copy
   gif_items.reverse().forEach(function(gif,i){
-
+    gif.bringToFront();
     var img = $('<img>').attr('src', $(gif._image).attr("src"));
     var gm = gif.getGlobalMatrix();
     // add the image to the dedicated gif layer and copy transform
