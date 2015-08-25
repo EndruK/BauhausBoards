@@ -336,3 +336,11 @@ body,
   overflow: auto;
   background-color: #fff;
 }
+#gifLayer {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 100px);
+  pointer-events: none;
+  overflow: hidden;
+}

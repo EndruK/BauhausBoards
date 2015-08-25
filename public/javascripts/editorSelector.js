@@ -30,10 +30,12 @@ var scaleCircles = new Array();
 var rotationCircle = null;
 var anchor = null;
 var anchorOld = null;
+var clickedOnRaster = false;
 
 function selectorMouseDown(event) {
   //get the actual click point
   mousePoint = event.point;
+  hide_gifs();
   //check for scale
   if(scaleCircles.length > 0) {
     var breakOut = false;
@@ -95,6 +97,7 @@ function selectorMouseDown(event) {
   }
 }
 function selectorMouseUp(event) {
+  show_gifs();
   if(dragElement) {
     dragElement = false;
     pOld = null;
@@ -309,6 +312,10 @@ function selectItems() {
   var textItems = project.getItems({
     class: PointText
   });
+  //get all Raster Items
+  var rasterItems = project.getItems({
+    class: Raster
+  });
   //iterate over all Path Items
   pathItems.forEach(function(key) {
     //check if the items intersect or are inside of the selection rect
@@ -322,6 +329,12 @@ function selectItems() {
     //check if the items intersect or are inside of the selection rect
     if(selectionPath.bounds.intersects(key.bounds) || selectionPath.bounds.contains(key.bounds)) {
       //if true: mark them as selected
+      key.selected = true;
+    }
+  });
+  //iterate over all Raster Items
+  rasterItems.forEach(function(key) {
+    if(selectionPath.bounds.intersects(key.bounds) || selectionPath.bounds.contains(key.bounds)) {
       key.selected = true;
     }
   });
