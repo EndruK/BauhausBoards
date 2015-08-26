@@ -67,6 +67,7 @@ function loadCreateMessage(event) {
   showSidebar('sidebarCreateMessage');
   clearTimeout(5000);
   updateTimer();
+  //TODO: back button frage: wirklich zurück
 }
 function loadBackend(event) {
   $('#header').text('Backend');
