@@ -110,3 +110,6 @@ function removeGifTicker() {
 function addGifTicker() {
   gifUpdate = setInterval(update_gifs, 500);
 }
+function removeAllGifs() {
+  $('#gifLayer').empty();
+}

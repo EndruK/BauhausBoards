@@ -67,6 +67,9 @@ function loadCreateMessage(event) {
   showSidebar('sidebarCreateMessage');
   clearTimeout(5000);
   updateTimer();
+  addImageDropLayer();
+  show_gifs();
+  removeAllGifs();
   //TODO: back button frage: wirklich zurück
 }
 function loadBackend(event) {
@@ -208,4 +211,7 @@ function hideAll() {
   closeColorContainer();
   resetColor();
   resetStrokeSize();
+  removeImageDropLayer();
+  removeAllGifs();
+  hide_gifs();
 }
