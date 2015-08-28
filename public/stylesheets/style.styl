@@ -12,12 +12,6 @@ border-transition(n)
   -ms-transition left n ease-in-out
   -o-transition left n ease-in-out
   transition left n ease-in-out
-popup-transition(n)
-  -webkit-transition fadein n
-  -moz-transition fadein n
-  -ms-transition fadein n
-  -o-transition fadein n
-  transition fadein n
 
 html,body,#wrapper
   height 100%
@@ -111,6 +105,11 @@ html,body,#wrapper
   background-color rgba(0,0,0,1)
   color rgba(255,255,255,1)
   border 1px
+
+.glyphicon-refresh-animate 
+  -animation spin .7s infinite linear
+  -webkit-animation spin2 .7s infinite linear
+
 
 //IDs
 #sidebarMain
@@ -230,3 +229,25 @@ html,body,#wrapper
   height 100%
   pointer-events none
   overflow hidden
+#loadingAnimation
+  position absolute
+  pointer-events none
+  padding 3px
+  background-color rgba(0,0,0,0.2)
+  border-radius 3px
+
+
+//animations
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { 
+      transform: scale(1) rotate(0deg);
+    }
+    to {
+      transform: scale(1) rotate(360deg);
+    }
+}

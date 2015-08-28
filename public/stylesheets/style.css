@@ -206,6 +206,10 @@ body,
   color: #fff;
   border: 1px;
 }
+.glyphicon-refresh-animate {
+  -animation: spin 0.7s infinite linear;
+  -webkit-animation: spin2 0.7s infinite linear;
+}
 #sidebarMain {
   visibility: visible;
 }
@@ -352,4 +356,84 @@ body,
   height: 100%;
   pointer-events: none;
   overflow: hidden;
+}
+#loadingAnimation {
+  position: absolute;
+  pointer-events: none;
+  padding: 3px;
+  background-color: rgba(0,0,0,0.2);
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+@-webkit-keyframes spin2 {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spin {
+  from {
+    -webkit-transform: scale(1) rotate(0deg);
+    -moz-transform: scale(1) rotate(0deg);
+    -o-transform: scale(1) rotate(0deg);
+    -ms-transform: scale(1) rotate(0deg);
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    -webkit-transform: scale(1) rotate(360deg);
+    -moz-transform: scale(1) rotate(360deg);
+    -o-transform: scale(1) rotate(360deg);
+    -ms-transform: scale(1) rotate(360deg);
+    transform: scale(1) rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: scale(1) rotate(0deg);
+    -moz-transform: scale(1) rotate(0deg);
+    -o-transform: scale(1) rotate(0deg);
+    -ms-transform: scale(1) rotate(0deg);
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    -webkit-transform: scale(1) rotate(360deg);
+    -moz-transform: scale(1) rotate(360deg);
+    -o-transform: scale(1) rotate(360deg);
+    -ms-transform: scale(1) rotate(360deg);
+    transform: scale(1) rotate(360deg);
+  }
+}
+@-o-keyframes spin {
+  from {
+    -webkit-transform: scale(1) rotate(0deg);
+    -moz-transform: scale(1) rotate(0deg);
+    -o-transform: scale(1) rotate(0deg);
+    -ms-transform: scale(1) rotate(0deg);
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    -webkit-transform: scale(1) rotate(360deg);
+    -moz-transform: scale(1) rotate(360deg);
+    -o-transform: scale(1) rotate(360deg);
+    -ms-transform: scale(1) rotate(360deg);
+    transform: scale(1) rotate(360deg);
+  }
+}
+@keyframes spin {
+  from {
+    -webkit-transform: scale(1) rotate(0deg);
+    -moz-transform: scale(1) rotate(0deg);
+    -o-transform: scale(1) rotate(0deg);
+    -ms-transform: scale(1) rotate(0deg);
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    -webkit-transform: scale(1) rotate(360deg);
+    -moz-transform: scale(1) rotate(360deg);
+    -o-transform: scale(1) rotate(360deg);
+    -ms-transform: scale(1) rotate(360deg);
+    transform: scale(1) rotate(360deg);
+  }
 }
