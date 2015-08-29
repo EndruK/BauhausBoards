@@ -18,8 +18,23 @@ function activateEraserTool(event) {
   eraserTool.activate();
 }
 function eraserMouseDrag(event) {
-  var hit = project.hitTest(event.point);
-  if(hit) {
-    hit.item.remove();
-  }
+  var paths = project.getItems({
+    class: Path
+  });
+  var texts = project.getItems({
+    class: PointText
+  })
+  var rasters = project.getItems({
+    class: Raster
+  });
+  checkHit(paths,event.point);
+  checkHit(texts,event.point);
+  checkHit(rasters,event.point);
+}
+function checkHit(items,point) {
+  items.forEach(function(key) {
+    if(key.hitTest(point)) {
+      key.remove();
+    }
+  });
 }
