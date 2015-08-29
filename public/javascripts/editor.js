@@ -25,11 +25,11 @@ function removeListeners() {
 }
 function addImageDropLayer() {
   var wrapper = $("#wrapper");
-  var imageDropLayer = wrapper.append("<div id='imageDropLayer'>");
+  /*var imageDropLayer = wrapper.append("<div id='imageDropLayer'>");
   imageDropLayer.on("dragenter",drag);
   imageDropLayer.on("dragexit",drag);
   imageDropLayer.on("dragover",drag);
-  imageDropLayer.on("drop",drop);
+  imageDropLayer.on("drop",drop);*/
 }
 function removeImageDropLayer() {
   var imageDropLayer = $("#imageDropLayer");

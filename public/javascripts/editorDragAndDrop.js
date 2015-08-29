@@ -73,7 +73,6 @@ function drawImage(imgURL) {
       raster2.scale(0.3);
     }
     addGifTicker();
-    activateSelectorTool();
   }
 }
 function showLoadingGif() {
