@@ -1,0 +1,38 @@
+User
+  id
+  name
+  pw
+  creationDate
+  description
+  image
+  Status
+    id
+    text
+    since
+    until
+  Content
+    id
+    content
+    date
+    background
+
+Message
+  id
+  content
+  date
+  to
+    user1
+    user2
+    ...
+
+Board
+  id
+  resolution
+  Room
+    id
+    name
+    descr
+    user
+      user1
+      user2
+      ...
