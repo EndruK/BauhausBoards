@@ -46,6 +46,11 @@ app.use('/node_modules/jquery', express.static(__dirname + '/node_modules/jquery
 app.use('/node_modules/jquery-touchswipe', express.static(__dirname + '/node_modules/jquery-touchswipe'));
 app.use('/node_modules/paper', express.static(__dirname + '/node_modules/paper'));
 
+app.use(function(req, res, next) {
+  req.db = db;
+  next();
+});
+
 app.use('/', routes);
 app.use('/functions', functions);
 
