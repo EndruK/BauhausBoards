@@ -1,7 +1,8 @@
 @import 'nib'
 global-reset()
 
-header-hight = 100px
+header-hight = 120px //tablet size
+header-hight = 20% //tablet size
 sidebar-width = 200px
 swiper-width = 35px
 stroke-height = 25px
@@ -110,6 +111,12 @@ html,body,#wrapper
   -animation spin .7s infinite linear
   -webkit-animation spin2 .7s infinite linear
 
+.userInfo
+  float left
+.userImage
+  float right
+  height 100%
+  background-color #555555
 
 //IDs
 #sidebarMain
@@ -147,13 +154,18 @@ html,body,#wrapper
   visibility hidden
   
 #header
+  position absolute
+  right 0px
+  width 400px
   background-color #aaaaaa
   padding-left "calc(%s + 10px)" %swiper-width
   height header-hight
+  z-index 1
 #content
   background-color #777777
   text-align center
-  height "calc(100% - %s)" %header-hight
+  //height "calc(100% - %s)" %header-hight
+  height 100%
 #sidebarBackendSettings
   position absolute
   visibility hidden
@@ -163,7 +175,7 @@ html,body,#wrapper
   left 0
   width 100%
   height inherit
-  height "calc(100% - %s)" %header-hight
+  //height "calc(100% - %s)" %header-hight
 
 #white
   background-color rgb(255,255,255)

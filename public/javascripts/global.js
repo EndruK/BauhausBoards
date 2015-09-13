@@ -20,30 +20,6 @@ $('.sidebar').on('click', '.btnUserSettings', loadUserSettings);
 $('.sidebar').on('click', '.btnRoomSettings', loadRoomSettings);
 $('.sidebar').on('click', '.btnLogs', loadLogs);
 
-//make the initial ajax call
-$( document ).ready(function() {
-
-  //TODO: if no cookie --> create new and switch to initial setup
-
-  //TODO: get boardID of cookie
-  var boardID = 1;
-  $.ajax({
-    url: "/functions/loadBoard",
-    type: "GET",
-    data: {"boardID":boardID},
-    success: function(data) {
-      console.log(data);
-      var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
-      data.forEach(function(key) {
-        buttonContainer.append("<button id='user"+ key.id + "'>" + key.name + "</button><br><br>");
-      });
-    },
-    error: function(data) {
-      console.log("Error, couldn't retreive board with ID " + boardID);
-    }
-  });
-});
-
 $('.sidebarSwiper').swipe({
   swipeStatus:function(event,phase,direction,distance,duration,fingers) {
     //console.log(direction);

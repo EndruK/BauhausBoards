@@ -1,0 +1,8 @@
+Problem Header
+- durch horizontale ausrichtung der tablets ist der Platz des header zu groß und wird verschwendet
+- wenn nur userimage, username, status, description usw angezeigt werden muss
+- Lösung: absolutes header div, welches oben rechts in der ecke ist
+  # content hat dadurch tatsächlich die größe des tablets
+  # platz wird nicht so stark verschwendet
+  # "toter winkel" oben rechts in den raw datas der images
+- die ganze css datei muss angepasst werden, da positionen und größen relativ zum header gesetzt waren
