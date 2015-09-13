@@ -1,0 +1,7 @@
+SQLITE anstelle von MONGODB
+
+- kein traditionelles Relationales Schema
+- Mongodb hätte jedoch direkt JSON results
+- Für kleines Umfeld ist SQLITE auch akzeptabel
+- alternativen wären: mysql
+- nodejs hat aber auch ein npm repo für sqlite

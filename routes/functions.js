@@ -3,15 +3,15 @@ var router = express.Router();
 
 router.get('/loadBoard', function(req, res, next) {
   var db = req.db;
-  var collection = db.get('boardcollection');
+  var boardID = req.query.boardID;
 
-  var boardID = req.param('boardID');
-  console.log(boardID);
+  //var query = "select user.u_name, room.r_name FROM roomusers, user, room WHERE roomusers.ru_user = user.u_id AND roomusers.ru_room = room.r_id";
+  var query = "select user.u_id AS id, user.u_name AS name FROM user INNER JOIN roomusers ON user.u_id = roomusers.ru_user INNER JOIN room ON roomusers.ru_room = room.r_id INNER JOIN board ON board.b_room = room.r_id WHERE board.b_id = " + boardID;
 
-  collection.find({},{},function(e,docs){
-    res.send(docs);
-  });
-  //res.send('respond with a resource');
+  db.all(query,function(err,rows) {
+    res.contentType('application/json');
+    res.send(rows);
+  })
 });
 
 module.exports = router;

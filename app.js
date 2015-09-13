@@ -6,9 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var stylus  = require('stylus');
 var nib     = require('nib');
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/bauhausboards');
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('data/bauhausboards.db');
 
 var paper = require('paper');
 

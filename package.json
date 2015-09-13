@@ -14,12 +14,11 @@
     "jade": "~1.9.2",
     "jquery": "^2.1.4",
     "jquery-touchswipe": "^1.6.7",
-    "mongodb": "~2.0.33",
-    "monk": "~1.0.1",
     "morgan": "~1.5.3",
     "nib": "*",
     "paper": "*",
     "serve-favicon": "~2.2.1",
+    "sqlite3": "^3.1.0",
     "stylus": "*"
   }
 }
