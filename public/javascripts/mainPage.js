@@ -52,9 +52,31 @@ function showUser(userID) {
   var imageURL = usercollection[collectionID].profilePic;
   //check if there is an url and check if there is an image on the url
   if(imageURL != null) {
-    userImage.append("<img src=" + imageURL + " style='max-width:100%; max-height:100%'>");
+    userImage.append("<img src=" + imageURL + " style='max-width:100%; max-height:100%;'>");
   }
   else {
-    userImage.append("<img src='images/default-user.png' style='max-width:100%; max-height:100%'>");
+    //TODO: anpassen der Image größen!!
+    userImage.append("<img src='images/default-user.png' style='height:inherit,width:inherit;'>");
   }
+  userInfo.append("<div class='userStatus'></div>");
+  //get the user status
+  $.ajax({
+    url: "/functions/getUserStatus",
+    type: "GET",
+    data: {"userID":userID},
+    success:function(response) {
+      if(response) {
+        $(".userStatus").append("<hr>");
+        $(".userStatus").append(response.text);
+        $(".userStatus").append("<br>");
+        $(".userStatus").append(response.since);
+        $(".userStatus").append("<br>");
+        $(".userStatus").append(response.until);
+        console.log(response);
+      }
+    },
+    error:function(error) {
+      console.log("couldn't get user status");
+    }
+  });
 }
