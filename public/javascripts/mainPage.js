@@ -16,7 +16,7 @@ $( document ).ready(function() {
       usercollection = data;
       var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
       usercollection.forEach(function(key) {
-        buttonContainer.append("<button id='user"+ key.id + "'>" + key.name + "</button><br><br>");
+        buttonContainer.append("<button class='btnUser' id='user" + key.id + "' onclick='showUser(" + key.id + ")'>" + key.name + "</button><br><br>");
       });
       showUser(usercollection[0].id);
     },
@@ -32,6 +32,7 @@ function showUser(userID) {
   //TODO: mark current selected user
   //TODO: get current status of current user (too get the freshest version after a switch)
   var header = $("#header");
+  header.empty();
   //append the user Info Area
   header.append("<div class='userInfo'></div>");
   //append the user Image Area
@@ -48,5 +49,12 @@ function showUser(userID) {
   //set the name of the user in the Info Area
   userInfo.append("<div class='userName'>" + usercollection[collectionID].name + "</div>");
   userInfo.append("<div class='userDescription'>" + usercollection[collectionID].description + "</div>");
-  userImage.css("width",header.height());
+  var imageURL = usercollection[collectionID].profilePic;
+  //check if there is an url and check if there is an image on the url
+  if(imageURL != null) {
+    userImage.append("<img src=" + imageURL + " style='max-width:100%; max-height:100%'>");
+  }
+  else {
+    userImage.append("<img src='images/default-user.png' style='max-width:100%; max-height:100%'>");
+  }
 }

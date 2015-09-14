@@ -6,7 +6,7 @@ var sidebarTimeoutHandler;
 var sidebarStatus = false;
 
 //###DOM########################################################################
-$('.sidebar').on('click', '.btnUser', loadMain);
+//$('.sidebar').on('click', '.btnUser', loadMain);
 $('.sidebar').on('click', '.btnMessage', loadMessageLanding);
 $('.sidebar').on('click', '.btnBackend', loadBackend);
 $('.sidebar').on('click', '.btnBack', loadMain);
@@ -49,6 +49,7 @@ function loadMain(event) {
   showSidebar('sidebarMain');
   console.log('goTo: main page');
   $('#header').text('header');
+  showUser(usercollection[0].id);
 }
 function loadMessageLanding(event) {
   showSidebar('sidebarMessages');
