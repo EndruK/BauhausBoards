@@ -6,74 +6,20 @@ var switchUserTimerHandler = null;
 var switchUserTime = 20000;
 var boardID = null;
 //var switchUserTime = 5000;
+
+
+//TODO: remmove the editor handlers
+
+
+
 //initial functions
 $( document ).ready(function() {
   boardID = location.search.split("BID=")[1];
-  console.log(boardID);
   if(!boardID) {
-    //TODO: redirect to register new board
-    $("#header").css("visibility","hidden");
-    $(".sidebar").css("visibility","hidden");
-    $("#EditorCanvas").css("visibility","hidden");
-    $("#tabletSizePreview").css("visibility","hidden");
-    $("#newBoard").css("visibility","visible");
+    loadNewBoard();
     return;
   }
-  $.ajax({
-    url: "functions/getBoardDim",
-    type: "GET",
-    data: {"boardID":boardID},
-    success: function(res) {
-      //DOM element get because jquery didn't work
-      dim = res;
-      var jSizePrevCanv = $("#tabletSizePreview");
-      jSizePrevCanv.attr("width",res.resX+1);
-      jSizePrevCanv.attr("height",res.resY+1);
-
-      var sizePrevCanvas = document.getElementById("tabletSizePreview");
-      var context = sizePrevCanvas.getContext("2d");
-      context.beginPath();
-      context.moveTo(res.resX+1,0);
-      context.lineTo(res.resX+1,res.resY+1);
-      context.lineTo(0,res.resY+1);
-      context.stroke();
-      resize();
-    },
-    error:function(err) {
-      console.log(err);
-    }
-  });
-
-  show_gifs();
-  addGifTicker();
-  $.ajax({
-    url: "/functions/loadBoard",
-    type: "GET",
-    data: {"boardID":boardID},
-    success: function(data) {
-      usercollection = data;
-      var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
-      usercollection.forEach(function(key) {
-        buttonContainer.append("<button class='btnUser' value='"+key.id+"'>" + key.name + "</button><br><br>");
-      });
-      $(".btnUser").on("click",function(event) {
-        var val = $(this).attr("value");
-        startSwitchUserTimer();
-        showUser(val);
-      });
-      $("#EditorCanvas").attr("width",dim.resX);
-      $("#EditorCanvas").attr("height",dim.resY);
-      $("#EditorCanvas").css("width",dim.resX);
-      $("#EditorCanvas").css("height",dim.resY);
-      showUser(usercollection[0].id);
-      if(usercollection.length > 1) {
-        startSwitchUserTimer();
-      }
-    },
-    error: function(data) {
-      console.log("Error, couldn't retreive board with ID " + boardID);
-    }
-  });
+  loadBoard();
 });
 
 $(window).on("resize", resize);
@@ -95,6 +41,69 @@ function resize () {
   else {
     $("#content").css("height",dim.resY);
   }
+}
+
+function loadBoard() {
+  $.ajax({
+    url: "functions/getBoardDim",
+    type: "GET",
+    data: {"boardID":boardID},
+    success: function(res) {
+      if(!res){
+        loadNewBoard();
+        return;
+      }
+      //DOM element get because jquery didn't work
+      dim = res;
+      var jSizePrevCanv = $("#tabletSizePreview");
+      jSizePrevCanv.attr("width",res.resX+1);
+      jSizePrevCanv.attr("height",res.resY+1);
+
+      var sizePrevCanvas = document.getElementById("tabletSizePreview");
+      var context = sizePrevCanvas.getContext("2d");
+      context.beginPath();
+      context.moveTo(res.resX+1,0);
+      context.lineTo(res.resX+1,res.resY+1);
+      context.lineTo(0,res.resY+1);
+      context.stroke();
+      resize();
+      show_gifs();
+      addGifTicker();
+      $.ajax({
+        url: "/functions/loadBoard",
+        type: "GET",
+        data: {"boardID":boardID},
+        success: function(data) {
+          usercollection = data;
+          var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
+          usercollection.forEach(function(key) {
+            buttonContainer.append("<button class='btnUser' value='"+key.id+"'>" + key.name + "</button><br><br>");
+          });
+          $(".btnUser").on("click",function(event) {
+            var val = $(this).attr("value");
+            if(findUID(val) != actualUserIndex) {
+              startSwitchUserTimer();
+              showUser(val);
+            }
+          });
+          $("#EditorCanvas").attr("width",dim.resX);
+          $("#EditorCanvas").attr("height",dim.resY);
+          $("#EditorCanvas").css("width",dim.resX);
+          $("#EditorCanvas").css("height",dim.resY);
+          showUser(usercollection[0].id);
+          if(usercollection.length > 1) {
+            startSwitchUserTimer();
+          }
+        },
+        error: function(data) {
+          console.log("Error, couldn't retreive board with ID " + boardID);
+        }
+      });
+    },
+    error:function(err) {
+      console.log(err);
+    }
+  });
 }
 
 function showUser(userID) {
@@ -158,6 +167,14 @@ function showUser(userID) {
       console.log("couldn't get user content");
     }
   })
+}
+
+function loadNewBoard() {
+  $("#header").css("visibility","hidden");
+  $(".sidebar").css("visibility","hidden");
+  $("#EditorCanvas").css("visibility","hidden");
+  $("#tabletSizePreview").css("visibility","hidden");
+  $("#newBoard").css("visibility","visible");
 }
 
 //switch between the users
