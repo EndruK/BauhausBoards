@@ -215,7 +215,8 @@ body,
 }
 .userImage {
   float: right;
-  background-color: #555;
+  width: 150px;
+  height: inherit;
 }
 .textContent {
   width: inherit;
@@ -392,7 +393,12 @@ body,
   position: absolute;
   top: 0;
   left: 0;
-  color: #454545;
+}
+#uImg {
+  max-width: 100%;
+  max-height: 100%;
+  height: inherit;
+  float: right;
 }
 @-webkit-keyframes spin2 {
   from {

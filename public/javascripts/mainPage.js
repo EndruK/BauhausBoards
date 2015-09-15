@@ -73,9 +73,7 @@ function resize() {
 
 function showUser(userID) {
   //console.log(usercollection);
-  //TODO: change header content
   //TODO: mark current selected user
-  //TODO: get current status of current user (too get the freshest version after a switch)
   var header = $("#header");
   header.empty();
   project.clear();
@@ -98,13 +96,10 @@ function showUser(userID) {
   userInfo.append("<div class='userDescription'>" + usercollection[collectionID].description + "</div>");
   var imageURL = usercollection[collectionID].profilePic;
   //check if there is an url and check if there is an image on the url
-  if(imageURL != null) {
-    userImage.append("<img src=" + imageURL + " style='max-width:100%; max-height:100%;'>");
+  if(imageURL == null) {
+    imageURL = "images/default-user.png";
   }
-  else {
-    //TODO: anpassen der Image größen!!
-    userImage.append("<img src='images/default-user.png' style='height:inherit,width:inherit;'>");
-  }
+  userImage.append("<img id='uImg' src=" + imageURL + " >");
   userInfo.append("<div class='userStatus'></div>");
   //get the user status
   $.ajax({
@@ -119,7 +114,6 @@ function showUser(userID) {
         $(".userStatus").append(response.since);
         $(".userStatus").append("<br>");
         $(".userStatus").append(response.until);
-        //console.log(response);
       }
     },
     error:function(error) {
@@ -131,11 +125,7 @@ function showUser(userID) {
     type: "GET",
     data: {"userID":userID},
     success:function(response) {
-      //console.log(response);
-      
       project.importJSON(response.content);
-      
-      //addGifTicker();
     },
     error:function(error) {
       console.log("couldn't get user content");
