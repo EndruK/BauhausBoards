@@ -4,12 +4,21 @@ var dim = null;
 var actualUserIndex = 0;
 var switchUserTimerHandler = null;
 var switchUserTime = 20000;
+var boardID = null;
 //var switchUserTime = 5000;
 //initial functions
 $( document ).ready(function() {
-  //TODO: if no cookie --> create new and switch to initial setup
-  //TODO: get boardID of cookie or url??
-  var boardID = 1;
+  boardID = location.search.split("BID=")[1];
+  console.log(boardID);
+  if(!boardID) {
+    //TODO: redirect to register new board
+    $("#header").css("visibility","hidden");
+    $(".sidebar").css("visibility","hidden");
+    $("#EditorCanvas").css("visibility","hidden");
+    $("#tabletSizePreview").css("visibility","hidden");
+    $("#newBoard").css("visibility","visible");
+    return;
+  }
   $.ajax({
     url: "functions/getBoardDim",
     type: "GET",
@@ -20,7 +29,6 @@ $( document ).ready(function() {
       var jSizePrevCanv = $("#tabletSizePreview");
       jSizePrevCanv.attr("width",res.resX+1);
       jSizePrevCanv.attr("height",res.resY+1);
-
 
       var sizePrevCanvas = document.getElementById("tabletSizePreview");
       var context = sizePrevCanvas.getContext("2d");
@@ -43,14 +51,12 @@ $( document ).ready(function() {
     type: "GET",
     data: {"boardID":boardID},
     success: function(data) {
-      //console.log(data);
       usercollection = data;
       var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
       usercollection.forEach(function(key) {
         buttonContainer.append("<button class='btnUser' value='"+key.id+"'>" + key.name + "</button><br><br>");
       });
       $(".btnUser").on("click",function(event) {
-        //console.log(this);
         var val = $(this).attr("value");
         startSwitchUserTimer();
         showUser(val);
@@ -70,22 +76,16 @@ $( document ).ready(function() {
   });
 });
 
-$(window).on("resize",resize);
-
-
-
-
-function resize() {
+$(window).on("resize", resize);
+function resize () {
   //set the header position to the dimension sizes
   //if the view is greater
   if(dim && $(window).width() > dim.resX) {
-    var diff = $(window).width()-dim.resX;
     $("#header").css("right",$(window).width()-dim.resX);
     $("#content").css("width",$(window).width());
   }
   else {
     var diff = $(window).width()-dim.resX;
-    console.log(diff);
     $("#header").css("right",diff);
     $("#content").css("width",dim.resX);
   }
@@ -99,7 +99,6 @@ function resize() {
 
 function showUser(userID) {
   actualUserIndex = findUID(userID);
-  //console.log(usercollection);
   //TODO: mark current selected user
   var header = $("#header");
   header.empty();
@@ -163,7 +162,6 @@ function showUser(userID) {
 
 //switch between the users
 function switchUser() {
-  console.log("hihi");
   actualUserIndex = actualUserIndex+1;
   if(actualUserIndex > usercollection.length-1) actualUserIndex = 0
   showUser(usercollection[actualUserIndex].id);
@@ -173,6 +171,7 @@ function startSwitchUserTimer() {
   clearTimeout(switchUserTimerHandler);
   switchUserTimerHandler = setInterval(switchUser,switchUserTime);
 }
+
 function stopSwitchUserTimer() {
   clearInterval(switchUserTimerHandler);
 }

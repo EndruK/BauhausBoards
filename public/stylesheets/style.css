@@ -401,6 +401,10 @@ body,
   height: inherit;
   float: right;
 }
+#newBoard {
+  margin: 0 auto;
+  visibility: hidden;
+}
 @-webkit-keyframes spin2 {
   from {
     -webkit-transform: rotate(0deg);

@@ -17,7 +17,6 @@ router.get('/loadBoard', function(req, res, next) {
       "INNER JOIN board ON board.b_room = room.r_id "+
     "WHERE "+
       "board.b_id = " + boardID;
-
   db.all(query,function(err,rows) {
     if(err) {
       res.status = 500;
@@ -120,6 +119,21 @@ router.get('/getBoardDim', function(req,res,next) {
       res.send(row);
     }
   });
+});
+
+router.get('/getBoards', function(req,res,next) {
+  var db = req.db;
+  var query = 
+    "SELECT board.b_id AS id, room.r_name AS room, room.r_descr AS description "+
+    "FROM board INNER JOIN room ON room.r_id = board.b_room";
+  db.all(query,function(err, rows) {
+    if(err) {
+      res.status = 500;
+    }
+    else {
+      res.send(rows);
+    }
+  })
 });
 
 module.exports = router;
