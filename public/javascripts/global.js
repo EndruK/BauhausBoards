@@ -50,6 +50,9 @@ function loadMain(event) {
   console.log('goTo: main page');
   $('#header').text('header');
   showUser(usercollection[0].id);
+  $('#EditorCanvas').css('visibility','visible');
+  show_gifs();
+  addGifTicker();
 }
 function loadMessageLanding(event) {
   showSidebar('sidebarMessages');
@@ -111,6 +114,7 @@ function loadUserSettings(event) {
 function loadRoomSettings(event) {
   $('#header').text('Room Settings');
   showSidebar('loadRoomSettings');
+  $('#settings').css('visibility','visible');
   updateTimer();
 }
 function loadLogs(event) {
@@ -208,6 +212,7 @@ function hideAll() {
   $('#sidebarBackendRoomSettings').css('visibility','hidden');
   $('#sidebarBackendLogs').css('visibility','hidden');
   $('#EditorCanvas').css('visibility','hidden');
+  $('#settings').css('visibility','hidden');
   closeContainer();
   closeColorContainer();
   resetColor();

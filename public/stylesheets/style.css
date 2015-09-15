@@ -217,6 +217,16 @@ body,
   float: right;
   background-color: #555;
 }
+.textContent {
+  width: inherit;
+  height: inherit;
+}
+.textContentUpper {
+  visibility: inherit;
+}
+.textContentLower {
+  visibility: inherit;
+}
 #sidebarMain {
   visibility: visible;
 }
@@ -279,11 +289,11 @@ body,
   visibility: hidden;
 }
 #EditorCanvas {
-  visibility: hidden;
   position: absolute;
+  top: 0;
   left: 0;
   width: 100%;
-  height: inherit;
+  height: 100%;
 }
 #white {
   background-color: #fff;
@@ -354,7 +364,7 @@ body,
   position: absolute;
   left: 0;
   width: 100%;
-  height: calc(100% - 20%);
+  height: inherit;
   pointer-events: none;
   overflow: hidden;
 }
@@ -374,6 +384,15 @@ body,
   background-color: rgba(0,0,0,0.2);
   -webkit-border-radius: 3px;
   border-radius: 3px;
+}
+#settings {
+  visibility: hidden;
+}
+#tabletSizePreview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #454545;
 }
 @-webkit-keyframes spin2 {
   from {

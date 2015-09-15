@@ -1,0 +1,6 @@
+Problem: Desktop Version dimensions
+- die Auflösung auf dem Desktop ist größer als auf dem Tablet
+- content, der auf dem Desktop weiter rechts/weiter unten erstellt wird, verschwindet auf dem tablet :(
+- Lösungsansätze:
+  # Canvas resize auf größeren Auflösungen
+  # anzeige von linien, wie es auf dem tablet angezeigt wird

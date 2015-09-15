@@ -117,6 +117,14 @@ html,body,#wrapper
   float right
   background-color #555555
 
+.textContent
+  width inherit
+  height inherit
+.textContentUpper
+  visibility inherit
+.textContentLower
+  visibility inherit
+
 //IDs
 #sidebarMain
   visibility visible
@@ -170,11 +178,12 @@ html,body,#wrapper
   position absolute
   visibility hidden
 #EditorCanvas
-  visibility hidden
+  //visibility hidden
   position absolute
+  top 0
   left 0
   width 100%
-  height inherit
+  height 100%
   //height "calc(100% - %s)" %header-hight
 
 #white
@@ -230,7 +239,8 @@ html,body,#wrapper
   position absolute
   left 0
   width 100%
-  height "calc(100% - %s)" %header-hight
+  //height "calc(100% - %s)" %header-hight
+  height inherit
   pointer-events none
   overflow hidden
 #imageDropLayer
@@ -247,7 +257,13 @@ html,body,#wrapper
   padding 3px
   background-color rgba(0,0,0,0.2)
   border-radius 3px
-
+#settings
+  visibility hidden
+#tabletSizePreview
+  position absolute
+  top 0
+  left 0
+  color #454545
 
 //animations
 @-webkit-keyframes spin2 {

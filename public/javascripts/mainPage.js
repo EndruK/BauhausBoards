@@ -1,18 +1,48 @@
 var usercollection = new Array();
-
+paper.install(window);
+var dim = null;
 //make the initial ajax call
 $( document ).ready(function() {
-
   //TODO: if no cookie --> create new and switch to initial setup
 
-  //TODO: get boardID of cookie
+  //TODO: get boardID of cookie or url??
   var boardID = 1;
+
+  //TODO: change canvas dim to tablet dimensions
+  $.ajax({
+    url: "functions/getBoardDim",
+    type: "GET",
+    data: {"boardID":boardID},
+    success: function(res) {
+      console.log([res.resX,res.resY]);
+      //DOM element get because jquery didn't work
+      dim = res;
+      var jSizePrevCanv = $("#tabletSizePreview");
+      jSizePrevCanv.attr("width",res.resX+1);
+      jSizePrevCanv.attr("height",res.resY+1);
+
+      var sizePrevCanvas = document.getElementById("tabletSizePreview");
+      var context = sizePrevCanvas.getContext("2d");
+      context.beginPath();
+      context.moveTo(res.resX+1,0);
+      context.lineTo(res.resX+1,res.resY+1);
+      context.lineTo(0,res.resY+1);
+      context.stroke();
+      resize();
+    },
+    error:function(err) {
+      console.log(err);
+    }
+  });
+
+  show_gifs();
+  addGifTicker();
   $.ajax({
     url: "/functions/loadBoard",
     type: "GET",
     data: {"boardID":boardID},
     success: function(data) {
-      console.log(data);
+      //console.log(data);
       usercollection = data;
       var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
       usercollection.forEach(function(key) {
@@ -26,6 +56,21 @@ $( document ).ready(function() {
   });
 });
 
+$(window).on("resize",resize);
+
+function resize() {
+  //set the header position to the dimension sizes
+  if(dim && $(window).width() > dim.resX) {
+    var diff = $(window).width()-dim.resX;
+    $("#header").css("right",$(window).width()-dim.resX);
+  }
+  else {
+    var diff = $(window).width()-dim.resX;
+    console.log(diff);
+    $("#header").css("right",diff);
+  }
+}
+
 function showUser(userID) {
   //console.log(usercollection);
   //TODO: change header content
@@ -33,6 +78,8 @@ function showUser(userID) {
   //TODO: get current status of current user (too get the freshest version after a switch)
   var header = $("#header");
   header.empty();
+  project.clear();
+  view.update();
   //append the user Info Area
   header.append("<div class='userInfo'></div>");
   //append the user Image Area
@@ -72,11 +119,26 @@ function showUser(userID) {
         $(".userStatus").append(response.since);
         $(".userStatus").append("<br>");
         $(".userStatus").append(response.until);
-        console.log(response);
+        //console.log(response);
       }
     },
     error:function(error) {
       console.log("couldn't get user status");
     }
   });
+  $.ajax({
+    url: "/functions/getUserContent",
+    type: "GET",
+    data: {"userID":userID},
+    success:function(response) {
+      //console.log(response);
+      
+      project.importJSON(response.content);
+      
+      //addGifTicker();
+    },
+    error:function(error) {
+      console.log("couldn't get user content");
+    }
+  })
 }

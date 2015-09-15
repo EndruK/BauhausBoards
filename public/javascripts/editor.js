@@ -13,6 +13,9 @@ $(document).ready(function() {
 
 function doClick(event) {}
 function submitMessage() {
+  project.deselectAll();
+  removeBoundingBox();
+  removeSelectionPopup();
   console.log(project.exportJSON());
 }
 

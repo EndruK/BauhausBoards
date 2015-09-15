@@ -392,7 +392,7 @@ function addSelectionPopup() {
     left = $("#EditorCanvas").width()-popup.width();
   }
   if(top+popup.height() >= $("#EditorCanvas").height()) {
-    top = $("#EditorCanvas").height()+headerHight-popup.height();
+    top = $("#EditorCanvas").height()-popup.height();
   }
   if(left <= 0) {
     left = 0;
