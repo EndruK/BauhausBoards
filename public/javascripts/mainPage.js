@@ -18,8 +18,6 @@ $( document ).ready(function() {
       jSizePrevCanv.attr("width",res.resX+1);
       jSizePrevCanv.attr("height",res.resY+1);
 
-      $("#EditorCanvas").css("width",res.resX);
-      $("#EditorCanvas").css("height",res.resY);
 
       var sizePrevCanvas = document.getElementById("tabletSizePreview");
       var context = sizePrevCanvas.getContext("2d");
@@ -48,6 +46,10 @@ $( document ).ready(function() {
       usercollection.forEach(function(key) {
         buttonContainer.append("<button class='btnUser' id='user" + key.id + "' onclick='showUser(" + key.id + ")'>" + key.name + "</button><br><br>");
       });
+      $("#EditorCanvas").attr("width",dim.resX);
+      $("#EditorCanvas").attr("height",dim.resY);
+      $("#EditorCanvas").css("width",dim.resX);
+      $("#EditorCanvas").css("height",dim.resY);
       showUser(usercollection[0].id);
     },
     error: function(data) {
