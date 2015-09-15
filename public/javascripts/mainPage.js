@@ -4,6 +4,7 @@ var dim = null;
 var actualUserIndex = 0;
 var switchUserTimerHandler = null;
 var switchUserTime = 20000;
+//var switchUserTime = 5000;
 //initial functions
 $( document ).ready(function() {
   //TODO: if no cookie --> create new and switch to initial setup
@@ -46,7 +47,13 @@ $( document ).ready(function() {
       usercollection = data;
       var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
       usercollection.forEach(function(key) {
-        buttonContainer.append("<button class='btnUser' id='user" + key.id + "' onclick='showUser(" + key.id + ")'>" + key.name + "</button><br><br>");
+        buttonContainer.append("<button class='btnUser' value='"+key.id+"'>" + key.name + "</button><br><br>");
+      });
+      $(".btnUser").on("click",function(event) {
+        //console.log(this);
+        var val = $(this).attr("value");
+        startSwitchUserTimer();
+        showUser(val);
       });
       $("#EditorCanvas").attr("width",dim.resX);
       $("#EditorCanvas").attr("height",dim.resY);
@@ -64,6 +71,9 @@ $( document ).ready(function() {
 });
 
 $(window).on("resize",resize);
+
+
+
 
 function resize() {
   //set the header position to the dimension sizes
@@ -88,6 +98,7 @@ function resize() {
 }
 
 function showUser(userID) {
+  actualUserIndex = findUID(userID);
   //console.log(usercollection);
   //TODO: mark current selected user
   var header = $("#header");
@@ -164,4 +175,10 @@ function startSwitchUserTimer() {
 }
 function stopSwitchUserTimer() {
   clearInterval(switchUserTimerHandler);
+}
+
+function findUID(userID) {
+  for(var i=0; i<usercollection.length; i++) {
+    if(usercollection[i].id == userID) return i;
+  }
 }
