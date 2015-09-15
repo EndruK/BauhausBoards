@@ -274,6 +274,7 @@ body,
 #header {
   position: absolute;
   right: 0px;
+  top: 0;
   width: 400px;
   background-color: #aaa;
   padding-left: calc(35px + 10px);
@@ -403,6 +404,7 @@ body,
 }
 #newBoard {
   margin: 0 auto;
+  position: absolute;
   visibility: hidden;
 }
 @-webkit-keyframes spin2 {
