@@ -1,14 +1,11 @@
 var usercollection = new Array();
 paper.install(window);
 var dim = null;
-//make the initial ajax call
+//initial functions
 $( document ).ready(function() {
   //TODO: if no cookie --> create new and switch to initial setup
-
   //TODO: get boardID of cookie or url??
   var boardID = 1;
-
-  //TODO: change canvas dim to tablet dimensions
   $.ajax({
     url: "functions/getBoardDim",
     type: "GET",
@@ -20,6 +17,9 @@ $( document ).ready(function() {
       var jSizePrevCanv = $("#tabletSizePreview");
       jSizePrevCanv.attr("width",res.resX+1);
       jSizePrevCanv.attr("height",res.resY+1);
+
+      $("#EditorCanvas").css("width",res.resX);
+      $("#EditorCanvas").css("height",res.resY);
 
       var sizePrevCanvas = document.getElementById("tabletSizePreview");
       var context = sizePrevCanvas.getContext("2d");
@@ -60,14 +60,23 @@ $(window).on("resize",resize);
 
 function resize() {
   //set the header position to the dimension sizes
+  //if the view is greater
   if(dim && $(window).width() > dim.resX) {
     var diff = $(window).width()-dim.resX;
     $("#header").css("right",$(window).width()-dim.resX);
+    $("#content").css("width",$(window).width());
   }
   else {
     var diff = $(window).width()-dim.resX;
     console.log(diff);
     $("#header").css("right",diff);
+    $("#content").css("width",dim.resX);
+  }
+  if(dim && $(window).height() > dim.resY) {
+    $("#content").css("height",$(window).height());
+  }
+  else {
+    $("#content").css("height",dim.resY);
   }
 }
 
@@ -100,6 +109,7 @@ function showUser(userID) {
     imageURL = "images/default-user.png";
   }
   userImage.append("<img id='uImg' src=" + imageURL + " >");
+
   userInfo.append("<div class='userStatus'></div>");
   //get the user status
   $.ajax({
@@ -132,3 +142,5 @@ function showUser(userID) {
     }
   })
 }
+
+//function 
