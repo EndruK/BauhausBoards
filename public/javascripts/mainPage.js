@@ -1,6 +1,9 @@
 var usercollection = new Array();
 paper.install(window);
 var dim = null;
+var actualUserIndex = 0;
+var switchUserTimerHandler = null;
+var switchUserTime = 20000;
 //initial functions
 $( document ).ready(function() {
   //TODO: if no cookie --> create new and switch to initial setup
@@ -11,7 +14,6 @@ $( document ).ready(function() {
     type: "GET",
     data: {"boardID":boardID},
     success: function(res) {
-      console.log([res.resX,res.resY]);
       //DOM element get because jquery didn't work
       dim = res;
       var jSizePrevCanv = $("#tabletSizePreview");
@@ -51,6 +53,9 @@ $( document ).ready(function() {
       $("#EditorCanvas").css("width",dim.resX);
       $("#EditorCanvas").css("height",dim.resY);
       showUser(usercollection[0].id);
+      if(usercollection.length > 1) {
+        startSwitchUserTimer();
+      }
     },
     error: function(data) {
       console.log("Error, couldn't retreive board with ID " + boardID);
@@ -145,4 +150,18 @@ function showUser(userID) {
   })
 }
 
-//function 
+//switch between the users
+function switchUser() {
+  console.log("hihi");
+  actualUserIndex = actualUserIndex+1;
+  if(actualUserIndex > usercollection.length-1) actualUserIndex = 0
+  showUser(usercollection[actualUserIndex].id);
+}
+
+function startSwitchUserTimer() {
+  clearTimeout(switchUserTimerHandler);
+  switchUserTimerHandler = setInterval(switchUser,switchUserTime);
+}
+function stopSwitchUserTimer() {
+  clearInterval(switchUserTimerHandler);
+}
