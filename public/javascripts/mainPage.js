@@ -44,7 +44,7 @@ function loadBoard() {
         return;
       }
       else if(res.resX == "" || res.resY == "") {
-        dim = {"resX":$(window).width()-10,"resY":$(window).height()-10};
+        dim = {"resX":$(window).width()-1,"resY":$(window).height()-1};
         alert("Warning: No resolution for board registered");
       }
       else {
