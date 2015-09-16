@@ -47,17 +47,23 @@ $('.sidebarSwiper').click(function(){
 
 //###FUNCTIONS##################################################################
 function loadMain(event) {
-  
+  usercollection = new Array();
+  $("#header").empty();
+  project.clear();
+  $("#sidebarMain .sidebarUpper").empty();
+  removeAllGifs();
   loadBoard();
   showSidebar('sidebarMain');
   console.log('goTo: main page');
   $('#header').text('header');
-  showUser(usercollection[0].id);
+  if(usercollection.length > 0) {
+    showUser(usercollection[0].id);
+  }
   $('#EditorCanvas').css('visibility','visible');
+  $('#tabletSizePreview').css('visibility','visible');
   show_gifs();
   addGifTicker();
   startSwitchUserTimer();
-  $('#tabletSizePreview').css('visibility','visible');
 }
 function loadMessageLanding(event) {
   showSidebar('sidebarMessages');

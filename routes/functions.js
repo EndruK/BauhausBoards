@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/loadBoard', function(req, res, next) {
+router.get('/loadBoardUsers', function(req, res, next) {
   var db = req.db;
   var boardID = req.query.boardID;
   var query = 

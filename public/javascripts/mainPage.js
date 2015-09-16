@@ -29,10 +29,10 @@ function resize () {
 
 function loadBoard() {
   //reset everything before loading
-  usercollection = new Array();
-  project.clear();
-  $("#header").empty();
-  $("#sidebarUpper").empty();
+  
+  
+  
+  
   $.ajax({
     url: "functions/getBoardDim",
     type: "GET",
@@ -81,13 +81,18 @@ function loadBoard() {
           else {
             //finally load the board
             $.ajax({
-              url: "/functions/loadBoard",
+              url: "/functions/loadBoardUsers",
               type: "GET",
               data: {"boardID":boardID},
               success: function(data) {
                 //TODO: check if there are users registered to the board
+                usercollection = new Array();
+                if(data.length == 0) {
+                  return;
+                }
                 usercollection = data;
                 var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
+                $("#sidebarMain .sidebarUpper").empty();
                 usercollection.forEach(function(key) {
                   buttonContainer.append("<button class='btnUser' value='"+key.id+"'>" + key.name + "</button><br><br>");
                 });
@@ -179,6 +184,7 @@ function showUser(userID) {
     type: "GET",
     data: {"userID":userID},
     success:function(response) {
+      project.clear();
       project.importJSON(response.content);
     },
     error:function(error) {
