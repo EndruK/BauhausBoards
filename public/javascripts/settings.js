@@ -3,7 +3,6 @@ $("#getTabletDim").on("click",saveDim);
 function saveDim(event) {
   var height = $(window).height();
   var width  = $(window).width();
-  var boardID = location.search.split("BID=")[1];
 
   $.ajax({
     url: "/functions/setBoardDim",
@@ -54,6 +53,17 @@ function setRoom(event) {
     //TODO: create new Room
   }
   else {
+    $.ajax({
+      url: "/functions/setBoardRoom",
+      type: "POST",
+      data: {"boardID":boardID,"roomID":val},
+      success:function(data) {
+        alert("Room for Board " + boardID + " set to Room " + val);
+      },
+      error:function(error) {
+        console.log("couldn't update board room");
+      }
+    });
     //TODO: set the Room
   }
 }

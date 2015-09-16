@@ -130,9 +130,9 @@ router.post('/newBoard', function(req, res, next) {
   var resY = req.body.resY;
   var query = "INSERT INTO board(b_resX,b_resY) VALUES("+resX+","+resY+")";
   db.run(query,function(err,result){
-    console.log([err,result]);
+    //console.log([err,result]);
   },function() {
-    console.log(this);
+    //console.log(this);
     if(this[0] != null) {
       res.status = 500;
       res.send("error: couldn't insert new board");
@@ -147,7 +147,7 @@ router.get('/boardHasRoom', function(req,res,next) {
   var boardID = req.query.boardID;
   var query = "SELECT b_room AS room FROM board WHERE b_id="+boardID;
   db.get(query,function(err,result) {
-    console.log(result);
+    //console.log(result);
     if(result.room == null) res.send(false);
     else res.send(true);
   });
@@ -164,6 +164,22 @@ router.get('/loadRooms', function(req,res,next) {
       res.send(rows);
     }
   })
-})
+});
+
+router.post('/setBoardRoom', function(req,res,next) {
+  var db = req.db;
+  var boardID = req.body.boardID;
+  var roomID = req.body.roomID;
+  var query = "UPDATE board SET b_room="+roomID+" WHERE b_id="+boardID;
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: couldn't update board room!");
+    }
+    else {
+      res.send("successfully updated board room");
+    }
+  });
+});
 
 module.exports = router;

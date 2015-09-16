@@ -4,7 +4,6 @@ var dim = null;
 var actualUserIndex = 0;
 var switchUserTimerHandler = null;
 var switchUserTime = 20000;
-var boardID = null;
 //var switchUserTime = 5000;
 
 //initial functions
@@ -29,6 +28,11 @@ function resize () {
 }
 
 function loadBoard() {
+  //reset everything before loading
+  usercollection = new Array();
+  project.clear();
+  $("#header").empty();
+  $("#sidebarUpper").empty();
   $.ajax({
     url: "functions/getBoardDim",
     type: "GET",
@@ -81,6 +85,7 @@ function loadBoard() {
               type: "GET",
               data: {"boardID":boardID},
               success: function(data) {
+                //TODO: check if there are users registered to the board
                 usercollection = data;
                 var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
                 usercollection.forEach(function(key) {

@@ -4,6 +4,7 @@ var pos = 'index';
 var sideBarTimeout = 10000; //sidebar timeout in ms
 var sidebarTimeoutHandler;
 var sidebarStatus = false;
+var boardID = null;
 
 //###DOM########################################################################
 //$('.sidebar').on('click', '.btnUser', loadMain);
@@ -46,6 +47,8 @@ $('.sidebarSwiper').click(function(){
 
 //###FUNCTIONS##################################################################
 function loadMain(event) {
+  
+  loadBoard();
   showSidebar('sidebarMain');
   console.log('goTo: main page');
   $('#header').text('header');
