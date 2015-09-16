@@ -70,38 +70,21 @@ router.get('/getUserContent', function(req,res,next) {
   });
 });
 
-router.post('/setTabletDim', function(req,res,next) {
+router.post('/setBoardDim', function(req,res,next) {
   var db = req.db;
   var boardID = req.body.boardID;
   var width = req.body.width;
   var height = req.body.height;
-  console.log([width,height]);
-  //check if there is an entry
-  var query = 
-    "SELECT "+
-      "count(*) AS count "+
-    "FROM "+
-      "board "+
-    "WHERE "+
-      "b_id = " + boardID;
-  db.get(query,function(err,row) {
-    if(row.count != 1) {
-      //no entriy is there!!!
-      res.send("error: boardID not found!");
+  query = 
+    "UPDATE board SET b_resX=" + width + ", b_resY=" + height + " " +
+    "WHERE b_id="+boardID;
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: couldn't update board dimensions!");
     }
     else {
-      query = 
-        "UPDATE board SET b_resX=" + width + ", b_resY=" + height + " "
-        "WHERE b_id="+boardID;
-      db.run(query,function(err,result) {
-        if(err) {
-          res.status = 500;
-          res.send("error: couldn't update board dimensions!");
-        }
-        else {
-          res.send("successfully updated board dimensions");
-        }
-      });
+      res.send("successfully updated board dimensions");
     }
   });
 });
@@ -124,8 +107,13 @@ router.get('/getBoardDim', function(req,res,next) {
 router.get('/getBoards', function(req,res,next) {
   var db = req.db;
   var query = 
-    "SELECT board.b_id AS id, room.r_name AS room, room.r_descr AS description "+
-    "FROM board INNER JOIN room ON room.r_id = board.b_room";
+    "SELECT "+
+      "board.b_id AS id, "+
+      "board.b_resX AS resX, "+
+      "board.b_resY AS resY, "+
+      "room.r_name AS room, "+
+      "room.r_descr AS description "+
+    "FROM board LEFT JOIN room ON board.b_room = room.r_id";
   db.all(query,function(err, rows) {
     if(err) {
       res.status = 500;
@@ -135,5 +123,33 @@ router.get('/getBoards', function(req,res,next) {
     }
   })
 });
+router.post('/newBoard', function(req, res, next) {
+  var db = req.db;
+  var resX = req.body.resX;
+  var resY = req.body.resY;
+  var query = "INSERT INTO board(b_resX,b_resY) VALUES("+resX+","+resY+")";
+  db.run(query,function(err,result){
+    console.log([err,result]);
+  },function() {
+    console.log(this);
+    if(this[0] != null) {
+      res.status = 500;
+      res.send("error: couldn't insert new board");
+    }
+    else {
+      res.send({"id":this.lastID});
+    }
+  });
+});
+router.get('/boardHasRoom', function(req,res,next) {
+  var db = req.db;
+  var boardID = req.query.boardID;
+  var query = "SELECT b_room AS room FROM board WHERE b_id="+boardID;
+  db.get(query,function(err,result) {
+    console.log(result);
+    if(result.room == null) res.send(false);
+    else res.send(true);
+  });
+})
 
 module.exports = router;

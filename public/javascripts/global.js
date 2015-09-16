@@ -53,7 +53,7 @@ function loadMain(event) {
   $('#EditorCanvas').css('visibility','visible');
   show_gifs();
   addGifTicker();
-  startSwitchUserTimer
+  startSwitchUserTimer();
 }
 function loadMessageLanding(event) {
   showSidebar('sidebarMessages');
@@ -222,4 +222,5 @@ function hideAll() {
   removeAllGifs();
   hide_gifs();
   stopSwitchUserTimer();
+  removeListeners();
 }

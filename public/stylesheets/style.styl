@@ -128,6 +128,7 @@ html,body,#wrapper
 .textContentLower
   visibility inherit
 
+
 //IDs
 #sidebarMain
   visibility visible
@@ -261,7 +262,10 @@ html,body,#wrapper
   background-color rgba(0,0,0,0.2)
   border-radius 3px
 #settings
+  position absolute
+  left sidebar-width+swiper-width+10px
   visibility hidden
+  text-align left
 #tabletSizePreview
   position absolute
   top 0
@@ -276,6 +280,24 @@ html,body,#wrapper
 #newBoard
   margin 0 auto
   position absolute
+  visibility hidden
+  left 50%
+  width 400px
+  display inline-block
+#otherBoards
+  width 100%
+  border-color black
+  margin-top 10px
+  visibility hidden
+#otherBoards thead th
+  font-weight bold
+  border 1px solid black
+  padding 2px
+#otherBoards tbody td
+  border 1px solid black
+  padding 2px
+#newBoardForm
+  margin-top 10px
   visibility hidden
 
 //animations

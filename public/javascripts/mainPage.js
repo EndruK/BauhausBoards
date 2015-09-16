@@ -20,12 +20,11 @@ $( document ).ready(function() {
 $(window).on("resize", resize);
 function resize () {
   //if the view is greater - put the header div at the tablet corner
-  if(dim && $(window).width() > dim.resX) {
+  if(dim && $(window).width() >= dim.resX) {
     $("#header").css("right",$(window).width()-dim.resX);
   }
-  else {
-    var diff = $(window).width()-dim.resX;
-    $("#header").css("right",diff);
+  else if(dim && $(window).width() < dim.resX) {
+    $("#header").css("right",$(window).width()-dim.resX);
   }
 }
 
@@ -35,54 +34,79 @@ function loadBoard() {
     type: "GET",
     data: {"boardID":boardID},
     success: function(res) {
+      console.log(res);
       if(!res){
         loadNewBoard();
         return;
       }
+      else if(res.resX == "" || res.resY == "") {
+        dim = {"resX":$(window).width()-10,"resY":$(window).height()-10};
+        alert("Warning: No resolution for board registered");
+      }
+      else {
+        dim = res;
+      }
       //DOM element get because jquery didn't work
-      dim = res;
       var jSizePrevCanv = $("#tabletSizePreview");
-      jSizePrevCanv.attr("width",res.resX+1);
-      jSizePrevCanv.attr("height",res.resY+1);
+      jSizePrevCanv.attr("width",dim.resX+1);
+      jSizePrevCanv.attr("height",dim.resY+1);
 
       var sizePrevCanvas = document.getElementById("tabletSizePreview");
       var context = sizePrevCanvas.getContext("2d");
       context.beginPath();
-      context.moveTo(res.resX+1,0);
-      context.lineTo(res.resX+1,res.resY+1);
-      context.lineTo(0,res.resY+1);
+      context.moveTo(dim.resX+1,0);
+      context.lineTo(dim.resX+1,dim.resY+1);
+      context.lineTo(0,dim.resY+1);
       context.stroke();
       resize();
       show_gifs();
       addGifTicker();
+      //check if the board has a room
       $.ajax({
-        url: "/functions/loadBoard",
+        url: "/functions/boardHasRoom",
         type: "GET",
         data: {"boardID":boardID},
-        success: function(data) {
-          usercollection = data;
-          var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
-          usercollection.forEach(function(key) {
-            buttonContainer.append("<button class='btnUser' value='"+key.id+"'>" + key.name + "</button><br><br>");
-          });
-          $(".btnUser").on("click",function(event) {
-            var val = $(this).attr("value");
-            if(findUID(val) != actualUserIndex) {
-              startSwitchUserTimer();
-              showUser(val);
-            }
-          });
-          $("#EditorCanvas").attr("width",dim.resX);
-          $("#EditorCanvas").attr("height",dim.resY);
-          $("#EditorCanvas").css("width",dim.resX);
-          $("#EditorCanvas").css("height",dim.resY);
-          showUser(usercollection[0].id);
-          if(usercollection.length > 1) {
-            startSwitchUserTimer();
+        success:function(data) {
+          console.log(data);
+          if(!data) {
+            alert("Board has no room assigned!");
+          }
+          else {
+            //finally load the board
+            $.ajax({
+              url: "/functions/loadBoard",
+              type: "GET",
+              data: {"boardID":boardID},
+              success: function(data) {
+                usercollection = data;
+                var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
+                usercollection.forEach(function(key) {
+                  buttonContainer.append("<button class='btnUser' value='"+key.id+"'>" + key.name + "</button><br><br>");
+                });
+                $(".btnUser").on("click",function(event) {
+                  var val = $(this).attr("value");
+                  if(findUID(val) != actualUserIndex) {
+                    startSwitchUserTimer();
+                    showUser(val);
+                  }
+                });
+                $("#EditorCanvas").attr("width",dim.resX);
+                $("#EditorCanvas").attr("height",dim.resY);
+                $("#EditorCanvas").css("width",dim.resX);
+                $("#EditorCanvas").css("height",dim.resY);
+                showUser(usercollection[0].id);
+                if(usercollection.length > 1) {
+                  startSwitchUserTimer();
+                }
+              },
+              error: function(data) {
+                console.log("Error, couldn't retreive board with ID " + boardID);
+              }
+            });
           }
         },
-        error: function(data) {
-          console.log("Error, couldn't retreive board with ID " + boardID);
+        error:function(error) {
+          console.log("Error, couldn't get room for board with ID " + boardID);
         }
       });
     },
@@ -155,13 +179,6 @@ function showUser(userID) {
   })
 }
 
-function loadNewBoard() {
-  $("#header").css("visibility","hidden");
-  $(".sidebar").css("visibility","hidden");
-  $("#EditorCanvas").css("visibility","hidden");
-  $("#tabletSizePreview").css("visibility","hidden");
-  $("#newBoard").css("visibility","visible");
-}
 
 //switch between the users
 function switchUser() {

@@ -3,12 +3,10 @@ $("#getTabletDim").on("click",saveDim);
 function saveDim(event) {
   var height = $(window).height();
   var width  = $(window).width();
+  var boardID = location.search.split("BID=")[1];
 
-  var boardID = 1;
-
-  console.log([width,height]);
   $.ajax({
-    url: "/functions/setTabletDim",
+    url: "/functions/setBoardDim",
     type: "POST",
     data:{"boardID":boardID,"width":width,"height":height},
     success:function(response) {
