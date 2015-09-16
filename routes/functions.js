@@ -117,6 +117,7 @@ router.get('/getBoards', function(req,res,next) {
   db.all(query,function(err, rows) {
     if(err) {
       res.status = 500;
+      res.send("error"+err);
     }
     else {
       res.send(rows);
@@ -150,6 +151,19 @@ router.get('/boardHasRoom', function(req,res,next) {
     if(result.room == null) res.send(false);
     else res.send(true);
   });
+});
+router.get('/loadRooms', function(req,res,next) {
+  var db = req.db;
+  var query = "SELECT r_id AS id, r_name AS name, r_descr AS description FROM room";
+  db.all(query,function(err, rows) {
+    if(err) {
+      res.status = 500;
+      res.send("error: "+err);
+    }
+    else {
+      res.send(rows);
+    }
+  })
 })
 
 module.exports = router;

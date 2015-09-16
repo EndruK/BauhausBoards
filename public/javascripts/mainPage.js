@@ -69,7 +69,10 @@ function loadBoard() {
         success:function(data) {
           console.log(data);
           if(!data) {
-            alert("Board has no room assigned!");
+            var result = confirm("Board has no room assigned! Switch to board settings?");
+            if(result) {
+              loadRoomSettings();
+            }
           }
           else {
             //finally load the board

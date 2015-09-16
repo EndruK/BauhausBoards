@@ -1,7 +1,3 @@
-$("#createNewBoard").on("click",newBoard);
-$("#useOtherBoard").on("click",otherBoard);
-
-
 function loadNewBoard() {
   $("#header").css("visibility","hidden");
   $(".sidebar").css("visibility","hidden");
@@ -12,40 +8,19 @@ function loadNewBoard() {
     "visibility" : "visible",
     "left" : "-=" + newBoard.width()/2 + "px"
   });
+  otherBoard();
 }
 
-function newBoard(event) {
-  $("#otherBoards").css("visibility","hidden");
-  var result = confirm("Create a new board?");
-  if(result) {
-    var resX = $(window).width();
-    var resY = $(window).height();
-
-    $.ajax({
-      url: "/functions/newBoard",
-      type: "POST",
-      data: {"resX":resX-1,"resY":resY-1},
-      success:function(result) {
-        console.log(result);
-        window.location.replace("/?BID="+result.id);
-      },
-      error:function(error) {
-        console.log("couldn't create new board");
-      }
-    });
-  }
-}
-
-function otherBoard(event) {
+function otherBoard() {
   $("#otherBoards").empty();
   $.ajax({
     url: "/functions/getBoards",
     type: "GET",
     success:function(res) {
       var otherBoards = $("#otherBoards");
-      otherBoards.css("visibility","visible");
-      var appendString = "<thead><tr><th>ID<th>room<th>description<th>resX<th>resY";
-      appendString += "<tbody>"
+      var appendString = "<thead><tr><th>Board-ID<th>Room<th>Description<th>Resolution";
+      appendString += "<tbody>";
+      appendString += "<tr value='newRoom'><td colspan='4' style='text-align:center'>new room";
       res.forEach(function(key) {
         appendString += "<tr value="+key.id+">"+
           "<td>"+key.id;
@@ -53,8 +28,7 @@ function otherBoard(event) {
         if(key.room) appendString += key.room;
         appendString +="<td>";
         if(key.description) appendString += key.description;
-        appendString += "<td>"+key.resX+
-          "<td>"+key.resY;
+        appendString += "<td>"+key.resX+":"+key.resY;
       });
       otherBoards.append(appendString);
       $("#otherBoards tbody tr").on("click",redirectTo);
@@ -68,5 +42,27 @@ function otherBoard(event) {
 
 function redirectTo(event) {
   var val=$(this).attr("value");
-  window.location.replace("/?BID="+val);
+  if(val == "newRoom") {
+    var result = confirm("Create new board?");
+    if(result) {
+      var resX = $(window).width();
+      var resY = $(window).height();
+
+      $.ajax({
+        url: "/functions/newBoard",
+        type: "POST",
+        data: {"resX":resX-1,"resY":resY-1},
+        success:function(result) {
+          console.log(result);
+          window.location.replace("/?BID="+result.id);
+        },
+        error:function(error) {
+          console.log("couldn't create new board");
+        }
+      });
+    }
+  }
+  else {
+    window.location.replace("/?BID="+val);
+  }
 }

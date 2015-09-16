@@ -54,6 +54,7 @@ function loadMain(event) {
   show_gifs();
   addGifTicker();
   startSwitchUserTimer();
+  $('#tabletSizePreview').css('visibility','visible');
 }
 function loadMessageLanding(event) {
   showSidebar('sidebarMessages');
@@ -75,7 +76,7 @@ function loadCreateMessage(event) {
   addImageDropLayer();
   show_gifs();
   removeAllGifs();
-  //TODO: back button frage: wirklich zurück
+  $('#tabletSizePreview').css('visibility','visible');
 }
 function loadBackend(event) {
   $('#header').text('Backend');
@@ -116,6 +117,7 @@ function loadRoomSettings(event) {
   $('#header').text('Room Settings');
   showSidebar('loadRoomSettings');
   $('#settings').css('visibility','visible');
+  loadRooms();
   updateTimer();
 }
 function loadLogs(event) {
@@ -214,6 +216,7 @@ function hideAll() {
   $('#sidebarBackendLogs').css('visibility','hidden');
   $('#EditorCanvas').css('visibility','hidden');
   $('#settings').css('visibility','hidden');
+  $('#tabletSizePreview').css('visibility','hidden');
   closeContainer();
   closeColorContainer();
   resetColor();

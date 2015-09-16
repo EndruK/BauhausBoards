@@ -127,7 +127,19 @@ html,body,#wrapper
   visibility inherit
 .textContentLower
   visibility inherit
-
+.ajaxTable
+  width 100%
+  border-color black
+  margin-top 10px
+.ajaxTable thead th
+  font-weight bold
+  border 1px solid black
+  padding 2px
+.ajaxTable tbody tr
+  cursor pointer
+.ajaxTable tbody td
+  border 1px solid black
+  padding 2px
 
 //IDs
 #sidebarMain
@@ -284,21 +296,8 @@ html,body,#wrapper
   left 50%
   width 400px
   display inline-block
-#otherBoards
-  width 100%
-  border-color black
-  margin-top 10px
-  visibility hidden
-#otherBoards thead th
-  font-weight bold
-  border 1px solid black
-  padding 2px
-#otherBoards tbody td
-  border 1px solid black
-  padding 2px
-#newBoardForm
-  margin-top 10px
-  visibility hidden
+
+
 
 //animations
 @-webkit-keyframes spin2 {

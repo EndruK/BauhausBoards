@@ -1,7 +1,11 @@
 .textContent#settings
   .textContentUpper
-    p Headline
   .textContentLower
-    button#getTabletDim save tablet dim
-    p test
-    p test
+    #boardSettings
+      h2 Board Settings
+      p board password setting(4er pin)
+      button#getTabletDim save tablet dim
+    hr
+    #roomSettings
+      h2 Set Board Room
+      table#rooms.table-hover.ajaxTable
