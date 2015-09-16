@@ -7,11 +7,6 @@ var switchUserTime = 20000;
 var boardID = null;
 //var switchUserTime = 5000;
 
-
-//TODO: remmove the editor handlers
-
-
-
 //initial functions
 $( document ).ready(function() {
   boardID = location.search.split("BID=")[1];
@@ -24,22 +19,13 @@ $( document ).ready(function() {
 
 $(window).on("resize", resize);
 function resize () {
-  //set the header position to the dimension sizes
-  //if the view is greater
+  //if the view is greater - put the header div at the tablet corner
   if(dim && $(window).width() > dim.resX) {
     $("#header").css("right",$(window).width()-dim.resX);
-    $("#content").css("width",$(window).width());
   }
   else {
     var diff = $(window).width()-dim.resX;
     $("#header").css("right",diff);
-    $("#content").css("width",dim.resX);
-  }
-  if(dim && $(window).height() > dim.resY) {
-    $("#content").css("height",$(window).height());
-  }
-  else {
-    $("#content").css("height",dim.resY);
   }
 }
 

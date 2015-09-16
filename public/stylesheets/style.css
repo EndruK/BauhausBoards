@@ -93,6 +93,7 @@ html,
 body,
 #wrapper {
   height: 100%;
+  background-color: #777;
 }
 .clear {
   clear: both;
@@ -282,7 +283,6 @@ body,
   z-index: 1;
 }
 #content {
-  background-color: #777;
   text-align: center;
   height: 100%;
 }
