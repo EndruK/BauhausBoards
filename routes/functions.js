@@ -1,6 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
+//to prevent injectionons use:
+/*
+var stmt = db.prepare();
+stmt.run("INSERT INTO bla VALUES($id,$name)",{
+  $id: 2,
+  $name:"hallo"
+});
+stmt.finalize();
+*/
+
 router.get('/loadBoardUsers', function(req, res, next) {
   var db = req.db;
   var boardID = req.query.boardID;

@@ -3,7 +3,8 @@ $("#getTabletDim").on("click",saveDim);
 function saveDim(event) {
   var height = $(window).height();
   var width  = $(window).width();
-  var result = confirm("Do you really want to change the Board resolution to "+width+":"+height+"?");
+  var result = confirm("Do you really want to change the Board resolution to "+
+    width+":"+height+"? This will have effect to the board resolution!");
   if(!result) return;
   $.ajax({
     url: "/functions/setBoardDim",
@@ -18,12 +19,37 @@ function saveDim(event) {
       }
     },
     error:function(error) {
-      console.log("couldn't update the tablet dimensions");
+      console.log("couldn't update the board dimensions");
     }
   })
 }
 
+function updateHeaderInfo() {
+  $.ajax({
+    url:"/functions/getBoards",
+    type:"GET",
+    data: {"boardID":boardID},
+    success:function(res) {
+      res.forEach(function(key) {
+        if(key.id == boardID) {
+          var header = $("#header");
+          var str = "BoardID = "+boardID+"\n"+
+            "Resolution = "+key.resX+":"+key.resY+"\n"+
+            "Connected Room = "+key.room+"\n\n"+
+            "Client Resolution = "+$(window).width()+":"+$(window).height();
+          var tmp = header.text(str);
+          header.html(tmp.html().replace(/\n/g,'<br>'));
+        }
+      });
+    },
+    error:function(err) {
+      console.log("couldn't get the board informations");
+    }
+  });
+}
+
 function loadRooms() {
+  updateHeaderInfo();
   $("#rooms").empty();
   $("#newRoomForm").empty();
   $.ajax({
@@ -42,7 +68,7 @@ function loadRooms() {
         lastTR.append("<td>"+key.description);
         lastTR.append("<td style='text-align:center'>");
         $("#rooms tbody tr:last td:last")
-          .append("<button onclick='deleteRoom("+key.id+")'>delete</button>");
+          .append("<button onclick='deleteRoom("+key.id+")'>Delete</button>");
         lastTR.append("<td style='text-align:center'>");
         $("#rooms tbody tr:last td:last")
           .append("<button onclick='setRoom("+key.id+")'>Set</button>")
