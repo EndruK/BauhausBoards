@@ -3,7 +3,8 @@ $("#getTabletDim").on("click",saveDim);
 function saveDim(event) {
   var height = $(window).height();
   var width  = $(window).width();
-
+  var result = confirm("Do you really want to change the Board resolution to "+width+":"+height+"?");
+  if(!result) return;
   $.ajax({
     url: "/functions/setBoardDim",
     type: "POST",
@@ -30,19 +31,21 @@ function loadRooms() {
     type: "GET",
     success:function(data) {
       var rooms = $("#rooms");
-      rooms.append("<thead><th>Room-ID<th>Roomname<th>Description<th>");
+      rooms.append("<thead><th>Room-ID<th>Roomname<th>Description<th colspan='2'>");
       rooms.append("<tbody>");
-      rooms.append("<tr value='newRoom'><td colspan='4' onclick='setRoom(\"newRoom\")'>New Room");
+      rooms.append("<tr value='newRoom'><td style='text-align:center' colspan='5' onclick='setRoom(\"newRoom\")'>New Room");
       data.forEach(function(key) {
         rooms.append("<tr>");
         var lastTR = $("#rooms tbody tr:last");
         lastTR.append("<td>"+key.id);
         lastTR.append("<td>"+key.name);
         lastTR.append("<td>"+key.description);
-        lastTR.append("<td>");
-        var lastTD = $("#rooms tbody tr:last td:last");
-        lastTD.append("<button class='submitForm' value='"+key.id+"' onclick='setRoom("+key.id+")'>Set</button>")
-        lastTD.append("<button class='submitForm' value='"+key.id+"' onclick='deleteRoom("+key.id+")'>delete</button>");
+        lastTR.append("<td style='text-align:center'>");
+        $("#rooms tbody tr:last td:last")
+          .append("<button onclick='deleteRoom("+key.id+")'>delete</button>");
+        lastTR.append("<td style='text-align:center'>");
+        $("#rooms tbody tr:last td:last")
+          .append("<button onclick='setRoom("+key.id+")'>Set</button>")
       });
       $.ajax({
         url: "/functions/getBoards",
@@ -53,13 +56,16 @@ function loadRooms() {
           boards.forEach(function(key) {
             if(key.id == boardID && key.roomID) {
               tableRows.each(function() {
-                if($(this).attr("value") == key.roomID.toString()) {
+                var val = $(this).children().first().text();
+                if(val == key.roomID) {
                   $(this).css({
                     "text-decoration":"underline",
                     "cursor":"default",
-                    "background-color":"none"
+                    "background-color":"white"
                   });
-                  $(this).attr("value","none");
+                  $(this).children().last().remove();
+                  $(this).children().last().remove();
+                  $(this).append("<td colspan='2'>");
                 }
               })
             }
