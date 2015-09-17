@@ -111,6 +111,7 @@ router.get('/getBoards', function(req,res,next) {
       "board.b_id AS id, "+
       "board.b_resX AS resX, "+
       "board.b_resY AS resY, "+
+      "room.r_id AS roomID, "+
       "room.r_name AS room, "+
       "room.r_descr AS description "+
     "FROM board LEFT JOIN room ON board.b_room = room.r_id";
@@ -181,5 +182,35 @@ router.post('/setBoardRoom', function(req,res,next) {
     }
   });
 });
+
+router.post('/createNewRoom', function(req,res,next) {
+  var db = req.db;
+  var name = req.body.name;
+  var description = req.body.description;
+  var query = "INSERT INTO room(r_name,r_descr) VALUES ('"+name+"','"+description+"')";
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: "+ err);
+    }
+    else {
+      res.send("successfully created new room");
+    }
+  });
+});
+router.post('/deleteRoom', function(req,res,next) {
+  var db = req.db;
+  var roomID = req.body.roomID;
+  var query = "DELETE FROM room WHERE r_id="+roomID;
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send("room successfully deleted");
+    }
+  })
+})
 
 module.exports = router;

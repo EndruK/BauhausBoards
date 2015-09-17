@@ -222,6 +222,7 @@ body,
 .textContent {
   width: inherit;
   height: inherit;
+  width: 50%;
 }
 .textContentUpper {
   visibility: inherit;
@@ -245,6 +246,12 @@ body,
 .ajaxTable tbody td {
   border: 1px solid #000;
   padding: 2px;
+}
+.cancelForm {
+  float: left;
+}
+.submitForm {
+  float: right;
 }
 #sidebarMain {
   visibility: visible;
@@ -429,6 +436,17 @@ body,
   left: 50%;
   width: 400px;
   display: inline-block;
+}
+#newRoomForm {
+  width: 100%;
+}
+#newRoomForm input {
+  width: 300px;
+}
+#newRoomForm textarea {
+  width: inherit;
+  height: 200px;
+  resize: none;
 }
 @-webkit-keyframes spin2 {
   from {
