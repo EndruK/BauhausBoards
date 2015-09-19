@@ -10,7 +10,9 @@ var switchUserTime = 20000;
 $( document ).ready(function() {
   boardID = location.search.split("BID=")[1];
   if(!boardID) {
-    loadNewBoard();
+    //TODO: select an existing board
+    alert("Implement select board");
+    window.location.replace("/?BID=1");
     return;
   }
   loadBoard();

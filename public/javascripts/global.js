@@ -11,15 +11,15 @@ var boardID = null;
 $('.sidebar').on('click', '.btnMessage', loadMessageLanding);
 $('.sidebar').on('click', '.btnBackend', loadBackend);
 $('.sidebar').on('click', '.btnBack', loadMain);
-$('.sidebar').on('click', '.btnBackendSettings', loadSettings);
+//$('.sidebar').on('click', '.btnBackendSettings', loadSettings);
 $('.sidebar').on('click', '.btnCreateMessage', loadCreateMessage);
 $('.sidebar').on('click', '.btnFeedback', loadFeedback);
 $('.sidebar').on('click', '.btnSetStatus', loadChangeStatus);
 $('.sidebar').on('click', '.btnChangeContent', loadChangeContent);
 $('.sidebar').on('click', '.btnViewMessages', loadViewMessages);
 $('.sidebar').on('click', '.btnUserSettings', loadUserSettings);
-$('.sidebar').on('click', '.btnRoomSettings', loadRoomSettings);
-$('.sidebar').on('click', '.btnLogs', loadLogs);
+//$('.sidebar').on('click', '.btnRoomSettings', loadRoomSettings);
+//$('.sidebar').on('click', '.btnLogs', loadLogs);
 
 $('.sidebarSwiper').swipe({
   swipeStatus:function(event,phase,direction,distance,duration,fingers) {
@@ -92,11 +92,11 @@ function loadBackend(event) {
   showSidebar('sidebarBackend');
   updateTimer();
 }
-function loadSettings(event) {
+/*function loadSettings(event) {
   $('#header').text('Settings');
   showSidebar('sidebarSettings');
   updateTimer();
-}
+}*/
 function loadFeedback(event) {
   $('#header').text('Feedback');
   showSidebar('sidebarFeedback');
@@ -119,9 +119,12 @@ function loadViewMessages(event) {
 }
 function loadUserSettings(event) {
   $('#header').text('User Settings');
-  showSidebar('loadUserSettings');
+  showSidebar('sidebarUserSettings');
+  $('#users').css('visibility','visible');
+  loadUser();
   updateTimer();
 }
+/*
 function loadRoomSettings(event) {
   $('#header').text('Room Settings');
   showSidebar('loadRoomSettings');
@@ -133,7 +136,7 @@ function loadLogs(event) {
   $('#header').text('Logs');
   showSidebar('loadLogs');
   updateTimer();
-}
+}*/
 
 function openSidebar(){
   updateTimer();
@@ -164,9 +167,9 @@ function showSidebar(sidebar) {
       hideAll();
       $('#sidebarMessages').css('visibility', 'visible');
       break;
-    case 'sidebarSettings':
+    case 'sidebarUserSettings':
       hideAll();
-      $('#sidebarBackendSettings').css('visibility','visible');
+      $('#sidebarUserSettings').css('visibility','visible');
       break;
     case 'sidebarCreateMessage':
       hideAll();
@@ -189,7 +192,7 @@ function showSidebar(sidebar) {
       hideAll();
       $('#sidebarViewMessages').css('visibility','visible');
       break;
-    case 'loadUserSettings':
+    /*case 'loadUserSettings':
       hideAll();
       $('#sidebarBackendUserSettings').css('visibility','visible');
       break;
@@ -200,7 +203,7 @@ function showSidebar(sidebar) {
     case 'loadLogs':
       hideAll();
       $('#sidebarBackendLogs').css('visibility','visible');
-      break;
+      break;*/
     default:
       //nothing or main???
       break;
@@ -214,17 +217,18 @@ function hideAll() {
   $('#sidebarMain').css('visibility', 'hidden');
   $('#sidebarBackend').css('visibility', 'hidden');
   $('#sidebarMessages').css('visibility', 'hidden');
-  $('#sidebarBackendSettings').css('visibility', 'hidden');
+  //$('#sidebarBackendSettings').css('visibility', 'hidden');
   $('#sidebarCreateMessage').css('visibility','hidden');
   $('#sidebarFeedback').css('visibility','hidden');
   $('#sidebarChangeStatus').css('visibility','hidden');
   $('#sidebarChangeContent').css('visibility','hidden');
   $('#sidebarViewMessages').css('visibility','hidden');
-  $('#sidebarBackendUserSettings').css('visibility','hidden');
-  $('#sidebarBackendRoomSettings').css('visibility','hidden');
-  $('#sidebarBackendLogs').css('visibility','hidden');
+  $('#sidebarUserSettings').css('visibility','hidden');
+  //$('#sidebarBackendRoomSettings').css('visibility','hidden');
+  //$('#sidebarBackendLogs').css('visibility','hidden');
   $('#EditorCanvas').css('visibility','hidden');
-  $('#settings').css('visibility','hidden');
+  //$('#settings').css('visibility','hidden');
+  //$('#users').css('visibility','hidden');
   $('#tabletSizePreview').css('visibility','hidden');
   closeContainer();
   closeColorContainer();

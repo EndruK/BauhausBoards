@@ -281,18 +281,16 @@ body,
   position: absolute;
   visibility: hidden;
 }
-#sidebarBackendUserSettings {
+#sidebarUserSettings {
   position: absolute;
   visibility: hidden;
 }
-#sidebarBackendRoomSettings {
-  position: absolute;
-  visibility: hidden;
-}
-#sidebarBackendLogs {
-  position: absolute;
-  visibility: hidden;
-}
+/*#sidebarBackendRoomSettings
+  position absolute
+  visibility hidden
+#sidebarBackendLogs
+  position absolute
+  visibility hidden*/
 #header {
   position: absolute;
   right: 0px;
