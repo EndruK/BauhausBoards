@@ -93,6 +93,7 @@ function loadBoard() {
                 usercollection = data;
                 var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
                 $("#sidebarMain .sidebarUpper").empty();
+                buttonContainer.append("<br>");
                 usercollection.forEach(function(key) {
                   buttonContainer.append("<button class='btnUser' value='"+key.id+"'>" + key.name + "</button><br><br>");
                 });

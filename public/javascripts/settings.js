@@ -49,6 +49,7 @@ function updateHeaderInfo() {
 }
 
 function loadRooms() {
+  closeSidebar();
   updateHeaderInfo();
   $("#rooms").empty();
   $("#newRoomForm").empty();
@@ -57,9 +58,9 @@ function loadRooms() {
     type: "GET",
     success:function(data) {
       var rooms = $("#rooms");
-      rooms.append("<thead><th>Room-ID<th>Roomname<th>Description<th colspan='2'>");
+      rooms.append("<thead><th>Room-ID<th>Roomname<th>Description<th colspan='3'>");
       rooms.append("<tbody>");
-      rooms.append("<tr value='newRoom'><td style='text-align:center' colspan='5' onclick='setRoom(\"newRoom\")'>New Room");
+      rooms.append("<tr value='newRoom'><td style='text-align:center' colspan='6' onclick='setRoom(\"newRoom\")'>New Room");
       data.forEach(function(key) {
         rooms.append("<tr>");
         var lastTR = $("#rooms tbody tr:last");
@@ -71,7 +72,10 @@ function loadRooms() {
           .append("<button onclick='deleteRoom("+key.id+")'>Delete</button>");
         lastTR.append("<td style='text-align:center'>");
         $("#rooms tbody tr:last td:last")
-          .append("<button onclick='setRoom("+key.id+")'>Set</button>")
+          .append("<button onclick='updateRoom("+key.id+")'>Change</button>");
+        lastTR.append("<td style='text-align:center'>");
+        $("#rooms tbody tr:last td:last")
+          .append("<button onclick='setRoom("+key.id+")'>Set</button>");
       });
       $.ajax({
         url: "/functions/getBoards",
@@ -90,8 +94,7 @@ function loadRooms() {
                     "background-color":"white"
                   });
                   $(this).children().last().remove();
-                  $(this).children().last().remove();
-                  $(this).append("<td colspan='2'>");
+                  $(this).append("<td>");
                 }
               })
             }
@@ -115,7 +118,7 @@ function setRoom(id) {
   var val = id;
   if(val == "newRoom") {
     //var result = confirm("Create a new room?");
-    $("#rooms").empty();
+    //$("#rooms").empty();
     var newRoom = $("#newRoom");
     newRoom.append("<form onsubmit='submitForm()' id='newRoomForm'>");
     var newRoomForm = $("#newRoomForm");
@@ -126,19 +129,18 @@ function setRoom(id) {
     newRoomForm.append("<br>Description(Optional):<br>");
     newRoomForm.append("<textarea name='roomdescription'></textarea>");
     newRoomForm.append("<br><button class='cancelForm' onclick='cancelForm()'>Cancel");
-    newRoomForm.append("<button class='submitForm' onclick='submitForm()'>Submit");
+    newRoomForm.append("<button class='submitForm' onclick='submitForm('createNew')'>Submit");
 
   }
-  else if(val == "none") {
-    return;
-  }
   else {
+    var result = confirm("Do you really want to set the room for this board?");
+    if(!result) return;
     $.ajax({
       url: "/functions/setBoardRoom",
       type: "POST",
       data: {"boardID":boardID,"roomID":val},
       success:function(data) {
-        alert("Room for Board " + boardID + " set to Room " + val);
+        //alert("Room for Board " + boardID + " set to Room " + val);
         loadRoomSettings();
       },
       error:function(error) {
@@ -152,24 +154,29 @@ function cancelForm() {
   var result = confirm("Cancel room creation?");
   if(result) loadRooms();
 }
-function submitForm() {
+function submitForm(task) {
   var roomname = $("#newRoomForm input").val();
   var description = $("#newRoomForm textarea").val();
   if(!roomname) {
     $("#newRoomForm input").css("border","2px solid red");
     return;
   }
-  $.ajax({
-    url:"/functions/createNewRoom",
-    type: "POST",
-    data: {"name":roomname,"description":description},
-    success:function(res) {
-      loadRooms();
-    },
-    error:function(err) {
-      console.log("couldn't create room");
-    }
-  });
+  if(task == 'createNew') {
+    $.ajax({
+      url:"/functions/createNewRoom",
+      type: "POST",
+      data: {"name":roomname,"description":description},
+      success:function(res) {
+        loadRooms();
+      },
+      error:function(err) {
+        console.log("couldn't create room");
+      }
+    });
+  }
+  else if(task == 'update') {
+
+  }
 }
 function deleteRoom(id) {
   var result = confirm("Do you really want to delete room " + id + "?");
@@ -185,6 +192,30 @@ function deleteRoom(id) {
     },
     error:function(err) {
       console.log("couldn't delete room");
+    }
+  });
+}
+function updateRoom(id) {
+  //$("#rooms").empty();
+  var newRoom = $("#newRoom");
+  newRoom.append("<form onsubmit='submitForm()' id='newRoomForm'>");
+  var newRoomForm = $("#newRoomForm");
+  newRoomForm.submit(function(event) {
+    event.preventDefault();
+  });
+  $.ajax({
+    url:"/functions/getRoom",
+    type: "GET",
+    data: {"roomID":id},
+    success:function(res) {
+      newRoomForm.append("Room Name:<br><input name='roomname' maxlength='40' value='"+res.name+"'>");
+      newRoomForm.append("<br>Description(Optional):<br>");
+      newRoomForm.append("<textarea name='roomdescription'>"+res.description+"</textarea>");
+      newRoomForm.append("<br><button class='cancelForm' onclick='loadRooms()'>Cancel");
+      newRoomForm.append("<button class='submitForm' onclick='submitForm('update')'>Submit");
+    },
+    error:function(err) {
+      console.log("couldn't get room");
     }
   });
 }

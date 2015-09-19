@@ -221,6 +221,20 @@ router.post('/deleteRoom', function(req,res,next) {
       res.send("room successfully deleted");
     }
   })
-})
+});
+router.get('/getRoom', function(req,res,next) {
+  var db = req.db;
+  roomID = req.query.roomID
+  var query = "SELECT r_name AS name, r_descr AS description FROM room WHERE r_id="+roomID;
+  db.get(query,function(err, row) {
+    if(err) {
+      res.status = 500;
+      res.send("error: "+err);
+    }
+    else {
+      res.send(row);
+    }
+  })
+});
 
 module.exports = router;
