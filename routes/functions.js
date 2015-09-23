@@ -11,6 +11,7 @@ stmt.run("INSERT INTO bla VALUES($id,$name)",{
 stmt.finalize();
 */
 
+//frontend
 router.get('/loadBoardUsers', function(req, res, next) {
   var db = req.db;
   var boardID = req.query.boardID;
@@ -39,6 +40,7 @@ router.get('/loadBoardUsers', function(req, res, next) {
   });
 });
 
+//frontend
 router.get('/getUserStatus', function(req, res, next) {
   var db = req.db;
   var userID = req.query.userID;
@@ -59,6 +61,7 @@ router.get('/getUserStatus', function(req, res, next) {
   });
 });
 
+//frontend
 router.get('/getUserContent', function(req,res,next) {
   var db = req.db;
   var userID = req.query.userID;
@@ -80,6 +83,7 @@ router.get('/getUserContent', function(req,res,next) {
   });
 });
 
+//frontend and maybe backend???
 router.post('/setBoardDim', function(req,res,next) {
   var db = req.db;
   var boardID = req.body.boardID;
@@ -99,6 +103,7 @@ router.post('/setBoardDim', function(req,res,next) {
   });
 });
 
+//frontend
 router.get('/getBoardDim', function(req,res,next) {
   var db = req.db;
   var boardID = req.query.boardID;
@@ -114,7 +119,8 @@ router.get('/getBoardDim', function(req,res,next) {
   });
 });
 
-router.get('/getBoards', function(req,res,next) {
+//backend
+router.get('/getBoards', restrictAdmin, function(req,res) {
   var db = req.db;
   var query = 
     "SELECT "+
@@ -135,7 +141,9 @@ router.get('/getBoards', function(req,res,next) {
     }
   })
 });
-router.post('/newBoard', function(req, res, next) {
+
+//backend
+router.post('/newBoard', restrictAdmin, function(req, res) {
   var db = req.db;
   var resX = req.body.resX;
   var resY = req.body.resY;
@@ -153,6 +161,8 @@ router.post('/newBoard', function(req, res, next) {
     }
   });
 });
+
+//delete?
 router.get('/boardHasRoom', function(req,res,next) {
   var db = req.db;
   var boardID = req.query.boardID;
@@ -163,7 +173,9 @@ router.get('/boardHasRoom', function(req,res,next) {
     else res.send(true);
   });
 });
-router.get('/loadRooms', function(req,res,next) {
+
+//backend
+router.get('/loadRooms', restrictAdmin, function(req,res) {
   var db = req.db;
   var query = "SELECT r_id AS id, r_name AS name, r_descr AS description FROM room";
   db.all(query,function(err, rows) {
@@ -172,12 +184,14 @@ router.get('/loadRooms', function(req,res,next) {
       res.send("error: "+err);
     }
     else {
+      console.log("asdasdasd");
       res.send(rows);
     }
   })
 });
 
-router.post('/setBoardRoom', function(req,res,next) {
+//backend
+router.post('/setBoardRoom', restrictAdmin, function(req,res) {
   var db = req.db;
   var boardID = req.body.boardID;
   var roomID = req.body.roomID;
@@ -193,7 +207,8 @@ router.post('/setBoardRoom', function(req,res,next) {
   });
 });
 
-router.post('/createNewRoom', function(req,res,next) {
+//backend
+router.post('/createNewRoom', restrictAdmin, function(req,res) {
   var db = req.db;
   var name = req.body.name;
   var description = req.body.description;
@@ -208,7 +223,9 @@ router.post('/createNewRoom', function(req,res,next) {
     }
   });
 });
-router.post('/deleteRoom', function(req,res,next) {
+
+//backend
+router.post('/deleteRoom', restrictAdmin, function(req,res) {
   var db = req.db;
   var roomID = req.body.roomID;
   var query = "DELETE FROM room WHERE r_id="+roomID;
@@ -222,6 +239,8 @@ router.post('/deleteRoom', function(req,res,next) {
     }
   })
 });
+
+//delete?
 router.get('/getRoom', function(req,res,next) {
   var db = req.db;
   roomID = req.query.roomID
@@ -236,5 +255,57 @@ router.get('/getRoom', function(req,res,next) {
     }
   })
 });
+
+//backend but without restriction
+router.post('/loginAdmin', function(req, res, next) {
+  var db = req.db;
+  var mail = req.body.mail;
+  var pw = req.body.pw;
+  var query = "SELECT * FROM user WHERE u_mail='"+mail+"' AND u_pw='"+pw+"' AND u_adminFlag=1";
+  db.get(query,function(err, row) {
+    if(err) {
+      res.status = 500;
+      res.send("error: "+err);
+    }
+    else {
+      if(row && row.u_mail === mail && row.u_pw === pw) {
+        req.session.email = row.u_mail;
+        req.session.name = row.u_name;
+        req.session.auth = true;
+        req.session.admin = true;
+        res.send("success");
+      }
+      else {
+        res.status = 401;
+        res.send("could not login");
+      }
+    }
+  });
+});
+
+router.get('/checkAdminSession', function(req,res,next) {
+  if(req.session.admin == true) {
+    res.send(true);
+  }
+  else {
+    res.send(false);
+  }
+})
+
+router.post('/logoutAdmin', function(req, res, next) {
+  req.session.destroy();
+  res.send(true);
+});
+
+
+function restrictAdmin(req,res,next) {
+  if(req.session.admin == true) {
+    next();
+  }
+  else {
+    req.session.error = 'Access denied!';
+    res.send('ACCESS DENIED');
+  }
+}
 
 module.exports = router;

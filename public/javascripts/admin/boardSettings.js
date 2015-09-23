@@ -1,5 +1,16 @@
 $("#getTabletDim").on("click",saveDim);
 
+
+function loadBoardSettings(event) {
+  console.log("settings");
+  var content = $("#content");
+  content.empty();
+  content.append("<table>");
+  content.append("<div id='back' class='containerTile'>Back");
+  $("#back").on("click", showSettings);
+}
+
+
 function saveDim(event) {
   var height = $(window).height();
   var width  = $(window).width();

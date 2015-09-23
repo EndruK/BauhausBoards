@@ -89,6 +89,9 @@ td {
 a img {
   border: none;
 }
+body {
+  text-align: center;
+}
 #logo {
   text-align: center;
 }
@@ -102,4 +105,18 @@ a img {
 }
 #password {
   width: 200px;
+}
+#content {
+  display: inline-block;
+  width: 100%;
+}
+.containerTile {
+  display: inherit;
+  width: 150px;
+  margin: 5px;
+  height: 150px;
+  background-color: #008000;
+}
+.clear {
+  clear: both;
 }

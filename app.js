@@ -8,6 +8,8 @@ var stylus  = require('stylus');
 var nib     = require('nib');
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('data/bauhausboards.db');
+var session = require('express-session');
+var uuid = require('uuid');
 
 var paper = require('paper');
 
@@ -22,6 +24,15 @@ function compile(str, path) {
     .use(nib());
 };
 
+app.use(session({
+  secret: 'ZMhX5IwFS9agS32KjR7iRKKR9bpsYUXvg7QRvaBSrfY=', //TODO: set this in setupFile
+  name: 'BauhausBoardSession',
+  genid: function(req) {
+    return uuid.v4();
+  },
+  resave: true,
+  saveUninitialized: true
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,6 +63,8 @@ app.use(function(req, res, next) {
 
 app.use('/', routes);
 app.use('/functions', functions);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
