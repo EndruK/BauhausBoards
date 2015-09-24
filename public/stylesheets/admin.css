@@ -117,6 +117,27 @@ body {
   height: 150px;
   background-color: #008000;
 }
+.containerTileAbs {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 75px;
+}
 .clear {
   clear: both;
+}
+.ajaxTable {
+  width: 80%;
+  margin: 0 auto;
+  border-color: #000;
+  margin-top: 10px;
+}
+.ajaxTable thead th {
+  font-weight: bold;
+  border: 1px solid #000;
+  padding: 2px;
+}
+.ajaxTable tbody td {
+  border: 1px solid #000;
+  padding: 2px;
 }

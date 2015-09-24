@@ -34,7 +34,7 @@ function showSettings() {
   content.append("<div id='roomSettings' class='containerTile'>Room");
   content.append("<div id='userSettings' class='containerTile'>User");
   content.append("<div class='clear'>");
-  content.append("<div id='logout' class='containerTile'>Logout");
+  content.append("<div id='logout' class='containerTile containerTileAbs'>Logout");
 
   $("#boardSettings").on("click",{call:loadBoardSettings},checkSession);
   $("#roomSettings").on("click",{call:loadRoomSettings},checkSession);
@@ -57,9 +57,6 @@ function logout() {
   });
 }
 
-function loadRoomSettings(event) {
-  console.log("room");
-}
 function loadUserSettings(event) {
   console.log("user");
 }
