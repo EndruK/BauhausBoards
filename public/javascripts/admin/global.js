@@ -1,4 +1,6 @@
 var logedIn = false;
+var floatyTimer = null;
+var floatyTime = 5000;
 $("#login").on("click",login);
 $(document).ready(function() {
   $("#typearea").submit(function(event) {
@@ -35,7 +37,6 @@ function showSettings() {
   content.append("<div id='userSettings' class='containerTile'>User");
   content.append("<div class='clear'>");
   content.append("<div id='logout' class='containerTile containerTileAbs'>Logout");
-
   $("#boardSettings").on("click",{call:loadBoardSettings},checkSession);
   $("#roomSettings").on("click",{call:loadRoomSettings},checkSession);
   $("#userSettings").on("click",{call:loadUserSettings},checkSession);
@@ -118,4 +119,13 @@ function removePopup() {
   popupVisible = false;
   $("#popupBackground").remove();
   $("#popup").remove();
+}
+
+function showFloaty() {
+  $("#floaty").css("left", $(window).width()/2-$("#floaty").width()/2 + "px");
+  $("#floaty").animate({top: '50px'},"slow");
+  floatyTimer = setTimeout(removeFloaty, floatyTime);
+}
+function removeFloaty() {
+  $("#floaty").animate({top: '-350px'},"slow");
 }

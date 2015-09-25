@@ -9,7 +9,6 @@ $(window).on("resize",function() {
 });
 
 function loadBoardSettings(event) {
-  console.log("board");
   var content = $("#content");
   content.empty();
   content.append("<h2>Board Settings");
@@ -19,30 +18,6 @@ function loadBoardSettings(event) {
     showSettings();
     removePopup();
   });
-}
-
-function saveDim(event) {
-  var height = $(window).height();
-  var width  = $(window).width();
-  var result = confirm("Do you really want to change the Board resolution to "+
-    width+":"+height+"? This will have effect to the board resolution!");
-  if(!result) return;
-  $.ajax({
-    url: "/functions/setBoardDim",
-    type: "POST",
-    data:{"boardID":boardID,"width":width,"height":height},
-    success:function(response) {
-      if(!startsWith(response,"error")) {
-        console.log(response);
-      }
-      else {
-        console.log(response);
-      }
-    },
-    error:function(error) {
-      console.log("couldn't update the board dimensions");
-    }
-  })
 }
 
 function printBoardTable() {
@@ -94,7 +69,7 @@ function createNewBoardPopup() {
   showPopup();
   $("#popup").append("<h2>Create new Board");
   $("#popup").append("<hr>");
-  $("#popup").append("<h4>Do you really want to create a new Board?<br>(Don't forget to set the Board resolution afterwards!)");
+  $("#popup").append("<h4>Do you really want to create a new Board?");
   $("#popup").append("<div class='popupConfirm'>");
   $(".popupConfirm").append("<button onclick='createNewBoard()'>Create");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
@@ -109,6 +84,9 @@ function createNewBoard() {
       removePopup();
       loadBoardSettings();
       //TODO: show reminder to set board dim on the board or via prompt
+      $("#floaty").empty();
+      $("#floaty").append("<h3>Don't forget to set the Board resolution!");
+      showFloaty();
     },
     error:function(err) {
       console.log("couldn't create new board");
@@ -132,7 +110,6 @@ function deleteBoard(boardID) {
     type:"POST",
     data: {"boardID":boardID},
     success:function(res) {
-      console.log(res);
       removePopup();
       loadBoardSettings();
     },
@@ -178,7 +155,6 @@ function setBoardRessolution(boardID,type) {
     type:"POST",
     data:{"boardID":boardID,"width":resX,"height":resY},
     success:function(res) {
-      console.log(res);
       removePopup();
       loadBoardSettings();
     },
@@ -189,7 +165,6 @@ function setBoardRessolution(boardID,type) {
 }
 
 function setBoardRoomPopup(boardID,roomID) {
-  console.log("set Board room "+boardID);
   showPopup();
   $("#popup").append("<h2>Set Room of Board "+boardID);
   $("#popup").append("<hr>");
@@ -202,7 +177,6 @@ function setBoardRoomPopup(boardID,roomID) {
     url:"/functions/loadRooms",
     type:"GET",
     success:function(res) {
-      console.log(res);
       res.forEach(function(key) {
         if(roomID != 0 && key.id == roomID) {
           $(".popupConfirm select option:first").removeAttr("selected");
@@ -232,7 +206,6 @@ function setBoardRoom(boardID) {
     type:"POST",
     data:{"boardID":boardID,"roomID":selected},
     success:function(res) {
-      console.log(res);
       removePopup();
       loadBoardSettings();
     },
@@ -246,21 +219,6 @@ function goToBoard(boardID) {
   window.location.href = "/?BID="+boardID;
 }
 
-function showPopup() {
-  popupVisible = true;
-  $("body").append("<div id='popupBackground'>");
-  $("body").append("<div id='popup'>");
-  $("#popupBackground").on("click",removePopup);
-  $("#popup").css({
-    "left": $(window).width()/2 - $("#popup").width()/2 + "px"
-  });
-}
-
-function removePopup() {
-  popupVisible = false;
-  $("#popupBackground").remove();
-  $("#popup").remove();
-}
 
 function getBoardResolution(boardID) {
   $.ajax({

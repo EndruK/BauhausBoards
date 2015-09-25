@@ -201,7 +201,6 @@ router.get('/loadRooms', restrictAdmin, function(req,res) {
       res.send("error: "+err);
     }
     else {
-      console.log("asdasdasd");
       res.send(rows);
     }
   })
