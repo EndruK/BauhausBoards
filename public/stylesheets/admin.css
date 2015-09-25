@@ -133,19 +133,25 @@ body {
   border-radius: 8px;
   border: 2px solid #000;
   pointer-events: none;
+  z-index: 2;
+}
+#connectedBoardsTable button {
+  width: inherit;
 }
 .containerTile {
   display: inherit;
   margin: 5px;
   width: 150px;
   height: 150px;
-  background-color: #008000;
+  background-color: rgba(77,77,77,0.4);
   cursor: pointer;
   font-size: 120px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
+  margin-top: 50px;
 }
 .containerTileAbs {
+  margin: 5px;
   position: absolute;
   right: 0;
   top: 0;
@@ -199,5 +205,11 @@ body {
 .popupConfirm select {
   float: right;
   width: 75%;
+  margin: 5px;
+}
+.popupConfirm textarea {
+  float: right;
+  resize: none;
+  height: 100px;
   margin: 5px;
 }

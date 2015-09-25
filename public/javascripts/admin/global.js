@@ -46,6 +46,7 @@ function showSettings() {
   content.append("<div title='Room Settings' id='roomSettings' class='containerTile'><span class='glyphicon glyphicon-picture'>");
   content.append("<div title='User Settings' id='userSettings' class='containerTile'><span class='glyphicon glyphicon-user'>");
   content.append("<div class='clear'>");
+  $("#logout").remove();
   $("body").append("<div title='Logout' id='logout' class='containerTile containerTileAbs'><span class='glyphicon glyphicon-log-out'>");
   $("#boardSettings").on("click",{call:loadBoardSettings},checkSession);
   $("#roomSettings").on("click",{call:loadRoomSettings},checkSession);
@@ -87,6 +88,7 @@ function checkSession(event) {
       else {
         console.log("user session not valid");
         if(logedIn) {
+          logedIn = false;
           window.location.replace("/admin");
         }
       }
@@ -102,10 +104,12 @@ function checkSessionLogin() {
     type: 'GET',
     success:function(res) {
       if(res) {
+        logedIn = true;
         console.log("user session valid");
         showSettings();
       }
       else {
+        logedIn = false;
         console.log("user session not valid");
       }
     },
@@ -141,4 +145,7 @@ function showFloaty(text) {
 }
 function removeFloaty() {
   $("#floaty").animate({top: '-350px'},"slow");
+}
+function goToBoard(boardID) {
+  window.location.href = "/?BID="+boardID;
 }

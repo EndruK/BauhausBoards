@@ -259,7 +259,7 @@ router.post('/deleteRoom', restrictAdmin, function(req,res) {
 //delete?
 router.get('/getRoom', function(req,res,next) {
   var db = req.db;
-  roomID = req.query.roomID
+  var roomID = req.query.roomID
   var query = "SELECT r_name AS name, r_descr AS description FROM room WHERE r_id="+roomID;
   db.get(query,function(err, row) {
     if(err) {
@@ -270,6 +270,56 @@ router.get('/getRoom', function(req,res,next) {
       res.send(row);
     }
   })
+});
+
+//backend
+router.get('/getBoardsForRoom', restrictAdmin, function(req,res) {
+  var db = req.db;
+  var roomID = req.query.roomID;
+  var query = "SELECT board.b_id AS boardID FROM room INNER JOIN board ON room.r_id = board.b_room WHERE room.r_id="+roomID;
+  db.all(query,function(err, rows) {
+    if(err) {
+      res.status = 500;
+      res.send("error: "+err);
+    }
+    else {
+      res.send(rows);
+    }
+  });
+});
+
+//backend
+router.post('/setRoomName', restrictAdmin, function(req,res) {
+  var db = req.db;
+  var roomID = req.body.roomID;
+  var name = req.body.name;
+  var query = "UPDATE room SET r_name='"+name+"' WHERE r_id="+roomID;
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send("room name successfully updated");
+    }
+  });
+});
+
+//backend
+router.post('/setRoomDescription', restrictAdmin, function(req,res) {
+  var db = req.db;
+  var roomID = req.body.roomID;
+  var description = req.body.description;
+  var query = "UPDATE room SET r_descr='"+description+"' WHERE r_id="+roomID;
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send("room description successfully updated");
+    }
+  });
 });
 
 //backend but without restriction
