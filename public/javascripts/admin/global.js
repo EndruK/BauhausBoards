@@ -1,11 +1,10 @@
+var logedIn = false;
 $("#login").on("click",login);
 $(document).ready(function() {
   $("#typearea").submit(function(event) {
     event.preventDefault();
   });
-  var e = jQuery.Event();
-  e.data = {call:showSettings};
-  checkSession(e);
+  checkSessionLogin();
 });
 
 function login(event) {
@@ -18,6 +17,7 @@ function login(event) {
     success:function(res) {
       console.log(res);
       if(res == "success") {
+        logedIn = true;
         showSettings();
       }
     },
@@ -40,6 +40,7 @@ function showSettings() {
   $("#roomSettings").on("click",{call:loadRoomSettings},checkSession);
   $("#userSettings").on("click",{call:loadUserSettings},checkSession);
   $("#logout").on("click",logout);
+
 }
 
 function logout() {
@@ -48,6 +49,7 @@ function logout() {
     type: 'POST',
     success:function(res) {
       console.log(res);
+      logedIn = false;
       window.location.replace("/admin");
     },
     error:function(err) {
@@ -68,7 +70,29 @@ function checkSession(event) {
     success:function(res) {
       if(res) {
         console.log("user session valid");
+        logedIn = true;
         event.data.call();
+      }
+      else {
+        console.log("user session not valid");
+        if(logedIn) {
+          window.location.replace("/admin");
+        }
+      }
+    },
+    error:function(err) {
+      console.log(err);
+    }
+  });
+}
+function checkSessionLogin() {
+  $.ajax({
+    url: '/functions/checkAdminSession',
+    type: 'GET',
+    success:function(res) {
+      if(res) {
+        console.log("user session valid");
+        showSettings();
       }
       else {
         console.log("user session not valid");
@@ -78,4 +102,20 @@ function checkSession(event) {
       console.log(err);
     }
   });
+}
+
+function showPopup() {
+  popupVisible = true;
+  $("body").append("<div id='popupBackground'>");
+  $("body").append("<div id='popup'>");
+  $("#popupBackground").on("click",removePopup);
+  $("#popup").css({
+    "left": $(window).width()/2 - $("#popup").width()/2 + "px"
+  });
+}
+
+function removePopup() {
+  popupVisible = false;
+  $("#popupBackground").remove();
+  $("#popup").remove();
 }

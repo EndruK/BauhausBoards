@@ -2,6 +2,7 @@ function loadRoomSettings(event) {
   console.log("settings");
   var content = $("#content");
   content.empty();
+  content.append("<h2>Room Settings");
   loadRooms();
   content.append("<div id='back' class='containerTile containerTileAbs'>Back");
   $("#back").on("click", showSettings);

@@ -17,6 +17,19 @@ body
 #content
   display inline-block
   width 100%
+  
+#popupBackground
+  background-color rgba(77,77,77,.5)
+  width 100%
+  height 100%
+  position absolute
+  top 0
+  left 0
+#popup
+  position absolute
+  width 50%
+  top 100px
+  background-color white
 .containerTile
   display inherit
   width 150px
@@ -28,6 +41,7 @@ body
   right 0
   top 0
   height 75px
+  z-index 1
 .clear
   clear both
 .ajaxTable
@@ -39,6 +53,26 @@ body
   font-weight bold
   border 1px solid black
   padding 2px
+  text-align center
 .ajaxTable tbody td
   border 1px solid black
   padding 2px
+  text-align center
+.ajaxTable tbody tr:hover
+  background-color grey
+.popupConfirm
+  width 300px
+  display inline-block
+.popupConfirm button
+  margin 10px
+  width calc(50% - 20px)
+.popupConfirm label
+  float left
+  margin 5px
+.popupConfirm input
+  float right
+  margin 5px
+.popupConfirm select
+  float right
+  width 75%
+  margin 5px

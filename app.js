@@ -31,7 +31,11 @@ app.use(session({
     return uuid.v4();
   },
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie:{
+    maxAge: 15*60*1000 //15min
+  },
+  rolling:true
 }));
 
 // view engine setup

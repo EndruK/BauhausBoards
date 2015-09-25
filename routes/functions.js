@@ -162,6 +162,23 @@ router.post('/newBoard', restrictAdmin, function(req, res) {
   });
 });
 
+router.post('/removeBoard', restrictAdmin, function(req, res) {
+  var db = req.db;
+  var boardID = req.body.boardID;
+  var query = "DELETE FROM board WHERE b_id="+boardID;
+  db.run(query,function(err,res) {
+    //console.log([err,result]);
+  },function() {
+    if(this[0] != null) {
+      res.status = 500;
+      res.send("error: couldn't remove board. "+this[0]);
+    }
+    else {
+      res.send("removed board");
+    }
+  });
+});
+
 //delete?
 router.get('/boardHasRoom', function(req,res,next) {
   var db = req.db;
@@ -169,8 +186,8 @@ router.get('/boardHasRoom', function(req,res,next) {
   var query = "SELECT b_room AS room FROM board WHERE b_id="+boardID;
   db.get(query,function(err,result) {
     //console.log(result);
-    if(result.room == null) res.send(false);
-    else res.send(true);
+    if(result && result.room != null) res.send(true);
+    else res.send(false);
   });
 });
 
@@ -195,7 +212,7 @@ router.post('/setBoardRoom', restrictAdmin, function(req,res) {
   var db = req.db;
   var boardID = req.body.boardID;
   var roomID = req.body.roomID;
-  var query = "UPDATE board SET b_room="+roomID+" WHERE b_id="+boardID;
+  var query = "UPDATE board SET b_room='"+roomID+"' WHERE b_id="+boardID;
   db.run(query,function(err) {
     if(err) {
       res.status = 500;
@@ -273,6 +290,7 @@ router.post('/loginAdmin', function(req, res, next) {
         req.session.name = row.u_name;
         req.session.auth = true;
         req.session.admin = true;
+        req.session.time = Date.now();
         res.send("success");
       }
       else {
@@ -299,8 +317,18 @@ router.post('/logoutAdmin', function(req, res, next) {
 
 
 function restrictAdmin(req,res,next) {
+  var mytime = 1000*60*15; //15min
   if(req.session.admin == true) {
-    next();
+    //console.log([req.session.time,Date.now()]);
+    if((req.session.time + mytime) > Date.now()) {
+      req.session.time = Date.now();
+      next();
+    }
+    else {
+      req.session.destroy();
+      req.session.error = 'Session expired!';
+      res.send('ACCESS DENIED');
+    }
   }
   else {
     req.session.error = 'Access denied!';
