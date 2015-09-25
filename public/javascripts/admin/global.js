@@ -121,8 +121,11 @@ function removePopup() {
   $("#popup").remove();
 }
 
-function showFloaty() {
+function showFloaty(text) {
+  clearTimeout(floatyTimer);
   $("#floaty").css("left", $(window).width()/2-$("#floaty").width()/2 + "px");
+  $("#floaty").empty();
+  $("#floaty").append("<h3>"+text);
   $("#floaty").animate({top: '50px'},"slow");
   floatyTimer = setTimeout(removeFloaty, floatyTime);
 }

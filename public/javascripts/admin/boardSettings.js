@@ -31,7 +31,10 @@ function printBoardTable() {
       boardTable.append("<thead><tr><th>Board ID<th>Room Name<th>Room Description<th>Board Resolution<th colspan='4'>");
       boardTable.append("<tbody>");
       boardTable.append("<tr value='newBoard'><td height='40px' colspan='8' style='text-align:center'>new Board");
-      $("#boardTable tbody tr:first td").css("font-weight","bold");
+      $("#boardTable tbody tr:first td").css({
+        "font-weight":"bold",
+        "cursor":"pointer"
+      });
       res.forEach(function(key) {
         boardTable.children("tbody").append("<tr value='"+key.id+"'>");
         var row = $("#boardTable tbody tr:last");
@@ -83,10 +86,7 @@ function createNewBoard() {
     success:function(res) {
       removePopup();
       loadBoardSettings();
-      //TODO: show reminder to set board dim on the board or via prompt
-      $("#floaty").empty();
-      $("#floaty").append("<h3>Don't forget to set the Board resolution!");
-      showFloaty();
+      showFloaty("Board successfully created.<br><br>Don't forget to set the Board resolution!");
     },
     error:function(err) {
       console.log("couldn't create new board");
@@ -112,6 +112,7 @@ function deleteBoard(boardID) {
     success:function(res) {
       removePopup();
       loadBoardSettings();
+      showFloaty("Board successfully deleted.");
     },
     error:function(err) {
       console.log("couldn't create new board");
@@ -157,6 +158,7 @@ function setBoardRessolution(boardID,type) {
     success:function(res) {
       removePopup();
       loadBoardSettings();
+      showFloaty("Resolution for Board " + boardID + " successfully updated.");
     },
     error:function(err) {
       console.log("couldn't set board resolution");
@@ -208,6 +210,12 @@ function setBoardRoom(boardID) {
     success:function(res) {
       removePopup();
       loadBoardSettings();
+      if($("#selectRoom").val() == 'none') {
+        showFloaty("Room for Board " + boardID + " successfully resetted.");
+      }
+      else {
+        showFloaty("Room for Board " + boardID + " successfully set to " + selected + ".");
+      }
     },
     error:function(err) {
       console.log("couldn't update board room");

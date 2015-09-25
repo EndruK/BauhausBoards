@@ -127,7 +127,6 @@ body {
 #floaty {
   position: absolute;
   width: 350px;
-  height: 150px;
   background-color: rgba(255,255,255,0.95);
   top: -350px;
   -webkit-border-radius: 8px;
