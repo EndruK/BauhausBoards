@@ -1,19 +1,9 @@
-var popupVisible = false;
-
-$(window).on("resize",function() {
-  if(popupVisible) {
-    $("#popup").css({
-      left:$(window).width()/2-$("#popup").width()/2
-    });
-  }
-});
-
 function loadBoardSettings(event) {
   var content = $("#content");
   content.empty();
   content.append("<h2>Board Settings");
   printBoardTable();
-  content.append("<div id='back' class='containerTile containerTileAbs'>Back");
+  $("body").append("<div title='Back' id='back' class='containerTile containerTileAbs secondAbsTile'><span class='glyphicon glyphicon-backward'>");
   $("#back").on("click", function() {
     showSettings();
     removePopup();

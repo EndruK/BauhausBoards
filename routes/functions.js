@@ -317,6 +317,7 @@ router.post('/logoutAdmin', function(req, res, next) {
 
 function restrictAdmin(req,res,next) {
   var mytime = 1000*60*15; //15min
+  //var mytime = 1000*60;
   if(req.session.admin == true) {
     //console.log([req.session.time,Date.now()]);
     if((req.session.time + mytime) > Date.now()) {
