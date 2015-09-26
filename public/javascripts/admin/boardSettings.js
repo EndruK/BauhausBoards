@@ -33,7 +33,8 @@ function printBoardTable() {
         row.append("<td>"+key.id);
         if(key.room) {
           row.append("<td>"+key.room);
-          row.append("<td>"+key.description);
+          var description = key.description.replace(/(?:\r\n|\r|\n)/g, '<br>');
+          row.append("<td>"+description);
         }
         else {
           row.append("<td>-");

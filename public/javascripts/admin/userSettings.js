@@ -38,12 +38,16 @@ function printUserTable() {
         }
         row.append("<td style='width:100px'><img style='max-width:100px' src=\""+imageURL+"\">");
         row.append("<td>"+key.userName);
-        row.append("<td>"+key.userDescription);
+        var description = "";
+        if(key.userDescription) {
+          description = key.userDescription.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        }
+        row.append("<td>"+description);
         row.append("<td>"+key.userMail);
         row.append("<td>"+key.userCreationDate);
         row.append("<td>"+key.userAdminFlag);
         row.append("<td><button onclick='deleteUserPopup("+key.userID+")'>DELETE");
-        row.append("<td><button>CHANGE USER");
+        row.append("<td><button onclick='changeUserPopup("+key.userID+")'>CHANGE USER");
       });
     },
     error:function(err) {
@@ -208,7 +212,7 @@ function deleteUserPopup(userID) {
   showPopup();
   $("#popup").append("<h2>Delete User");
   $("#popup").append("<hr>");
-  $("#popup").append("<h4>Do you really want to remove the User "+userID+"?");
+  $("#popup").append("<h4>Do you really want to remove User "+userID+"?");
   $("#popup").append("<hr>");
   $("#popup").append("<div class='popupConfirm'>");
   $(".popupConfirm").append("<button onclick='deleteUser("+userID+")'>Delete");
@@ -229,6 +233,22 @@ function deleteUser(userID) {
       console.log("couldn't delete user");
     }
   });
+}
+
+function changeUserPopup(userID) {
+  checkSessionIntermediate();
+  showPopup();
+  $("#popup").append("<h2>Change User");
+  $("#popup").append("<hr>");
+  $("#popup").append("<h4>Change parameters for User "+userID);
+  $("#popup").append("<hr>");
+  $("#popup").append("<div class='popupConfirm'>");
+  $(".popupConfirm").append("<button onclick='changeUser("+userID+")'>Change");
+  $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+}
+
+function changeUser(userID) {
+
 }
 
 function checkButton(event) {
