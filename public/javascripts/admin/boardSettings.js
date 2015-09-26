@@ -60,6 +60,7 @@ function printBoardTable() {
 }
 
 function createNewBoardPopup() {
+  checkSessionIntermediate();
   showPopup();
   $("#popup").append("<h2>Create new Board");
   $("#popup").append("<hr>");
@@ -87,6 +88,7 @@ function createNewBoard() {
 }
 
 function deleteBoardPopup(boardID) {
+  checkSessionIntermediate();
   showPopup();
   $("#popup").append("<h2>Delete Board");
   $("#popup").append("<hr>");
@@ -114,6 +116,7 @@ function deleteBoard(boardID) {
 }
 
 function setBoardResolutionPopup(boardID) {
+  checkSessionIntermediate();
   showPopup();
   $("#popup").append("<h2>Set Resolution of Board "+boardID);
   $("#popup").append("<hr>");
@@ -160,6 +163,7 @@ function setBoardRessolution(boardID,type) {
 }
 
 function setBoardRoomPopup(boardID,roomID) {
+  checkSessionIntermediate();
   showPopup();
   $("#popup").append("<h2>Set Room of Board "+boardID);
   $("#popup").append("<hr>");

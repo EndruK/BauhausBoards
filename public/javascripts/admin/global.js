@@ -42,15 +42,12 @@ function login(event) {
 
 function showSettings() {
   var content = $('#content').empty();
-  content.append("<div title='Board Settings' id='boardSettings' class='containerTile'><span class='glyphicon glyphicon-phone'>");
-  content.append("<div title='Room Settings' id='roomSettings' class='containerTile'><span class='glyphicon glyphicon-picture'>");
-  content.append("<div title='User Settings' id='userSettings' class='containerTile'><span class='glyphicon glyphicon-user'>");
-  content.append("<div class='clear'>");
+  content.append("<div title='Board Settings' onclick='checkSession(loadBoardSettings)' id='boardSettings' class='containerTile'><span class='glyphicon glyphicon-phone'>");
+  content.append("<div title='Room Settings' onclick='checkSession(loadRoomSettings)' id='roomSettings' class='containerTile'><span class='glyphicon glyphicon-picture'>");
+  content.append("<div title='User Settings' onclick='checkSession(loadUserSettings)' id='userSettings' class='containerTile'><span class='glyphicon glyphicon-user'>");
+  content.append("<div title='Logs' id='logs' class='containerTile'><span class='glyphicon glyphicon-book'>");
   $("#logout").remove();
   $("body").append("<div title='Logout' id='logout' class='containerTile containerTileAbs'><span class='glyphicon glyphicon-log-out'>");
-  $("#boardSettings").on("click",{call:loadBoardSettings},checkSession);
-  $("#roomSettings").on("click",{call:loadRoomSettings},checkSession);
-  $("#userSettings").on("click",{call:loadUserSettings},checkSession);
   $("#logout").on("click",logout);
 
 }
@@ -71,26 +68,38 @@ function logout() {
   });
 }
 
-function loadUserSettings(event) {
-  console.log("user");
-}
-
-function checkSession(event) {
+function checkSession(callback) {
   $.ajax({
     url: '/functions/checkAdminSession',
     type: 'GET',
     success:function(res) {
       if(res) {
-        console.log("user session valid");
         logedIn = true;
-        event.data.call();
+        callback();
       }
       else {
-        console.log("user session not valid");
         if(logedIn) {
           logedIn = false;
           window.location.replace("/admin");
         }
+      }
+    },
+    error:function(err) {
+      console.log(err);
+    }
+  });
+}
+function checkSessionIntermediate() {
+  $.ajax({
+    url: '/functions/checkAdminSession',
+    type: 'GET',
+    success:function(res) {
+      if(res) {
+        logedIn = true;
+      }
+      else {
+        logedIn = false;
+        window.location.replace("/admin");
       }
     },
     error:function(err) {
@@ -105,12 +114,10 @@ function checkSessionLogin() {
     success:function(res) {
       if(res) {
         logedIn = true;
-        console.log("user session valid");
         showSettings();
       }
       else {
         logedIn = false;
-        console.log("user session not valid");
       }
     },
     error:function(err) {
@@ -135,13 +142,18 @@ function removePopup() {
   $("#popup").remove();
 }
 
-function showFloaty(text) {
+function showFloaty(text,time) {
   clearTimeout(floatyTimer);
   $("#floaty").css("left", $(window).width()/2-$("#floaty").width()/2 + "px");
   $("#floaty").empty();
   $("#floaty").append("<h3>"+text);
   $("#floaty").animate({top: '50px'},"slow");
-  floatyTimer = setTimeout(removeFloaty, floatyTime);
+  if(!time) {
+    floatyTimer = setTimeout(removeFloaty, floatyTime);
+  }
+  else {
+    floatyTimer = setTimeout(removeFloaty, time);
+  }
 }
 function removeFloaty() {
   $("#floaty").animate({top: '-350px'},"slow");

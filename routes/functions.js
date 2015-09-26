@@ -322,6 +322,62 @@ router.post('/setRoomDescription', restrictAdmin, function(req,res) {
   });
 });
 
+//backend
+router.get('/getUsers', restrictAdmin, function(req,res) {
+  var db = req.db;
+  var query = 
+    "SELECT "+
+      "user.u_id AS userID, "+
+      "user.u_name AS userName, "+
+      "user.u_date AS userCreationDate, "+
+      "user.u_mail AS userMail, "+
+      "user.u_profilePic AS userProfilePic, "+
+      "user.u_descr AS userDescription, "+
+      "user.u_twitter AS userTwitter, "+
+      "user.u_adminFlag AS userAdminFlag "+
+    "FROM "+
+      "user";
+  db.all(query,function(err,rows) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send(rows);
+    }
+  });
+});
+
+//backend
+router.post('/createNewUser', restrictAdmin, function(req,res) {
+  var db = req.db;
+  var name = req.body.userName;
+  var pw = req.body.userPassword;
+  var date = new Date();
+  var jsonDate = date.toJSON();
+  jsonDate = jsonDate.split("T")[0];
+  var mail = req.body.userMail;
+  var profilePic = req.body.userProfilePic;
+  var description = req.body.userDescription;
+  var twitter = req.body.userTwitter;
+  var adminFlag = req.body.userTwitter;
+  if(adminFlag) adminFlag = 1;
+  else adminFlag = 0;
+  var pin = req.body.userPin;
+  var query = 
+    "INSERT INTO user (u_name,u_pw,u_date,u_mail,u_profilePic,u_descr,u_twitter,u_adminFlag,u_pin) "+
+    "VALUES ('"+name+"','"+pw+"','"+jsonDate+"','"+mail+"','"+profilePic+"','"+description+"','"+twitter+"',"+adminFlag+","+pin+")";
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send("user successfully created");
+    }
+  });
+});
+
 //backend but without restriction
 router.post('/loginAdmin', function(req, res, next) {
   var db = req.db;

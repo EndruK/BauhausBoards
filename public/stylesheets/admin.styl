@@ -19,7 +19,7 @@ body
   width 100%
   
 #popupBackground
-  background-color rgba(77,77,77,.5)
+  background-color rgba(77,77,77,.3)
   width 100%
   height 100%
   position absolute
@@ -30,11 +30,11 @@ body
   width 50%
   top 100px
   background-color white
+  min-width 475px
 #floaty
   position absolute
   width 350px
   background-color rgba(255,255,255,.95)
-  //background-color white
   top -350px
   border-radius 8px
   border 2px solid black
@@ -42,14 +42,26 @@ body
   z-index 2
 #connectedBoardsTable button
   width inherit
-
+#picDiv
+  float right
+  width 65%
+#picURLInput
+  float right
+  margin-right 0
+#picUploadButton
+  width 100%
+#adminDiv
+  float right
+  width 60%
+#adminDiv input
+  float left
 
 .containerTile
   display inherit
   margin 5px
   width 150px
   height 150px
-  background-color rgba(77,77,77,.4)
+  background-color rgba(180,180,180,1)
   cursor pointer
   font-size 120px
   border-radius 5px
@@ -104,3 +116,12 @@ body
   resize none
   height 100px
   margin 5px
+.popupConfirm fieldset
+  float right
+  margin 5px
+  width 100%
+
+.popupConfirm fieldset label
+  float left
+.popupConfirm fieldset input
+  float left

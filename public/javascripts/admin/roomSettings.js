@@ -20,9 +20,9 @@ function printRoomTable() {
     type:"GET",
     success:function(res) {
       var roomTable = $("#roomTable");
-      roomTable.append("<thead><tr><th>Room ID<th>Room Name<th>Room Description<th colspan='4'>");
+      roomTable.append("<thead><tr><th>Room ID<th>Room Name<th>Room Description<th colspan='5'>");
       roomTable.append("<tbody>");
-      roomTable.append("<tr value='newRoom'><td height='40px' colspan='7' style='text-align:center' onclick='createNewRoomPopup()'>new Room");
+      roomTable.append("<tr value='newRoom'><td height='40px' colspan='8' style='text-align:center' onclick='createNewRoomPopup()'>new Room");
       $("#roomTable tbody tr:first td").css({
         "font-weight":"bold",
         "cursor":"pointer"
@@ -32,10 +32,13 @@ function printRoomTable() {
         var row = $("#roomTable tbody tr:last");
         row.append("<td>"+key.id);
         row.append("<td>"+key.name);
-        row.append("<td>"+key.description);
+        var description = key.description.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        var descriptionTextarea = description.replace("<br>", "\\n");
+        row.append("<td>"+description);
         row.append("<td style='max-width:60px'><button onclick='deleteRoomPopup("+key.id+")'>DELETE");
         row.append("<td style='max-width:70px'><button onclick='setRoomNamePopup("+key.id+",\""+key.name+"\")'>SET ROOM NAME");
-        row.append("<td style='max-width:80px'><button onclick='setRoomDescriptionPopup("+key.id+",\""+key.description+"\")'>SET ROOM DESCRIPTION");
+        row.append("<td style='max-width:80px'><button onclick='setRoomDescriptionPopup("+key.id+",\""+descriptionTextarea+"\")'>SET ROOM DESCRIPTION");
+        row.append("<td style='max-width:80px'><button onclick=''>ROOM USERS");
       });
     },
     error:function(err) {
@@ -45,6 +48,7 @@ function printRoomTable() {
 }
 
 function createNewRoomPopup() {
+  checkSessionIntermediate();
   showPopup();
   $("#popup").append("<h2>Create new Room");
   $("#popup").append("<hr>");
@@ -81,6 +85,7 @@ function createNewRoom() {
 }
 
 function deleteRoomPopup(roomID) {
+  checkSessionIntermediate();
   showPopup();
   $("#popup").append("<h2>Delete Room");
   $("#popup").append("<hr>");
@@ -137,6 +142,7 @@ function deleteRoom(roomID) {
 }
 
 function setRoomNamePopup(roomID,name) {
+  checkSessionIntermediate();
   showPopup();
   $("#popup").append("<h2>Set Room name");
   $("#popup").append("<hr>");
@@ -174,6 +180,7 @@ function setRoomName(roomID) {
 }
 
 function setRoomDescriptionPopup(roomID,description) {
+  checkSessionIntermediate();
   showPopup();
   $("#popup").append("<h2>Set room description");
   $("#popup").append("<hr>");
