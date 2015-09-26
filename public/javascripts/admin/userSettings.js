@@ -42,7 +42,7 @@ function printUserTable() {
         row.append("<td>"+key.userMail);
         row.append("<td>"+key.userCreationDate);
         row.append("<td>"+key.userAdminFlag);
-        row.append("<td><button>DELETE USER");
+        row.append("<td><button onclick='deleteUserPopup("+key.userID+")'>DELETE");
         row.append("<td><button>CHANGE USER");
       });
     },
@@ -104,7 +104,6 @@ function createNewUserPopup() {
   $(".popupConfirm").append("<br>");
   $(".popupConfirm").append("<button onclick='createNewUser()'>Create");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
-  $("#popupBackground").css("height",$(document).height());
 }
 
 function createNewUser() {
@@ -163,30 +162,71 @@ function createNewUser() {
   $("#userPassword").removeAttr("style");
   $("#userPasswordConfirm").removeAttr("style");
   $("#userPin").removeAttr("style");
-
-  //TODO: hash password
-  //TODO: check if email is already in use
-
   $.ajax({
-    url:"/functions/createNewUser",
-    type:"POST",
-    data: {
-      "userName":name,
-      "userPassword":password,
-      "userMail":mail,
-      "userProfilePic":url,
-      "userDescription":description,
-      "userTwitter":twitter,
-      "userAdminFlag":adminFlag,
-      "userPin":pin
+    url:"/functions/checkMailExists",
+    type:"GET",
+    data:{"mail":mail},
+    success:function(res) {
+      if(!res) {
+        var hash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+        $.ajax({
+          url:"/functions/createNewUser",
+          type:"POST",
+          data: {
+            "userName":name,
+            "userPassword":hash,
+            "userMail":mail,
+            "userProfilePic":url,
+            "userDescription":description,
+            "userTwitter":twitter,
+            "userAdminFlag":adminFlag,
+            "userPin":pin
+          },
+          success:function(res) {
+            removePopup();
+            loadUserSettings();
+            showFloaty("User successfully created.");
+          },
+          error:function(err) {
+            console.log("couldn't create new user");
+          }
+        });
+      }
+      else {
+        $("#userMail").css("border","2px solid red");
+        showFloaty("Mail address already exists!");
+      }
     },
+    error:function(err) {
+      console.log("couldn't check mail address");
+    }
+  });
+}
+
+function deleteUserPopup(userID) {
+  checkSessionIntermediate();
+  showPopup();
+  $("#popup").append("<h2>Delete User");
+  $("#popup").append("<hr>");
+  $("#popup").append("<h4>Do you really want to remove the User "+userID+"?");
+  $("#popup").append("<hr>");
+  $("#popup").append("<div class='popupConfirm'>");
+  $(".popupConfirm").append("<button onclick='deleteUser("+userID+")'>Delete");
+  $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+}
+
+function deleteUser(userID) {
+  $.ajax({
+    url:"/functions/removeUser",
+    type:"POST",
+    data: {"userID":userID},
     success:function(res) {
       removePopup();
       loadUserSettings();
-      showFloaty("User successfully created.");
+      showFloaty("User successfully deleted.");
     },
     error:function(err) {
-      console.log("couldn't create new user");
+      console.log("couldn't delete user");
     }
   });
 }

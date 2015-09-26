@@ -378,6 +378,62 @@ router.post('/createNewUser', restrictAdmin, function(req,res) {
   });
 });
 
+//backend and frontend
+router.get('/checkMailExists',function(req,res, next) {
+  var db = req.db;
+  var mail = req.query.mail;
+  var query = "SELECT * FROM user WHERE u_mail='"+mail+"'";
+  db.get(query,function(err,row) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      if(row) {
+        res.send(true);
+      }
+      else {
+        res.send(false);
+      }
+    }
+  });
+});
+
+//backend
+router.post('/removeUser',restrictAdmin,function(req,res) {
+  var db = req.db;
+  var userID = req.body.userID;
+  var query1 = "DELETE FROM roomusers WHERE ru_user="+userID;
+  var query2 = "DELETE FROM user WHERE u_id="+userID;
+  var success1 = false;
+  var success2 = false;
+  var error1 = "";
+  var error2 = "";
+  db.run(query1,function(err,row) {
+    if(err) {
+      error1 = err;
+    }
+    else {
+      success1 = true;
+    }
+  });
+  db.run(query2,function(err,row) {
+    if(err) {
+      error2 = err;
+    }
+    else {
+      success2 = true;
+    }
+  });
+  if(success1 && success2) {
+    res.send("user successfully deleted");
+  }
+  else {
+    res.status = 500;
+    res.send([error1,error2]);
+  }
+});
+
 //backend but without restriction
 router.post('/loginAdmin', function(req, res, next) {
   var db = req.db;

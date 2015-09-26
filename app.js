@@ -10,6 +10,7 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('data/bauhausboards.db');
 var session = require('express-session');
 var uuid = require('uuid');
+var SHA256 = require("crypto-js/sha256");
 
 var paper = require('paper');
 
@@ -59,6 +60,7 @@ app.use('/node_modules/paper', express.static(__dirname + '/node_modules/paper')
 app.use('/node_modules/jquery', express.static(__dirname + '/node_modules/jquery'));
 app.use('/node_modules/jquery-touchswipe', express.static(__dirname + '/node_modules/jquery-touchswipe'));
 app.use('/node_modules/paper', express.static(__dirname + '/node_modules/paper'));
+app.use('/node_modules/crypto-js', express.static(__dirname + '/node_modules/crypto-js'));
 
 app.use(function(req, res, next) {
   req.db = db;

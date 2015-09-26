@@ -110,7 +110,7 @@ function deleteBoard(boardID) {
       showFloaty("Board successfully deleted.");
     },
     error:function(err) {
-      console.log("couldn't create new board");
+      console.log("couldn't delete board");
     }
   });
 }
@@ -121,7 +121,7 @@ function setBoardResolutionPopup(boardID) {
   $("#popup").append("<h2>Set Resolution of Board "+boardID);
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Set Automatically");
-  $("#popup").append("<button title='set to current window size' onclick='setBoardRessolution("+boardID+",\"aut\")'>Set");
+  $("#popup").append("<button title='set to current window size' onclick='setBoardResolution("+boardID+",\"aut\")'>Set");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Set Manually");
   $("#popup").append("<div class='popupConfirm'>");
@@ -132,11 +132,11 @@ function setBoardResolutionPopup(boardID) {
   $(".popupConfirm").append("<label>Height:");
   $(".popupConfirm").append("<input type='text' id='resY'>");
   $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<button onclick='setBoardRessolution("+boardID+",\"man\")'>Set");
+  $(".popupConfirm").append("<button onclick='setBoardResolution("+boardID+",\"man\")'>Set");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
   getBoardResolution(boardID);
 }
-function setBoardRessolution(boardID,type) {
+function setBoardResolution(boardID,type) {
   var resX;
   var resY;
   if(type == 'man') {
