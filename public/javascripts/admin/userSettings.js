@@ -56,57 +56,9 @@ function printUserTable() {
 }
 
 function createNewUserPopup() {
-  checkSessionIntermediate();
-  showPopup();
-  $("#popup").append("<h2>Create new User");
-  $("#popup").append("<hr>");
-  $("#popup").append("<h4>Insert user parameters.");
-  $("#popup").append("<hr>");
-  $("#popup").append("<div class='popupConfirm'>");
-  $(".popupConfirm").append("<label>Name*:");
-  $(".popupConfirm").append("<input id='userName' maxlength='30'>");
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<label>Mail*:");
-  $(".popupConfirm").append("<input type='email' id='userMail' maxlength='60'>");
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<label>Password*:");
-  $(".popupConfirm").append("<input id='userPassword' type='password'>");
-  $(".popupConfirm").append("<input id='userPasswordConfirm' type='password'>");
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<label>Pin*:");
-  $(".popupConfirm").append("<input type='password' id='userPin' maxlength='4'>");
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<label>Description:");
-  $(".popupConfirm").append("<textarea id='userDescription'>");
-  $(".popupConfirm").append("<fieldset>");
-  $(".popupConfirm fieldset").append("<label>Profile Pic:");
-  $(".popupConfirm fieldset").append("<div id='picDiv'>");
-  $("#picDiv").append("<input checked='checked' type='radio' id='picDefault' value=0>Default");
-  $("#picDiv").append("<br>");
-  $("#picDiv").append("<input type='radio' id='picURL' value=1>URL");
-  $("#picDiv").append("<input type='text' id='picURLInput'>");
-  $("#picDiv").append("<div class='clear'>");
-  $("#picDiv").append("<button id='picUploadButton' onclick='uploadImage()'>upload Image");
-  $("#picDiv").append("<input id='picUploadInput' accept='image/*' name='file' type='file' style='display:none'>");
-  $("#picDefault").on("click",checkButton);
-  $("#picURL").on("click",checkButton);
-  $("#picURLInput").on("click",enterInput);
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<label>Twitter:");
-  $(".popupConfirm").append("<input id='userTwitter' type='text'>");
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<label>Admin:");
-  $(".popupConfirm").append("<div id='adminDiv'>");
-  $("#adminDiv").append("<input id='userAdminFlag' type='checkbox'>");
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<button onclick='createNewUser()'>Create");
-  $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  showUserFormular("Create",createNewUser);
+  $("#userFormularButton").text("Create");
+  $("#userFormularButton").on("click",createNewUser);
 }
 
 function createNewUser() {
@@ -238,57 +190,7 @@ function deleteUser(userID) {
 }
 
 function changeUserPopup(userID) {
-  checkSessionIntermediate();
-  showPopup();
-  $("#popup").append("<h2>Change User");
-  $("#popup").append("<hr>");
-  $("#popup").append("<h4>Change user parameters.");
-  $("#popup").append("<hr>");
-  $("#popup").append("<div class='popupConfirm'>");
-  $(".popupConfirm").append("<label>Name*:");
-  $(".popupConfirm").append("<input id='userName' maxlength='30'>");
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<label>Mail*:");
-  $(".popupConfirm").append("<input type='email' id='userMail' maxlength='60'>");
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<label>Password*:");
-  $(".popupConfirm").append("<input id='userPassword' type='password'>");
-  $(".popupConfirm").append("<input id='userPasswordConfirm' type='password'>");
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<label>Pin*:");
-  $(".popupConfirm").append("<input type='password' id='userPin' maxlength='4'>");
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<label>Description:");
-  $(".popupConfirm").append("<textarea id='userDescription'>");
-  $(".popupConfirm").append("<fieldset>");
-  $(".popupConfirm fieldset").append("<label>Profile Pic:");
-  $(".popupConfirm fieldset").append("<div id='picDiv'>");
-  $("#picDiv").append("<input checked='checked' type='radio' id='picDefault' value=0>Default");
-  $("#picDiv").append("<br>");
-  $("#picDiv").append("<input type='radio' id='picURL' value=1>URL");
-  $("#picDiv").append("<input type='text' id='picURLInput'>");
-  $("#picDiv").append("<div class='clear'>");
-  $("#picDiv").append("<button id='picUploadButton' onclick='uploadImage()'>upload Image");
-  $("#picDiv").append("<input id='picUploadInput' accept='image/*' name='file' type='file' style='display:none'>");
-  $("#picDefault").on("click",checkButton);
-  $("#picURL").on("click",checkButton);
-  $("#picURLInput").on("click",enterInput);
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<label>Twitter:");
-  $(".popupConfirm").append("<input id='userTwitter' type='text'>");
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<label>Admin:");
-  $(".popupConfirm").append("<div id='adminDiv'>");
-  $("#adminDiv").append("<input id='userAdminFlag' type='checkbox'>");
-  $(".popupConfirm").append("<div class='clear'>");
-  $(".popupConfirm").append("<br>");
-  $(".popupConfirm").append("<button id='changeUserButton'>Change");
-  $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  showUserFormular();
   $.ajax({
     url:"/functions/getUserForChange",
     type:"GET",
@@ -303,7 +205,8 @@ function changeUserPopup(userID) {
       $("#userDescription").val(res.userDescription);
       $("#userTwitter").val(res.userTwitter);
       if(res.userAdminFlag) $("#userAdminFlag").prop("checked",true);
-      $("#changeUserButton").on("click",function(event) {
+      $("#userFormularButton").text("Change");
+      $("#userFormularButton").on("click",function(event) {
         changeUser(userID,res.userMail);
       });
     },
@@ -522,4 +425,57 @@ function validatePin(pin) {
     return true;
   }
   return false;
+}
+function showUserFormular() {
+  checkSessionIntermediate();
+  showPopup();
+  $("#popup").append("<h2>Change User");
+  $("#popup").append("<hr>");
+  $("#popup").append("<h4>Change user parameters.");
+  $("#popup").append("<hr>");
+  $("#popup").append("<div class='popupConfirm'>");
+  $(".popupConfirm").append("<label>Name*:");
+  $(".popupConfirm").append("<input id='userName' maxlength='30'>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<label>Mail*:");
+  $(".popupConfirm").append("<input type='email' id='userMail' maxlength='60'>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<label>Password*:");
+  $(".popupConfirm").append("<input id='userPassword' type='password'>");
+  $(".popupConfirm").append("<input id='userPasswordConfirm' type='password'>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<label>Pin*:");
+  $(".popupConfirm").append("<input type='password' id='userPin' maxlength='4'>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<label>Description:");
+  $(".popupConfirm").append("<textarea id='userDescription'>");
+  $(".popupConfirm").append("<fieldset>");
+  $(".popupConfirm fieldset").append("<label>Profile Pic:");
+  $(".popupConfirm fieldset").append("<div id='picDiv'>");
+  $("#picDiv").append("<input checked='checked' type='radio' id='picDefault' value=0>Default");
+  $("#picDiv").append("<br>");
+  $("#picDiv").append("<input type='radio' id='picURL' value=1>URL");
+  $("#picDiv").append("<input type='text' id='picURLInput'>");
+  $("#picDiv").append("<div class='clear'>");
+  $("#picDiv").append("<button id='picUploadButton' onclick='uploadImage()'>upload Image");
+  $("#picDiv").append("<input id='picUploadInput' accept='image/*' name='file' type='file' style='display:none'>");
+  $("#picDefault").on("click",checkButton);
+  $("#picURL").on("click",checkButton);
+  $("#picURLInput").on("click",enterInput);
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<label>Twitter:");
+  $(".popupConfirm").append("<input id='userTwitter' type='text'>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<label>Admin:");
+  $(".popupConfirm").append("<div id='adminDiv'>");
+  $("#adminDiv").append("<input id='userAdminFlag' type='checkbox'>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<button id='userFormularButton'>");
+  $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
 }
