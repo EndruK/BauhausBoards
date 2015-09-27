@@ -33,9 +33,14 @@ function login(event) {
         logedIn = true;
         showSettings();
       }
+      else {
+        $("#password").val("");
+        showFloaty("Wrong mail address and/or password!",2000);
+      }
     },
     error:function(err) {
       console.log("Error, couldn't login");
+      $("#password").val("");
       window.location.replace("/admin");
     }
   });
@@ -129,9 +134,9 @@ function checkSessionLogin() {
 
 function showPopup() {
   popupVisible = true;
-  $("body").append("<div id='popupBackground'>");
+  $("body").append("<div id='popupBackground1' class='popupBackground'>");
   $("body").append("<div id='popup'>");
-  $("#popupBackground").on("click",removePopup);
+  $("#popupBackground1").on("click",removePopup);
   $("#popup").css({
     "left": $(window).width()/2 - $("#popup").width()/2 + "px"
   });
@@ -139,7 +144,7 @@ function showPopup() {
 
 function removePopup() {
   popupVisible = false;
-  $("#popupBackground").remove();
+  $("#popupBackground1").remove();
   $("#popup").remove();
 }
 

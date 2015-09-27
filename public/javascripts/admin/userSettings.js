@@ -32,7 +32,6 @@ function printUserTable() {
         var row = $("#userTable tbody tr:last");
         row.append("<td>"+key.userID);
         var imageURL = key.userProfilePic;
-        console.log(imageURL);
         if(!imageURL || imageURL == null) {
           imageURL = "images/default-user.png";
         }
@@ -65,7 +64,7 @@ function createNewUserPopup() {
   $("#popup").append("<hr>");
   $("#popup").append("<div class='popupConfirm'>");
   $(".popupConfirm").append("<label>Name*:");
-  $(".popupConfirm").append("<input id='userName' maxlength='50'>");
+  $(".popupConfirm").append("<input id='userName' maxlength='30'>");
   $(".popupConfirm").append("<div class='clear'>");
   $(".popupConfirm").append("<br>");
   $(".popupConfirm").append("<label>Mail*:");

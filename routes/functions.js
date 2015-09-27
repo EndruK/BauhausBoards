@@ -147,17 +147,14 @@ router.post('/newBoard', restrictAdmin, function(req, res) {
   var db = req.db;
   var resX = req.body.resX;
   var resY = req.body.resY;
-  var query = "INSERT INTO board(b_resX,b_resY) VALUES("+resX+","+resY+")";
-  db.run(query,function(err,result){
-    //console.log([err,result]);
-  },function() {
-    //console.log(this);
-    if(this[0] != null) {
+  var query = "INSERT INTO board (b_resX,b_resY) VALUES("+resX+","+resY+")";
+  db.run(query,function(err) {
+    if(err) {
       res.status = 500;
-      res.send("error: couldn't insert new board");
+      res.send("error: " + err);
     }
     else {
-      res.send({"id":this.lastID});
+      res.send("board successfully created");
     }
   });
 });
@@ -166,15 +163,13 @@ router.post('/removeBoard', restrictAdmin, function(req, res) {
   var db = req.db;
   var boardID = req.body.boardID;
   var query = "DELETE FROM board WHERE b_id="+boardID;
-  db.run(query,function(err,res) {
-    //console.log([err,result]);
-  },function() {
-    if(this[0] != null) {
+  db.run(query,function(err) {
+    if(err) {
       res.status = 500;
-      res.send("error: couldn't remove board. "+this[0]);
+      res.send("error: " + err);
     }
     else {
-      res.send("removed board");
+      res.send("board successfully deleted");
     }
   });
 });
@@ -432,6 +427,88 @@ router.post('/removeUser',restrictAdmin,function(req,res) {
     res.status = 500;
     res.send([error1,error2]);
   }
+});
+
+//backend
+router.get('/getUsersForRoom',restrictAdmin,function(req,res) {
+  var db = req.db;
+  var roomID = req.query.roomID;
+  var query = 
+    "SELECT "+
+      "user.u_id AS userID, "+
+      "user.u_profilePic AS userProfilePic, "+
+      "user.u_name AS userName "+
+    "FROM "+
+      "roomusers INNER JOIN user ON roomusers.ru_user=user.u_id "+
+    "WHERE "+
+      "ru_room="+roomID;
+  db.all(query,function(err,rows) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send(rows);
+    }
+  });
+});
+
+//backend
+router.get('/getUsersNotInRoom',restrictAdmin,function(req,res) {
+  var db = req.db;
+  var roomID = req.query.roomID;
+  var query = 
+  "SELECT "+
+    "u_id AS userID, u_name AS userName, u_profilePic AS userProfilePic "+
+  "FROM user "+
+  "WHERE "+
+    "u_id NOT IN "+
+      "(select ru_user as u_id from roomusers where ru_room="+roomID+")";
+  db.all(query,function(err,rows) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send(rows);
+    }
+  });
+});
+
+//backend
+router.post('/addUserToRoom',restrictAdmin,function(req,res) {
+  var db = req.db;
+  var roomID = req.body.roomID;
+  var userID = req.body.userID;
+  var query = 
+    "INSERT INTO roomusers (ru_user,ru_room) VALUES ("+userID+","+roomID+")";
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send("user successfully added to room");
+    }
+  });
+});
+
+//backend
+router.post('/removeUserFromRoom',restrictAdmin,function(req,res) {
+  var db = req.db;
+  var roomID = req.body.roomID;
+  var userID = req.body.userID;
+  var query = 
+    "DELETE FROM roomusers WHERE ru_user="+userID+" AND ru_room="+roomID;
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send("user successfully removed from room");
+    }
+  });
 });
 
 //backend but without restriction

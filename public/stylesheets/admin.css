@@ -110,20 +110,13 @@ body {
   display: inline-block;
   width: 100%;
 }
-#popupBackground {
-  background-color: rgba(77,77,77,0.3);
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
 #popup {
   position: absolute;
   width: 50%;
   top: 100px;
   background-color: #fff;
   min-width: 475px;
+  z-index: 3;
 }
 #floaty {
   position: fixed;
@@ -134,7 +127,7 @@ body {
   border-radius: 8px;
   border: 2px solid #000;
   pointer-events: none;
-  z-index: 2;
+  z-index: 4;
 }
 #connectedBoardsTable button {
   width: inherit;
@@ -157,6 +150,24 @@ body {
 #adminDiv input {
   float: left;
 }
+#addUserToRoom .userTile {
+  width: 100px;
+  height: 100px;
+}
+#popupBackground1 {
+  z-index: 1;
+}
+#popupBackground2 {
+  z-index: 2;
+}
+.popupBackground {
+  background-color: rgba(77,77,77,0.3);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 .containerTile {
   display: inherit;
   margin: 5px;
@@ -174,7 +185,7 @@ body {
   position: absolute;
   right: 0;
   top: 0;
-  z-index: 1;
+  z-index: 4;
   width: 100px;
   height: 100px;
   font-size: 80px;
@@ -242,4 +253,37 @@ body {
 }
 .popupConfirm fieldset input {
   float: left;
+}
+.userTile {
+  width: 220px;
+  height: 120px;
+  margin: 5px;
+  float: left;
+  word-break: break-all;
+  margin: 5px;
+  display: inline-block;
+}
+.userTile div {
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+}
+.userTile div img {
+  max-width: 100px;
+  max-height: 100px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.roomUsers {
+  display: inline-block;
+}
+.plus-size {
+  font-size: 90px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #f0f1f5;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  cursor: pointer;
 }
