@@ -145,8 +145,6 @@ function createNewUser() {
     if(!password || !passwordConfirm || password != passwordConfirm) {
       $("#userPassword").css("border","2px solid red");
       $("#userPasswordConfirm").css("border","2px solid red");
-      $("#userPassword").val("");
-      $("#userPasswordConfirm").val("");
     }
     else {
       $("#userPassword").removeAttr("style");
@@ -158,6 +156,9 @@ function createNewUser() {
     else {
       $("#userPin").removeAttr("style");
     }
+    $("#userPassword").val("");
+    $("#userPasswordConfirm").val("");
+    $("#userPin").val("");
     return;
   }
   $("#userName").removeAttr("style");
@@ -198,6 +199,8 @@ function createNewUser() {
       else {
         $("#userMail").css("border","2px solid red");
         showFloaty("Mail address already exists!");
+        $("#userPassword").val("");
+        $("#userPasswordConfirm").val("");
       }
     },
     error:function(err) {
@@ -239,15 +242,208 @@ function changeUserPopup(userID) {
   showPopup();
   $("#popup").append("<h2>Change User");
   $("#popup").append("<hr>");
-  $("#popup").append("<h4>Change parameters for User "+userID);
+  $("#popup").append("<h4>Change user parameters.");
   $("#popup").append("<hr>");
   $("#popup").append("<div class='popupConfirm'>");
-  $(".popupConfirm").append("<button onclick='changeUser("+userID+")'>Change");
+  $(".popupConfirm").append("<label>Name*:");
+  $(".popupConfirm").append("<input id='userName' maxlength='30'>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<label>Mail*:");
+  $(".popupConfirm").append("<input type='email' id='userMail' maxlength='60'>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<label>Password*:");
+  $(".popupConfirm").append("<input id='userPassword' type='password'>");
+  $(".popupConfirm").append("<input id='userPasswordConfirm' type='password'>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<label>Pin*:");
+  $(".popupConfirm").append("<input type='password' id='userPin' maxlength='4'>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<label>Description:");
+  $(".popupConfirm").append("<textarea id='userDescription'>");
+  $(".popupConfirm").append("<fieldset>");
+  $(".popupConfirm fieldset").append("<label>Profile Pic:");
+  $(".popupConfirm fieldset").append("<div id='picDiv'>");
+  $("#picDiv").append("<input checked='checked' type='radio' id='picDefault' value=0>Default");
+  $("#picDiv").append("<br>");
+  $("#picDiv").append("<input type='radio' id='picURL' value=1>URL");
+  $("#picDiv").append("<input type='text' id='picURLInput'>");
+  $("#picDiv").append("<div class='clear'>");
+  $("#picDiv").append("<button id='picUploadButton' onclick='uploadImage()'>upload Image");
+  $("#picDiv").append("<input id='picUploadInput' accept='image/*' name='file' type='file' style='display:none'>");
+  $("#picDefault").on("click",checkButton);
+  $("#picURL").on("click",checkButton);
+  $("#picURLInput").on("click",enterInput);
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<label>Twitter:");
+  $(".popupConfirm").append("<input id='userTwitter' type='text'>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<label>Admin:");
+  $(".popupConfirm").append("<div id='adminDiv'>");
+  $("#adminDiv").append("<input id='userAdminFlag' type='checkbox'>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<button id='changeUserButton'>Change");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $.ajax({
+    url:"/functions/getUserForChange",
+    type:"GET",
+    data:{"userID":userID},
+    success:function(res) {
+      $("#userName").val(res.userName);
+      $("#userMail").val(res.userMail);
+      if(res.userProfilePic) {
+        $("#picURL").trigger("click");
+        $("#picURLInput").val(res.userProfilePic);
+      }
+      $("#userDescription").val(res.userDescription);
+      $("#userTwitter").val(res.userTwitter);
+      if(res.userAdminFlag) $("#userAdminFlag").prop("checked",true);
+      $("#changeUserButton").on("click",function(event) {
+        changeUser(userID,res.userMail);
+      });
+    },
+    error:function(err) {
+      console.log("couldn't get user to change");
+    }
+  });
 }
 
-function changeUser(userID) {
+function changeUser(userID,userMail) {
+  var name = $("#userName").val(); //send everytime
+  var mail = $("#userMail").val(); //check for change and twice
+  var password = $("#userPassword").val(); //check if something is in there
+  var passwordConfirm = $("#userPasswordConfirm").val(); //check against if ^
+  var picType = getPictureType();
+  var description = $("#userDescription").val(); //send everytime
+  var url; //send everytime
+  if(picType == 0) {
+    url = "";
+  }
+  else if(picType == 1) {
+    url = $("#picURLInput").val();
+  }
+  else {
+    console.log("error with the radio buttons");
+  }
+  var twitter = $("#userTwitter").val(); //send everytime
+  var adminFlag = $("#userAdminFlag").prop("checked");
+  var pin = $("#userPin").val(); //check for change
 
+  var checkMail = false; //for later check in the ajax
+  var checkPW   = false; //for later variable check
+  var checkPin  = false; //for later variable check
+
+  if(userMail != mail) checkMail = true;
+  if(password || passwordConfirm) checkPW = true;
+  if(pin) checkPin = true;
+  console.log([checkMail,checkPW,checkPin]);
+
+  if(!name || !mail || !validateEmail(mail) || checkPW || checkPin) {
+    var stop = false;
+    if(!name) {
+      $("#userName").css("border","2px solid red");
+      stop = true;
+    }
+    else {
+      $("#userName").removeAttr("style");
+    }
+    if(!mail || !validateEmail(mail)) {
+      $("#userMail").css("border","2px solid red");
+      stop = true;
+    }
+    else {
+      $("#userMail").removeAttr("style");
+    }
+    if(checkPW) {
+      if(!password || !passwordConfirm || password != passwordConfirm) {
+        $("#userPassword").css("border","2px solid red");
+        $("#userPasswordConfirm").css("border","2px solid red");
+        stop = true;
+      }
+      else {
+        $("#userPassword").removeAttr("style");
+        $("#userPasswordConfirm").removeAttr("style");
+      }
+    }
+    if(checkPin) {
+      if(!pin || !validatePin(pin)) {
+        $("#userPin").css("border","2px solid red");
+        stop = true;
+      }
+      else {
+        $("#userPin").removeAttr("style");
+      }
+    }
+    if (stop) {
+      $("#userPassword").val("");
+      $("#userPasswordConfirm").val("");
+      $("#userPin").val("");
+      return;
+    }
+  }
+  $("#userName").removeAttr("style");
+  $("#userMail").removeAttr("style");
+  $("#userPassword").removeAttr("style");
+  $("#userPasswordConfirm").removeAttr("style");
+  $("#userPin").removeAttr("style");
+
+  if(checkMail) {
+    $.ajax({
+      url:"/functions/checkMailExists",
+      type:"GET",
+      data:{"mail":mail},
+      success:function(res) {
+        if(!res) {
+          changeUserAjax(userID,name,password,mail,url,description,twitter,adminFlag,pin);
+        }
+        else {
+          $("#userMail").css("border","2px solid red");
+          showFloaty("Mail address already exists!");
+          $("#userPassword").val("");
+          $("#userPasswordConfirm").val("");
+        }
+      },
+      error:function(err) {
+        console.log("couldn't check mail address");
+      }
+    });
+  }
+  else {
+    changeUserAjax(userID,name,password,mail,url,description,twitter,adminFlag,pin);
+  }
+}
+
+function changeUserAjax(userID,name,password,mail,url,description,twitter,adminFlag,pin) {
+  var hash = "";
+  if(password) hash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+  $.ajax({
+    url:"/functions/changeUser",
+    type:"POST",
+    data: {
+      "userID":userID,
+      "userName":name,
+      "userPassword":hash,
+      "userMail":mail,
+      "userProfilePic":url,
+      "userDescription":description,
+      "userTwitter":twitter,
+      "userAdminFlag":adminFlag,
+      "userPin":pin
+    },
+    success:function(res) {
+      removePopup();
+      loadUserSettings();
+      showFloaty("User successfully changed.");
+    },
+    error:function(err) {
+      console.log("couldn't change user");
+    }
+  });
 }
 
 function checkButton(event) {

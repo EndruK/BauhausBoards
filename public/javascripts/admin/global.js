@@ -161,9 +161,17 @@ function showFloaty(text,time) {
     floatyTimer = setTimeout(removeFloaty, time);
   }
 }
+
 function removeFloaty() {
   $("#floaty").animate({top: '-350px'},"slow");
 }
+
 function goToBoard(boardID) {
   window.location.href = "/?BID="+boardID;
+}
+
+function popupBackgroundSecond(roomID) {
+  $("#popupBackground2").remove();
+  removePopup();
+  setRoomUsersPopup(roomID);
 }

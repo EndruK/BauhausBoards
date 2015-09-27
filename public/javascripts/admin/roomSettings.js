@@ -38,7 +38,7 @@ function printRoomTable() {
         row.append("<td style='max-width:60px'><button onclick='deleteRoomPopup("+key.id+")'>DELETE");
         row.append("<td style='max-width:70px'><button onclick='setRoomNamePopup("+key.id+",\""+key.name+"\")'>SET ROOM NAME");
         row.append("<td style='max-width:80px'><button onclick='setRoomDescriptionPopup("+key.id+",\""+descriptionTextarea+"\")'>SET ROOM DESCRIPTION");
-        row.append("<td style='max-width:80px'><button onclick='setRoomUsersPopup("+key.id+")'>ROOM USERS");
+        row.append("<td style='max-width:80px'><button onclick='setRoomUsersPopup("+key.id+",\""+key.name+"\")'>ROOM USERS");
       });
     },
     error:function(err) {
@@ -210,12 +210,12 @@ function setRoomDescription(roomID) {
   });
 }
 
-function setRoomUsersPopup(roomID) {
+function setRoomUsersPopup(roomID,roomName) {
   checkSessionIntermediate();
   showPopup();
   $("#popup").append("<h2>Set Room Users");
   $("#popup").append("<hr>");
-  $("#popup").append("<h4>Manage the users for room "+roomID+".<br>(Click on the users to remove them from the board)");
+  $("#popup").append("<h4>Manage the users for "+roomName+".<br>(Click on the users to remove them from the board)");
   $("#popup").append("<hr>");
   $("#popup").append("<div id='usersInRoom' class='roomUsers'>");
   $.ajax({
@@ -330,12 +330,6 @@ function removeUserFromRoom(userID,roomID) {
       console.log("couldn't remove user from room");
     }
   });
-}
-
-function popupBackgroundSecond(roomID) {
-  $("#popupBackground2").remove();
-  removePopup();
-  setRoomUsersPopup(roomID);
 }
 
 function addUserToRoom(userID,roomID) {

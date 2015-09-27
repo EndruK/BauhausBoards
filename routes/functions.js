@@ -511,6 +511,74 @@ router.post('/removeUserFromRoom',restrictAdmin,function(req,res) {
   });
 });
 
+//backend
+router.get('/getUserForChange',restrictAdmin,function(req,res) {
+  var db =req.db;
+  var userID = req.query.userID;
+  var query =
+    "SELECT "+
+      "u_name AS userName, "+
+      "u_mail AS userMail, "+
+      "u_profilePic AS userProfilePic, "+
+      "u_descr AS userDescription, "+
+      "u_twitter AS userTwitter, "+
+      "u_adminFlag AS userAdminFlag "+
+    "FROM user "+
+    "WHERE u_id="+userID;
+  db.get(query,function(err, row) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send(row);
+    }
+  });
+});
+
+//backend
+router.post('/changeUser',restrictAdmin,function(req,res) {
+  var db = req.db;
+  var userID = req.body.userID;
+  var name = req.body.userName;
+  var pw = req.body.userPassword;
+  var mail = req.body.userMail;
+  var profilePic = req.body.userProfilePic;
+  var description = req.body.userDescription;
+  var twitter = req.body.userTwitter;
+  var adminFlag = req.body.userTwitter;
+  if(adminFlag) adminFlag = 1;
+  else adminFlag = 0;
+  var pin = req.body.userPin;
+  var query = 
+    "UPDATE user "+
+    "SET "+
+      "u_name='"+name+"', ";
+  if(pw) {
+    query += "u_pw='"+pw+"', ";
+  }
+  query +=
+      "u_mail='"+mail+"', "+
+      "u_profilePic='"+profilePic+"', "+
+      "u_descr='"+description+"', "+
+      "u_twitter='"+twitter+"', "+
+      "u_adminFlag="+adminFlag+" ";
+  if(pin) {
+    query += ",u_pin="+pin+" ";
+  }
+  query +=
+    "WHERE u_id="+userID;
+    db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send("user successfully updated");
+    }
+  });
+});
+
 //backend but without restriction
 router.post('/loginAdmin', function(req, res, next) {
   var db = req.db;
