@@ -63,6 +63,7 @@ function printBoardTable() {
 function createNewBoardPopup() {
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("#popup").append("<h2>Create new Board");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Do you really want to create a new Board?");
@@ -91,6 +92,7 @@ function createNewBoard() {
 function deleteBoardPopup(boardID) {
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("#popup").append("<h2>Delete Board");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Do you really want to remove Board "+boardID+"?");
@@ -119,6 +121,7 @@ function deleteBoard(boardID) {
 function setBoardResolutionPopup(boardID) {
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("#popup").append("<h2>Set Resolution of Board "+boardID);
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Set Automatically");
@@ -166,6 +169,7 @@ function setBoardResolution(boardID,type) {
 function setBoardRoomPopup(boardID,roomID) {
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("#popup").append("<h2>Set Room of Board "+boardID);
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Select the room which the Board should show.");

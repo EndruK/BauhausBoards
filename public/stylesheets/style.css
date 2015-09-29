@@ -93,7 +93,7 @@ html,
 body,
 #wrapper {
   height: 100%;
-  background-color: #777;
+  background-color: #e6e6e6;
 }
 .clear {
   clear: both;
@@ -101,6 +101,8 @@ body,
 .sidebar {
   position: absolute;
   height: 100%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   -webkit-transition: left 0.4s ease-in-out;
   -moz-transition: left 0.4s ease-in-out;
   -ms-transition: left 0.4s ease-in-out;
@@ -110,7 +112,7 @@ body,
   -o-transition: left 0.4s ease-in-out;
   -ms-transition: left 0.4s ease-in-out;
   transition: left 0.4s ease-in-out;
-  background-color: rgba(150,150,150,0.8);
+  background-color: rgba(200,200,200,0.8);
   z-index: 10;
 }
 .sidebarContent {
@@ -126,8 +128,10 @@ body,
   text-align: center;
   vertical-align: middle;
   float: left;
-  background-color: rgba(150,150,150,0.4);
+  background-color: rgba(0,0,0,0.1);
   z-index: 10;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .sidebarLower {
   width: 200px;
@@ -211,14 +215,6 @@ body,
   -animation: spin 0.7s infinite linear;
   -webkit-animation: spin2 0.7s infinite linear;
 }
-.userInfo {
-  float: left;
-}
-.userImage {
-  float: right;
-  width: 150px;
-  height: inherit;
-}
 .textContent {
   left: 50px;
   height: inherit;
@@ -249,6 +245,22 @@ body,
 }
 .submitForm {
   float: right;
+}
+.popupBackground {
+  background-color: rgba(77,77,77,0.3);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.popupConfirm {
+  width: 300px;
+  display: inline-block;
+}
+.popupConfirm button {
+  margin: 10px;
+  width: calc(50% - 20px);
 }
 #sidebarMain {
   visibility: visible;
@@ -285,21 +297,15 @@ body,
   position: absolute;
   visibility: hidden;
 }
-/*#sidebarBackendRoomSettings
-  position absolute
-  visibility hidden
-#sidebarBackendLogs
-  position absolute
-  visibility hidden*/
 #header {
   position: absolute;
   right: 0px;
   top: 0;
-  width: 400px;
-  background-color: #aaa;
-  padding-left: calc(35px + 10px);
+  width: 450px;
+  background-color: #c8c8c8;
   height: 150px;
   z-index: 1;
+  border-bottom-left-radius: 10px;
 }
 #content {
   text-align: center;
@@ -441,6 +447,59 @@ body,
   width: inherit;
   height: 200px;
   resize: none;
+}
+#popup {
+  position: absolute;
+  width: 50%;
+  top: 100px;
+  background-color: #fff;
+  min-width: 475px;
+  z-index: 13;
+  text-align: center;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+#popupBackground1 {
+  z-index: 11;
+}
+#popupBackground2 {
+  z-index: 12;
+}
+#userInfo {
+  width: calc(100% - 150px);
+  height: inherit;
+  float: left;
+  padding: 10px;
+  word-wrap: break-word;
+}
+#userImage {
+  width: 150px;
+  height: inherit;
+  float: left;
+}
+#userImage img {
+  float: right;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+}
+#userInfo hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#userName {
+  font-weight: bold;
+  font-size: 15px;
+  padding: 5px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  background-color: rgba(255,255,255,0.5);
+}
+#userDescription {
+  padding: 5px;
+}
+#userStatus div {
+  float: right;
 }
 @-webkit-keyframes spin2 {
   from {

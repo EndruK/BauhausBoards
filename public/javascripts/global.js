@@ -240,3 +240,19 @@ function hideAll() {
   stopSwitchUserTimer();
   removeListeners();
 }
+
+function showPopup() {
+  popupVisible = true;
+  $("body").append("<div id='popupBackground1' class='popupBackground'>");
+  $("body").append("<div id='popup'>");
+  $("#popupBackground1").on("click",removePopup);
+  $("#popup").css({
+    "left": $(window).width()/2 - $("#popup").width()/2 + "px"
+  });
+}
+
+function removePopup() {
+  popupVisible = false;
+  $("#popupBackground1").remove();
+  $("#popup").remove();
+}

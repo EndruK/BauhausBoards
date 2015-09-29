@@ -50,6 +50,7 @@ function printRoomTable() {
 function createNewRoomPopup() {
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("#popup").append("<h2>Create new Room");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Insert room parameters.");
@@ -87,6 +88,7 @@ function createNewRoom() {
 function deleteRoomPopup(roomID) {
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("#popup").append("<h2>Delete Room");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Do you really want to remove Room "+roomID+"?");
@@ -144,6 +146,7 @@ function deleteRoom(roomID) {
 function setRoomNamePopup(roomID,name) {
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("#popup").append("<h2>Set Room name");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Insert a new room name for room "+roomID+".");
@@ -182,6 +185,7 @@ function setRoomName(roomID) {
 function setRoomDescriptionPopup(roomID,description) {
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("#popup").append("<h2>Set room description");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Insert a new room description for room "+roomID+".");
@@ -213,6 +217,7 @@ function setRoomDescription(roomID) {
 function setRoomUsersPopup(roomID,roomName) {
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("#popup").append("<h2>Set Room Users");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Manage the users for "+roomName+".<br>(Click on the users to remove them from the board)");
@@ -263,6 +268,7 @@ function addUserToRoomPopup(roomID) {
   removePopup();
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("body").append("<div id='popupBackground2' class='popupBackground' onclick='popupBackgroundSecond("+roomID+")'>");
   $("#popup").append("<h2>Add User to Room");
   $("#popup").append("<hr>");
@@ -307,6 +313,7 @@ function removeUserFromRoomPopup(userID,roomID,userName) {
   removePopup();
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("body").append("<div id='popupBackground2' class='popupBackground' onclick='popupBackgroundSecond("+roomID+")'>");
   $("#popup").append("<h2>Remove User from Room");
   $("#popup").append("<hr>");

@@ -16,6 +16,7 @@
     "jade": "~1.9.2",
     "jquery": "^2.1.4",
     "jquery-touchswipe": "^1.6.7",
+    "moment": "^2.10.6",
     "morgan": "~1.5.3",
     "nib": "*",
     "paper": "*",

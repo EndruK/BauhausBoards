@@ -12,29 +12,26 @@ stmt.finalize();
 */
 
 //frontend
-router.get('/loadBoardUsers', function(req, res, next) {
+router.get('/getRoomUsers', function(req, res, next) {
   var db = req.db;
-  var boardID = req.query.boardID;
+  var roomID = req.query.roomID;
   var query = 
     "SELECT " +
-      "user.u_id AS id, "+
-      "user.u_name AS name, "+
-      "user.u_profilePic AS profilePic, "+
-      "user.u_descr AS description, "+
-      "user.u_twitter AS twitter "+
+      "user.u_id AS userID, "+
+      "user.u_name AS userName, "+
+      "user.u_profilePic AS userProfilePic, "+
+      "user.u_descr AS userDescription, "+
+      "user.u_twitter AS userTwitter "+
     "FROM "+
       "user INNER JOIN roomusers ON user.u_id = roomusers.ru_user "+
-      "INNER JOIN room ON roomusers.ru_room = room.r_id "+
-      "INNER JOIN board ON board.b_room = room.r_id "+
     "WHERE "+
-      "board.b_id = " + boardID;
+      "roomusers.ru_room = " + roomID;
   db.all(query,function(err,rows) {
     if(err) {
       res.status = 500;
       res.send("error:"+err);
     }
     else {
-      res.contentType('application/json');
       res.send(rows);
     }
   });
@@ -104,10 +101,16 @@ router.post('/setBoardDim', function(req,res,next) {
 });
 
 //frontend
-router.get('/getBoardDim', function(req,res,next) {
+router.get('/getBoard', function(req,res,next) {
   var db = req.db;
   var boardID = req.query.boardID;
-  var query = "SELECT b_resX AS resX, b_resY AS resY FROM board WHERE b_id="+boardID;
+  var query = 
+    "SELECT "+
+      "b_resX AS boardResX, "+
+      "b_resY AS boardResY, "+
+      "b_room AS boardRoom "+
+    "FROM board "+
+    "WHERE b_id="+boardID;
   db.get(query,function(err,row) {
     if(err) {
       res.status = 500;
@@ -119,8 +122,8 @@ router.get('/getBoardDim', function(req,res,next) {
   });
 });
 
-//backend
-router.get('/getBoards', restrictAdmin, function(req,res) {
+//backend and frontend
+router.get('/getBoards', function(req,res,next) {
   var db = req.db;
   var query = 
     "SELECT "+

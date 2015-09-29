@@ -1,0 +1,24 @@
+PRAGMA foreign_keys=off;
+
+BEGIN TRANSACTION;
+
+ALTER TABLE user RENAME TO _user_old2;
+
+CREATE TABLE user(
+  u_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  u_name VARCHAR(30) NOT NULL,
+  u_pw CHAR(64) NOT NULL,
+  u_date DATE NOT NULL,
+  u_mail VARCHAR(60),
+  u_profilePic TEXT,
+  u_descr VARCHAR(30),
+  u_twitter TEXT, 
+  u_adminFlag INTEGER DEFAULT 0, 
+  u_pin INTEGER);
+
+INSERT INTO user (u_id, u_name, u_pw, u_date, u_mail, u_profilePic, u_descr, u_twitter, u_adminFlag, u_pin)
+  SELECT * FROM _user_old2;
+
+COMMIT;
+
+PRAGMA foreign_keys=on;

@@ -61,6 +61,7 @@ app.use('/node_modules/jquery', express.static(__dirname + '/node_modules/jquery
 app.use('/node_modules/jquery-touchswipe', express.static(__dirname + '/node_modules/jquery-touchswipe'));
 app.use('/node_modules/paper', express.static(__dirname + '/node_modules/paper'));
 app.use('/node_modules/crypto-js', express.static(__dirname + '/node_modules/crypto-js'));
+app.use('/node_modules/moment', express.static(__dirname + '/node_modules/moment'));
 
 app.use(function(req, res, next) {
   req.db = db;

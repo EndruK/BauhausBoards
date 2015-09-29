@@ -164,6 +164,7 @@ function createNewUser() {
 function deleteUserPopup(userID) {
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("#popup").append("<h2>Delete User");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Do you really want to remove User "+userID+"?");
@@ -429,6 +430,7 @@ function validatePin(pin) {
 function showUserFormular() {
   checkSessionIntermediate();
   showPopup();
+  window.scrollTo(0, 0);
   $("#popup").append("<h2>Change User");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Change user parameters.");
@@ -452,7 +454,7 @@ function showUserFormular() {
   $(".popupConfirm").append("<div class='clear'>");
   $(".popupConfirm").append("<br>");
   $(".popupConfirm").append("<label>Description:");
-  $(".popupConfirm").append("<textarea id='userDescription'>");
+  $(".popupConfirm").append("<input maxlength='30' type='text' id='userDescription'>");
   $(".popupConfirm").append("<fieldset>");
   $(".popupConfirm fieldset").append("<label>Profile Pic:");
   $(".popupConfirm fieldset").append("<div id='picDiv'>");
