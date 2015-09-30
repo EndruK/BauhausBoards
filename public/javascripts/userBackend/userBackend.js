@@ -53,6 +53,7 @@ function userLoginPopup() {
     complete:function() {
       $("#popup").append("<div class='popupConfirm'>");
       $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+      showUser(selectedUser);
     }
   });
 }
