@@ -1,5 +1,7 @@
 var loginPopupTimer = null;
 var loginPopupTime = 1000*15; //15sec
+var autoLogoutTimer = null;
+var autoLogoutTime = 1000*60*5 //5min
 var loggedIn = false;
 var authenticatedUser = null;
 
@@ -12,7 +14,7 @@ function userLoginPopup() {
   if(loggedIn) {
     checkSession(showUserBackend);
     return;
-  } 
+  }
   showPopup();
   startLoginPopupTimer();
   $("#popup").append("<h2>Login");
@@ -29,12 +31,7 @@ function userLoginPopup() {
         $("#usersInRoom").append("There are currently no users in this room.");
       }
       else {
-        var counter = 0;
         res.forEach(function(key) {
-          if(counter > 3) {
-            $("#usersInRoom").append("<br>");
-            counter = 0;
-          }
           var profilePicURL = key.userProfilePic;
           if(!profilePicURL || profilePicURL == null) {
             profilePicURL = "images/default-user.png";
@@ -42,7 +39,6 @@ function userLoginPopup() {
           $("#usersInRoom").append("<div class='userTile'><div>"+
             "<img title='Login as "+key.userName+"' src='"+profilePicURL+"' onclick='loginPopup("+key.userID+",\""+key.userName+"\",\""+profilePicURL+"\")'>");
           $("#usersInRoom").children().last().append("<br>"+key.userName);
-          counter += 1;
         });
         $("<br><br>").insertAfter("#usersInRoom");
       }
@@ -53,6 +49,7 @@ function userLoginPopup() {
     complete:function() {
       $("#popup").append("<div class='popupConfirm'>");
       $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+      // just a small hack to display the scrollbar on the tablet
       showUser(selectedUser);
     }
   });
@@ -65,15 +62,20 @@ function loginPopup(userID,userName,userProfilePic) {
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Insert Pin for "+userName);
   $("#popup").append("<hr>");
-  $("#popup").append("<div id='usersInRoom' class='roomUsers'>");
+  $("#popup").append("<div id='usersInRoom' class='roomUsers'><form>");
+  $("#usersInRoom").css("overflow","hidden");
   $("#popup").append("<div class='popupConfirm'>");
-  $("<br>").insertAfter("#usersInRoom");
   $(".popupConfirm").append("<button onclick='login("+userID+")'>Login");
   $(".popupConfirm").append("<button onclick='{removePopup(); userLoginPopup();}'>Cancel");
+  $("#usersInRoom form").append("<input type='password' id='userPin' maxlength='4' size='2'><br>");
+  $("#usersInRoom form").submit(function(event) {
+    event.preventDefault();
+    login(userID);
+  });
   $("#usersInRoom").append("<div class='userTile'><div><img id='loginProfilePic' title='"+userName+"' src='"+userProfilePic+"'>");
   $("#loginProfilePic").css("cursor","default");
-  $("#usersInRoom").children().last().append("<br>"+userName);
-  $("#usersInRoom").append("<br><input type='password' id='userPin' maxlength='4' size='2'><hr>");
+  $("#usersInRoom form").children().last().append("<br>"+userName+"<hr>");
+  $("#userPin").focus();
 }
 
 function login(userID) {
@@ -115,12 +117,20 @@ function loadUserSettings(event) {
 }
 
 function startLoginPopupTimer() {
-  //clearTimeout(loginPopupTimer);
-  //loginPopupTimer = setTimeout(removePopup,loginPopupTime);
+  clearTimeout(loginPopupTimer);
+  loginPopupTimer = setTimeout(removePopup,loginPopupTime);
 }
 
 function stopLoginPopupTimer() {
-  //clearTimeout(loginPopupTimer);
+  clearTimeout(loginPopupTimer);
+}
+
+function startAutoLogoutTimer() {
+  clearTimeout(autoLogoutTimer);
+  autoLogoutTimer = setTimeout(logout,autoLogoutTime);
+}
+function stopAutoLogoutTimer() {
+  clearTimeout(autoLogoutTimer);
 }
 
 function showUserBackend() {
@@ -132,11 +142,13 @@ function showUserBackend() {
 }
 
 function checkSession(callback) {
+  startAutoLogoutTimer();
   $.ajax({
     url:"/functions/checkUserSession",
     type:'GET',
     success:function(res) {
       if(res != "session valid") {
+        stopAutoLogoutTimer();
         loggedIn = false;
         authenticatedUser = null;
         showFloaty("Session expired!");
@@ -153,6 +165,7 @@ function checkSession(callback) {
 }
 
 function logoutUser() {
+  stopAutoLogoutTimer();
   loggedIn = false;
   $.ajax({
     url:'/functions/logoutUser',
