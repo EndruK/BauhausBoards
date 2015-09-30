@@ -19,15 +19,12 @@ function userLoginPopup() {
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Select a User to Login");
   $("#popup").append("<hr>");
-  $("#popup").append("<div id='usersInRoom' class='roomUsers'>");
-  $("<br><br>").insertAfter("#usersInRoom");
-  $("#popup").append("<div class='popupConfirm'>");
-  $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
   $.ajax({
     url:"/functions/getUsersForRoom",
     type:"GET",
     data:{"roomID":roomID},
     success:function(res) {
+      $("#popup").append("<div id='usersInRoom' class='roomUsers'>");
       if(res.length == 0) {
         $("#usersInRoom").append("There are currently no users in this room.");
       }
@@ -47,10 +44,15 @@ function userLoginPopup() {
           $("#usersInRoom").children().last().append("<br>"+key.userName);
           counter += 1;
         });
+        $("<br><br>").insertAfter("#usersInRoom");
       }
     },
     error:function(err) {
       console.log("couldn't get users for room");
+    },
+    complete:function() {
+      $("#popup").append("<div class='popupConfirm'>");
+      $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
     }
   });
 }
@@ -112,12 +114,12 @@ function loadUserSettings(event) {
 }
 
 function startLoginPopupTimer() {
-  clearTimeout(loginPopupTimer);
-  loginPopupTimer = setTimeout(removePopup,loginPopupTime);
+  //clearTimeout(loginPopupTimer);
+  //loginPopupTimer = setTimeout(removePopup,loginPopupTime);
 }
 
 function stopLoginPopupTimer() {
-  clearTimeout(loginPopupTimer);
+  //clearTimeout(loginPopupTimer);
 }
 
 function showUserBackend() {

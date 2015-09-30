@@ -99,6 +99,14 @@ function initSidebar() {
     buttonContainer.append("<button name='"+i+"' onclick='selectUser("+i+")'>"+usercollection[i].userName);
     buttonContainer.append("<br>");
   };
+  buttonContainer.append("<br><button id='test'>TEST");
+  $("#test").on("click",function() {
+    $("body").empty();
+    $("body").append("<div style='discplay: inline-block; position:absolute; top:50px; left:100px; width: 500px; height: 100px; word-wrap: break-word; overflow:scroll;'>");
+    for(var i=0; i<1000; i++) {
+      $("body div").append("a");
+    }
+  });
 }
 
 function selectUser(userIndex) {

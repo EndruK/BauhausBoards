@@ -159,11 +159,12 @@ html,body,#wrapper
   margin 10px
   width calc(50% - 20px)
 .roomUsers
+  height 250px
+  width 100%
   display inline-block
-  height 130px
-  width auto
-  padding-right 15px
   overflow-y scroll
+  word-break break-all
+  
 .userTile
   width 210px
   height 120px
@@ -404,4 +405,13 @@ html,body,#wrapper
     to {
       transform: scale(1) rotate(360deg);
     }
+}
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }

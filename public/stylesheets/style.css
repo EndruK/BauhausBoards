@@ -263,10 +263,11 @@ body,
   width: calc(50% - 20px);
 }
 .roomUsers {
+  height: 250px;
+  width: 100%;
   display: inline-block;
-  height: 130px;
-  width: auto;
   overflow-y: scroll;
+  word-break: break-all;
 }
 .userTile {
   width: 210px;
@@ -546,6 +547,16 @@ body,
   to {
     -webkit-transform: rotate(360deg);
   }
+}
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,0.5);
 }
 @-moz-keyframes spin {
   from {

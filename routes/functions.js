@@ -390,7 +390,8 @@ router.post('/createNewUser', restrictAdmin, function(req,res) {
   var pin = req.body.userPin;
   var query = 
     "INSERT INTO user (u_name,u_pw,u_date,u_mail,u_profilePic,u_descr,u_twitter,u_adminFlag,u_pin) "+
-    "VALUES ('"+name+"','"+pw+"','"+jsonDate+"','"+mail+"','"+profilePic+"','"+description+"','"+twitter+"',"+adminFlag+","+pin+")";
+    "VALUES ('"+name+"','"+pw+"','"+jsonDate+"','"+mail+"','"+profilePic+"','"+description+"','"+twitter+"',"+adminFlag+",'"+pin+"')";
+  console.log(query);
   db.run(query,function(err) {
     if(err) {
       res.status = 500;
