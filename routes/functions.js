@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var sessionTimeAdmin = 1000*60*15; //15min
-var sessionTimeUser = 1000*60*1; //5min
+var sessionTimeUser = 1000*60*5; //5min
 
 //to prevent injectionons use:
 /*
