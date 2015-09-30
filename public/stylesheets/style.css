@@ -264,6 +264,9 @@ body,
 }
 .roomUsers {
   display: inline-block;
+  height: 130px;
+  width: auto;
+  overflow-y: auto;
 }
 .userTile {
   width: 210px;
