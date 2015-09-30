@@ -3,16 +3,13 @@ extends layout
 block content
   include sidebars/sidebarMain
   include sidebars/sidebarMessages
-  include sidebars/sidebarBackend
-  //include sidebars/sidebarSettings
   include sidebars/sidebarCreateMessage
   include sidebars/sidebarFeedback
   include sidebars/sidebarChangeStatus
   include sidebars/sidebarChangeContent
   include sidebars/sidebarViewMessages
+  include sidebars/sidebarUserBackend
   include sidebars/sidebarUserSettings
-  //include sidebars/sidebarBackendRoomSettings
-  //include sidebars/sidebarBackendLogs
   #wrapper
     #header
     #content
@@ -21,3 +18,4 @@ block content
       include contents/newBoard
       include contents/settings
       canvas#tabletSizePreview(resize)
+  #floaty

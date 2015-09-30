@@ -125,6 +125,7 @@ function createNewUser() {
     success:function(res) {
       if(!res) {
         var hash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+        var hashPin = CryptoJS.SHA256(pin).toString(CryptoJS.enc.Hex);
         $.ajax({
           url:"/functions/createNewUser",
           type:"POST",
@@ -136,7 +137,7 @@ function createNewUser() {
             "userDescription":description,
             "userTwitter":twitter,
             "userAdminFlag":adminFlag,
-            "userPin":pin
+            "userPin":hashPin
           },
           success:function(res) {
             removePopup();
@@ -324,7 +325,9 @@ function changeUser(userID,userMail) {
 
 function changeUserAjax(userID,name,password,mail,url,description,twitter,adminFlag,pin) {
   var hash = "";
+  var hashPin = "";
   if(password) hash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+  if(pin) hashPin = CryptoJS.SHA256(pin).toString(CryptoJS.enc.Hex);
   $.ajax({
     url:"/functions/changeUser",
     type:"POST",
@@ -337,7 +340,7 @@ function changeUserAjax(userID,name,password,mail,url,description,twitter,adminF
       "userDescription":description,
       "userTwitter":twitter,
       "userAdminFlag":adminFlag,
-      "userPin":pin
+      "userPin":hashPin
     },
     success:function(res) {
       removePopup();

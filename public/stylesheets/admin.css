@@ -260,9 +260,7 @@ body {
   width: 220px;
   height: 120px;
   margin: 5px;
-  float: left;
   word-break: break-all;
-  margin: 5px;
   display: inline-block;
 }
 .userTile div {

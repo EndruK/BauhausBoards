@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+var sessionTimeAdmin = 1000*60*15; //15min
+var sessionTimeUser = 1000*60*1; //5min
+
 //to prevent injectionons use:
 /*
 var stmt = db.prepare();
@@ -345,6 +348,29 @@ router.get('/getUsers', restrictAdmin, function(req,res) {
     }
   });
 });
+/*
+//frontend
+router.get('/getUser', function(req,res,next) {
+  var db = req.db;
+  var userID = req.query.userID;
+  var query = 
+    "SELECT "+
+      "u_name AS userName, "+
+      "u_profilePic AS userProfilePic "+
+    "FROM "+
+      "user "+
+    "WHERE "+
+      "u_id="+userID;
+  db.get(query,function(err,row) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send(row);
+    }
+  });
+});*/
 
 //backend
 router.post('/createNewUser', restrictAdmin, function(req,res) {
@@ -432,8 +458,8 @@ router.post('/removeUser',restrictAdmin,function(req,res) {
   }
 });
 
-//backend
-router.get('/getUsersForRoom',restrictAdmin,function(req,res) {
+//backend and frontend
+router.get('/getUsersForRoom',function(req,res,next) {
   var db = req.db;
   var roomID = req.query.roomID;
   var query = 
@@ -595,11 +621,12 @@ router.post('/loginAdmin', function(req, res, next) {
     }
     else {
       if(row && row.u_mail === mail && row.u_pw === pw) {
+        req.session.userID = row.u_id;
         req.session.email = row.u_mail;
         req.session.name = row.u_name;
         req.session.auth = true;
         req.session.admin = true;
-        req.session.time = Date.now();
+        req.session.adminTime = Date.now();
         res.send("success");
       }
       else {
@@ -608,6 +635,45 @@ router.post('/loginAdmin', function(req, res, next) {
       }
     }
   });
+});
+
+router.post('/loginUserPin',function(req,res,next) {
+  var db = req.db;
+  var userID = req.body.userID;
+  var userPin = req.body.userPin;
+  var query = "SELECT * FROM user WHERE u_id="+userID+" AND u_pin='"+userPin+"'";
+  db.get(query,function(err,row) {
+    console.log(row);
+    if(err) {
+      res.status = 500;
+      res.send("error: "+err);
+    }
+    else {
+      if(row && row.u_id == userID && row.u_pin == userPin) {
+        req.session.userID = userID;
+        req.session.pinTime = Date.now();
+        if(row.u_adminFlag) req.session.admin = true;
+        else req.session.admin = false;
+        req.session.type = "pin";
+        res.send("success");
+      }
+      else {
+        res.status = 401;
+        res.send("could not login");
+      }
+    }
+  });
+});
+
+
+router.post('/logoutAdmin', function(req, res, next) {
+  req.session.destroy();
+  res.send(true);
+});
+
+router.get('/logoutUser',function(req,res,next) {
+  req.session.destroy();
+  res.send(true);
 });
 
 router.get('/checkAdminSession', function(req,res,next) {
@@ -619,29 +685,42 @@ router.get('/checkAdminSession', function(req,res,next) {
   }
 })
 
-router.post('/logoutAdmin', function(req, res, next) {
-  req.session.destroy();
-  res.send(true);
+router.get('/checkUserSession', restrictUser, function(req,res) {
+  res.send('session valid');
 });
 
-
 function restrictAdmin(req,res,next) {
-  var mytime = 1000*60*15; //15min
-  //var mytime = 1000*60;
   if(req.session.admin == true) {
-    //console.log([req.session.time,Date.now()]);
-    if((req.session.time + mytime) > Date.now()) {
-      req.session.time = Date.now();
+    if((req.session.adminTime + sessionTimeAdmin) > Date.now()) {
+      req.session.adminTime = Date.now();
       next();
     }
     else {
-      req.session.destroy();
       req.session.error = 'Session expired!';
-      res.send('ACCESS DENIED');
+      req.session.destroy();
+      res.send('Session expired');
     }
   }
   else {
     req.session.error = 'Access denied!';
+    res.send('ACCESS DENIED');
+  }
+}
+
+function restrictUser(req,res,next) {
+  if(req.session.type == "pin") {
+    if((req.session.pinTime + sessionTimeUser) > Date.now()) {
+      req.session.pinTime = Date.now();
+      next();
+    }
+    else {
+      req.session.error = 'Session expired!';
+      req.session.destroy();
+      res.send('Session expired');
+    }
+  }
+  else {
+    req.session.error = "Access denied!";
     res.send('ACCESS DENIED');
   }
 }

@@ -158,12 +158,30 @@ html,body,#wrapper
 .popupConfirm button
   margin 10px
   width calc(50% - 20px)
+.roomUsers
+  display inline-block
+.userTile
+  width 210px
+  height 120px
+  //background-color grey
+  word-break break-all
+  margin 5px
+  display inline-block
+.userTile div
+  height 100px
+  width 100px
+  display inline-block
+.userTile div img
+  max-width 100px
+  max-height 100px
+  border-radius 5px
+  cursor pointer
 
 //IDs
 #sidebarMain
   visibility visible
   
-#sidebarBackend
+#sidebarUserBackend
   position absolute
   visibility hidden
 #sidebarMessages
@@ -325,6 +343,7 @@ html,body,#wrapper
   z-index 13
   text-align center
   border-radius 10px
+  display inline-block
 #popupBackground1
   z-index 11
 #popupBackground2
@@ -357,9 +376,16 @@ html,body,#wrapper
   padding 5px
 #userStatus div
   float right
-  
-  //background-color #555555
-
+#floaty
+  position fixed
+  width 350px
+  background-color rgba(255,255,255,.95)
+  top -350px
+  border-radius 10px
+  border 2px solid black
+  pointer-events none
+  z-index 14
+  text-align center
 
 //animations
 @-webkit-keyframes spin2 {

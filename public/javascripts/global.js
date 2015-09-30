@@ -5,25 +5,19 @@ var sideBarTimeout = 10000; //sidebar timeout in ms
 var sidebarTimeoutHandler;
 var sidebarStatus = false;
 var boardID = null;
+var roomID = null;
+var floatyTimer = null;
+var floatyTime = 5000;
 
 //###DOM########################################################################
-//$('.sidebar').on('click', '.btnUser', loadMain);
 $('.sidebar').on('click', '.btnMessage', loadMessageLanding);
-$('.sidebar').on('click', '.btnBackend', loadBackend);
 $('.sidebar').on('click', '.btnBack', loadMain);
-//$('.sidebar').on('click', '.btnBackendSettings', loadSettings);
 $('.sidebar').on('click', '.btnCreateMessage', loadCreateMessage);
 $('.sidebar').on('click', '.btnFeedback', loadFeedback);
-$('.sidebar').on('click', '.btnSetStatus', loadChangeStatus);
-$('.sidebar').on('click', '.btnChangeContent', loadChangeContent);
-$('.sidebar').on('click', '.btnViewMessages', loadViewMessages);
-$('.sidebar').on('click', '.btnUserSettings', loadUserSettings);
-//$('.sidebar').on('click', '.btnRoomSettings', loadRoomSettings);
-//$('.sidebar').on('click', '.btnLogs', loadLogs);
+$('.sidebar').on('click', '.btnUserBackend', loadUserBackend);
 
 $('.sidebarSwiper').swipe({
   swipeStatus:function(event,phase,direction,distance,duration,fingers) {
-    //console.log(direction);
     if(phase=='move' && direction=="right") {
       openSidebar();
       return false;
@@ -35,7 +29,6 @@ $('.sidebarSwiper').swipe({
   }
 });
 $('.sidebarSwiper').click(function(){
-  console.log("clicked on sidebarSwiper");
   if(!sidebarStatus) {
     openSidebar();
   }
@@ -52,9 +45,8 @@ function loadMain(event) {
   project.clear();
   $("#sidebarMain .sidebarUpper").empty();
   removeAllGifs();
-  loadBoard();
+  getBoard();
   showSidebar('sidebarMain');
-  console.log('goTo: main page');
   $('#header').text('header');
   if(usercollection.length > 0) {
     showUser(usercollection[0].id);
@@ -67,7 +59,6 @@ function loadMain(event) {
 }
 function loadMessageLanding(event) {
   showSidebar('sidebarMessages');
-  console.log('goTo: message landing');
   $('#header').text('Message Landingpage');
   updateTimer();
 }
@@ -87,57 +78,14 @@ function loadCreateMessage(event) {
   removeAllGifs();
   $('#tabletSizePreview').css('visibility','visible');
 }
-function loadBackend(event) {
-  $('#header').text('Backend');
-  showSidebar('sidebarBackend');
-  updateTimer();
+function loadUserBackend(event) {
+  userLoginPopup();
 }
-/*function loadSettings(event) {
-  $('#header').text('Settings');
-  showSidebar('sidebarSettings');
-  updateTimer();
-}*/
 function loadFeedback(event) {
   $('#header').text('Feedback');
   showSidebar('sidebarFeedback');
   updateTimer();
 }
-function loadChangeStatus(event) {
-  $('#header').text('change Status');
-  showSidebar('sidebarChangeStatus');
-  updateTimer();
-}
-function loadChangeContent(event) {
-  $('#header').text('change Content');
-  showSidebar('sidebarChangeContent');
-  updateTimer();
-}
-function loadViewMessages(event) {
-  $('#header').text('View Messages');
-  showSidebar('sidebarViewMessages');
-  updateTimer();
-}
-function loadUserSettings(event) {
-  $('#header').text('User Settings');
-  showSidebar('sidebarUserSettings');
-  $('#users').css('visibility','visible');
-  loadUser();
-  updateTimer();
-}
-/*
-function loadRoomSettings(event) {
-  $('#header').text('Room Settings');
-  showSidebar('loadRoomSettings');
-  $('#settings').css('visibility','visible');
-  loadRooms();
-  updateTimer();
-}
-function loadLogs(event) {
-  $('#header').text('Logs');
-  showSidebar('loadLogs');
-  updateTimer();
-}*/
-
 function openSidebar(){
   updateTimer();
   sidebarStatus = true;
@@ -158,9 +106,9 @@ function showSidebar(sidebar) {
       $('#sidebarMain').css('visibility', 'visible');
       $('#myCanvas').css('visibility','visible');
       break;
-    case 'sidebarBackend':
+    case 'sidebarUserBackend':
       hideAll();
-      $('#sidebarBackend').css('visibility', 'visible');
+      $('#sidebarUserBackend').css('visibility', 'visible');
       $('#myCanvas').css('visibility','hidden');
       break;
     case 'sidebarMessages':
@@ -192,18 +140,10 @@ function showSidebar(sidebar) {
       hideAll();
       $('#sidebarViewMessages').css('visibility','visible');
       break;
-    /*case 'loadUserSettings':
+    case 'loadUserSettings':
       hideAll();
       $('#sidebarBackendUserSettings').css('visibility','visible');
       break;
-    case 'loadRoomSettings':
-      hideAll();
-      $('#sidebarBackendRoomSettings').css('visibility','visible');
-      break;
-    case 'loadLogs':
-      hideAll();
-      $('#sidebarBackendLogs').css('visibility','visible');
-      break;*/
     default:
       //nothing or main???
       break;
@@ -217,18 +157,14 @@ function hideAll() {
   $('#sidebarMain').css('visibility', 'hidden');
   $('#sidebarBackend').css('visibility', 'hidden');
   $('#sidebarMessages').css('visibility', 'hidden');
-  //$('#sidebarBackendSettings').css('visibility', 'hidden');
   $('#sidebarCreateMessage').css('visibility','hidden');
   $('#sidebarFeedback').css('visibility','hidden');
   $('#sidebarChangeStatus').css('visibility','hidden');
   $('#sidebarChangeContent').css('visibility','hidden');
   $('#sidebarViewMessages').css('visibility','hidden');
+  $("#sidebarUserBackend").css('visibility','hidden');
   $('#sidebarUserSettings').css('visibility','hidden');
-  //$('#sidebarBackendRoomSettings').css('visibility','hidden');
-  //$('#sidebarBackendLogs').css('visibility','hidden');
   $('#EditorCanvas').css('visibility','hidden');
-  //$('#settings').css('visibility','hidden');
-  //$('#users').css('visibility','hidden');
   $('#tabletSizePreview').css('visibility','hidden');
   closeContainer();
   closeColorContainer();
@@ -255,4 +191,22 @@ function removePopup() {
   popupVisible = false;
   $("#popupBackground1").remove();
   $("#popup").remove();
+}
+
+function showFloaty(text,time) {
+  clearTimeout(floatyTimer);
+  $("#floaty").css("left", $(window).width()/2-$("#floaty").width()/2 + "px");
+  $("#floaty").empty();
+  $("#floaty").append("<h3>"+text);
+  $("#floaty").animate({top: '50px'},"slow");
+  if(!time) {
+    floatyTimer = setTimeout(removeFloaty, floatyTime);
+  }
+  else {
+    floatyTimer = setTimeout(removeFloaty, time);
+  }
+}
+
+function removeFloaty() {
+  $("#floaty").animate({top: '-350px'},"slow");
 }

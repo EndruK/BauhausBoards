@@ -222,6 +222,7 @@ function setRoomUsersPopup(roomID,roomName) {
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Manage the users for "+roomName+".<br>(Click on the users to remove them from the board)");
   $("#popup").append("<hr>");
+  $("<br><br>").insertAfter("#usersInRoom");
   $("#popup").append("<div id='usersInRoom' class='roomUsers'>");
   $.ajax({
     url:"/functions/getUsersForRoom",
