@@ -5,7 +5,8 @@ var autoLogoutTime = 1000*60*5 //5min
 var loggedIn = false;
 var authenticatedUser = null;
 
-$('.sidebar').on('click', '.btnChangeContent', loadChangeContent);
+$('.sidebar').on('click', '.btnSetStatus', function(){checkSession(loadChangeStatus)});
+$('.sidebar').on('click', '.btnChangeContent', function(){checkSession(loadChangeContent)});
 $('.sidebar').on('click', '.btnViewMessages', loadViewMessages);
 $('.sidebar').on('click', '.btnUserSettings', loadUserSettings);
 $('.sidebar').on('click', '.btnLogout', logoutUser);
@@ -103,11 +104,6 @@ function login(userID) {
   });
 }
 
-function loadChangeContent(event) {
-  $('#header').text('change Content');
-  showSidebar('sidebarChangeContent');
-  updateTimer();
-}
 function loadViewMessages(event) {
   $('#header').text('View Messages');
   showSidebar('sidebarViewMessages');

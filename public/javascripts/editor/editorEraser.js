@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 function activateEraserTool(event) {
   console.log($(this).attr('class'));
-  $('#header').text($(this).attr('class'));
+  //$('#header').text($(this).attr('class'));
   updateTimer();
   removeListeners();
   eraserTool = new Tool();

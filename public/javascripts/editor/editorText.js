@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 function activateTextTool(event) {
   console.log($(this).attr('class'));
-  $('#header').text($(this).attr('class'));
+  //$('#header').text($(this).attr('class'));
   updateTimer();
   removeListeners();
   textTool = new Tool();

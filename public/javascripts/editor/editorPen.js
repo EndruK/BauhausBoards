@@ -57,7 +57,7 @@ function penMosueUp(event) {
 }
 function activatePenTool(event) {
   console.log($(this).attr('class'));
-  $('#header').text($(this).attr('class'));
+  //$('#header').text($(this).attr('class'));
   updateTimer();
   removeListeners();
   penTool = new Tool();

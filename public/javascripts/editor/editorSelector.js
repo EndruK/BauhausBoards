@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 function activateSelectorTool(event) {
   console.log($(this).attr('class'));
-  $('#header').text($(this).attr('class'));
+  //$('#header').text($(this).attr('class'));
   updateTimer();
   removeListeners();
   // add the event listeners

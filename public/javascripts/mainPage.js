@@ -164,7 +164,7 @@ function showUserContent(userIndex) {
     error:function(error) {
       console.log("couldn't get user content");
     }
-  })
+  });
 }
 
 function getUSerStatus(userIndex) {

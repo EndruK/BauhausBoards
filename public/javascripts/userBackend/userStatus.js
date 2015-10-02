@@ -1,5 +1,3 @@
-$('.sidebar').on('click', '.btnSetStatus', function(){checkSession(loadChangeStatus)});
-
 function loadChangeStatus() {
   showPopup();
   $("#popup").append("<h2>Set Status");
@@ -74,7 +72,9 @@ function setStatus() {
     type:"POST",
     data:{"userID":authenticatedUser,"statusText":text,"statusUntil":time},
     success:function(res) {
-      console.log(res);
+      removePopup();
+      checkSession(showUserBackend);
+      showFloaty("Status successfully updated.");
     },
     error:function(err) {
       console.log("couldn't set user status");

@@ -540,6 +540,9 @@ body,
 #userDescription {
   padding: 5px;
 }
+#userStatus {
+  padding-left: 5px;
+}
 #userStatus div {
   float: right;
   text-align: right;

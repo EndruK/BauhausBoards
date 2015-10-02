@@ -73,7 +73,6 @@ router.post('/setStatus', restrictUser, function(req,res) {
   console.log(now);
   var query = "INSERT INTO status (s_user,s_text,s_since,s_until) "+
     "VALUES("+userID+",\""+statusText+"\",\""+now+"\",\""+statusUntil+"\")";
-  console.log(query);
   db.run(query,function(err) {
     if(err) {
       res.status = 500;
@@ -95,7 +94,9 @@ router.get('/getUserContent', function(req,res,next) {
       "c_contentJSON as content, c_date as date, c_background as background "+
     "FROM "+
       "content "+
-    "WHERE c_user = " + userID;
+    "WHERE c_user = " + userID + " "+
+    "ORDER BY c_id DESC "+
+    "LIMIT 1";
   db.get(query,function(err,row) {
     if(err) {
       res.status = 500;
@@ -103,6 +104,26 @@ router.get('/getUserContent', function(req,res,next) {
     }
     else {
       res.send(row);
+    }
+  });
+});
+
+router.post('/changeUserContent', restrictUser, function(req,res) {
+  var db = req.db;
+  var userID = req.body.userID;
+  var contentJSON = req.body.content;
+  var now = req.moment().format("YYYY-MM-DD");
+  var background = req.body.background;
+
+  var query = "INSERT INTO content (c_user,c_date,c_contentJSON,c_background) "+
+    "VALUES("+userID+",\""+now+"\",\'"+contentJSON+"\',\""+background+"\")";
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: "+ err);
+    }
+    else {
+      res.send("successfully created new content");
     }
   });
 });
