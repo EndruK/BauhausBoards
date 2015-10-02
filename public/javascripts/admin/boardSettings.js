@@ -71,6 +71,7 @@ function createNewBoardPopup() {
   $("#popup").append("<div class='popupConfirm'>");
   $(".popupConfirm").append("<button onclick='createNewBoard()'>Create");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button:last").focus();
 }
 
 function createNewBoard() {
@@ -100,6 +101,7 @@ function deleteBoardPopup(boardID) {
   $("#popup").append("<div class='popupConfirm'>");
   $(".popupConfirm").append("<button onclick='deleteBoard("+boardID+")'>Delete");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button:last").focus();
 }
 
 function deleteBoard(boardID) {
@@ -139,6 +141,7 @@ function setBoardResolutionPopup(boardID) {
   $(".popupConfirm").append("<button onclick='setBoardResolution("+boardID+",\"man\")'>Set");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
   getBoardResolution(boardID);
+  $(".popupConfirm button:last").focus();
 }
 function setBoardResolution(boardID,type) {
   var resX;
@@ -199,6 +202,7 @@ function setBoardRoomPopup(boardID,roomID) {
   $(".popupConfirm").append("<div class='clear'>");
   $(".popupConfirm").append("<button onclick='setBoardRoom("+boardID+")'>Set");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button:last").focus();
 }
 
 function setBoardRoom(boardID) {

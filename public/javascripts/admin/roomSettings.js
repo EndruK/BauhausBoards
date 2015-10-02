@@ -65,6 +65,7 @@ function createNewRoomPopup() {
   $(".popupConfirm").append("<br>");
   $(".popupConfirm").append("<button onclick='createNewRoom()'>Create");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button:last").focus();
 }
 
 function createNewRoom() {
@@ -125,6 +126,7 @@ function deleteRoomPopup(roomID) {
   $(".popupConfirm").append("<br>");
   $(".popupConfirm").append("<button onclick='deleteRoom("+roomID+")'>Delete");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button:last").focus();
 }
 
 function deleteRoom(roomID) {
@@ -156,6 +158,7 @@ function setRoomNamePopup(roomID,name) {
   $(".popupConfirm").append("<input id='roomNameinput' value=\""+name+"\">");
   $(".popupConfirm").append("<button onclick='setRoomName("+roomID+")'>Set");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button:last").focus();
 }
 
 function setRoomName(roomID) {
@@ -195,6 +198,7 @@ function setRoomDescriptionPopup(roomID,description) {
   $(".popupConfirm").append("<textarea id='roomDescriptionArea'>"+description.replace("<br>", "\n"));
   $(".popupConfirm").append("<button onclick='setRoomDescription("+roomID+")'>Set");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button:last").focus();
 }
 
 function setRoomDescription(roomID) {
@@ -263,6 +267,7 @@ function setRoomUsersPopup(roomID,roomName) {
   $("#popup").append("<hr>");
   $("#popup").append("<div class='popupConfirm'>");
   $(".popupConfirm").append("<button onclick='removePopup()'>Back");
+  $(".popupConfirm button:last").focus();
  
 }
 function addUserToRoomPopup(roomID) {
@@ -279,6 +284,7 @@ function addUserToRoomPopup(roomID) {
   $("#popup").append("<hr>");
   $("#popup").append("<div class='popupConfirm'>");
   $(".popupConfirm").append("<button onclick='popupBackgroundSecond("+roomID+")'>Cancel");
+  $(".popupConfirm button:last").focus();
   $.ajax({
     url:"functions/getUsersNotInRoom",
     type:"GET",
@@ -323,6 +329,7 @@ function removeUserFromRoomPopup(userID,roomID,userName) {
   $("#popup").append("<div class='popupConfirm'>");
   $(".popupConfirm").append("<button onclick='removeUserFromRoom("+userID+","+roomID+")'>Remove");
   $(".popupConfirm").append("<button onclick='popupBackgroundSecond("+roomID+")'>Cancel");
+  $(".popupConfirm button:last").focus();
 }
 
 function removeUserFromRoom(userID,roomID) {

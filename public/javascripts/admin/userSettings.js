@@ -173,6 +173,7 @@ function deleteUserPopup(userID) {
   $("#popup").append("<div class='popupConfirm'>");
   $(".popupConfirm").append("<button onclick='deleteUser("+userID+")'>Delete");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button:last").focus();
 }
 
 function deleteUser(userID) {
@@ -483,4 +484,5 @@ function showUserFormular() {
   $(".popupConfirm").append("<br>");
   $(".popupConfirm").append("<button id='userFormularButton'>");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button:last").focus();
 }

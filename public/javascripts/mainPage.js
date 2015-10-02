@@ -160,6 +160,7 @@ function showUserContent(userIndex) {
     success:function(response) {
       project.clear();
       project.importJSON(response.content);
+      view.update();
     },
     error:function(error) {
       console.log("couldn't get user content");
