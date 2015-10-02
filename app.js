@@ -11,6 +11,7 @@ var db = new sqlite3.Database('data/bauhausboards.db');
 var session = require('express-session');
 var uuid = require('uuid');
 var SHA256 = require("crypto-js/sha256");
+var moment = require("moment");
 
 var paper = require('paper');
 
@@ -65,6 +66,7 @@ app.use('/node_modules/moment', express.static(__dirname + '/node_modules/moment
 
 app.use(function(req, res, next) {
   req.db = db;
+  req.moment = moment;
   next();
 });
 

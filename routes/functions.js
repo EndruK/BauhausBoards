@@ -49,7 +49,9 @@ router.get('/getUserStatus', function(req, res, next) {
     "SELECT "+
       "s_text AS text, s_since AS since, s_until AS until " +
     "FROM status " +
-    "WHERE s_user = " + userID;
+    "WHERE s_user = " + userID + " "+
+    "ORDER BY s_id DESC "+
+    "LIMIT 1";
   db.get(query,function(err,row) {
     if(err) {
       res.status = 500;
@@ -57,6 +59,28 @@ router.get('/getUserStatus', function(req, res, next) {
     }
     else {
       res.send(row);
+    }
+  });
+});
+
+router.post('/setStatus', restrictUser, function(req,res) {
+  var db = req.db;
+  var userID = req.body.userID;
+  var statusText = req.body.statusText;
+  var statusUntil = req.body.statusUntil;
+  console.log([userID,statusText,statusUntil]);
+  var now = req.moment().format("YYYY-MM-DD\THH:mm");
+  console.log(now);
+  var query = "INSERT INTO status (s_user,s_text,s_since,s_until) "+
+    "VALUES("+userID+",\""+statusText+"\",\""+now+"\",\""+statusUntil+"\")";
+  console.log(query);
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: "+ err);
+    }
+    else {
+      res.send("successfully created new status");
     }
   });
 });
@@ -391,7 +415,7 @@ router.post('/createNewUser', restrictAdmin, function(req,res) {
   var query = 
     "INSERT INTO user (u_name,u_pw,u_date,u_mail,u_profilePic,u_descr,u_twitter,u_adminFlag,u_pin) "+
     "VALUES ('"+name+"','"+pw+"','"+jsonDate+"','"+mail+"','"+profilePic+"','"+description+"','"+twitter+"',"+adminFlag+",'"+pin+"')";
-  console.log(query);
+  //console.log(query);
   db.run(query,function(err) {
     if(err) {
       res.status = 500;
@@ -644,7 +668,7 @@ router.post('/loginUserPin',function(req,res,next) {
   var userPin = req.body.userPin;
   var query = "SELECT * FROM user WHERE u_id="+userID+" AND u_pin='"+userPin+"'";
   db.get(query,function(err,row) {
-    console.log(row);
+    //console.log(row);
     if(err) {
       res.status = 500;
       res.send("error: "+err);

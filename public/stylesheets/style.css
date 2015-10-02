@@ -486,6 +486,21 @@ body,
   border-radius: 10px;
   display: inline-block;
 }
+#popup #statusDiv {
+  display: inline-block;
+  max-width: 500px;
+}
+#popup #statusDiv label {
+  float: left;
+  margin: 5px;
+}
+#popup #statusDiv input {
+  float: right;
+  margin: 5px;
+}
+#popup #statusDiv button {
+  margin: 5px;
+}
 #popupBackground1 {
   z-index: 11;
 }
@@ -511,8 +526,8 @@ body,
   margin: 0 auto;
 }
 #userInfo hr {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 #userName {
   font-weight: bold;
@@ -527,6 +542,7 @@ body,
 }
 #userStatus div {
   float: right;
+  text-align: right;
 }
 #floaty {
   position: fixed;

@@ -174,12 +174,16 @@ function getUSerStatus(userIndex) {
     data:{"userID":usercollection[userIndex].userID},
     success:function(res) {
       if(res) {
-        var untilDate = new Date(res.until);
-        if(untilDate > new Date()) {
+        var untilDate = moment(res.until);
+        var now = moment();
+        //var untilDate = new Date(res.until);
+        if(untilDate > now) {
           $("#userInfo").append("<hr>");
           $("#userInfo").append("<div id='userStatus'>"+res.text);
-          untilString = moment(untilDate).format("HH:mm DD.MM.YYYY");
-          $("#userStatus").append("<br><div>~ "+untilString);
+          var time = untilDate.format("HH:mm");
+          var date = moment(untilDate).format("DD.MM.YYYY");
+          //untilString = moment(untilDate).format("HH:mm DD.MM.YYYY");
+          $("#userStatus").append("<br><div>until "+time+"<br>"+date);
         }
       }
     },

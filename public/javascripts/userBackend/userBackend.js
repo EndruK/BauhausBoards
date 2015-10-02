@@ -89,7 +89,12 @@ function login(userID) {
       if(res == "success") {
         loggedIn = true;
         authenticatedUser = userID;
+        stopLoginPopupTimer();
         showUserBackend();
+      }
+      else {
+        $("#userPin").css("border","solid red 2px");
+        $("#userPin").val("");
       }
     },
     error:function(err) {
@@ -127,7 +132,7 @@ function stopLoginPopupTimer() {
 
 function startAutoLogoutTimer() {
   clearTimeout(autoLogoutTimer);
-  autoLogoutTimer = setTimeout(logout,autoLogoutTime);
+  autoLogoutTimer = setTimeout(logoutUser,autoLogoutTime);
 }
 function stopAutoLogoutTimer() {
   clearTimeout(autoLogoutTimer);
@@ -166,6 +171,7 @@ function checkSession(callback) {
 
 function logoutUser() {
   stopAutoLogoutTimer();
+  removePopup();
   loggedIn = false;
   $.ajax({
     url:'/functions/logoutUser',
