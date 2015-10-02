@@ -22,6 +22,7 @@ function loadChangeStatus() {
   $("#popup").append("<div class='popupConfirm'>");
   $(".popupConfirm").append("<button onclick='setStatus()'>Set");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button:last").focus();
   $.ajax({
     url:"/functions/getUserStatus",
     type:"GET",
@@ -70,7 +71,7 @@ function setStatus() {
   $.ajax({
     url:"/functions/setStatus",
     type:"POST",
-    data:{"userID":authenticatedUser,"statusText":text,"statusUntil":time},
+    data:{"statusText":text,"statusUntil":time},
     success:function(res) {
       removePopup();
       checkSession(showUserBackend);

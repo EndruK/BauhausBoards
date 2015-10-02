@@ -50,6 +50,7 @@ function userLoginPopup() {
     complete:function() {
       $("#popup").append("<div class='popupConfirm'>");
       $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+      $(".popupConfirm button").focus();
       // just a small hack to display the scrollbar on the tablet
       showUser(selectedUser);
     }

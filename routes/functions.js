@@ -65,7 +65,7 @@ router.get('/getUserStatus', function(req, res, next) {
 
 router.post('/setStatus', restrictUser, function(req,res) {
   var db = req.db;
-  var userID = req.body.userID;
+  var userID = req.session.userID;
   var statusText = req.body.statusText;
   var statusUntil = req.body.statusUntil;
   console.log([userID,statusText,statusUntil]);
@@ -110,7 +110,7 @@ router.get('/getUserContent', function(req,res,next) {
 
 router.post('/changeUserContent', restrictUser, function(req,res) {
   var db = req.db;
-  var userID = req.body.userID;
+  var userID = req.session.userID;
   var contentJSON = req.body.content;
   var now = req.moment().format("YYYY-MM-DD");
   var background = req.body.background;
@@ -124,6 +124,34 @@ router.post('/changeUserContent', restrictUser, function(req,res) {
     }
     else {
       res.send("successfully created new content");
+    }
+  });
+});
+
+router.post('/setContentBackground', restrictUser, function(req, res) {
+  var db = req.db;
+  var userID = req.session.userID;
+  var background = req.body.background;
+  var now = req.moment().format("YYYY-MM-DD");
+  var query1 = "SELECT c_contentJSON FROM content WHERE c_user="+userID+" ORDER BY c_id DESC LIMIT 1";
+
+  db.get(query1,function(err,row) {
+    if(err) {
+      res.status = 500;
+      res.send("error:"+err);
+    }
+    else {
+      var query2 = "INSERT INTO content (c_user,c_contentJSON,c_background) "+
+        "VALUES ("+userID+",\'"+row.c_contentJSON+"\',\'"+background+"\')";
+      db.run(query2,function(err,row) {
+        if(err) {
+          res.status = 500;
+          res.send("error: "+ err);
+        }
+        else {
+          res.send("successfully created new content");
+        }
+      });
     }
   });
 });
