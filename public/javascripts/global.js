@@ -3,11 +3,14 @@ paper.install(window);
 var pos = 'index';
 var sideBarTimeout = 10000; //sidebar timeout in ms
 var sidebarTimeoutHandler;
+var reloadPageTimeout;
+var reloadPageTime = 1000*60*60*2 //2h
 var sidebarStatus = false;
 var boardID = null;
 var roomID = null;
 var floatyTimer = null;
 var floatyTime = 5000;
+var reloadPage
 
 //###DOM########################################################################
 $('.sidebar').on('click', '.btnMessage', loadMessageLanding);
@@ -15,6 +18,13 @@ $('.sidebar').on('click', '.btnBack', loadMain);
 $('.sidebar').on('click', '.btnCreateMessage', loadCreateMessage);
 $('.sidebar').on('click', '.btnFeedback', loadFeedback);
 $('.sidebar').on('click', '.btnUserBackend', loadUserBackend);
+
+$(document).ready(function() {
+  //reload the site at 02:00
+  refreshAt(2,0,0);
+  //and every 2 hours
+  reloadPageTimeout = setTimeout(function(){window.location.reload(true)},reloadPageTime);
+});
 
 $('.sidebarSwiper').swipe({
   swipeStatus:function(event,phase,direction,distance,duration,fingers) {
@@ -209,4 +219,21 @@ function showFloaty(text,time) {
 
 function removeFloaty() {
   $("#floaty").animate({top: '-350px'},"slow");
+}
+
+function refreshAt(hours, minutes, seconds) {
+  var now = new Date();
+  var then = new Date();
+
+  if(now.getHours() > hours ||
+     (now.getHours() == hours && now.getMinutes() > minutes) ||
+      now.getHours() == hours && now.getMinutes() == minutes && now.getSeconds() >= seconds) {
+      then.setDate(now.getDate() + 1);
+  }
+  then.setHours(hours);
+  then.setMinutes(minutes);
+  then.setSeconds(seconds);
+
+  var timeout = (then.getTime() - now.getTime());
+  setTimeout(function() { window.location.reload(true); }, timeout);
 }
