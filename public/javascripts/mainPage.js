@@ -38,6 +38,25 @@ function getBoard() {
       resize();
       roomID = res.boardRoom;
       if(roomID) getRoomUsers();
+      
+      //TODO: resize for browser - apply resize for pointer events in the canvas
+      /*
+      var bSize;
+      var wSize;
+
+      if(dim.resX > dim.resY) {
+        bSize = dim.resY;
+        wSize = $(window).height();
+      }
+      else {
+        bSize = dim.resX;
+        wSize = $(window).width();
+      }
+      var x = (100/bSize)*wSize;
+
+      $("#content").css("zoom",x+"%");
+      $("#header").css("zoom",x+"%");
+      */
     },
     error:function(err) {
       console.log("couldn't get board resolution");

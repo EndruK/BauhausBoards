@@ -10,12 +10,11 @@ var boardID = null;
 var roomID = null;
 var floatyTimer = null;
 var floatyTime = 5000;
-var reloadPage
 
 //###DOM########################################################################
-$('.sidebar').on('click', '.btnMessage', loadMessageLanding);
+$('.sidebar').on('click', '.btnMessage', loadMessagePopup);
 $('.sidebar').on('click', '.btnBack', loadMain);
-$('.sidebar').on('click', '.btnCreateMessage', loadCreateMessage);
+//$('.sidebar').on('click', '.btnCreateMessage', loadCreateMessage);
 $('.sidebar').on('click', '.btnFeedback', loadFeedback);
 $('.sidebar').on('click', '.btnUserBackend', loadUserBackend);
 
@@ -67,27 +66,7 @@ function loadMain(event) {
   addGifTicker();
   startSwitchUserTimer();
 }
-function loadMessageLanding(event) {
-  showSidebar('sidebarMessages');
-  $('#header').text('Message Landingpage');
-  updateTimer();
-}
-function loadCreateMessage(event) {
-  var tmp  = $('#header').text('Compose Message\nall selected persons have to be displayed here');
-  undo_undoStack = FixedQueue(undo_stackLength);
-  undo_redoStack = FixedQueue(undo_stackLength);
-  tmp.html(tmp.html().replace(/\n/g,'<br>'));
-  paper.setup('EditorCanvas');
-  activatePenTool();
-  activeColor = colors["black"];
-  showSidebar('sidebarCreateMessage');
-  clearTimeout(5000);
-  updateTimer();
-  addImageDropLayer();
-  show_gifs();
-  removeAllGifs();
-  $('#tabletSizePreview').css('visibility','visible');
-}
+
 function loadUserBackend(event) {
   userLoginPopup();
 }
