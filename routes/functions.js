@@ -200,6 +200,45 @@ router.post('/createMessage', function(req,res,next) {
   });
 });
 
+router.get('/getUserMessages', restrictUser, function(req,res) {
+  var db = req.db;
+  var query = 
+    "SELECT "+
+      "message.m_id AS messageID, "+
+      "message.m_contentJSON AS content, "+
+      "message.m_date AS date, "+
+      "msgTo.mt_seen AS seen "+
+    "FROM msgTo LEFT JOIN message "+
+      "ON msgTo.mt_message = m_id "+
+    "WHERE msgTo.mt_user = "+req.session.userID+" "+
+    "ORDER BY message.m_id DESC";
+  db.all(query,function(err,rows) {
+    if(err) {
+      res.status = 500;
+      res.send("error"+err);
+    }
+    else {
+      res.send(rows);
+    }
+  });
+});
+
+router.post('/markMessageSeen', restrictUser, function(req,res) {
+  var db = req.db;
+  var messageID = req.body.messageID;
+  var userID = req.session.userID;
+  var query = "UPDATE msgTo SET mt_seen=1 WHERE mt_user="+userID+" AND mt_message="+messageID;
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error"+err);
+    }
+    else {
+      res.send("successfully maked message as seen");
+    }
+  });
+});
+
 //frontend
 router.get('/getBoard', function(req,res,next) {
   var db = req.db;

@@ -164,6 +164,7 @@ function hideAll() {
   hide_gifs();
   stopSwitchUserTimer();
   removeListeners();
+  showMessages = false;
 }
 
 function showPopup() {

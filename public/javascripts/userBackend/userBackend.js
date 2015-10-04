@@ -7,8 +7,8 @@ var authenticatedUser = null;
 
 $('.sidebar').on('click', '.btnSetStatus', function(){checkSession(loadChangeStatus)});
 $('.sidebar').on('click', '.btnChangeContent', function(){checkSession(loadChangeContent)});
-$('.sidebar').on('click', '.btnViewMessages', loadViewMessages);
-$('.sidebar').on('click', '.btnUserSettings', loadUserSettings);
+$('.sidebar').on('click', '.btnViewMessages', function(){checkSession(loadViewMessages)});
+$('.sidebar').on('click', '.btnUserSettings', function(){checkSession(loadUserSettings)});
 $('.sidebar').on('click', '.btnLogout', logoutUser);
 
 function userLoginPopup() {
@@ -92,7 +92,7 @@ function login(userID) {
         loggedIn = true;
         authenticatedUser = userID;
         stopLoginPopupTimer();
-        showUserBackend();
+        checkSession(showUserBackend);
       }
       else {
         $("#userPin").css("border","solid red 2px");
@@ -105,11 +105,6 @@ function login(userID) {
   });
 }
 
-function loadViewMessages(event) {
-  $('#header').text('View Messages');
-  showSidebar('sidebarViewMessages');
-  updateTimer();
-}
 function loadUserSettings(event) {
   $('#header').text('User Settings');
   showSidebar('sidebarUserSettings');
