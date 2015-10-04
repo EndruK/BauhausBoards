@@ -889,9 +889,8 @@ router.post('/loginUserPin',function(req,res,next) {
       if(row && row.u_id == userID && row.u_pin == userPin) {
         req.session.userID = userID;
         req.session.pinTime = Date.now();
-        if(row.u_adminFlag) req.session.admin = true;
-        else req.session.admin = false;
         req.session.type = "pin";
+        req.session.userPin = true;
         res.send("success");
       }
       else {
@@ -904,12 +903,12 @@ router.post('/loginUserPin',function(req,res,next) {
 
 
 router.post('/logoutAdmin', function(req, res, next) {
-  req.session.destroy();
+  req.session.admin = false;
   res.send(true);
 });
 
 router.get('/logoutUser',function(req,res,next) {
-  req.session.destroy();
+  req.session.userPin = false;
   res.send(true);
 });
 
@@ -945,7 +944,7 @@ function restrictAdmin(req,res,next) {
 }
 
 function restrictUser(req,res,next) {
-  if(req.session.type == "pin") {
+  if(req.session.type == "pin" && req.session.userPin == true) {
     if((req.session.pinTime + sessionTimeUser) > Date.now()) {
       req.session.pinTime = Date.now();
       next();
