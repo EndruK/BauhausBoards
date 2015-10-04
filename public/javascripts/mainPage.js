@@ -185,6 +185,7 @@ function showUserContent(userIndex) {
       console.log("couldn't get user content");
     }
   });
+  showTwitter(userIndex);
 }
 
 function getUSerStatus(userIndex) {
@@ -267,4 +268,21 @@ function showSelectBoardPopup() {
 function selectBoard() {
   var selected = $("#boardOptions select").val();
   window.location.href = "/?BID="+selected;
+}
+
+function showTwitter(userIndex) {
+  console.log(usercollection[userIndex].userTwitter);
+  /*$("#twitterDiv").remove();
+  $("body").append("<div id='twitterDiv' style='z-index: 40; position:absolute; left:0; top:0; width:200px; height:100px'>");
+  $.ajax({
+    type:"GET",
+    url:"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=AndreKarge&count=1",
+    dataType:"jsonp",
+    success: function(res) {
+      console.log(res);
+    },
+    error:function(err) {
+      console.log(err);
+    }
+  });*/
 }

@@ -23,13 +23,11 @@ function login(event) {
   var mail = $("#mailaddress").val();
   var password = $("#password").val();
   var hash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
-  console.log(hash);
   $.ajax({
     url: '/functions/loginAdmin',
     type: 'POST',
     data: {'mail':mail,'pw':hash},
     success:function(res) {
-      console.log(res);
       if(res == "success") {
         logedIn = true;
         showSettings();
