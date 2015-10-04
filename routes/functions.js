@@ -176,6 +176,30 @@ router.post('/setBoardDim', function(req,res,next) {
   });
 });
 
+router.post('/createMessage', function(req,res,next) {
+  var db = req.db;
+  var content = req.body.messageContent;
+  var roomID = req.body.roomID;
+  var receivers = JSON.parse(req.body.receivers);
+  var date = req.moment().format("YYYY-MM-DD\THH:mm");
+  var query = "INSERT INTO message (m_date,m_contentJSON) VALUES(\'"+date+"\',\'"+content+"\')";
+  db.run(query,function(err,row){
+    if(err) {
+      res.status = 500;
+      res.send("error: "+err);
+    }
+    else {
+      var messageID = this.lastID;
+      var finished = true;
+      receivers.forEach(function(key) {
+        query = "INSERT OR IGNORE INTO msgTo (mt_user,mt_message) VALUES("+parseInt(key)+","+parseInt(messageID)+")";
+        db.run(query);
+      });
+      res.send("successfully created new message");
+    }
+  });
+});
+
 //frontend
 router.get('/getBoard', function(req,res,next) {
   var db = req.db;
@@ -584,7 +608,7 @@ router.post('/addUserToRoom',restrictAdmin,function(req,res) {
   var roomID = req.body.roomID;
   var userID = req.body.userID;
   var query = 
-    "INSERT INTO roomusers (ru_user,ru_room) VALUES ("+userID+","+roomID+")";
+    "INSERT INTO roomusers (ru_user,ru_room) VALUES("+userID+","+roomID+")";
   db.run(query,function(err) {
     if(err) {
       res.status = 500;
