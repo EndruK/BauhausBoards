@@ -2,9 +2,10 @@ var messageSelectedUsers;
 var allUsers;
 var messageCollection;
 
-//TODO: create timers to switch back to the main page
 var timerPopup;
+var messagePopupTime = 1000*20; //20sec
 var timerMessage;
+var messageTime = 1000*60*5 //5min
 
 $('.sidebar').on('click', '#askToLeave', askToLeave);
 $('.sidebar').on('click', '.btnSubmitMessage', submitMessagePopup);
@@ -12,7 +13,8 @@ $('.sidebar').on('click', '.btnSubmitMessage', submitMessagePopup);
 function loadMessagePopup(event) {
   messageSelectedUsers = new Array();
   allUsers = new Array();
-  showPopup()
+  showPopup();
+  startMessagePopupTimer();
   $("#popup").append("<h2>Create Message");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Select the users to compose a message for.");
@@ -60,6 +62,7 @@ function loadMessagePopup(event) {
 
 function composeTo(type) {
   if(messageSelectedUsers.length > 0) {
+    stopSwitchUserTimer();
     removePopup();
     undo_undoStack = FixedQueue(undo_stackLength);
     undo_redoStack = FixedQueue(undo_stackLength);
@@ -73,6 +76,7 @@ function composeTo(type) {
     updateTimer();
     activatePenTool();
     view.update();
+    startMessageTimer();
     $('#tabletSizePreview').css('visibility','visible');
     messageCollection = new Array();
     if(type == "selected") {
@@ -94,7 +98,6 @@ function showUsersInHeader() {
   $("#userInfo").append("<div id='userName'>Compose Message to");
   $("#userInfo").append("<div id='userDescription'>");
   var count = 0;
-  console.log([usercollection.length,messageCollection.length]);
   if(usercollection.length == messageCollection.length) {
     $("#userDescription").append("All users in room");
   }
@@ -134,21 +137,35 @@ function handleSelection(userID) {
 }
 
 function askToLeave(event) {
-  var input = confirm("Do you really want to discard your message?");
-  if(input) {
+  if(JSON.parse(project.exportJSON()).length > 0) {
+    showPopup();
+    startMessagePopupTimer();
+    $("#popup").append("<h2>Cancel Message");
+    $("#popup").append("<hr>");
+    $("#popup").append("<h4>Do you want to discard this message?");
+    $("#popup").append("<hr>");
+    $("#popup").append("<div class='popupConfirm'>");
+    $(".popupConfirm").append("<button onclick='{removePopup(); loadMain(); stopMessageTimer(); stopMessagePopupTimer(); closeSidebar();}'>Discard");
+    $(".popupConfirm").append("<button onclick='{removePopup(); stopMessagePopupTimer();}'>Cancel");
+    $(".popupConfirm button:last").focus();
+  }
+  else {
     loadMain();
+    stopMessageTimer();
+    closeSidebar();
   }
 }
 
 function submitMessagePopup() {
   showPopup();
+  startMessagePopupTimer();
   $("#popup").append("<h2>Send Message");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Do you want to send this message?");
   $("#popup").append("<hr>");
   $("#popup").append("<div class='popupConfirm'>");
   $(".popupConfirm").append("<button onclick='submitMessage()'>Send");
-  $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm").append("<button onclick='{removePopup(); stopMessagePopupTimer();}'>Cancel");
   $(".popupConfirm button:last").focus();
 }
 
@@ -170,10 +187,36 @@ function submitMessage() {
       },
       error:function(err) {
         console.log(err);
+      },
+      complete:function() {
+        stopMessageTimer();
+        stopMessagePopupTimer();
       }
     });
   }
   else {
     showFloaty("Message is empty!");
   }
+}
+
+function startMessagePopupTimer() {
+  stopMessagePopupTimer();
+  timerPopup = setTimeout(removePopup,messagePopupTime);
+}
+
+function stopMessagePopupTimer() {
+  clearTimeout(timerPopup);
+}
+
+function startMessageTimer() {
+  stopMessageTimer();
+  timerMessage = setTimeout(function() {
+    removePopup();
+    closeSidebar();
+    loadMain();
+  },messageTime);
+}
+
+function stopMessageTimer() {
+  clearTimeout(timerMessage);
 }

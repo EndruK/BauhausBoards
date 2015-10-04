@@ -1,5 +1,5 @@
 var loginPopupTimer = null;
-var loginPopupTime = 1000*15; //15sec
+var loginPopupTime = 1000*20; //20sec
 var autoLogoutTimer = null;
 var autoLogoutTime = 1000*60*5 //5min
 var loggedIn = false;
