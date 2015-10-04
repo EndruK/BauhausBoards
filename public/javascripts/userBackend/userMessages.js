@@ -12,7 +12,9 @@ $(window).on("resize",function() {
 });
 
 function loadViewMessages(event) {
-  //$('#header').text('View Messages');
+  $("#sidebarViewMessages .sidebarUpper").empty();
+  messagePage = 0;
+  messages = new Array();
   showSidebar('sidebarViewMessages');
   updateTimer();
 
@@ -24,8 +26,7 @@ function loadViewMessages(event) {
   view.update();
   $('#EditorCanvas').css('visibility','visible');
   $('#tabletSizePreview').css('visibility','visible');
-  messagePage = 0;
-  messages = new Array();
+  
   loadMessages();
 }
 
@@ -57,11 +58,11 @@ function displayMessages() {
   $("#messageContainer").append("<div>");
   $("#messageContainer").css("height",sidebarUpperHeight+"px");
   $("#messageContainer div").css("height",sidebarUpperHeight-30+"px");
-  $("#messageContainer").append("<button onclick='{messagePage--; displayMessages();}'><");
-  $("#messageContainer").append("<button onclick='{messagePage++; displayMessages();}'>>");
+  if(messagePage != 0) $("#messageContainer").append("<button onclick='{messagePage--; displayMessages();}'><");
+  if(messagePage != maxpages) $("#messageContainer").append("<button onclick='{messagePage++; displayMessages();}'>>");
   for(var i=(messagePage*maxMessages); i<((messagePage+1)*maxMessages); i++) {
     if(i == messages.length) break;
-    $("#messageContainer div").append("<button value='"+i+"' onclick='showMessage("+i+")'>"+messages[i].date);
+    $("#messageContainer div").append("<button value='"+i+"' onclick='showMessage("+i+")'>"+moment(messages[i].date).format("YYYY-MM-DD HH:mm"));
     if(messages[i].seen == 0) {
       $("#messageContainer div button:last").attr("style","border:solid 2px red;");
     }
@@ -79,22 +80,45 @@ function showMessage(messageIndex) {
         return;
       }
     });
-    messages[messageIndex].seen = 1;
-  }
-
-  if(messages[messageIndex].seen == 0) {
     $.ajax({
       url:"/functions/markMessageSeen",
       type:"POST",
       data:{"messageID":messages[messageIndex].messageID},
+      success:function(res) {
+        messages[messageIndex].seen = 1;
+      },
       error:function(err) {
         console.log("couldn't mark message as seen");
       }
     });
   }
   updateTimer();
-  console.log(messages);
   project.clear();
   project.importJSON(messages[messageIndex].content);
   view.update();
+  $("#userDescription").empty();
+  $("#userDescription").append(moment(messages[messageIndex].date).format("HH:mm"));
+  $("#userDescription").append("<br>"+moment(messages[messageIndex].date).format("YYYY-MM-DD"));
+  $("#userDescription").append("<br><button onclick='markMessageUnseen("+messageIndex+")'>Mark as unseen");
+}
+
+function markMessageUnseen(messageIndex) {
+  if(messages[messageIndex].seen == 1) {
+    $("#messageContainer div button").each(function() {
+      if($(this).val() == messageIndex) {
+        $(this).attr("style","border:solid 2px red;");
+      }
+    });
+    $.ajax({
+      url:"/functions/markMessageUnseen",
+      type:"POST",
+      data:{"messageID":messages[messageIndex].messageID},
+      success:function(res) {
+        messages[messageIndex].seen = 0;
+      },
+      error:function(err) {
+        console.log("couldn't mark message as unseen");
+      }
+    });
+  }
 }

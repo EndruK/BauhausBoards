@@ -68,9 +68,7 @@ router.post('/setStatus', restrictUser, function(req,res) {
   var userID = req.session.userID;
   var statusText = req.body.statusText;
   var statusUntil = req.body.statusUntil;
-  console.log([userID,statusText,statusUntil]);
   var now = req.moment().format("YYYY-MM-DD\THH:mm");
-  console.log(now);
   var query = "INSERT INTO status (s_user,s_text,s_since,s_until) "+
     "VALUES("+userID+",\""+statusText+"\",\""+now+"\",\""+statusUntil+"\")";
   db.run(query,function(err) {
@@ -234,7 +232,23 @@ router.post('/markMessageSeen', restrictUser, function(req,res) {
       res.send("error"+err);
     }
     else {
-      res.send("successfully maked message as seen");
+      res.send("successfully marked message as seen");
+    }
+  });
+});
+
+router.post('/markMessageUnseen', restrictUser, function(req,res) {
+  var db = req.db;
+  var messageID = req.body.messageID;
+  var userID = req.session.userID;
+  var query = "UPDATE msgTo SET mt_seen=0 WHERE mt_user="+userID+" AND mt_message="+messageID;
+  db.run(query,function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error"+err);
+    }
+    else {
+      res.send("successfully marked message as unseen");
     }
   });
 });
