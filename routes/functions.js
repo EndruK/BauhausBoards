@@ -14,7 +14,9 @@ router.get('/getRoomUsers', function(req, res, next) {
       "user.u_name AS userName, "+
       "user.u_profilePic AS userProfilePic, "+
       "user.u_descr AS userDescription, "+
-      "user.u_twitter AS userTwitter "+
+      "user.u_twitter AS userTwitter, "+
+      "user.u_adminFlag AS adminFlag, "+
+      "user.u_mail AS userMail "+
     "FROM "+
       "user INNER JOIN roomusers ON user.u_id = roomusers.ru_user "+
     "WHERE "+
@@ -375,7 +377,6 @@ router.get('/boardHasRoom', function(req,res,next) {
   db.get(query,{
     $boardID:boardID
   },function(err,result) {
-    //console.log(result);
     if(result && result.room != null) res.send(true);
     else res.send(false);
   });
@@ -838,6 +839,25 @@ router.post('/changeUser',restrictAdmin,function(req,res) {
   });
 });
 
+router.post('/changeUserMail', restrictUserPW, function(req,res) {
+  var db = req.db;
+  var userID = req.session.userID;
+  var userMail = req.body.userMail;
+  var query = "UPDATE user SET u_mail=$userMail WHERE u_id=$userID";
+  db.run(query,{
+    $userMail:userMail,
+    $userID:userID
+  },function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send("user mail successfully changed");
+    }
+  });
+});
+
 //backend but without restriction
 router.post('/loginAdmin', function(req, res, next) {
   var db = req.db;
@@ -889,7 +909,6 @@ router.post('/loginUserPin',function(req,res,next) {
       if(row && row.u_id == userID && row.u_pin == userPin) {
         req.session.userID = userID;
         req.session.pinTime = Date.now();
-        req.session.type = "pin";
         req.session.userPin = true;
         res.send("success");
       }
@@ -901,6 +920,31 @@ router.post('/loginUserPin',function(req,res,next) {
   });
 });
 
+router.post('/loginUserPassword', restrictUser, function(req,res) {
+  var db = req.db;
+  var userID = req.session.userID;
+  var userPW = req.body.userPassword;
+  var query = "SELECT * FROM user WHERE u_id=$userID AND u_pw=$userPassword";
+  db.get(query,{
+    $userID:userID,
+    $userPassword:userPW
+  },function(err,row) {
+    if(err) {
+      res.status = 500;
+      res.send("could not login");
+    }
+    else {
+      if(row && row.u_id == userID && row.u_pw == userPW) {
+        req.session.userPW = true;
+        res.send("success");
+      }
+      else {
+        res.status = 401;
+        res.send("could not login");
+      }
+    }
+  });
+});
 
 router.post('/logoutAdmin', function(req, res, next) {
   req.session.admin = false;
@@ -909,6 +953,7 @@ router.post('/logoutAdmin', function(req, res, next) {
 
 router.get('/logoutUser',function(req,res,next) {
   req.session.userPin = false;
+  req.session.userPW = false;
   res.send(true);
 });
 
@@ -922,6 +967,10 @@ router.get('/checkAdminSession', function(req,res,next) {
 })
 
 router.get('/checkUserSession', restrictUser, function(req,res) {
+  res.send('session valid');
+});
+
+router.get('/checkUserSessionPW', restrictUserPW, function(req,res) {
   res.send('session valid');
 });
 
@@ -944,7 +993,7 @@ function restrictAdmin(req,res,next) {
 }
 
 function restrictUser(req,res,next) {
-  if(req.session.type == "pin" && req.session.userPin == true) {
+  if(req.session.userPin == true) {
     if((req.session.pinTime + sessionTimeUser) > Date.now()) {
       req.session.pinTime = Date.now();
       next();
@@ -958,6 +1007,24 @@ function restrictUser(req,res,next) {
   else {
     req.session.error = "Access denied!";
     res.send('ACCESS DENIED');
+  }
+}
+
+function restrictUserPW(req,res,next) {
+  if(req.session.userPW == true) {
+    if((req.session.pinTime + sessionTimeUser) > Date.now()) {
+      req.session.pinTime = Date.now();
+      next();
+    }
+    else {
+      req.session.error = "Session expired!";
+      req.session.destroy();
+      res.send("Session expired");
+    }
+  }
+  else {
+    req.session.error = "Access denied!";
+    res.send("ACCESS DENIED!");
   }
 }
 

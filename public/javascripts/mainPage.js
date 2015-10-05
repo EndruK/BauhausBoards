@@ -271,7 +271,7 @@ function selectBoard() {
 }
 
 function showTwitter(userIndex) {
-  console.log(usercollection[userIndex].userTwitter);
+  //console.log(usercollection[userIndex].userTwitter);
   /*$("#twitterDiv").remove();
   $("body").append("<div id='twitterDiv' style='z-index: 40; position:absolute; left:0; top:0; width:200px; height:100px'>");
   $.ajax({

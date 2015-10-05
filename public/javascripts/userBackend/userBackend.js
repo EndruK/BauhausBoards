@@ -8,7 +8,7 @@ var authenticatedUser = null;
 $('.sidebar').on('click', '.btnSetStatus', function(){checkSession(loadChangeStatus)});
 $('.sidebar').on('click', '.btnChangeContent', function(){checkSession(loadChangeContent)});
 $('.sidebar').on('click', '.btnViewMessages', function(){checkSession(loadViewMessages)});
-$('.sidebar').on('click', '.btnUserSettings', function(){checkSession(loadUserSettings)});
+$('.sidebar').on('click', '.btnUserSettings', function(){checkSession(loadUserSettingsPopup)});
 $('.sidebar').on('click', '.btnLogout', logoutUser);
 
 function userLoginPopup() {
@@ -105,14 +105,6 @@ function login(userID) {
   });
 }
 
-function loadUserSettings(event) {
-  $('#header').text('User Settings');
-  showSidebar('sidebarUserSettings');
-  $('#users').css('visibility','visible');
-  loadUser();
-  updateTimer();
-}
-
 function startLoginPopupTimer() {
   clearTimeout(loginPopupTimer);
   loginPopupTimer = setTimeout(removePopup,loginPopupTime);
@@ -147,6 +139,7 @@ function checkSession(callback) {
       if(res != "session valid") {
         stopAutoLogoutTimer();
         loggedIn = false;
+        loggedInPassword = false;
         authenticatedUser = null;
         showFloaty("Session expired!");
         loadMain();
@@ -165,6 +158,7 @@ function logoutUser() {
   stopAutoLogoutTimer();
   removePopup();
   loggedIn = false;
+  loggedInPassword = false;
   $.ajax({
     url:'/functions/logoutUser',
     type:'GET',
