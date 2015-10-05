@@ -330,6 +330,7 @@ function changeBoardResolutionPopup() {
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Change the Resolution");
   $("#popup").append("<hr>");
+  
 }
 
 function checkSessionPW(callback) {
