@@ -570,6 +570,17 @@ body,
 #messageContainer div {
   overflow-y: scroll;
 }
+#changeUserPWDiv {
+  width: 300px;
+  max-width: 300px;
+  display: inline-block;
+}
+#changeUserPWDiv form label {
+  float: left;
+}
+#changeUserPWDiv form input {
+  float: right;
+}
 @-webkit-keyframes spin2 {
   from {
     -webkit-transform: rotate(0deg);

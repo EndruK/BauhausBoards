@@ -11,7 +11,6 @@ function loadUserSettingsPopup(event) {
       break;
     }
   }
-  console.log(usercollection[userIndex].userAdminFlag)
   var profilePicURL = usercollection[userIndex].userProfilePic;
   if(!profilePicURL || profilePicURL == null) {
     profilePicURL = "images/default-user.png";
@@ -136,8 +135,91 @@ function changeUserMail(userIndex) {
   });
 }
 
-function changeUserPWPopup() {
+function changeUserPWPopup(userIndex) {
+  showPopup();
+  startLoginPopupTimer();
+  $("#popup").append("<h2>Password");
+  $("#popup").append("<hr>");
+  $("#popup").append("<h4>Change your password");
+  $("#popup").append("<hr>");
+  $("#popup").append("<div id='changeUserPWDiv'>");
+  $("#changeUserPWDiv").append("<form>");
+  $("#changeUserPWDiv form").append("<label>old PW");
+  $("#changeUserPWDiv form").append("<input type='password' id='oldPasswordInput'>");
+  $("#changeUserPWDiv form").append("<br><br>");
+  $("#changeUserPWDiv form").append("<label>new PW");
+  $("#changeUserPWDiv form").append("<input type='password' id='newPassword'>");
+  $("#changeUserPWDiv form").append("<br><br>");
+  $("#changeUserPWDiv form").append("<label>check PW");
+  $("#changeUserPWDiv form").append("<input type='password' id='newPasswordCheck'>");
+  $("#changeUserPWDiv form").submit(function(event) {
+    event.preventDefault();
+    changeUserPW(userIndex);
+  });
+  $("#popup").append("<div class='clear'>");
+  $("#popup").append("<div class='popupConfirm'>");
+  $(".popupConfirm").append("<button onclick='changeUserPW("+userIndex+")'>Change");
+  $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button").focus();
+}
 
+function changeUserPW(userIndex) {
+  $("#oldPasswordInput").removeAttr("style");
+  $("#newPassword").removeAttr("style");
+  $("#newPasswordCheck").removeAttr("style");
+  var oldPW = CryptoJS.SHA256($("#oldPasswordInput").val()).toString(CryptoJS.enc.Hex);
+  if(!$("#oldPasswordInput").val()) {
+    markPWRed()
+    return;
+  }
+  $.ajax({
+    url:"/functions/checkUserPW",
+    type:"GET",
+    data:{"userPassword":oldPW},
+    success:function(res) {
+      if(res == true) {
+        if($("#newPassword").val() && $("#newPassword").val() == $("#newPasswordCheck").val()) {
+          var newPassword = CryptoJS.SHA256($("#newPassword").val()).toString(CryptoJS.enc.Hex);
+          $.ajax({
+            url:"/functions/setNewUserPW",
+            type:"POST",
+            data:{"userPassword":newPassword},
+            success:function(res) {
+              showFloaty("Password successfully updated");
+              removePopup();
+              stopLoginPopupTimer();
+            },
+            error:function(err) {
+              console.log("couldn't update new password");
+            }
+          });
+        }
+        else {
+          markPWRed();
+        }
+      }
+      else {
+        markPWRed();
+      }
+    },
+    error:function(err) {
+      console.log("couldn't check pw");
+    }
+  });
+  var newPW = "";
+  var newPWCheck = "";
+
+  //TODO: check old pw
+  //TODO: check if new pw is not zero and both are equal
+}
+
+function markPWRed() {
+  $("#oldPasswordInput").css("border","solid 2px red");
+  $("#newPassword").css("border","solid 2px red");
+  $("#newPasswordCheck").css("border","solid 2px red");
+  $("#oldPasswordInput").val("");
+  $("#newPassword").val("");
+  $("#newPasswordCheck").val("");
 }
 
 function changeUserPinPopup() {

@@ -946,6 +946,48 @@ router.post('/loginUserPassword', restrictUser, function(req,res) {
   });
 });
 
+router.get('/checkUserPW',restrictUserPW,function(req,res) {
+  var db = req.db;
+  var userID = req.session.userID;
+  var pw = req.query.userPassword;
+  var query = "SELECT * FROM user WHERE u_id=$userID";
+  db.get(query,{
+    $userID:userID
+  },function(err,row) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      if(row && row.u_pw == pw) {
+        res.send(true);
+      }
+      else {
+        res.send(false);
+      }
+    }
+  });
+});
+
+router.post('/setNewUserPW', restrictUserPW, function(req,res) {
+  var db = req.db;
+  var userID = req.session.userID;
+  var pw = req.body.userPassword;
+  var query = "UPDATE user SET u_pw=$userPassword WHERE u_id=$userID";
+  db.run(query,{
+    $userPassword:pw,
+    $userID:userID
+  },function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send(true);
+    }
+  });
+});
+
 router.post('/logoutAdmin', function(req, res, next) {
   req.session.admin = false;
   res.send(true);
