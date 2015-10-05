@@ -301,6 +301,9 @@ body,
 .changeUserForm form input {
   float: right;
 }
+.changeUserForm form button {
+  float: right;
+}
 #sidebarMain {
   visibility: visible;
 }

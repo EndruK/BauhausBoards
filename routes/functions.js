@@ -946,6 +946,38 @@ router.post('/loginUserPassword', restrictUser, function(req,res) {
   });
 });
 
+router.post('/changeUserInfo', restrictUserPW, function(req,res) {
+  var db = req.db;
+  var userID = req.session.userID;
+  var userName = req.body.userName;
+  var userDescription = req.body.userDescription;
+  var userTwitter = req.body.userTwitter;
+  var userProfilePic = req.body.userProfilePic;
+  var query = 
+  "UPDATE user "+
+  "SET "+
+    "u_name=$userName, "+
+    "u_descr=$userDescription, "+
+    "u_twitter=$userTwitter, "+
+    "u_profilePic=$userProfilePic "+
+  "WHERE u_id=$userID";
+  db.run(query,{
+    $userName:userName,
+    $userDescription:userDescription,
+    $userTwitter:userTwitter,
+    $userProfilePic:userProfilePic,
+    $userID:userID
+  },function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send(true);
+    }
+  });
+});
+
 router.get('/checkUserPW',restrictUserPW,function(req,res) {
   var db = req.db;
   var userID = req.session.userID;

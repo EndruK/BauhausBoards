@@ -82,19 +82,80 @@ function showUserSettings() {
   }
 }
 
-function changeUserPopup() {
+function changeUserPopup(userIndex) {
+  showPopup();
+  stopLoginPopupTimer();
+  $("#popup").append("<h2>User");
+  $("#popup").append("<hr>");
+  $("#popup").append("<h4>Change your informations");
+  $("#popup").append("<hr>");
+  $("#popup").append("<div id='changeUserInfoDiv' class='changeUserForm'>");
+  $("#changeUserInfoDiv").append("<form>");
+  $("#changeUserInfoDiv form").append("<label>Name");
+  $("#changeUserInfoDiv form").append("<input maxlength='30' type='text' id='nameInput' value='"+usercollection[userIndex].userName+"'>");
+  $("#changeUserInfoDiv form").append("<br><br>");
+  $("#changeUserInfoDiv form").append("<label>Description");
+  $("#changeUserInfoDiv form").append("<input maxlength='30' type='text' id='descriptionInput' value='"+usercollection[userIndex].userDescription+"'>");
+  $("#changeUserInfoDiv form").append("<br><br>");
+  $("#changeUserInfoDiv form").append("<label>Twitter");
+  $("#changeUserInfoDiv form").append("<input type='text' id='twitterInput' value='"+usercollection[userIndex].userTwitter+"'>");
+  $("#changeUserInfoDiv form").append("<br><br>");
+  $("#changeUserInfoDiv form").append("<label>Profile Pic");
+  $("#changeUserInfoDiv form").append("<input type='text' id='picURLInput' value='"+usercollection[userIndex].userProfilePic+"'>");
+  $("#changeUserInfoDiv form").append("<br class='clear'>");
+  $("#changeUserInfoDiv form").append("<button onclick='uploadImage()'>Upload Image");
+  $("#changeUserInfoDiv form").append("<input id='picUploadInput' accept='image/*' name='file' type='file' style='display:none'>");
+  $("#changeUserInfoDiv form").submit(function(event) {
+    event.preventDefault();
+    changeUserInfo(userIndex);
+  });
+  $("#popup").append("<div class='clear'>");
+  $("#popup").append("<div class='popupConfirm'>");
+  $(".popupConfirm").append("<button onclick='changeUserInfo("+userIndex+")'>Change");
+  $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button").focus();
+}
 
+function changeUserInfo(userIndex) {
+  $("#nameInput").removeAttr("style");
+  var userName = $("#nameInput").val();
+  var userDescription = $("#descriptionInput").val();
+  var userTwitter = $("#twitterInput").val();
+  var userProfilePic = $("#picURLInput").val();
+
+  if(!userName) {
+    $("#nameInput").css("border","solid 2px red");
+    return;
+  }
+  $.ajax({
+    url:"/functions/changeUserInfo",
+    type:"POST",
+    data:{"userName":userName,"userDescription":userDescription,"userTwitter":userTwitter,"userProfilePic":userProfilePic},
+    success:function(res) {
+      usercollection[userIndex].userName = userName;
+      usercollection[userIndex].userDescription = userDescription;
+      usercollection[userIndex].userTwitter = userTwitter;
+      usercollection[userIndex].userProfilePic = userProfilePic;
+      removePopup();
+      stopLoginPopupTimer();
+      showUserHeader(userIndex);
+      showFloaty("User info successfully changed");
+    },
+    error:function(err) {
+      console.log("couldn't update user info");
+    }
+  });
 }
 
 function changeUserMailPopup(userIndex) {
   showPopup();
-  startLoginPopupTimer();
+  stopLoginPopupTimer();
   $("#popup").append("<h2>Email");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Change your mail address");
   $("#popup").append("<hr>");
   $("#popup").append("<form>");
-  $("#popup form").append("<input type='text' id='userMailInput' value='"+usercollection[userIndex].userMail+"'>");
+  $("#popup form").append("<input maxlength='60' type='text' id='userMailInput' value='"+usercollection[userIndex].userMail+"'>");
   $("#popup form").submit(function(event) {
     event.preventDefault();
     changeUserMail();
@@ -137,7 +198,7 @@ function changeUserMail(userIndex) {
 
 function changeUserPWPopup(userIndex) {
   showPopup();
-  startLoginPopupTimer();
+  stopLoginPopupTimer();
   $("#popup").append("<h2>Password");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Change your password");
@@ -221,7 +282,7 @@ function markPWRed() {
 
 function changeUserPinPopup(userIndex) {
   showPopup();
-  startLoginPopupTimer();
+  stopLoginPopupTimer();
   $("#popup").append("<h2>Pin");
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Change your pin");
@@ -229,10 +290,10 @@ function changeUserPinPopup(userIndex) {
   $("#popup").append("<div id='changeUserPinDiv' class='changeUserForm'>");
   $("#changeUserPinDiv").append("<form>");
   $("#changeUserPinDiv form").append("<label>new Pin");
-  $("#changeUserPinDiv form").append("<input type='password' id='newPinInput'>");
+  $("#changeUserPinDiv form").append("<input maxlength='4' type='password' id='newPinInput'>");
   $("#changeUserPinDiv form").submit(function(event) {
     event.preventDefault();
-    changeUserPW(userIndex);
+    changeUserPin(userIndex);
   });
   $("#popup").append("<div class='clear'>");
   $("#popup").append("<div class='popupConfirm'>");
@@ -242,6 +303,11 @@ function changeUserPinPopup(userIndex) {
 }
 
 function changeUserPin(userIndex) {
+  $("#newPinInput").removeAttr("style");
+  if(!validatePin($("#newPinInput").val())) {
+    $("#newPinInput").css("border","solid 2px red");
+    return;
+  }
   $.ajax({
     url:"functions/changeUserPin",
     type:"POST",
@@ -311,4 +377,52 @@ function checkMail(mail,callback) {
       console.log("couldn't check mail address");
     }
   });
+}
+
+function uploadImage() {
+  //$("#picURL").trigger("click");
+  $("#picUploadInput").trigger("click");
+  $("#picUploadInput").change(function(event) {
+    var file = event.target.files[0];
+    if(!file || !file.type.match(/image.*/)) {
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(event) {
+      var result = event.target.result;
+      var image  = result.substr(result.indexOf(",") + 1);
+      showFloaty("Uploading Image...",1000*60);
+      $.ajax({
+        url: "https://api.imgur.com/3/image",
+        type: "POST",
+        headers: {
+          Authorization: "Client-ID 395d5a7dec70b4a"
+        },
+        data: {
+          image: image
+        },
+        dataType: "json",
+        success: function(res){
+          url = res.data.link;
+          $("#picURLInput").val(url);
+          showFloaty("Image successfully uploaded!");
+        },
+        error: function(err) {
+          console.log(err);
+          showFloaty("Error while uploading image!");
+        },
+        complete: function() {
+          //TODO remove uploading indicator
+        }
+      });
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function validatePin(pin) {
+  if(/^\d\d\d\d$/.test(pin)) {
+    return true;
+  }
+  return false;
 }
