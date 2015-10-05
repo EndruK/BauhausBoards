@@ -324,7 +324,12 @@ function changeUserPin(userIndex) {
 }
 
 function changeBoardResolutionPopup() {
-
+  showPopup();
+  stopLoginPopupTimer();
+  $("#popup").append("<h2>Board Resolution");
+  $("#popup").append("<hr>");
+  $("#popup").append("<h4>Change the Resolution");
+  $("#popup").append("<hr>");
 }
 
 function checkSessionPW(callback) {
