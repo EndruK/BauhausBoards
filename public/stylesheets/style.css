@@ -290,6 +290,17 @@ body,
 .userAuth {
   overflow-y: initial;
 }
+.changeUserForm {
+  width: 300px;
+  max-width: 300px;
+  display: inline-block;
+}
+.changeUserForm form label {
+  float: left;
+}
+.changeUserForm form input {
+  float: right;
+}
 #sidebarMain {
   visibility: visible;
 }
@@ -569,17 +580,6 @@ body,
 }
 #messageContainer div {
   overflow-y: scroll;
-}
-#changeUserPWDiv {
-  width: 300px;
-  max-width: 300px;
-  display: inline-block;
-}
-#changeUserPWDiv form label {
-  float: left;
-}
-#changeUserPWDiv form input {
-  float: right;
 }
 @-webkit-keyframes spin2 {
   from {

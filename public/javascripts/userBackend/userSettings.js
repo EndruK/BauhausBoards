@@ -142,7 +142,7 @@ function changeUserPWPopup(userIndex) {
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Change your password");
   $("#popup").append("<hr>");
-  $("#popup").append("<div id='changeUserPWDiv'>");
+  $("#popup").append("<div id='changeUserPWDiv' class='changeUserForm'>");
   $("#changeUserPWDiv").append("<form>");
   $("#changeUserPWDiv form").append("<label>old PW");
   $("#changeUserPWDiv form").append("<input type='password' id='oldPasswordInput'>");
@@ -208,9 +208,6 @@ function changeUserPW(userIndex) {
   });
   var newPW = "";
   var newPWCheck = "";
-
-  //TODO: check old pw
-  //TODO: check if new pw is not zero and both are equal
 }
 
 function markPWRed() {
@@ -222,8 +219,42 @@ function markPWRed() {
   $("#newPasswordCheck").val("");
 }
 
-function changeUserPinPopup() {
+function changeUserPinPopup(userIndex) {
+  showPopup();
+  startLoginPopupTimer();
+  $("#popup").append("<h2>Pin");
+  $("#popup").append("<hr>");
+  $("#popup").append("<h4>Change your pin");
+  $("#popup").append("<hr>");
+  $("#popup").append("<div id='changeUserPinDiv' class='changeUserForm'>");
+  $("#changeUserPinDiv").append("<form>");
+  $("#changeUserPinDiv form").append("<label>new Pin");
+  $("#changeUserPinDiv form").append("<input type='password' id='newPinInput'>");
+  $("#changeUserPinDiv form").submit(function(event) {
+    event.preventDefault();
+    changeUserPW(userIndex);
+  });
+  $("#popup").append("<div class='clear'>");
+  $("#popup").append("<div class='popupConfirm'>");
+  $(".popupConfirm").append("<button onclick='changeUserPin("+userIndex+")'>Change");
+  $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  $(".popupConfirm button").focus();
+}
 
+function changeUserPin(userIndex) {
+  $.ajax({
+    url:"functions/changeUserPin",
+    type:"POST",
+    data:{"userPin":CryptoJS.SHA256($("#newPinInput").val()).toString(CryptoJS.enc.Hex)},
+    success:function(res) {
+      showFloaty("Pin successfully updated");
+      removePopup();
+      stopLoginPopupTimer();
+    },
+    error:function(err) {
+      console.log("couldn't update pin");
+    }
+  });
 }
 
 function changeBoardResolutionPopup() {

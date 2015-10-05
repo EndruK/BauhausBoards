@@ -988,6 +988,25 @@ router.post('/setNewUserPW', restrictUserPW, function(req,res) {
   });
 });
 
+router.post('/changeUserPin', restrictUserPW, function(req,res) {
+  var db = req.db;
+  var userID = req.session.userID;
+  var pin = req.body.userPin;
+  var query = "UPDATE user SET u_pin=$pin WHERE u_id=$userID";
+  db.run(query,{
+    $pin:pin,
+    $userID:userID
+  },function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send(true);
+    }
+  });
+});
+
 router.post('/logoutAdmin', function(req, res, next) {
   req.session.admin = false;
   res.send(true);
