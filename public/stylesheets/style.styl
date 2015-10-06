@@ -197,7 +197,13 @@ html,body,#wrapper
   float right
 .changeUserForm form button
   float right
-
+.colorTile
+  border-radius 5px
+  width 50px
+  height 50px
+  border 1px solid black
+  float left
+  cursor pointer
 
 //IDs
 #sidebarMain
@@ -427,10 +433,19 @@ html,body,#wrapper
   height 100%
 #messageContainer button
   margin 5px
+  padding 0px
 #messageContainer div
   overflow-y scroll
-
-
+#sidebarCreateMessage .sidebarUpper button
+  margin 5px
+#sidebarCreateMessage .sidebarUpper button span
+  font-size 50px
+#editorPopup
+  position absolute
+  z-index 11
+  background-color white
+  border-radius 5px
+  
 //animations
 @-webkit-keyframes spin2 {
     from { -webkit-transform: rotate(0deg);}

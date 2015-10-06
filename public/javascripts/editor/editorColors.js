@@ -20,19 +20,19 @@ var colors = {
   "blue" :        [65 ,105,225],
   "darkblue" :    [0  ,0  ,128]
 }
-var activeColor
 var colorContainerOpen;
 var colorContainerTimeout = 5000;
 var colorContainerTimeoutHandler;
-$(".sidebar").on("click",".btnColor",handleButtonClick);
-$(".sidebar").on("click",".colorContainer",switchColor);
+$('.sidebar').on('click', '.btnEditorColor', openColorPopup);
+
 
 $(document).ready(function() {
   colorContainerOpen = false;
   activeColor = colors["black"];
+  $("#sidebarCreateMessage .sidebarUpper").css("color",rgbToHex(activeColor));
 });
 
-function handleButtonClick(event) {
+/*function handleButtonClick(event) {
   console.log("clicked on color button");
   updateTimer();
   if(!colorContainerOpen) {
@@ -43,44 +43,45 @@ function handleButtonClick(event) {
     closeColorContainer();
     clearTimeout(colorContainerTimeoutHandler);
   }
-}
-function openColorContainer() {
-  var container = $(".colors");
-  container.css("visibility","visible");
-  container.css("position","relative");
-  colorContainerOpen = true;
-}
-function closeColorContainer() {
-  var container = $(".colors");
-  container.css("visibility","hidden");
-  container.css("position","absolute");
-  colorContainerOpen = false;
+}*/
+
+function openColorPopup(event) {
+  var width = 5 * 50;
+  var height = 4 * 50;
+  var time = 150;
+  openEditorPopup(this,width,height,function() {
+    $("#editorPopup").append("<div id='white' class='colorTile'>");
+    $("#editorPopup").append("<div id='pink' class='colorTile'>");
+    $("#editorPopup").append("<div id='yellow' class='colorTile'>");
+    $("#editorPopup").append("<div id='yellowgreen' class='colorTile'>");
+    $("#editorPopup").append("<div id='greenblue' class='colorTile'>");
+    $("#editorPopup").append("<div class='clear'>");
+    $("#editorPopup").append("<div id='lightgrey' class='colorTile'>");
+    $("#editorPopup").append("<div id='lightred' class='colorTile'>");
+    $("#editorPopup").append("<div id='orange' class='colorTile'>");
+    $("#editorPopup").append("<div id='lightgreen' class='colorTile'>");
+    $("#editorPopup").append("<div id='lightblue' class='colorTile'>");
+    $("#editorPopup").append("<div class='clear'>");
+    $("#editorPopup").append("<div id='darkgrey' class='colorTile'>");
+    $("#editorPopup").append("<div id='red' class='colorTile'>");
+    $("#editorPopup").append("<div id='darkorange' class='colorTile'>");
+    $("#editorPopup").append("<div id='green' class='colorTile'>");
+    $("#editorPopup").append("<div id='blue' class='colorTile'>");
+    $("#editorPopup").append("<div class='clear'>");
+    $("#editorPopup").append("<div id='black' class='colorTile'>");
+    $("#editorPopup").append("<div id='darkred' class='colorTile'>");
+    $("#editorPopup").append("<div id='brown' class='colorTile'>");
+    $("#editorPopup").append("<div id='darkgreen' class='colorTile'>");
+    $("#editorPopup").append("<div id='darkblue' class='colorTile'>");
+    $(".colorTile").on("click", switchColor);
+  });
 }
 
 function switchColor(event) {
+  startEditorPopupTimer();
   var clicked = $(this).attr("id");
-  var previous = $(".activeColor");
-  if(clicked != previous.attr("id")) {
-    previous.removeClass("activeColor");
-    $(this).addClass("activeColor");
-    //clicked.css("border-color","rgba(255,0,0,1)");
-    //console.log($(this).attr("id"));
-    activeColor = colors[clicked];
-    //console.log(activeColor);
-    updateTimer();
-    updateColorContainerTimeout();
-    var button = $(".btnColor");
-    if(clicked == "black" || clicked == "darkblue") {
-      button.css("color","white");
-    }
-    else {
-      button.css("color","black");
-    }
-    var buttonColor = "rgba("+activeColor[0]+","+activeColor[1]+","+activeColor[2]+",1)";
-    button.css("background-color",buttonColor);
-    var strokeBar = $(".strokeBar");
-    strokeBar.css("background-color",buttonColor);
-  }
+  activeColor = colors[clicked];
+  switchButtonColor();
   var items = project.selectedItems;
   if(items.length > 0) {
     items.forEach(function(key) {
@@ -89,11 +90,13 @@ function switchColor(event) {
     view.update();
   }
 }
-function updateColorContainerTimeout() {
-  clearTimeout(colorContainerTimeoutHandler);
-  colorContainerTimeoutHandler = setTimeout(closeColorContainer,colorContainerTimeout);
-}
 
+function switchButtonColor() {
+  $(".btnEditorColor").css("color",rgbToHex(activeColor));
+  $(".btnEditorPen").css("color",rgbToHex(activeColor));
+  $(".btnEditorText").css("color",rgbToHex(activeColor));
+  $(".btnEditorStroke").css("color",rgbToHex(activeColor));
+}
 
 function colorToHex(color) {
   var hexColor = color.toString(16);
@@ -107,11 +110,5 @@ function rgbToHex(rgb) {
   return "#" + colorToHex(rgb[0])+colorToHex(rgb[1])+colorToHex(rgb[2]);
 }
 function resetColor() {
-  var previous = $(".activeColor");
-  previous.removeClass("activeColor");
-  var black = $("#black");
-  black.addClass("activeColor");
-  var button = $(".btnColor");
-  button.css("color","white");
-  button.css("background-color","black");
+  activeColor = colors["black"];
 }

@@ -65,6 +65,7 @@ function loadMain(event) {
   show_gifs();
   addGifTicker();
   startSwitchUserTimer();
+  closeEditorPopup();
 }
 
 function loadUserBackend(event) {
@@ -86,6 +87,7 @@ function closeSidebar() {
   $('.sidebar').removeClass('open-sidebar');
   $('.sidebar').addClass("close-sidebar");
   clearTimeout(sidebarTimeoutHandler);
+  closeEditorPopup();
 }
 
 function showSidebar(sidebar) {
@@ -156,7 +158,6 @@ function hideAll() {
   $('#EditorCanvas').css('visibility','hidden');
   $('#tabletSizePreview').css('visibility','hidden');
   closeContainer();
-  closeColorContainer();
   resetColor();
   resetStrokeSize();
   removeImageDropLayer();
@@ -168,6 +169,7 @@ function hideAll() {
 }
 
 function showPopup() {
+  closeEditorPopup();
   popupVisible = true;
   $("body").append("<div id='popupBackground1' class='popupBackground'>");
   $("body").append("<div id='popup'>");

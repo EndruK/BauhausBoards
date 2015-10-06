@@ -66,5 +66,5 @@ function activatePenTool(event) {
   penTool.onMouseDrag = penMouseDrag;
   penTool.onMouseUp   = penMosueUp;
   penTool.activate();
-  tool.minDistance = 10;
+  penTool.minDistance = 10;
 }

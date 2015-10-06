@@ -61,7 +61,14 @@ function loadMessagePopup(event) {
 }
 
 function composeTo(type) {
-  if(messageSelectedUsers.length > 0) {
+  messageCollection = new Array();
+  if(type == "selected") {
+    messageCollection = messageSelectedUsers.slice();
+  }
+  else {
+    messageCollection = allUsers.slice();
+  }
+  if(messageCollection.length > 0) {
     stopSwitchUserTimer();
     removePopup();
     undo_undoStack = FixedQueue(undo_stackLength);
@@ -78,13 +85,6 @@ function composeTo(type) {
     view.update();
     startMessageTimer();
     $('#tabletSizePreview').css('visibility','visible');
-    messageCollection = new Array();
-    if(type == "selected") {
-      messageCollection = messageSelectedUsers.slice();
-    }
-    else {
-      messageCollection = allUsers.slice();
-    }
     showUsersInHeader();
   }
   else {

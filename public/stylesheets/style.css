@@ -310,6 +310,15 @@ body,
 .changeUserForm form button {
   float: right;
 }
+.colorTile {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #000;
+  float: left;
+  cursor: pointer;
+}
 #sidebarMain {
   visibility: visible;
 }
@@ -586,9 +595,23 @@ body,
 }
 #messageContainer button {
   margin: 5px;
+  padding: 0px;
 }
 #messageContainer div {
   overflow-y: scroll;
+}
+#sidebarCreateMessage .sidebarUpper button {
+  margin: 5px;
+}
+#sidebarCreateMessage .sidebarUpper button span {
+  font-size: 50px;
+}
+#editorPopup {
+  position: absolute;
+  z-index: 11;
+  background-color: #fff;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 @-webkit-keyframes spin2 {
   from {

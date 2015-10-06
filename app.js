@@ -12,6 +12,7 @@ var session = require('express-session');
 var uuid = require('uuid');
 var SHA256 = require("crypto-js/sha256");
 var moment = require("moment");
+var bootstrap = require('bootstrap')
 
 var paper = require('paper');
 
@@ -63,6 +64,7 @@ app.use('/node_modules/jquery-touchswipe', express.static(__dirname + '/node_mod
 app.use('/node_modules/paper', express.static(__dirname + '/node_modules/paper'));
 app.use('/node_modules/crypto-js', express.static(__dirname + '/node_modules/crypto-js'));
 app.use('/node_modules/moment', express.static(__dirname + '/node_modules/moment'));
+//app.use('/node_modules/bootstrap', express.static(__dirname + '/node_modules/bootstrap'));
 
 app.use(function(req, res, next) {
   req.db = db;
