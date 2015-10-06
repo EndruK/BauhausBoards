@@ -18,7 +18,8 @@ function openStrokePopup(event) {
   var height = 50*1;
   var posX = event.pageX;
   var posY = event.pageY;
-  openEditorPopup(this,width,height,posX,posY,function() {
+
+  openEditorPopup($(event.toElement),width,height,posX,posY,function() {
     $("#editorPopup").append("<div class='minStroke strokeTile' title='min stroke'><div>");
     $("#editorPopup").append("<div class='smallStroke strokeTile' title='small stroke'><div>");
     $("#editorPopup").append("<div class='greatStroke strokeTile' title='great stroke'><div>");

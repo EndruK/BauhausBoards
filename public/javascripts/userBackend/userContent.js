@@ -3,23 +3,19 @@ $(".btnChangeBackground").on("click",function(){checkSession(changeBackgroundPop
 var background;
 
 function loadChangeContent(event) {
+  activeColor = colors["black"];
+  switchButtonColor();
+  strokeSize = 1;
+  setSidebarStrokeButtonClass("minStroke");
   var userIndex = 0;
   for(var i=0; i<usercollection.length; i++) {
     if(usercollection[i].userID == authenticatedUser) userIndex = i;
   }
   $("#header").empty();
   $("#header").append("<div id='userInfo'>");
-  var imgURL = usercollection[userIndex].userProfilePic;
-  if(!imgURL) imgURL = "/images/default-user.png";
-  $("#header").append("<div id='userImage'><img src='"+imgURL+"'>");
-  if($("#userImage img").width() > $("#userImage img").height()) {
-    $("<div id='verticalAlignDiv'>").insertBefore("#userImage img");
-    $("#userImage img").css("width","100%");
-    $("#verticalAlignDiv").css("height",($("#userImage").height()-$("#userImage img").height())/2);
-  }
-  else {
-    $("#userImage img").css("height","100%");
-  }
+  $("#header").append("<div id='userImage'>")
+  $("#userImage").append("<span class='glyphicon'>");
+  showIcon("selector");
   $("#userInfo").append("<div id='userName'>Change Content");
   showSidebar('sidebarChangeContent');
   closeSidebar();

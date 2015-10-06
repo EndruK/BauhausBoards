@@ -1,23 +1,27 @@
 .sidebar.close-sidebar
   #sidebarChangeContent.sidebarContent
     .sidebarUpper
+      button.btnEditorSelector(title='Selector')
+        span.glyphicon.glyphicon-edit
+      button.btnEditorPen(title='Pen')
+        span.glyphicon.glyphicon-pencil
       br
-      button.btnEditorSelector Selector
+      button.btnEditorText(title='Text')
+        span.glyphicon.glyphicon-font
+      button.btnEditorEraser(title='Eraser')
+        span.glyphicon.glyphicon-erase
       br
+      button.btnEditorColor(title='Color')
+        span.glyphicon.glyphicon-text-color
+      button.btnEditorStroke(title='Stroke Size')
+        span.glyphicon.glyphicon-minus
+          .minStroke.strokeTile
+            div
       br
-      button.btnEditorPen Pen
-      br
-      br
-      button.btnEditorText Text
-      br
-      br
-      button.btnEditorEraser Eraser
-      br
-      br
-      //include strokeContainer
-      //include colorContainer
-      button.btnEditorUndo UNDO
-      button.btnEditorRedo REDO
+      button.btnEditorUndo(title='Undo')
+        span.glyphicon.glyphicon-step-backward
+      button.btnEditorRedo(title='Redo')
+        span.glyphicon.glyphicon-step-forward
     .sidebarLower
       hr
       button.btnSubmitChangeContent Change

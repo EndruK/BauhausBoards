@@ -38,7 +38,7 @@ function openColorPopup(event) {
   var height = 4 * 50;
   var posX = event.pageX;
   var posY = event.pageY;
-  openEditorPopup(this,width,height,posX,posY,function() {
+  openEditorPopup($(event.toElement),width,height,posX,posY,function() {
     $("#editorPopup").append("<div id='white' class='colorTile'>");
     $("#editorPopup").append("<div id='pink' class='colorTile'>");
     $("#editorPopup").append("<div id='yellow' class='colorTile'>");

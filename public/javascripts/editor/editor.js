@@ -18,6 +18,7 @@ function removeListeners() {
   selectorTool.remove();
   eraserTool.remove();
   deactivateSelector();
+  $('html').unbind("keyup");
 }
 function addImageDropLayer() {
   var wrapper = $("#wrapper");
@@ -33,8 +34,8 @@ function removeImageDropLayer() {
 }
 
 function openEditorPopup(obj,width,height,posX,posY,callback) {
-
-  if(clickedOn == obj){
+  console.log([clickedOn,obj])
+  if(clickedOn && clickedOn.get(0) == obj.get(0)){
     closeEditorPopupClick();
   }
   else {
@@ -50,8 +51,6 @@ function openEditorPopup(obj,width,height,posX,posY,callback) {
       "left":posX+10,
       "top":posY+10
     });
-    console.log("asdasd");
-
     $("#editorPopup").animate({
       "min-width":width+"px",
       "min-height":height+"px"

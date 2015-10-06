@@ -18,6 +18,12 @@ function activateSelectorTool(event) {
   selectorTool.onMouseUp   = selectorMouseUp;
   selectorTool.onMouseDrag = selectorMouseDrag;
   showIcon("selector");
+
+  $('html').keyup(function(e){
+    if(e.keyCode == 46) {
+      btnRemove()
+    }
+  });
 }
 var mousePoint;
 var selectionPath = null;
