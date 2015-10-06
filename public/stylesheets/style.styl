@@ -80,14 +80,7 @@ html,body,#wrapper
   background-color black
   border-bottom solid 1px
   border-radius 3px
-.strokeMin
-  height 25%
-.strokeSmall
-  height 50%
-.strokeBig
-  height 75%
-.strokeMax
-  height 100%
+
 
 .colors
   width inherit
@@ -211,7 +204,18 @@ html,body,#wrapper
   border 1px solid black
   float left
   cursor pointer
-  background-color black
+.strokeTile div
+  width 100%
+  border-bottom solid 1px black
+.minStroke div
+  height 25%
+.smallStroke div
+  height 50%
+.greatStroke div
+  height 75%
+.maxStroke div
+  height 100%
+
 
 //IDs
 #sidebarMain
@@ -453,7 +457,9 @@ html,body,#wrapper
   z-index 11
   background-color white
   border-radius 5px
-  
+
+
+
 //animations
 @-webkit-keyframes spin2 {
     from { -webkit-transform: rotate(0deg);}

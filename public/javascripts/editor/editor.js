@@ -1,16 +1,17 @@
 //set up the global paper scope
 paper.install(window);
 $('.sidebar').on('click', '.btnEditorEraser', doClick);
-$('.sidebar').on('click', '.btnEditorStroke', openStrokePopup);
 $('.sidebar').on('click', '.btnEditorUndo', doClick);
 $('.sidebar').on('click', '.btnEditorRedo', doClick);
 var clickedOn;
 var editorPopupTimer;
-var editorPopupTime = 1000*5;
+var editorPopupTime = 1000*60;
+//var editorPopupTime = 1000*5;
 
 $(document).ready(function() {
   //get the editor canvas
   paper.setup('EditorCanvas');
+  clickedOn = null;
 });
 
 function doClick(event) {}
@@ -36,12 +37,9 @@ function removeImageDropLayer() {
   imageDropLayer.remove();
 }
 
-function openStrokePopup(event) {
-  openEditorPopup(this,100,100);
-}
-
 function openEditorPopup(obj,width,height,callback) {
   if(clickedOn == obj){
+
     closeEditorPopupClick();
   }
   else {
@@ -68,7 +66,7 @@ function openEditorPopup(obj,width,height,callback) {
 
 function closeEditorPopupClick() {
   stopEditorPopupTimer();
-  $("body").unbind("click");
+  $("body").unbind("mousedown");
   $("#editorPopup").empty();
   $("#editorPopup").animate({
     "width":"0px",
@@ -81,7 +79,7 @@ function closeEditorPopupClick() {
 
 function closeEditorPopup() {
   stopEditorPopupTimer();
-  $("body").unbind("click");
+  $("body").unbind("mousedown");
   $("#editorPopup").remove();
   clickedOn = null;
 }
@@ -96,12 +94,14 @@ function stopEditorPopupTimer() {
 }
 
 function activateBodyListener() {
-  $("body").on("click", function(event) {
+  $("body").mousedown(function(event) {
     if($("#editorPopup").length > 0) {
       var clickedItem = $(event.toElement);
-      if(clickedItem.get(0) == $(".btnEditorStroke").get(0) || clickedItem.parent().get(0) == $(".btnEditorStroke").get(0) ||
-        (clickedItem.get(0) == $(".btnEditorColor").get(0) || clickedItem.parent().get(0) == $(".btnEditorColor").get(0))) {}
-      else if(clickedItem.parent().get(0) != $("#editorPopup").get(0)) {
+      var clickedItemparent = $(clickedItem.parent().get(0));
+      if((clickedItem.get(0) == $(".btnEditorStroke").get(0) || clickedItem.parent().get(0) == $(".btnEditorStroke").get(0)) ||
+          (clickedItem.get(0) == $(".btnEditorColor").get(0) || clickedItem.parent().get(0) == $(".btnEditorColor").get(0))) {}
+      else if(clickedItem.parent().get(0) != $("#editorPopup").get(0) && 
+          clickedItem.parents("#editorPopup").get(0) != $("#editorPopup").get(0)) {
         closeEditorPopupClick();
       }
     }

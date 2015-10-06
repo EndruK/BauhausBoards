@@ -34,7 +34,6 @@ $(document).ready(function() {
 function openColorPopup(event) {
   var width = 5 * 50;
   var height = 4 * 50;
-  var time = 150;
   openEditorPopup(this,width,height,function() {
     $("#editorPopup").append("<div id='white' class='colorTile'>");
     $("#editorPopup").append("<div id='pink' class='colorTile'>");
@@ -83,6 +82,7 @@ function switchButtonColor() {
   $(".btnEditorPen").css("color",rgbToHex(activeColor));
   $(".btnEditorText").css("color",rgbToHex(activeColor));
   $(".btnEditorStroke").css("color",rgbToHex(activeColor));
+  $(".strokeTile div").css("background-color",rgbToHex(activeColor));
 }
 
 function colorToHex(color) {

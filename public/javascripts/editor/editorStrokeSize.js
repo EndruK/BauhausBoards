@@ -1,4 +1,4 @@
-$('.sidebar').on('click', '.btnStroke', openStrokePopup);
+$('.sidebar').on('click', '.btnEditorStroke', openStrokePopup);
 $('.sidebar').on('click', '.stroke', handlePopup);
 var strokeSize;
 var containerOpen;
@@ -11,13 +11,41 @@ $(document).ready(function() {
 });
 
 function openStrokePopup(event) {
+  var width = 50*4;
+  var height = 50*1;
   openEditorPopup(this,width,height,function() {
-    $("#editorPopup").append("<div id='minStroke' class='strokeTile'>");
-    $("#editorPopup").append("<div id='smallStroke' class='strokeTile'>");
-    $("#editorPopup").append("<div id='greatStroke' class='strokeTile'>");
-    $("#editorPopup").append("<div id='maxStroke' class='strokeTile'>");
+    $("#editorPopup").append("<div class='minStroke strokeTile' title='min stroke'><div>");
+    $("#editorPopup").append("<div class='smallStroke strokeTile' title='small stroke'><div>");
+    $("#editorPopup").append("<div class='greatStroke strokeTile' title='great stroke'><div>");
+    $("#editorPopup").append("<div class='maxStroke strokeTile' title='max stroke'><div>");
+    $(".strokeTile div").css("background-color",rgbToHex(activeColor));
+    $("#editorPopup").append("<div class='clear'>");
     $(".strokeTile").on("click", switchStroke);
   });
+}
+
+function switchStroke() {
+  startEditorPopupTimer();
+  updateTimer();
+  var clicked = $(this).attr("class").split(" ")[0];
+  console.log(clicked);
+  switch(clicked) {
+    case "minStroke":
+      strokeSize = 1;
+      break;
+    case "smallStroke":
+      strokeSize = 2;
+      break;
+    case "greatStroke":
+      strokeSize = 3;
+      break;
+    case "maxStroke":
+      strokeSize = 4;
+      break;
+    default:
+      strokeSize = 1;
+      break;
+  }
 }
 
 

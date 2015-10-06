@@ -170,18 +170,6 @@ body,
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
-.strokeMin {
-  height: 25%;
-}
-.strokeSmall {
-  height: 50%;
-}
-.strokeBig {
-  height: 75%;
-}
-.strokeMax {
-  height: 100%;
-}
 .colors {
   width: inherit;
   overflow: auto;
@@ -327,7 +315,22 @@ body,
   border: 1px solid #000;
   float: left;
   cursor: pointer;
-  background-color: #000;
+}
+.strokeTile div {
+  width: 100%;
+  border-bottom: solid 1px #000;
+}
+.minStroke div {
+  height: 25%;
+}
+.smallStroke div {
+  height: 50%;
+}
+.greatStroke div {
+  height: 75%;
+}
+.maxStroke div {
+  height: 100%;
 }
 #sidebarMain {
   visibility: visible;
