@@ -11,6 +11,10 @@ $('.sidebar').on('click', '#askToLeave', askToLeave);
 $('.sidebar').on('click', '.btnSubmitMessage', submitMessagePopup);
 
 function loadMessagePopup(event) {
+  activeColor = colors["black"];
+  switchButtonColor();
+  strokeSize = 1;
+  setSidebarStrokeButtonClass("minStroke");
   messageSelectedUsers = new Array();
   allUsers = new Array();
   showPopup();
