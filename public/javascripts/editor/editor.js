@@ -45,7 +45,9 @@ function openEditorPopup(obj,width,height,callback) {
     closeEditorPopupClick();
   }
   else {
+    editorPopupOpen = true;
     clickedOn = obj;
+    updateTimer();
     var clickPoint = [event.pageX+10,event.pageY+10];
     $("#editorPopup").remove();
     $("body").append("<div id='editorPopup'>");
@@ -57,16 +59,16 @@ function openEditorPopup(obj,width,height,callback) {
       "width":width+"px",
       "height":height+"px"
     },150,function() {
+      activateBodyListener();
       startEditorPopupTimer();
-      if(typeof(callback) == "function") {
-        callback();
-      }
+      if(typeof(callback) == "function") callback();
     });
   }
 }
 
 function closeEditorPopupClick() {
   stopEditorPopupTimer();
+  $("body").unbind("click");
   $("#editorPopup").empty();
   $("#editorPopup").animate({
     "width":"0px",
@@ -79,6 +81,7 @@ function closeEditorPopupClick() {
 
 function closeEditorPopup() {
   stopEditorPopupTimer();
+  $("body").unbind("click");
   $("#editorPopup").remove();
   clickedOn = null;
 }
@@ -90,4 +93,17 @@ function startEditorPopupTimer() {
 
 function stopEditorPopupTimer() {
   clearTimeout(editorPopupTimer);
+}
+
+function activateBodyListener() {
+  $("body").on("click", function(event) {
+    if($("#editorPopup").length > 0) {
+      var clickedItem = $(event.toElement);
+      if(clickedItem.get(0) == $(".btnEditorStroke").get(0) || clickedItem.parent().get(0) == $(".btnEditorStroke").get(0) ||
+        (clickedItem.get(0) == $(".btnEditorColor").get(0) || clickedItem.parent().get(0) == $(".btnEditorColor").get(0))) {}
+      else if(clickedItem.parent().get(0) != $("#editorPopup").get(0)) {
+        closeEditorPopupClick();
+      }
+    }
+  });
 }

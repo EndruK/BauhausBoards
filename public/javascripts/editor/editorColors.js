@@ -23,27 +23,13 @@ var colors = {
 var colorContainerOpen;
 var colorContainerTimeout = 5000;
 var colorContainerTimeoutHandler;
-$('.sidebar').on('click', '.btnEditorColor', openColorPopup);
-
+$(".sidebar").on('click', '.btnEditorColor', openColorPopup);
 
 $(document).ready(function() {
   colorContainerOpen = false;
   activeColor = colors["black"];
   $("#sidebarCreateMessage .sidebarUpper").css("color",rgbToHex(activeColor));
 });
-
-/*function handleButtonClick(event) {
-  console.log("clicked on color button");
-  updateTimer();
-  if(!colorContainerOpen) {
-    openColorContainer();
-    updateColorContainerTimeout();
-  }
-  else {
-    closeColorContainer();
-    clearTimeout(colorContainerTimeoutHandler);
-  }
-}*/
 
 function openColorPopup(event) {
   var width = 5 * 50;
@@ -79,6 +65,7 @@ function openColorPopup(event) {
 
 function switchColor(event) {
   startEditorPopupTimer();
+  updateTimer();
   var clicked = $(this).attr("id");
   activeColor = colors[clicked];
   switchButtonColor();
