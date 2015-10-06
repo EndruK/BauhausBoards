@@ -20,7 +20,7 @@ function openStrokePopup(event) {
     $("#editorPopup").append("<div class='maxStroke strokeTile' title='max stroke'><div>");
     $(".strokeTile div").css("background-color",rgbToHex(activeColor));
     $("#editorPopup").append("<div class='clear'>");
-    $(".strokeTile").on("click", switchStroke);
+    $("#editorPopup .strokeTile").on("click", switchStroke);
   });
 }
 

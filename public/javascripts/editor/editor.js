@@ -66,6 +66,7 @@ function openEditorPopup(obj,width,height,callback) {
 
 function closeEditorPopupClick() {
   stopEditorPopupTimer();
+  //$("body").unbind("mousedown");
   $("body").unbind("mousedown");
   $("#editorPopup").empty();
   $("#editorPopup").animate({
@@ -79,6 +80,7 @@ function closeEditorPopupClick() {
 
 function closeEditorPopup() {
   stopEditorPopupTimer();
+  //$("body").unbind("mousedown");
   $("body").unbind("mousedown");
   $("#editorPopup").remove();
   clickedOn = null;
@@ -94,8 +96,13 @@ function stopEditorPopupTimer() {
 }
 
 function activateBodyListener() {
-  $("body").mousedown(function(event) {
-    if($("#editorPopup").length > 0) {
+  //TODO: the mousedown event doesn't work on the tablets use touchstart
+  //$("body").mousedown(listener);
+  $("body").bind("mousedown",listener);
+}
+
+function listener() {
+  if($("#editorPopup").length > 0) {
       var clickedItem = $(event.toElement);
       if((clickedItem.get(0) == $(".btnEditorStroke").get(0) || clickedItem.parents(".btnEditorStroke").get(0) == $(".btnEditorStroke").get(0)) ||
           (clickedItem.get(0) == $(".btnEditorColor").get(0) || clickedItem.parent().get(0) == $(".btnEditorColor").get(0))) {}
@@ -104,5 +111,4 @@ function activateBodyListener() {
         closeEditorPopupClick();
       }
     }
-  });
 }
