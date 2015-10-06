@@ -1,4 +1,6 @@
-$('.sidebar').on('click', '.btnEditorStroke', openStrokePopup);
+$('.sidebar').on('click', '.btnEditorStroke', function(event) {
+  openStrokePopup(event);
+});
 $('.sidebar').on('click', '.stroke', handlePopup);
 var strokeSize;
 var containerOpen;
@@ -8,12 +10,15 @@ $(document).ready(function() {
   //initialize stroke size with 2
   strokeSize = 1;
   containerOpen = false;
+
 });
 
 function openStrokePopup(event) {
   var width = 50*4;
   var height = 50*1;
-  openEditorPopup(this,width,height,function() {
+  var posX = event.pageX;
+  var posY = event.pageY;
+  openEditorPopup(this,width,height,posX,posY,function() {
     $("#editorPopup").append("<div class='minStroke strokeTile' title='min stroke'><div>");
     $("#editorPopup").append("<div class='smallStroke strokeTile' title='small stroke'><div>");
     $("#editorPopup").append("<div class='greatStroke strokeTile' title='great stroke'><div>");

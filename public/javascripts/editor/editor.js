@@ -37,25 +37,29 @@ function removeImageDropLayer() {
   imageDropLayer.remove();
 }
 
-function openEditorPopup(obj,width,height,callback) {
-  if(clickedOn == obj){
+function openEditorPopup(obj,width,height,posX,posY,callback) {
 
+  if(clickedOn == obj){
     closeEditorPopupClick();
   }
   else {
+
     editorPopupOpen = true;
     clickedOn = obj;
+
     updateTimer();
-    var clickPoint = [event.pageX+10,event.pageY+10];
     $("#editorPopup").remove();
+
     $("body").append("<div id='editorPopup'>");
     $("#editorPopup").css({
-      "left":clickPoint[0],
-      "top":clickPoint[1]
+      "left":posX+10,
+      "top":posY+10
     });
+    console.log("asdasd");
+
     $("#editorPopup").animate({
-      "width":width+"px",
-      "height":height+"px"
+      "min-width":width+"px",
+      "min-height":height+"px"
     },150,function() {
       activateBodyListener();
       startEditorPopupTimer();

@@ -23,7 +23,9 @@ var colors = {
 var colorContainerOpen;
 var colorContainerTimeout = 5000;
 var colorContainerTimeoutHandler;
-$(".sidebar").on('click', '.btnEditorColor', openColorPopup);
+$(".sidebar").on('click', '.btnEditorColor', function(event) {
+  openColorPopup(event);
+});
 
 $(document).ready(function() {
   colorContainerOpen = false;
@@ -34,7 +36,9 @@ $(document).ready(function() {
 function openColorPopup(event) {
   var width = 5 * 50;
   var height = 4 * 50;
-  openEditorPopup(this,width,height,function() {
+  var posX = event.pageX;
+  var posY = event.pageY;
+  openEditorPopup(this,width,height,posX,posY,function() {
     $("#editorPopup").append("<div id='white' class='colorTile'>");
     $("#editorPopup").append("<div id='pink' class='colorTile'>");
     $("#editorPopup").append("<div id='yellow' class='colorTile'>");
