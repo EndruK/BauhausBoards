@@ -332,6 +332,9 @@ body,
 .maxStroke div {
   height: 100%;
 }
+.btnEditorStroke span .strokeTile div {
+  background-color: #000;
+}
 #sidebarMain {
   visibility: visible;
 }

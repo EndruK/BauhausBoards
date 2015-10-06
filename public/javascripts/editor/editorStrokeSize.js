@@ -32,15 +32,19 @@ function switchStroke() {
   switch(clicked) {
     case "minStroke":
       strokeSize = 1;
+      setSidebarStrokeButtonClass("minStroke")
       break;
     case "smallStroke":
       strokeSize = 2;
+      setSidebarStrokeButtonClass("smallStroke")
       break;
     case "greatStroke":
       strokeSize = 3;
+      setSidebarStrokeButtonClass("greatStroke")
       break;
     case "maxStroke":
       strokeSize = 4;
+      setSidebarStrokeButtonClass("maxStroke")
       break;
     default:
       strokeSize = 1;
@@ -48,6 +52,13 @@ function switchStroke() {
   }
 }
 
+function setSidebarStrokeButtonClass(name) {
+  $(".btnEditorStroke span div").removeClass("minStroke");
+  $(".btnEditorStroke span div").removeClass("smallStroke");
+  $(".btnEditorStroke span div").removeClass("greatStroke");
+  $(".btnEditorStroke span div").removeClass("maxStroke");
+  $(".btnEditorStroke span div").addClass(name);
+}
 
 function handlePopup(event) {
   console.log("stroke");

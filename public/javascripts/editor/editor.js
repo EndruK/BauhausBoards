@@ -97,8 +97,7 @@ function activateBodyListener() {
   $("body").mousedown(function(event) {
     if($("#editorPopup").length > 0) {
       var clickedItem = $(event.toElement);
-      var clickedItemparent = $(clickedItem.parent().get(0));
-      if((clickedItem.get(0) == $(".btnEditorStroke").get(0) || clickedItem.parent().get(0) == $(".btnEditorStroke").get(0)) ||
+      if((clickedItem.get(0) == $(".btnEditorStroke").get(0) || clickedItem.parents(".btnEditorStroke").get(0) == $(".btnEditorStroke").get(0)) ||
           (clickedItem.get(0) == $(".btnEditorColor").get(0) || clickedItem.parent().get(0) == $(".btnEditorColor").get(0))) {}
       else if(clickedItem.parent().get(0) != $("#editorPopup").get(0) && 
           clickedItem.parents("#editorPopup").get(0) != $("#editorPopup").get(0)) {
