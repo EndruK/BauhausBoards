@@ -330,8 +330,50 @@ function changeBoardResolutionPopup() {
   $("#popup").append("<hr>");
   $("#popup").append("<h4>Change the Resolution");
   $("#popup").append("<hr>");
-  
+  $("#popup").append("<h4>Set Automatically");
+  $("#popup").append("<button title='set to current window size' onclick='setBoardResolution("+boardID+",\"aut\")'>Set");
+  $("#popup").append("<hr>");
+  $("#popup").append("<h4>Set Manually");
+  $("#popup").append("<div class='popupConfirm'>");
+  $(".popupConfirm").append("<label>Width:");
+  $(".popupConfirm").append("<input type='text' id='resX'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<label>Height:");
+  $(".popupConfirm").append("<input type='text' id='resY'>");
+  $(".popupConfirm").append("<br>");
+  $(".popupConfirm").append("<button onclick='setBoardResolution("+boardID+",\"man\")'>Set");
+  $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
+  getBoardResolution(boardID);
+  $(".popupConfirm button:last").focus();
 }
+
+function setBoardResolution(boardID,type) {
+  var resX;
+  var resY;
+  if(type == 'man') {
+    resX = $("#resX").val();
+    resY = $("#resY").val();
+  }
+  else if(type == 'aut') {
+    resX = $(window).width();
+    resY = $(window).height();
+  }
+  $.ajax({
+    url:"/functions/setBoardDimUserBackend",
+    type:"POST",
+    data:{"boardID":boardID,"resX":resX,"resY":resY},
+    success:function(res) {
+      removePopup();
+      showFloaty("Resolution for Board " + boardID + " successfully updated.");
+      stopLoginPopupTimer();
+    },
+    error:function(err) {
+      console.log("couldn't set board resolution");
+    }
+  });
+}
+
 
 function checkSessionPW(callback) {
   startAutoLogoutTimer();
@@ -372,7 +414,6 @@ function checkMail(mail,callback) {
     success:function(res) {
       if(!res) {
         callback();
-        //changeUserAjax(userID,name,password,mail,url,description,twitter,adminFlag,pin);
       }
       else {
         $("#userMailInput").css("border","2px solid red");
@@ -431,4 +472,19 @@ function validatePin(pin) {
     return true;
   }
   return false;
+}
+
+function getBoardResolution(boardID) {
+  $.ajax({
+    url:"/functions/getBoard",
+    type:"GET",
+    data:{"boardID":boardID},
+    success:function(res) {
+      $("#resX").val(res.boardResX);
+      $("#resY").val(res.boardResY);
+    },
+    error:function(err) {
+      console.log("couldn't get board resolution");
+    }
+  });
 }

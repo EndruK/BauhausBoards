@@ -910,6 +910,12 @@ router.post('/loginUserPin',function(req,res,next) {
         req.session.userID = userID;
         req.session.pinTime = Date.now();
         req.session.userPin = true;
+        if(row.u_adminFlag == 1) {
+          req.session.adminFlag = true;
+        }
+        else {
+          req.session.adminFlag = false;
+        }
         res.send("success");
       }
       else {
@@ -1037,6 +1043,33 @@ router.post('/changeUserPin', restrictUserPW, function(req,res) {
       res.send(true);
     }
   });
+});
+
+router.post('/setBoardDimUserBackend',restrictUserPW, function(req,res) {
+  var db = req.db;
+  if(req.session.adminFlag) {
+    var boardID = req.body.boardID;
+    var resX = req.body.resX;
+    var resY = req.body.resY;
+    var query = "UPDATE board SET b_resX=$resX, b_resY=$resY WHERE b_id=$boardID";
+    db.run(query,{
+      $resX:resX,
+      $resY:resY,
+      $boardID:boardID
+    },function(err) {
+      if(err) {
+        res.status = 500;
+        res.send("error: " + err);
+      }
+      else {
+        res.send(true);
+      }
+    });
+  }
+  else {
+    req.session.error = 'ACCESS DENIED';
+    res.send("ACCESS DENIED");
+  }
 });
 
 router.post('/logoutAdmin', function(req, res, next) {

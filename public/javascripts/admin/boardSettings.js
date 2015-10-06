@@ -232,12 +232,12 @@ function setBoardRoom(boardID) {
 
 function getBoardResolution(boardID) {
   $.ajax({
-    url:"/functions/getBoardDim",
+    url:"/functions/getBoard",
     type:"GET",
     data:{"boardID":boardID},
     success:function(res) {
-      $("#resX").val(res.resX);
-      $("#resY").val(res.resY);
+      $("#resX").val(res.boardResX);
+      $("#resY").val(res.boardResY);
     },
     error:function(err) {
       console.log("couldn't get board resolution");

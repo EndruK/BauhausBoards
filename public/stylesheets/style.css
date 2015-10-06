@@ -261,6 +261,12 @@ body,
   margin: 10px;
   width: calc(50% - 20px);
 }
+.popupConfirm label {
+  float: left;
+}
+.popupConfirm input {
+  float: right;
+}
 .roomUsers {
   max-height: 250px;
   width: 100%;
