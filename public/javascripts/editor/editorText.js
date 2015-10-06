@@ -8,6 +8,7 @@ $(document).ready(function() {
   textTool = new Tool();
 });
 function activateTextTool(event) {
+  showIcon("text");
   console.log($(this).attr('class'));
   //$('#header').text($(this).attr('class'));
   updateTimer();

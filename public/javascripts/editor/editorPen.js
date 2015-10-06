@@ -56,6 +56,7 @@ function penMosueUp(event) {
   }
 }
 function activatePenTool(event) {
+  showIcon("pen");
   console.log($(this).attr('class'));
   //$('#header').text($(this).attr('class'));
   updateTimer();

@@ -8,6 +8,7 @@ $(document).ready(function() {
   eraserTool = new Tool();
 });
 function activateEraserTool(event) {
+  showIcon("eraser");
   console.log($(this).attr('class'));
   //$('#header').text($(this).attr('class'));
   updateTimer();

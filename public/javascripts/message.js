@@ -90,6 +90,7 @@ function composeTo(type) {
     startMessageTimer();
     $('#tabletSizePreview').css('visibility','visible');
     showUsersInHeader();
+    switchButtonColor();
   }
   else {
     showFloaty("Select a user!");
@@ -118,7 +119,8 @@ function showUsersInHeader() {
     });
   }
   $("#header").append("<div id='userImage'>")
-  $("#userImage").append("pic of selected tool");
+  $("#userImage").append("<span class='glyphicon'>");
+  showIcon("selector");
 }
 
 function handleSelection(userID) {

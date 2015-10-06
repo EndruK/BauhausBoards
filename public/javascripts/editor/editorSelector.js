@@ -17,6 +17,7 @@ function activateSelectorTool(event) {
   selectorTool.onMouseDown = selectorMouseDown;
   selectorTool.onMouseUp   = selectorMouseUp;
   selectorTool.onMouseDrag = selectorMouseDrag;
+  showIcon("selector");
 }
 var mousePoint;
 var selectionPath = null;

@@ -1,8 +1,5 @@
 //set up the global paper scope
 paper.install(window);
-$('.sidebar').on('click', '.btnEditorEraser', doClick);
-$('.sidebar').on('click', '.btnEditorUndo', doClick);
-$('.sidebar').on('click', '.btnEditorRedo', doClick);
 var clickedOn;
 var editorPopupTimer;
 var editorPopupTime = 1000*60;
@@ -13,8 +10,6 @@ $(document).ready(function() {
   paper.setup('EditorCanvas');
   clickedOn = null;
 });
-
-function doClick(event) {}
 
 //function to remove all active listeners
 function removeListeners() {
@@ -115,4 +110,34 @@ function listener() {
         closeEditorPopupClick();
       }
     }
+}
+
+function showIcon(type) {
+  $("#userImage span").removeClass("glyphicon-edit");
+  $("#userImage span").removeClass("glyphicon-pencil");
+  $("#userImage span").removeClass("glyphicon-font");
+  $("#userImage span").removeClass("glyphicon-erase");
+
+  switch(type){
+    case "selector":
+      $("#userImage span").addClass("glyphicon-edit");
+      break;
+    case "pen":
+      $("#userImage span").addClass("glyphicon-pencil");
+      break;
+    case "text":
+      $("#userImage span").addClass("glyphicon-font");
+      break;
+    case "eraser":
+      $("#userImage span").addClass("glyphicon-erase");
+      break;
+    default:
+      break;
+  }
+  if($("#userImage span").hasClass("glyphicon-font") || $("#userImage span").hasClass("glyphicon-pencil")) {
+    $("#userImage span").css("color",rgbToHex(activeColor));
+  }
+  else {
+    $("#userImage span").css("color",rgbToHex(colors["black"]));
+  }
 }

@@ -87,6 +87,12 @@ function switchButtonColor() {
   $(".btnEditorText").css("color",rgbToHex(activeColor));
   $(".btnEditorStroke").css("color",rgbToHex(activeColor));
   $(".strokeTile div").css("background-color",rgbToHex(activeColor));
+  if($("#userImage span").hasClass("glyphicon-font") || $("#userImage span").hasClass("glyphicon-pencil")) {
+    $("#userImage span").css("color",rgbToHex(activeColor));
+  }
+  else {
+    $("#userImage span").css("color",rgbToHex(colors["black"]));
+  }
 }
 
 function colorToHex(color) {
