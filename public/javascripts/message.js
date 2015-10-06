@@ -120,7 +120,7 @@ function showUsersInHeader() {
   }
   $("#header").append("<div id='userImage'>")
   $("#userImage").append("<span class='glyphicon'>");
-  showIcon("selector");
+  showIcon("pen");
 }
 
 function handleSelection(userID) {

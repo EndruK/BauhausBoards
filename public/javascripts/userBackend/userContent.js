@@ -5,6 +5,7 @@ var background;
 function loadChangeContent(event) {
   activeColor = colors["black"];
   switchButtonColor();
+  $("#sidebarChangeContent").css("color","black");
   strokeSize = 1;
   setSidebarStrokeButtonClass("minStroke");
   var userIndex = 0;
