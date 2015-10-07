@@ -49,6 +49,7 @@ $('.sidebarSwiper').click(function(){
 
 //###FUNCTIONS##################################################################
 function loadMain(event) {
+  showMain = true;
   usercollection = new Array();
   $("#header").empty();
   project.clear();
@@ -166,6 +167,7 @@ function hideAll() {
   stopSwitchUserTimer();
   removeListeners();
   showMessages = false;
+  showMain = false;
 }
 
 function showPopup() {

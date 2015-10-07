@@ -4,7 +4,7 @@ var dim = null;
 var selectedUser;
 var switchUserTimerHandler = null;
 var switchUserTime = 20000;
-
+var showMain;
 
 //initial functions
 $( document ).ready(function() {
@@ -14,6 +14,7 @@ $( document ).ready(function() {
     return;
   }
   getBoard();
+  showMain = true;
 });
 
 $(window).on("resize", resize);
@@ -24,6 +25,12 @@ function resize () {
   }
   else if(dim && $(window).width() < dim.resX) {
     $("#header").css("right",$(window).width()-dim.resX);
+  }
+  if(showMain) {
+    var sidebarHeight = $(".sidebar").height();
+    var sidebarLowerHeight = $("#sidebarMain .sidebarLower").height();
+    var sidebarUpperHeight = sidebarHeight-sidebarLowerHeight-20;
+    $("#userContainer").css("height",sidebarUpperHeight+"px");
   }
 }
 
@@ -112,15 +119,46 @@ function initRoomDisplay() {
 }
 
 function initSidebar() {
-  var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
-  buttonContainer.empty();
-  buttonContainer.append("<br>");
+  var sidebarHeight = $(".sidebar").height();
+  var sidebarLowerHeight = $("#sidebarMain .sidebarLower").height();
+  var sidebarUpperHeight = sidebarHeight-sidebarLowerHeight-20;
+
+
+  $("#sidebarMain .sidebarUpper").empty();
+  $("#sidebarMain .sidebarUpper").append("<br>");
+  $("#sidebarMain .sidebarUpper").append("<div id='userContainer'>");
+  $("#userContainer").css("height",sidebarUpperHeight+"px");
   for(var i=0; i<usercollection.length; i++) {
-    buttonContainer.append("<button name='"+i+"' onclick='selectUser("+i+")'>"+usercollection[i].userName);
+    $("#userContainer").append("<button name='"+i+"' onclick='selectUser("+i+")'>"+usercollection[i].userName);
     //buttonContainer.append("<button name='"+i+"' onclick='selectUser("+i+")'>012345678901234567890123456789");
-    buttonContainer.append("<br>");
+    $("#userContainer").append("<br>");
   };
 }
+
+/*
+  var sidebarHeight = $(".sidebar").height();
+  var sidebarLowerHeight = $("#sidebarViewMessages .sidebarLower").height();
+  var sidebarUpperHeight = sidebarHeight-sidebarLowerHeight;
+  var nextSize = 30;
+  $("#sidebarViewMessages .sidebarUpper").empty();
+  $("#sidebarViewMessages .sidebarUpper").append("<br>");
+  $("#sidebarViewMessages .sidebarUpper").append("<div id='messageContainer'>");
+  $("#messageContainer").append("<div>");
+  $("#messageContainer").css("height",sidebarUpperHeight+"px");
+  $("#messageContainer div").css("height",sidebarUpperHeight-55+"px");
+  if(messagePage != 0) $("#messageContainer").append("<button style='width:40%' onclick='{messagePage--; displayMessages();}'><");
+  if(messagePage != maxpages) $("#messageContainer").append("<button style='width:40%' class='nextPrevBtn' onclick='{messagePage++; displayMessages();}'>>");
+  for(var i=(messagePage*maxMessages); i<((messagePage+1)*maxMessages); i++) {
+    if(i == messages.length) break;
+    $("#messageContainer div").append("<button value='"+i+"' onclick='showMessage("+i+")'>"+moment(messages[i].date).format("YYYY-MM-DD HH:mm"));
+    if(messages[i].seen == 0) {
+      $("#messageContainer div button:last").attr("style","border:solid 2px red;");
+    }
+    if(((messagePage+1)*maxMessages)-1 != i) {
+      $("#messageContainer div").append("<br>");
+    }
+  }
+*/
 
 function selectUser(userIndex) {
   updateTimer();

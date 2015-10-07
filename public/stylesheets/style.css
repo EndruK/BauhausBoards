@@ -138,6 +138,7 @@ body,
   width: 200px;
   position: absolute;
   bottom: 0;
+  padding-right: 5px;
 }
 .sidebarLower button {
   width: 80%;
@@ -635,6 +636,9 @@ body,
   padding: 0px;
 }
 #messageContainer div {
+  overflow-y: scroll;
+}
+#userContainer {
   overflow-y: scroll;
 }
 #sidebarMain .sidebarUpper button,
