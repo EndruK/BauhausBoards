@@ -3,7 +3,7 @@ paper.install(window);
 var dim = null;
 var selectedUser;
 var switchUserTimerHandler = null;
-var switchUserTime = 20000*10;
+var switchUserTime = 20000;
 var showMain;
 
 //initial functions

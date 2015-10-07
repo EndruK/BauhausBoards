@@ -1,0 +1,33 @@
+Studie:
+- Nutzer müssen damit einverstanden sein, dass ich deren nachrichten/content lese
+- Nutzer müssen für die Dauer der Studie in kauf nehmen, dass sie vom system mails bekommen
+- Nutzer sollen Funktionen Testen mit: Board, Desktop, Smartphone
+  * Schreibe Nachricht an einen Nutzer
+  * Schreibe Nachricht an 2 Nutzer
+  * Schreibe Nachricht an alle nutzer
+  * Schreibe Feedback
+- Log In with Pin
+- Set a Status
+- Remove Status
+- Set a Status While another is still active
+- Change The Content Several Times
+- View the messages
+- login in the user settings
+- change a few settings
+  * name
+  * description
+  * add a twitter account
+  * change the profile pic
+  * upload a profile pic
+  * change their pw
+  * change pin
+
+
+
+Testfragen:
+  #Oberfläche
+  #Editor
+  #Tablet nutzbarkeit
+  #Desktop nutzbarkeit
+  #Smartphone nutzbarkeit
+  
