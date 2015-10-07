@@ -3,7 +3,7 @@ paper.install(window);
 var dim = null;
 var selectedUser;
 var switchUserTimerHandler = null;
-var switchUserTime = 20000;
+var switchUserTime = 20000*10;
 var showMain;
 
 //initial functions
@@ -286,18 +286,41 @@ function selectBoard() {
 }
 
 function showTwitter(userIndex) {
-  //console.log(usercollection[userIndex].userTwitter);
-  //var yourRawJSONData;
+
   $("#twitterDiv").remove();
   $.ajax({
     url:"/functions/getUserTwitter",
     type:"GET",
     data:{"userID":usercollection[userIndex].userID},
     success:function(res) {
-      console.log(res);
+      if(res && res.twitterName && res.tweetID) {
+        getTwitterEmbed(res.twitterName,res.tweetID);
+        //console.log(res);
+      }
     },
     error:function(err) {
       console.log("couldn't get twitter content");
+    },
+    timeout: 3000
+  });
+}
+
+function getTwitterEmbed(twitterName,tweetID) {
+  var url = "https://api.twitter.com/1/statuses/oembed.json?url=https://twitter.com/"+twitterName+"/status/"+tweetID;
+  $.ajax({
+    url: url,
+    dataType: "jsonp",
+    success:function(res) {
+      console.log(res.html);
+      var onlyBlockquote = (res.html).split("<script")[0];
+      $("body").append("<div id='twitterDiv'>");
+      $("#twitterDiv").append(onlyBlockquote);
+      $(".Tweet-card").remove();
+      $(".Tweet-actions").remove();
+      $(".tweet-brand").remove();
+    },
+    error:function(err) {
+      console.log(err);
     }
-  })
+  });
 }

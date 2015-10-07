@@ -127,7 +127,11 @@ router.get('/getUserTwitter', function(req,res,next) {
         var params = {screen_name: row.twitter}
         twitter.get('statuses/user_timeline', params, function(err,tweets,response) {
           if(!err) {
-            res.send(tweets[0]);
+            
+            res.send({
+              "twitterName" : row.twitter,
+              "tweetID": tweets[0].id_str
+            });
           }
           else {
             res.status = 500;
@@ -135,17 +139,12 @@ router.get('/getUserTwitter', function(req,res,next) {
           }
         });
       }
+      else {
+        res.status = 500;
+        res.send("couldn't get user twitter");
+      }
     }
   });
-
-/*
-  var twitter = req.twitter;
-  var params = {screen_name: 'AndreKarge'};
-  twitter.get('statuses/user_timeline', params, function(err,tweets,res) {
-    if(!err) {
-      console.log(tweets);
-    }
-  });*/
 });
 
 router.post('/changeUserContent', restrictUser, function(req,res) {
