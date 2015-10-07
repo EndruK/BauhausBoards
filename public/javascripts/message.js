@@ -59,7 +59,7 @@ function loadMessagePopup(event) {
       $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
       $(".popupConfirm button:last").focus();
       // just a small hack to display the scrollbar on the tablet
-      showUser(selectedUser);
+      //showUser(selectedUser);
     }
   });
 }
