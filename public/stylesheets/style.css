@@ -667,6 +667,16 @@ body,
   -webkit-border-radius: 5px;
   border-radius: 5px;
 }
+#twitterDiv {
+  position: absolute;
+  pointer-events: none;
+  cursor: default;
+  right: 0;
+  bottom: 0;
+}
+#twitterDiv blockquote {
+  background-color: #fff;
+}
 @-webkit-keyframes spin2 {
   from {
     -webkit-transform: rotate(0deg);
