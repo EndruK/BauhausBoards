@@ -311,7 +311,6 @@ function getTwitterEmbed(twitterName,tweetID) {
     url: url,
     dataType: "jsonp",
     success:function(res) {
-      console.log(res.html);
       var onlyBlockquote = (res.html).split("<script")[0];
       $("body").append("<div id='twitterDiv'>");
       $("#twitterDiv").append(onlyBlockquote);

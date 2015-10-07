@@ -163,6 +163,7 @@ function hideAll() {
   removeListeners();
   showMessages = false;
   showMain = false;
+  $("#twitterDiv").remove();
 }
 
 function showPopup() {
@@ -216,4 +217,3 @@ function refreshAt(hours, minutes, seconds) {
   var timeout = (then.getTime() - now.getTime());
   setTimeout(function() { window.location.reload(true); }, timeout);
 }
-

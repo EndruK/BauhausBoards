@@ -14,7 +14,6 @@ var SHA256 = require("crypto-js/sha256");
 var moment = require("moment");
 var Twitter = require("twitter");
 var paper = require('paper');
-var https = require('http');
 
 var routes = require('./routes/index');
 var functions = require('./routes/functions');
@@ -83,7 +82,6 @@ app.use(function(req, res, next) {
   req.db = db;
   req.moment = moment;
   req.twitter = client;
-  req.https = https;
   next();
 });
 

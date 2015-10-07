@@ -59,7 +59,7 @@ function displayMessages() {
   $("#sidebarViewMessages .sidebarUpper").append("<div id='messageContainer'>");
   $("#messageContainer").append("<div>");
   $("#messageContainer").css("height",sidebarUpperHeight+"px");
-  $("#messageContainer div").css("height",sidebarUpperHeight-55+"px");
+  $("#messageContainer div").css("height",sidebarUpperHeight-65+"px");
   if(messagePage != 0) $("#messageContainer").append("<button style='width:40%' onclick='{messagePage--; displayMessages();}'><");
   if(messagePage != maxpages) $("#messageContainer").append("<button style='width:40%' class='nextPrevBtn' onclick='{messagePage++; displayMessages();}'>>");
   for(var i=(messagePage*maxMessages); i<((messagePage+1)*maxMessages); i++) {

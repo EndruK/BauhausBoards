@@ -34,6 +34,25 @@ router.get('/getRoomUsers', function(req, res, next) {
   });
 });
 
+router.post('/feedback', function(req,res,next) {
+  var db = req.db;
+  var content = req.body.content;
+  var now = req.moment().format("YYYY-MM-DD\THH:mm");
+  var query = "INSERT INTO feedback(f_content,f_date) VALUES($content,$date)";
+  db.run(query,{
+    $content:content,
+    $date:now
+  },function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: "+ err);
+    }
+    else {
+      res.send("successfully created new feedback");
+    }
+  })
+});
+
 //frontend
 router.get('/getUserStatus', function(req, res, next) {
   var db = req.db;
