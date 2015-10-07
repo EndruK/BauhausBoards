@@ -109,6 +109,45 @@ router.get('/getUserContent', function(req,res,next) {
   });
 });
 
+//frontend
+router.get('/getUserTwitter', function(req,res,next) {
+  var db = req.db;
+  var userID = req.query.userID;
+  var query = "SELECT u_twitter AS twitter FROM user WHERE u_id=$userID";
+  db.get(query,{
+    $userID:userID
+  },function(err,row) {
+    if(err) {
+      res.status = 500;
+      res.send("error:"+err);
+    }
+    else {
+      if(row.twitter) {
+        var twitter = req.twitter;
+        var params = {screen_name: row.twitter}
+        twitter.get('statuses/user_timeline', params, function(err,tweets,response) {
+          if(!err) {
+            res.send(tweets[0]);
+          }
+          else {
+            res.status = 500;
+            res.send("couldn't get user twitter");
+          }
+        });
+      }
+    }
+  });
+
+/*
+  var twitter = req.twitter;
+  var params = {screen_name: 'AndreKarge'};
+  twitter.get('statuses/user_timeline', params, function(err,tweets,res) {
+    if(!err) {
+      console.log(tweets);
+    }
+  });*/
+});
+
 router.post('/changeUserContent', restrictUser, function(req,res) {
   var db = req.db;
   var userID = req.session.userID;

@@ -72,11 +72,6 @@ function loadMain(event) {
 function loadUserBackend(event) {
   userLoginPopup();
 }
-function loadFeedback(event) {
-  $('#header').text('Feedback');
-  showSidebar('sidebarFeedback');
-  updateTimer();
-}
 function openSidebar(){
   updateTimer();
   sidebarStatus = true;

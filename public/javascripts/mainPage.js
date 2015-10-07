@@ -135,31 +135,6 @@ function initSidebar() {
   };
 }
 
-/*
-  var sidebarHeight = $(".sidebar").height();
-  var sidebarLowerHeight = $("#sidebarViewMessages .sidebarLower").height();
-  var sidebarUpperHeight = sidebarHeight-sidebarLowerHeight;
-  var nextSize = 30;
-  $("#sidebarViewMessages .sidebarUpper").empty();
-  $("#sidebarViewMessages .sidebarUpper").append("<br>");
-  $("#sidebarViewMessages .sidebarUpper").append("<div id='messageContainer'>");
-  $("#messageContainer").append("<div>");
-  $("#messageContainer").css("height",sidebarUpperHeight+"px");
-  $("#messageContainer div").css("height",sidebarUpperHeight-55+"px");
-  if(messagePage != 0) $("#messageContainer").append("<button style='width:40%' onclick='{messagePage--; displayMessages();}'><");
-  if(messagePage != maxpages) $("#messageContainer").append("<button style='width:40%' class='nextPrevBtn' onclick='{messagePage++; displayMessages();}'>>");
-  for(var i=(messagePage*maxMessages); i<((messagePage+1)*maxMessages); i++) {
-    if(i == messages.length) break;
-    $("#messageContainer div").append("<button value='"+i+"' onclick='showMessage("+i+")'>"+moment(messages[i].date).format("YYYY-MM-DD HH:mm"));
-    if(messages[i].seen == 0) {
-      $("#messageContainer div button:last").attr("style","border:solid 2px red;");
-    }
-    if(((messagePage+1)*maxMessages)-1 != i) {
-      $("#messageContainer div").append("<br>");
-    }
-  }
-*/
-
 function selectUser(userIndex) {
   updateTimer();
   selectedUser = userIndex;
@@ -220,12 +195,12 @@ function showUserContent(userIndex) {
       project.clear();
       project.importJSON(response.content);
       view.update();
+      showTwitter(userIndex);
     },
     error:function(error) {
       console.log("couldn't get user content");
     }
   });
-  showTwitter(userIndex);
 }
 
 function getUSerStatus(userIndex) {
@@ -313,19 +288,16 @@ function selectBoard() {
 function showTwitter(userIndex) {
   //console.log(usercollection[userIndex].userTwitter);
   //var yourRawJSONData;
-  //$("#twitterDiv").remove();
-  //$("body").append("<div id='twitterDiv' style='z-index: 40; position:absolute; left:0; top:0; width:200px; height:100px'>");
-  /*$("#twitterDiv").remove();
-  $("body").append("<div id='twitterDiv' style='z-index: 40; position:absolute; left:0; top:0; width:200px; height:100px'>");
+  $("#twitterDiv").remove();
   $.ajax({
+    url:"/functions/getUserTwitter",
     type:"GET",
-    url:"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=AndreKarge&count=1",
-    dataType:"jsonp",
-    success: function(res) {
+    data:{"userID":usercollection[userIndex].userID},
+    success:function(res) {
       console.log(res);
     },
     error:function(err) {
-      console.log(err);
+      console.log("couldn't get twitter content");
     }
-  });*/
+  })
 }

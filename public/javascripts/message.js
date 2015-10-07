@@ -119,7 +119,7 @@ function showUsersInHeader() {
       }
     });
   }
-  $("#header").append("<div id='userImage'>")
+  $("#header").append("<div id='userImage'>");
   $("#userImage").append("<span class='glyphicon'>");
   showIcon("pen");
 }

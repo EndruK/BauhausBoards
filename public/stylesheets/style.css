@@ -651,11 +651,13 @@ body,
   word-break: break-all;
 }
 #sidebarCreateMessage .sidebarUpper button,
-#sidebarChangeContent .sidebarUpper button {
+#sidebarChangeContent .sidebarUpper button,
+#sidebarFeedback .sidebarUpper button {
   margin: 5px;
 }
 #sidebarCreateMessage .sidebarUpper button span,
-#sidebarChangeContent .sidebarUpper button span {
+#sidebarChangeContent .sidebarUpper button span,
+#sidebarFeedback .sidebarUpper button span {
   font-size: 50px;
 }
 #editorPopup {
