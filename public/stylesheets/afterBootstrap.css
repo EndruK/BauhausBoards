@@ -11,3 +11,6 @@ div {
 .glyphicon-minus:before {
   content: none;
 }
+button {
+  border-radius: 5px;
+}

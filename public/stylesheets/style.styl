@@ -19,7 +19,7 @@ html,body,#wrapper
   height 100%
   //font-family "Helvetica Neue",Helvetica,Arial,sans-serif
   font-family Arial,"Helvetica Neue",Helvetica,sans-serif
-  //background-color rgba(230,230,230,1)
+  background-color rgba(240,240,240,1)
   
 //CLASSES
 .clear
@@ -52,6 +52,10 @@ html,body,#wrapper
   width sidebar-width
   position absolute
   bottom 0
+.sidebarLower button
+  width 80%
+  height 35px
+  margin 5px
 
 .close-sidebar
   left -200px
@@ -153,6 +157,7 @@ html,body,#wrapper
 .popupConfirm button
   margin 10px
   width calc(50% - 20px)
+  height 35px
 .popupConfirm label
   float left
 .popupConfirm input
@@ -219,6 +224,7 @@ html,body,#wrapper
   height 100%
 .btnEditorStroke span .strokeTile div
   background-color black
+
 
 //IDs
 #sidebarMain
@@ -323,6 +329,9 @@ html,body,#wrapper
   //height 50px
   overflow auto
   background-color white
+#popup hr
+  margin-top 5px
+  argin-bottom 5px
 
 #gifLayer
   position absolute
@@ -457,7 +466,7 @@ html,body,#wrapper
   padding 0px
 #messageContainer div
   overflow-y scroll
-#sidebarMain .sidebarUpper button
+#sidebarMain .sidebarUpper button, #sidebarUserBackend .sidebarUpper button, #sidebarViewMessages .sidebarUpper button, #sidebarUserSettings .sidebarUpper button
   margin 5px
   width 80%
   height 45px
@@ -472,8 +481,6 @@ html,body,#wrapper
   z-index 11
   background-color white
   border-radius 5px
-
-
 
 //animations
 @-webkit-keyframes spin2 {

@@ -1,7 +1,7 @@
 var messagePage;
 var messages;
 
-var maxMessages = 10;
+var maxMessages = 8;
 var maxpages;
 var showMessages;
 
@@ -46,6 +46,7 @@ function loadMessages() {
 }
 
 function displayMessages() {
+  updateTimer();
   if(messagePage < 0) messagePage = 0;
   if(messagePage > maxpages) messagePage = maxpages;
   showMessages = true;
@@ -54,12 +55,13 @@ function displayMessages() {
   var sidebarUpperHeight = sidebarHeight-sidebarLowerHeight;
   var nextSize = 30;
   $("#sidebarViewMessages .sidebarUpper").empty();
+  $("#sidebarViewMessages .sidebarUpper").append("<br>");
   $("#sidebarViewMessages .sidebarUpper").append("<div id='messageContainer'>");
   $("#messageContainer").append("<div>");
   $("#messageContainer").css("height",sidebarUpperHeight+"px");
-  $("#messageContainer div").css("height",sidebarUpperHeight-30+"px");
-  if(messagePage != 0) $("#messageContainer").append("<button onclick='{messagePage--; displayMessages();}'><");
-  if(messagePage != maxpages) $("#messageContainer").append("<button onclick='{messagePage++; displayMessages();}'>>");
+  $("#messageContainer div").css("height",sidebarUpperHeight-55+"px");
+  if(messagePage != 0) $("#messageContainer").append("<button style='width:40%' onclick='{messagePage--; displayMessages();}'><");
+  if(messagePage != maxpages) $("#messageContainer").append("<button style='width:40%' class='nextPrevBtn' onclick='{messagePage++; displayMessages();}'>>");
   for(var i=(messagePage*maxMessages); i<((messagePage+1)*maxMessages); i++) {
     if(i == messages.length) break;
     $("#messageContainer div").append("<button value='"+i+"' onclick='showMessage("+i+")'>"+moment(messages[i].date).format("YYYY-MM-DD HH:mm"));

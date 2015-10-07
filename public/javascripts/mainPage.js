@@ -114,6 +114,7 @@ function initRoomDisplay() {
 function initSidebar() {
   var buttonContainer = $("#sidebarMain").children(".sidebarUpper");
   buttonContainer.empty();
+  buttonContainer.append("<br>");
   for(var i=0; i<usercollection.length; i++) {
     buttonContainer.append("<button name='"+i+"' onclick='selectUser("+i+")'>"+usercollection[i].userName);
     //buttonContainer.append("<button name='"+i+"' onclick='selectUser("+i+")'>012345678901234567890123456789");
