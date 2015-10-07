@@ -12,7 +12,6 @@ var session = require('express-session');
 var uuid = require('uuid');
 var SHA256 = require("crypto-js/sha256");
 var moment = require("moment");
-var bootstrap = require('bootstrap')
 
 var paper = require('paper');
 
