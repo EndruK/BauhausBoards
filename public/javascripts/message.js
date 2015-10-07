@@ -86,6 +86,7 @@ function composeTo(type) {
     removeAllGifs();
     updateTimer();
     activatePenTool();
+    project.clear();
     view.update();
     startMessageTimer();
     $('#tabletSizePreview').css('visibility','visible');

@@ -116,6 +116,7 @@ function initSidebar() {
   buttonContainer.empty();
   for(var i=0; i<usercollection.length; i++) {
     buttonContainer.append("<button name='"+i+"' onclick='selectUser("+i+")'>"+usercollection[i].userName);
+    //buttonContainer.append("<button name='"+i+"' onclick='selectUser("+i+")'>012345678901234567890123456789");
     buttonContainer.append("<br>");
   };
 }
@@ -272,6 +273,9 @@ function selectBoard() {
 
 function showTwitter(userIndex) {
   //console.log(usercollection[userIndex].userTwitter);
+  //var yourRawJSONData;
+  //$("#twitterDiv").remove();
+  //$("body").append("<div id='twitterDiv' style='z-index: 40; position:absolute; left:0; top:0; width:200px; height:100px'>");
   /*$("#twitterDiv").remove();
   $("body").append("<div id='twitterDiv' style='z-index: 40; position:absolute; left:0; top:0; width:200px; height:100px'>");
   $.ajax({

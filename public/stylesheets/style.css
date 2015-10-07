@@ -624,6 +624,12 @@ body,
 #messageContainer div {
   overflow-y: scroll;
 }
+#sidebarMain .sidebarUpper button {
+  margin: 5px;
+  width: 80%;
+  height: 45px;
+  word-break: break-all;
+}
 #sidebarCreateMessage .sidebarUpper button,
 #sidebarChangeContent .sidebarUpper button {
   margin: 5px;
