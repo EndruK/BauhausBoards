@@ -343,6 +343,9 @@ body,
 .btnEditorStroke span .strokeTile div {
   background-color: #000;
 }
+.btnSelectorPopup span {
+  font-size: 35px;
+}
 #sidebarMain {
   visibility: visible;
 }
@@ -466,7 +469,6 @@ body,
 #popupSelector {
   position: absolute;
   overflow: auto;
-  background-color: #fff;
 }
 #popup hr {
   margin-top: 5px;

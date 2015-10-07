@@ -378,10 +378,10 @@ function addSelectionPopup() {
   $("#content").append("<div id='popupSelector'></div>");
   var popup = $("#popupSelector");
   //add buttons to the popup div
-  popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupRemove'>Delete</button>");
-  popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupLayerUp'>LayerUp</button>");
-  popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupLayerDown'>LayerDown</button>");
-  popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupCopy'>Copy</button>");
+  popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupRemove'><span class='glyphicon glyphicon-trash'>");
+  popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupLayerUp'><span class='glyphicon glyphicon-chevron-up'>");
+  popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupLayerDown'><span class='glyphicon glyphicon-chevron-down'>");
+  popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupCopy'><span class='glyphicon glyphicon-duplicate'>");
 
   $("#btnSelectorPopupRemove").on("click",btnRemove);
   $("#btnSelectorPopupCopy").on("click",btnCopy);
