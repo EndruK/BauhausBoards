@@ -196,6 +196,7 @@ function showUserContent(userIndex) {
       project.importJSON(response.content);
       view.update();
       showTwitter(userIndex);
+      showBackground(response.background);
     },
     error:function(error) {
       console.log("couldn't get user content");
@@ -321,5 +322,16 @@ function getTwitterEmbed(twitterName,tweetID) {
     error:function(err) {
       console.log(err);
     }
+  });
+}
+
+function showBackground(background) {
+  $("#background").remove();
+  var url = background;
+  if(!url) return;
+  $("body").append("<iframe id='background' scrolling='no' src='"+url+"'>");
+  $("#background").css({
+    "width":$("#EditorCanvas").width(),
+    "height":$("#EditorCanvas").height()
   });
 }

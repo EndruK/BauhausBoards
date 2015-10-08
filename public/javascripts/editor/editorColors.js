@@ -1,5 +1,5 @@
 var colors = {
-  "white" :       [255,255,255],
+  "white" :       [235,235,235],
   "lightgrey" :   [170,170,170],
   "darkgrey" :    [85 ,85 ,85 ],
   "black" :       [0  ,0  ,0  ],

@@ -164,6 +164,7 @@ function hideAll() {
   showMessages = false;
   showMain = false;
   $("#twitterDiv").remove();
+  $("#background").remove();
 }
 
 function showPopup() {

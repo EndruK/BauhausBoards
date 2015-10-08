@@ -19,7 +19,7 @@ html,body,#wrapper
   height 100%
   //font-family "Helvetica Neue",Helvetica,Arial,sans-serif
   font-family Arial,"Helvetica Neue",Helvetica,sans-serif
-  background-color rgba(240,240,240,1)
+  //background-color rgba(240,240,240,1)
   
 //CLASSES
 .clear
@@ -286,7 +286,7 @@ html,body,#wrapper
   //height "calc(100% - %s)" %header-hight
 
 #white
-  background-color rgb(255,255,255)
+  background-color rgb(235,235,235)
 #lightgrey
   background-color rgb(170,170,170)
 #darkgrey
@@ -497,7 +497,15 @@ html,body,#wrapper
   bottom 0
   z-index 9
 #twitterDiv blockquote
-  background-color rgba(255,255,255,.8)
+  background-color rgba(255,255,255,.9)
+#background
+  cursor default
+  pointer-events none
+  position absolute
+  top 0
+  left 0
+  overflow hidden
+  z-index -1
 
 //animations
 @-webkit-keyframes spin2 {

@@ -19,7 +19,7 @@ function loadChangeContent(event) {
   showIcon("selector");
   $("#userInfo").append("<div id='userName'>Change Content");
   showSidebar('sidebarChangeContent');
-  closeSidebar();
+  //closeSidebar();
   view.update();
   $('#EditorCanvas').css('visibility','visible');
   $('#tabletSizePreview').css('visibility','visible');
@@ -40,6 +40,7 @@ function loadChangeContent(event) {
         background = response.background;
         project.clear();
         project.importJSON(response.content);
+        showBackground(background)
       }
     },
     error:function(error) {
@@ -65,7 +66,6 @@ function changeContent() {
   removeBoundingBox();
   removeSelectionPopup();
   var contentJSON = project.exportJSON();
-  var background = "";
   $.ajax({
     url:"functions/changeUserContent",
     type:"POST",
@@ -97,7 +97,14 @@ function changeBackgroundPopup(event) {
 }
 
 function changeBackground() {
+  var userIndex = 0;
+  for(var i=0; i<usercollection.length; i++) {
+    if(usercollection[i].userID == authenticatedUser) userIndex = i;
+  }
   background = $("#userBackgroundInput").val();
+  var http = "http://";
+
+  if(background.length > 0 && background.substring(0,http.length) !== http) background = http+background;
   $.ajax({
     url:"functions/setContentBackground",
     type:"POST",
