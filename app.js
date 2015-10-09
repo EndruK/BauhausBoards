@@ -16,7 +16,7 @@ var Twitter = require("twitter");
 var paper = require('paper');
 var email = require('emailjs');
 var crypto = require('crypto');
-var webshot = require('webshot');
+var banquo = require('banquo');
 
 var routes = require('./routes/index');
 var functions = require('./routes/functions');
@@ -91,7 +91,7 @@ app.use(function(req, res, next) {
   req.twitter = client;
   req.mail = server;
   req.crypto = crypto;
-  req.webshot = webshot;
+  req.banquo = banquo;
   next();
 });
 
