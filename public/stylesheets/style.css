@@ -98,6 +98,9 @@ body,
 button:focus {
   outline: 0;
 }
+#boardOptions {
+  color: #000;
+}
 .clear {
   clear: both;
 }

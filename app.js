@@ -36,7 +36,7 @@ var client = new Twitter({
 });
 
 var server = email.server.connect({
-  host: "webis40.medien.uni-weimar.de",
+  host: "igor.medien.uni-weimar.de",
   //user: "",
   //password: "",
   port: 25,
