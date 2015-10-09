@@ -266,18 +266,55 @@ router.post('/createMessage', function(req,res,next) {
     }
     else {
       var messageID = this.lastID;
-      var finished = true;
+      var users = new Array();
       receivers.forEach(function(key) {
-        query = "INSERT OR IGNORE INTO msgTo (mt_user,mt_message) VALUES($userID,$messageID)";
+        var token = req.crypto.randomBytes(48).toString('hex');
+        var pushObject = {};
+        pushObject.userID = key;
+        pushObject.token = token;
+        users.push(pushObject);
+        query = "INSERT OR IGNORE INTO msgTo (mt_user,mt_message,mt_token) VALUES($userID,$messageID,$token)";
         db.run(query,{
           $userID:parseInt(key),
-          $messageID:parseInt(messageID)
+          $messageID:parseInt(messageID),
+          $token:token
         });
       });
       res.send("successfully created new message");
+      sendMail(users,req.mail,db);
     }
   });
 });
+
+function sendMail(users,mail,db) {
+  console.log([users]);
+  users.forEach(function(key) {
+    var query = "SELECT u_mail FROM user WHERE u_id=$userID";
+    db.get(query,{
+      $userID:key.userID
+    },function(err,row) {
+      if(!err) {
+        mail.send({
+          text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/getMail?token='+users.token,
+          from: 'Bauhausboards <bauhausboards@uni-weimar.de>',
+          to: row.u_mail,
+          subject: 'new message'
+        }, function(err,message) {
+          console.log(err || message);
+        });
+        /*var transporter = nodemailer.createTransport();
+        transporter.sendMail({
+          host: ,
+          from: 'Bauhausboards <bauhausboards@uni-weimar.de>',
+          to: row.u_mail,
+          subject: 'new message',
+          text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/getMail?token='+users.token,
+          html: '<p>You received a new message on your board</p><a src="http://igor.medien.uni-weimar.de:3000/getMail?token='+users.token+'">Link</a>'
+        });*/
+      }
+    });
+  });
+}
 
 router.get('/getUserMessages', restrictUser, function(req,res) {
   var db = req.db;

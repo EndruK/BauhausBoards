@@ -14,6 +14,8 @@ var SHA256 = require("crypto-js/sha256");
 var moment = require("moment");
 var Twitter = require("twitter");
 var paper = require('paper');
+var email = require('emailjs');
+var crypto = require('crypto');
 
 var routes = require('./routes/index');
 var functions = require('./routes/functions');
@@ -32,12 +34,15 @@ var client = new Twitter({
   access_token_key: '2317344978-UvpuDUFdgqIjmwR2XX5eV6NDW9PeJXLOK2397f1',
   access_token_secret: 'j9s6ZgUCwcE0LwrKuKCbWWUVtv5HzlSHXGpB30etNc094'
 });
-/*var params = {screen_name: 'AndreKarge'};
-client.get('statuses/user_timeline', params, function(err,tweets,res) {
-  if(!err) {
-    console.log(tweets);
-  }
-});*/
+
+var server = email.server.connect({
+  host: "webis40.medien.uni-weimar.de",
+  //user: "",
+  //password: "",
+  port: 25,
+  ssl: false
+});
+
 
 app.use(session({
   secret: 'ZMhX5IwFS9agS32KjR7iRKKR9bpsYUXvg7QRvaBSrfY=', //TODO: set this in setupFile
@@ -82,6 +87,8 @@ app.use(function(req, res, next) {
   req.db = db;
   req.moment = moment;
   req.twitter = client;
+  req.mail = server;
+  req.crypto = crypto;
   next();
 });
 
