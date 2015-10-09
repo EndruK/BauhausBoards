@@ -306,7 +306,7 @@ function sendMail(users,mail,db,banquo) {
   var opts = {
     mode : 'base64',
     url: url,
-    delay: 2000,
+    delay: 3000,
   };
   banquo.capture(opts, function(err, imageData) {
     if(err) {
@@ -321,7 +321,7 @@ function sendMail(users,mail,db,banquo) {
         },function(err,row) {
           if(!err) {
             mail.send({
-              text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/getMail?token='+key.token,
+              //text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/getMessage?token='+key.token,
               html: '<html><head></head><body><p>You received a new message on your board</p>'+
                 '<a src="http://igor.medien.uni-weimar.de:3000/getMessage?token='+key.token+'">Link</a>'+
                 '<img src="data:image/png;base64,'+binImage+'"></body></html>',
