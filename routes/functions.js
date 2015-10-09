@@ -295,7 +295,8 @@ function sendMail(users,mail,db) {
     },function(err,row) {
       if(!err) {
         mail.send({
-          text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/getMail?token='+users.token,
+          text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/getMail?token='+key.token,
+          html: '<p>You received a new message on your board</p><a src="http://igor.medien.uni-weimar.de:3000/getMail?token='+key.token+'">Link</a>'
           from: 'Bauhausboards <bauhausboards@igor.medien.uni-weimar.de>',
           to: row.u_mail,
           subject: 'new message'
