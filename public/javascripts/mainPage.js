@@ -18,14 +18,13 @@ $( document ).ready(function() {
 });
 
 $(window).on("resize", resize);
+
 function resize () {
-  //if the view is greater - put the header div at the tablet corner
-  if(dim && $(window).width() >= dim.resX) {
-    $("#header").css("right",$(window).width()-dim.resX);
-  }
-  else if(dim && $(window).width() < dim.resX) {
-    $("#header").css("right",$(window).width()-dim.resX);
-  }
+  //put the header div at the top right corner
+  //put the twitter div at bottom right corner
+  $("#header").css("right",$(window).width()-dim.resX);
+  $("#twitterDiv").css("right",$(window).width()-dim.resX);
+  $("#twitterDiv").css("bottom",$(window).height()-dim.resY);
   if(showMain) {
     var sidebarHeight = $(".sidebar").height();
     var sidebarLowerHeight = $("#sidebarMain .sidebarLower").height();
@@ -296,6 +295,7 @@ function showTwitter(userIndex) {
     success:function(res) {
       if(res && res.twitterName && res.tweetID) {
         getTwitterEmbed(res.twitterName,res.tweetID);
+        
         //console.log(res);
       }
     },
@@ -318,6 +318,7 @@ function getTwitterEmbed(twitterName,tweetID) {
       $(".Tweet-card").remove();
       $(".Tweet-actions").remove();
       $(".tweet-brand").remove();
+      resize();
     },
     error:function(err) {
       console.log(err);
