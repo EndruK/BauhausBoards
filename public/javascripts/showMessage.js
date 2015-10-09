@@ -6,7 +6,7 @@ function showMessage() {
   if(!token) return;
   paper.setup('EditorCanvas');
   $.ajax({
-    url:"/getMessage/get",
+    url:"/message/get",
     type:"GET",
     data:{"token":token},
     success:function(res) {
