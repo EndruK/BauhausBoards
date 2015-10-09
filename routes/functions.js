@@ -305,7 +305,7 @@ function sendMail(users,mail,db,banquo) {
   //var url = "localhost:3000/getMessage?token="+users[0].token;
   var opts = {
     mode : 'base64',
-    url: "localhost:3000/getMessage?token="+users[0].token,
+    url: "localhost:3000/message?token="+users[0].token,
     delay: 10000
   };
   banquo.capture(opts, function(err, imageData) {
@@ -321,9 +321,9 @@ function sendMail(users,mail,db,banquo) {
         },function(err,row) {
           if(!err) {
             mail.send({
-              //text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/getMessage?token='+key.token,
+              //text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/message?token='+key.token,
               html: '<html><head></head><body><p>You received a new message on your board</p>'+
-                '<a src="http://igor.medien.uni-weimar.de:3000/getMessage?token='+key.token+'">Link</a>'+
+                '<a src="http://igor.medien.uni-weimar.de:3000/message?token='+key.token+'">Link</a>'+
                 '<img src="data:image/png;base64,'+binImage+'"></body></html>',
               from: 'Bauhausboards <bauhausboards@igor.medien.uni-weimar.de>',
               to: row.u_mail,

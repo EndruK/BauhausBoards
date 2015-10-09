@@ -20,7 +20,7 @@ var banquo = require('banquo');
 
 var routes = require('./routes/index');
 var functions = require('./routes/functions');
-var getMessage = require('./routes/getMessage');
+var message = require('./routes/message');
 
 var app = express();
 //use nib middleware for stylus
@@ -97,7 +97,7 @@ app.use(function(req, res, next) {
 
 app.use('/', routes);
 app.use('/functions', functions);
-app.use('/getMessage', getMessage);
+app.use('/message', message);
 
 
 
