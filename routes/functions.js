@@ -307,7 +307,9 @@ function sendMail(users,mail,db,webshot) {
         if(!err) {
           mail.send({
             text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/getMail?token='+key.token,
-            html: '<p>You received a new message on your board</p><a src="http://igor.medien.uni-weimar.de:3000/getMessage?token='+key.token+'">Link</a>',
+            html: '<p>You received a new message on your board</p>'+
+              '<a src="http://igor.medien.uni-weimar.de:3000/getMessage?token='+key.token+'">Link</a>'+
+              '<img src="data:image/png;base64,'+binImage+'">',
             from: 'Bauhausboards <bauhausboards@igor.medien.uni-weimar.de>',
             to: row.u_mail,
             subject: 'new message'
