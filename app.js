@@ -16,9 +16,11 @@ var Twitter = require("twitter");
 var paper = require('paper');
 var email = require('emailjs');
 var crypto = require('crypto');
+var webshot = require('webshot');
 
 var routes = require('./routes/index');
 var functions = require('./routes/functions');
+var getMessage = require('./routes/getMessage');
 
 var app = express();
 //use nib middleware for stylus
@@ -89,11 +91,13 @@ app.use(function(req, res, next) {
   req.twitter = client;
   req.mail = server;
   req.crypto = crypto;
+  req.webshot = webshot;
   next();
 });
 
 app.use('/', routes);
 app.use('/functions', functions);
+app.use('/getMessage', getMessage);
 
 
 
