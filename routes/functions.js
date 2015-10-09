@@ -306,7 +306,7 @@ function sendMail(users,mail,db,banquo) {
   var opts = {
     mode : 'base64',
     url: url,
-    delay: 3000,
+    delay: 2000
   };
   banquo.capture(opts, function(err, imageData) {
     if(err) {
