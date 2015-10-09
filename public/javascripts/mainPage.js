@@ -157,8 +157,8 @@ function showUser(userIndex) {
   var buttons = $("#sidebarMain .sidebarUpper button");
   buttons.removeAttr("style");
   buttons.each(function() {
-    if($(this).attr("name") == userIndex)
-      $(this).css("border","2px solid red");
+    if($(this).attr("name") == userIndex) 
+      $(this).css("border","2px solid white");
   });
   showUserHeader(userIndex);
   showUserContent(userIndex);

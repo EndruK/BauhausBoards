@@ -10,7 +10,8 @@ sidebar-border-radius = 10px
 main-color = rgba(0,102,153,1)
 main-color-transparent = rgba(0,102,153,0.8)
 button-color = rgba(41,106,139,1)
-button-border-color = rgba(122,122,122,1)
+button-border-color = rgba(27,71,93,1)
+button-selected-color = rgba(27,71,93,1)
 popup-color = rgba(51,132,173,1)
 
 border-transition(n)
@@ -25,7 +26,8 @@ html,body,#wrapper
   //font-family "Helvetica Neue",Helvetica,Arial,sans-serif
   font-family Arial,"Helvetica Neue",Helvetica,sans-serif
   //background-color rgba(240,240,240,1)
-  
+button:focus
+  outline 0
 //CLASSES
 .clear
   clear both
@@ -68,7 +70,7 @@ html,body,#wrapper
   background-color button-color
   color white
   //border 1px solid white
-  border 1px solid white
+  border 2px solid button-border-color
 
 .close-sidebar
   left -200px
@@ -172,7 +174,7 @@ html,body,#wrapper
   width calc(50% - 20px)
   height 35px
   background-color button-color
-  border 1px solid white
+  border 2px solid button-border-color
 .popupConfirm label
   float left
 .popupConfirm input
@@ -213,7 +215,7 @@ html,body,#wrapper
 .changeUserForm form button
   float right
   background-color button-color
-  border 1px solid white
+  border 2px solid button-border-color
 .colorTile
   border-radius 5px
   width 50px
@@ -360,7 +362,7 @@ html,body,#wrapper
   argin-bottom 5px
 #popup button
   background-color button-color
-  border 1px solid white
+  border 2px solid button-border-color
 
 #gifLayer
   position absolute
@@ -445,7 +447,7 @@ html,body,#wrapper
   margin 5px
 #popup #statusDiv button
   background-color button-color
-  border 1px solid white
+  border 2px solid button-border-color
   margin 5px
 #popupBackground1
   z-index 11
@@ -485,7 +487,7 @@ html,body,#wrapper
   padding 5px
 #userDescription button
   background-color button-color
-  border 1px solid white
+  border 2px solid button-border-color
 #userStatus
   padding-left 5px
 #userStatus div
@@ -499,7 +501,7 @@ html,body,#wrapper
   color white
   top -350px
   border-radius 10px
-  border 2px solid white
+  border 2px solid button-border-color
   pointer-events none
   z-index 14
   text-align center
@@ -521,11 +523,11 @@ html,body,#wrapper
   background-color button-color
   border 0px
   color white
-  border 1px solid white
+  border 2px solid button-border-color
 #sidebarCreateMessage .sidebarUpper button, #sidebarChangeContent .sidebarUpper button, #sidebarFeedback .sidebarUpper button
   margin 5px
   background-color button-color
-  border 1px solid white
+  border 2px solid button-border-color
   color white
 #sidebarCreateMessage .sidebarUpper button span, #sidebarChangeContent .sidebarUpper button span, #sidebarFeedback .sidebarUpper button span
   font-size 50px

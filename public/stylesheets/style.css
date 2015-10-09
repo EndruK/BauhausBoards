@@ -95,6 +95,9 @@ body,
   height: 100%;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
+button:focus {
+  outline: 0;
+}
 .clear {
   clear: both;
 }
@@ -146,7 +149,7 @@ body,
   margin: 5px;
   background-color: #296a8b;
   color: #fff;
-  border: 1px solid #fff;
+  border: 2px solid #1b475d;
 }
 .close-sidebar {
   left: -200px;
@@ -261,7 +264,7 @@ body,
   width: calc(50% - 20px);
   height: 35px;
   background-color: #296a8b;
-  border: 1px solid #fff;
+  border: 2px solid #1b475d;
 }
 .popupConfirm label {
   float: left;
@@ -312,7 +315,7 @@ body,
 .changeUserForm form button {
   float: right;
   background-color: #296a8b;
-  border: 1px solid #fff;
+  border: 2px solid #1b475d;
 }
 .colorTile {
   -webkit-border-radius: 5px;
@@ -492,7 +495,7 @@ body,
 }
 #popup button {
   background-color: #296a8b;
-  border: 1px solid #fff;
+  border: 2px solid #1b475d;
 }
 #gifLayer {
   position: absolute;
@@ -589,7 +592,7 @@ body,
 }
 #popup #statusDiv button {
   background-color: #296a8b;
-  border: 1px solid #fff;
+  border: 2px solid #1b475d;
   margin: 5px;
 }
 #popupBackground1 {
@@ -640,7 +643,7 @@ body,
 }
 #userDescription button {
   background-color: #296a8b;
-  border: 1px solid #fff;
+  border: 2px solid #1b475d;
 }
 #userStatus {
   padding-left: 5px;
@@ -657,7 +660,7 @@ body,
   top: -350px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  border: 2px solid #fff;
+  border: 2px solid #1b475d;
   pointer-events: none;
   z-index: 14;
   text-align: center;
@@ -686,14 +689,14 @@ body,
   background-color: #296a8b;
   border: 0px;
   color: #fff;
-  border: 1px solid #fff;
+  border: 2px solid #1b475d;
 }
 #sidebarCreateMessage .sidebarUpper button,
 #sidebarChangeContent .sidebarUpper button,
 #sidebarFeedback .sidebarUpper button {
   margin: 5px;
   background-color: #296a8b;
-  border: 1px solid #fff;
+  border: 2px solid #1b475d;
   color: #fff;
 }
 #sidebarCreateMessage .sidebarUpper button span,
