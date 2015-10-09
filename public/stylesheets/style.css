@@ -112,7 +112,8 @@ body,
   -o-transition: left 0.4s ease-in-out;
   -ms-transition: left 0.4s ease-in-out;
   transition: left 0.4s ease-in-out;
-  background-color: rgba(200,200,200,0.8);
+  font-weight: bold;
+  background-color: rgba(0,102,153,0.8);
   z-index: 10;
 }
 .sidebarContent {
@@ -128,7 +129,7 @@ body,
   text-align: center;
   vertical-align: middle;
   float: left;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.2);
   z-index: 10;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -143,6 +144,9 @@ body,
   width: 80%;
   height: 35px;
   margin: 5px;
+  background-color: #296a8b;
+  color: #fff;
+  border: 1px solid #fff;
 }
 .close-sidebar {
   left: -200px;
@@ -256,6 +260,8 @@ body,
   margin: 10px;
   width: calc(50% - 20px);
   height: 35px;
+  background-color: #296a8b;
+  border: 1px solid #fff;
 }
 .popupConfirm label {
   float: left;
@@ -305,6 +311,8 @@ body,
 }
 .changeUserForm form button {
   float: right;
+  background-color: #296a8b;
+  border: 1px solid #fff;
 }
 .colorTile {
   -webkit-border-radius: 5px;
@@ -320,13 +328,13 @@ body,
   border-radius: 5px;
   width: 50px;
   height: 50px;
-  border: 1px solid #000;
   float: left;
   cursor: pointer;
 }
 .strokeTile div {
   width: 100%;
-  border-bottom: solid 1px #000;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 .minStroke div {
   height: 25%;
@@ -389,10 +397,14 @@ body,
   right: 0px;
   top: 0;
   width: 450px;
-  background-color: #c8c8c8;
+  background-color: #069;
   height: 150px;
   z-index: 10;
   border-bottom-left-radius: 10px;
+}
+#header {
+  color: #fff;
+  font-weight: bold;
 }
 #content {
   text-align: center;
@@ -478,6 +490,10 @@ body,
   margin-top: 5px;
   argin-bottom: 5px;
 }
+#popup button {
+  background-color: #296a8b;
+  border: 1px solid #fff;
+}
 #gifLayer {
   position: absolute;
   left: 0;
@@ -546,13 +562,18 @@ body,
   position: absolute;
   width: 50%;
   top: 50px;
-  background-color: #fff;
+  background-color: #3384ad;
+  font-weight: bold;
+  color: #fff;
   min-width: 475px;
   z-index: 13;
   text-align: center;
   -webkit-border-radius: 10px;
   border-radius: 10px;
   display: inline-block;
+}
+#popup input {
+  color: #000;
 }
 #popup #statusDiv {
   display: inline-block;
@@ -567,6 +588,8 @@ body,
   margin: 5px;
 }
 #popup #statusDiv button {
+  background-color: #296a8b;
+  border: 1px solid #fff;
   margin: 5px;
 }
 #popupBackground1 {
@@ -610,10 +633,14 @@ body,
   padding: 5px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.2);
 }
 #userDescription {
   padding: 5px;
+}
+#userDescription button {
+  background-color: #296a8b;
+  border: 1px solid #fff;
 }
 #userStatus {
   padding-left: 5px;
@@ -625,11 +652,12 @@ body,
 #floaty {
   position: fixed;
   width: 350px;
-  background-color: rgba(255,255,255,0.95);
+  background-color: #3384ad;
+  color: #fff;
   top: -350px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  border: 2px solid #000;
+  border: 2px solid #fff;
   pointer-events: none;
   z-index: 14;
   text-align: center;
@@ -655,11 +683,18 @@ body,
   width: 80%;
   height: 45px;
   word-break: break-all;
+  background-color: #296a8b;
+  border: 0px;
+  color: #fff;
+  border: 1px solid #fff;
 }
 #sidebarCreateMessage .sidebarUpper button,
 #sidebarChangeContent .sidebarUpper button,
 #sidebarFeedback .sidebarUpper button {
   margin: 5px;
+  background-color: #296a8b;
+  border: 1px solid #fff;
+  color: #fff;
 }
 #sidebarCreateMessage .sidebarUpper button span,
 #sidebarChangeContent .sidebarUpper button span,
