@@ -322,8 +322,8 @@ function sendMail(users,mail,db,banquo) {
         },function(err,row) {
           if(!err) {
             var html = '<html><head></head><body><p>You received a new message on your board</p>'+
-                '<a src="http://igor.medien.uni-weimar.de:3000/message?token='+key.token+'">Link</a>'+
-                '<img src="data:image/png;base64,'+binImage+'"></body></html>';
+                '<p>http://igor.medien.uni-weimar.de:3000/message?token='+key.token+'</p>'+
+                '<img src=\'data:image/png;base64,'+binImage+'\'></body></html>';
             mail.send({
               text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/message?token='+key.token,
               attachment:
