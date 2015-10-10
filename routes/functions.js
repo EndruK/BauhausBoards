@@ -302,7 +302,7 @@ function sendMail(users,mail,db,banquo) {
     console.log(binImage);
     
   });*/
-  var url = "http://127.0.0.1:3000/message?token="+users[0].token;
+  var url = "/message?token="+users[0].token;
   var opts = {
     mode : 'base64',
     url: url,
