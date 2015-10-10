@@ -17,7 +17,6 @@ var paper = require('paper');
 var email = require('emailjs');
 var crypto = require('crypto');
 var banquo = require('banquo');
-var favicon = require('serve-favicon');
 
 var routes = require('./routes/index');
 var functions = require('./routes/functions');
