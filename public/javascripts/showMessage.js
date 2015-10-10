@@ -12,6 +12,7 @@ function showMessage() {
     success:function(res) {
       console.log(res);
       project.importJSON(res.content);
+      view.update();
     },
     error:function(err) {
       console.log("couldn't get message");

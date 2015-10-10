@@ -5,6 +5,7 @@ var popupVisible = false;
 
 $("#login").on("click",login);
 $(document).ready(function() {
+  paper.setup('EditorCanvas');
   $("#typearea").submit(function(event) {
     event.preventDefault();
   });
@@ -50,14 +51,17 @@ function showSettings() {
   content.append("<div title='Board Settings' onclick='checkSession(loadBoardSettings)' id='boardSettings' class='containerTile'><span class='glyphicon glyphicon-phone'>");
   content.append("<div title='Room Settings' onclick='checkSession(loadRoomSettings)' id='roomSettings' class='containerTile'><span class='glyphicon glyphicon-picture'>");
   content.append("<div title='User Settings' onclick='checkSession(loadUserSettings)' id='userSettings' class='containerTile'><span class='glyphicon glyphicon-user'>");
-  content.append("<div title='Logs' id='logs' class='containerTile'><span class='glyphicon glyphicon-book'>");
+  content.append("<div title='Logs' id='logs' onclick='checkSession(loadLogging)' class='containerTile'><span class='glyphicon glyphicon-book'>");
   $("#logout").remove();
   $("body").append("<div title='Logout' id='logout' class='containerTile containerTileAbs'><span class='glyphicon glyphicon-log-out'>");
   $("#logout").on("click",logout);
-
+  $("#EditorCanvas").css("visibility","hidden");
 }
 
 function logout() {
+  $("#EditorCanvas").css("visibility","hidden");
+  $("#background").remove();
+  removeAllGifs();
   $.ajax({
     url:'/functions/logoutAdmin',
     type: 'POST',

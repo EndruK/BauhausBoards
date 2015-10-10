@@ -170,7 +170,7 @@ router.post('/changeUserContent', restrictUser, function(req,res) {
   var db = req.db;
   var userID = req.session.userID;
   var contentJSON = req.body.content;
-  var now = req.moment().format("YYYY-MM-DD");
+  var now = req.moment().format("YYYY-MM-DD\THH:mm");
   var background = req.body.background;
 
   var query = "INSERT INTO content (c_user,c_date,c_contentJSON,c_background) "+
@@ -673,6 +673,51 @@ router.get('/getUsers', restrictAdmin, function(req,res) {
     "FROM "+
       "user";
   db.all(query,function(err,rows) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send(rows);
+    }
+  });
+});
+
+router.get('/getFeedback', restrictAdmin, function(req,res){
+  var db = req.db;
+  var query = "SELECT * FROM feedback";
+  db.all(query,function(err,rows) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send(rows);
+    }
+  });
+});
+
+router.get('/getAllMessages', restrictAdmin, function(req,res) {
+  var db = req.db;
+  var query = "SELECT * FROM message";
+  db.all(query,function(err,rows) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send(rows);
+    }
+  });
+});
+
+router.get('/getAllUserContent', restrictAdmin, function(req,res) {
+  var db = req.db;
+  var userID = req.query.userID;
+  var query = "SELECT * FROM content WHERE c_user=$userID ORDER BY c_id DESC";
+  db.all(query,{
+    $userID:userID
+  }, function(err, rows) {
     if(err) {
       res.status = 500;
       res.send("error: " + err);

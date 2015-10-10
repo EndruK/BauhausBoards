@@ -40,6 +40,7 @@ function loadChangeContent(event) {
         background = response.background;
         project.clear();
         project.importJSON(response.content);
+        view.update();
         showBackground(background)
       }
     },

@@ -3,7 +3,27 @@ global-reset()
 
 body
   text-align center
-
+#EditorCanvas
+  visibility hidden
+  border 1px solid black
+#background
+  cursor default
+  pointer-events none
+  position absolute
+  top 0
+  left 0
+  overflow hidden
+  z-index -1
+#gifLayer
+  position absolute
+  left 0
+  width 100%
+  //height "calc(100% - %s)" %header-hight
+  height inherit
+  pointer-events none
+  overflow hidden
+#gifLayer img
+  z-index 8
 #logo
   text-align center
 #typearea

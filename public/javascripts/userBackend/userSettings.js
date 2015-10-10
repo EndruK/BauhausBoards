@@ -69,6 +69,7 @@ function showUserSettings() {
   $("#sidebarUserSettings .sidebarUpper").empty();
   showSidebar('sidebarUserSettings');
   $('#users').css('visibility','visible');
+  $("#sidebarUserSettings .sidebarUpper").append("<br>");
   $("#sidebarUserSettings .sidebarUpper").append("<button onclick='changeUserPopup("+userIndex+")'>Change User");
   $("#sidebarUserSettings .sidebarUpper").append("<br>");
   $("#sidebarUserSettings .sidebarUpper").append("<button onclick='changeUserMailPopup("+userIndex+")'>Change Mail");
