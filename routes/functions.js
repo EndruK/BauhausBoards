@@ -302,8 +302,8 @@ function sendMail(users,mail,db,banquo) {
     console.log(binImage);
     
   });*/
-  //var url = "/message?token="+users[0].token;
-  var url = "http://www.google.de";
+  var url = "/message?token="+users[0].token;
+  //var url = "http://www.google.de";
   var opts = {
     mode : 'base64',
     url: url,
@@ -321,14 +321,18 @@ function sendMail(users,mail,db,banquo) {
           $userID:key.userID
         },function(err,row) {
           if(!err) {
-            mail.send({
-              //text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/message?token='+key.token,
-              html: '<html><head></head><body><p>You received a new message on your board</p>'+
+            var html = '<html><head></head><body><p>You received a new message on your board</p>'+
                 '<a src="http://igor.medien.uni-weimar.de:3000/message?token='+key.token+'">Link</a>'+
-                '<img src="data:image/png;base64,'+binImage+'"></body></html>',
+                '<img src="data:image/png;base64,'+binImage+'"></body></html>';
+            mail.send({
+              text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/message?token='+key.token,
+              attachment:
+              [
+                {data:html}
+              ],
               from: 'Bauhausboards <bauhausboards@igor.medien.uni-weimar.de>',
               to: row.u_mail,
-              subject: 'new message'
+              subject: 'new message on board'
             }, function(err,message) {
               console.log(err || message);
             });
