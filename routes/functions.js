@@ -302,10 +302,10 @@ function sendMail(users,mail,db,banquo) {
     console.log(binImage);
     
   });*/
-  //var url = "localhost:3000/getMessage?token="+users[0].token;
+  var url = "http://127.0.0.1:3000/message?token="+users[0].token;
   var opts = {
     mode : 'base64',
-    url: "localhost:3000/message?token="+users[0].token,
+    url: url,
     delay: 10000
   };
   banquo.capture(opts, function(err, imageData) {
