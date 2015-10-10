@@ -489,7 +489,6 @@ button:focus {
 }
 #popupSelector {
   position: absolute;
-  overflow: auto;
   z-index: 9;
 }
 #popup hr {

@@ -377,6 +377,7 @@ function addSelectionPopup() {
   //add the popup div
   $("#content").append("<div id='popupSelector'></div>");
   var popup = $("#popupSelector");
+  popup.css("width","auto")
   //add buttons to the popup div
   popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupRemove'><span class='glyphicon glyphicon-trash'>");
   popup.append("<button class='btnSelectorPopup' id='btnSelectorPopupLayerUp'><span class='glyphicon glyphicon-chevron-up'>");
