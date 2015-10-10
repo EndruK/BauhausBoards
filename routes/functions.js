@@ -328,7 +328,7 @@ function sendMail(users,mail,db,banquo) {
               text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/message?token='+key.token,
               attachment:
               [
-                {data:html}
+                {data:html, alternative:true}
               ],
               from: 'Bauhausboards <bauhausboards@igor.medien.uni-weimar.de>',
               to: row.u_mail,
