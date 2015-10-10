@@ -314,7 +314,6 @@ function sendMail(users,mail,db,banquo) {
       console.log(err);
     }
     else {
-      var binImage = imageData;
       users.forEach(function(key) {
         var query = "SELECT u_mail FROM user WHERE u_id=$userID";
         db.get(query,{
@@ -323,7 +322,7 @@ function sendMail(users,mail,db,banquo) {
           if(!err) {
             var html = '<html><head></head><body><p>You received a new message on your board</p>'+
                 '<p>http://igor.medien.uni-weimar.de:3000/message?token='+key.token+'</p>'+
-                '<img src=\'data:image/png;base64,'+binImage+'\'></body></html>';
+                '<img src=\'data:image/png;base64,'+imageData.toString()+'\'></body></html>';
             mail.send({
               text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/message?token='+key.token,
               attachment:
