@@ -46,6 +46,7 @@ function userLoginPopup() {
     },
     error:function(err) {
       console.log("couldn't get users for room");
+      showFloaty("no connection");
     },
     complete:function() {
       $("#popup").append("<div class='popupConfirm'>");
@@ -101,6 +102,7 @@ function login(userID) {
     },
     error:function(err) {
       console.log("couldn't login user with pin");
+      showFloaty("no connection");
     }
   });
 }
@@ -150,6 +152,7 @@ function checkSession(callback) {
     },
     error:function(err) {
       console.log(err);
+      showFloaty("no connection");
     }
   });
 }
@@ -168,6 +171,7 @@ function logoutUser() {
     },
     error:function(err) {
       console.log("couldn't logout user");
+      showFloaty("no connection");
     }
   });
 }

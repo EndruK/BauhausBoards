@@ -17,6 +17,7 @@ var paper = require('paper');
 var email = require('emailjs');
 var crypto = require('crypto');
 var banquo = require('banquo');
+var favicon = require('serve-favicon');
 
 var routes = require('./routes/index');
 var functions = require('./routes/functions');
@@ -65,7 +66,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 //define stylus to compile styl to css
 app.use(stylus.middleware(

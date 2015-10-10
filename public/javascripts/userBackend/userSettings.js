@@ -53,6 +53,7 @@ function loginUserPassword() {
     },
     error:function(err) {
       console.log("couldn't check user password");
+      showFloaty("no connection");
     }
   });
 }
@@ -144,6 +145,7 @@ function changeUserInfo(userIndex) {
     },
     error:function(err) {
       console.log("couldn't update user info");
+      showFloaty("no connection");
     }
   });
 }
@@ -192,6 +194,7 @@ function changeUserMail(userIndex) {
       },
       error:function(err) {
         console.log(err);
+        showFloaty("no connection");
       }
     });
   });
@@ -266,6 +269,7 @@ function changeUserPW(userIndex) {
     },
     error:function(err) {
       console.log("couldn't check pw");
+      showFloaty("no connection");
     }
   });
   var newPW = "";
@@ -320,6 +324,7 @@ function changeUserPin(userIndex) {
     },
     error:function(err) {
       console.log("couldn't update pin");
+      showFloaty("no connection");
     }
   });
 }
@@ -371,6 +376,7 @@ function setBoardResolution(boardID,type) {
     },
     error:function(err) {
       console.log("couldn't set board resolution");
+      showFloaty("no connection");
     }
   });
 }
@@ -396,6 +402,7 @@ function checkSessionPW(callback) {
     },
     error:function(err) {
       console.log(err);
+      showFloaty("no connection");
     }
   });
 }
@@ -423,6 +430,7 @@ function checkMail(mail,callback) {
     },
     error:function(err) {
       console.log("couldn't check mail address");
+      showFloaty("no connection");
     }
   });
 }
@@ -486,6 +494,7 @@ function getBoardResolution(boardID) {
     },
     error:function(err) {
       console.log("couldn't get board resolution");
+      showFloaty("no connection");
     }
   });
 }

@@ -103,6 +103,7 @@ function getRoomUsers() {
     },
     error:function(err) {
       console.log("couldn't get board users");
+      showFloaty("no connection");
     }
   });
 }
@@ -199,6 +200,7 @@ function showUserContent(userIndex) {
     },
     error:function(error) {
       console.log("couldn't get user content");
+      showFloaty("no connection");
     }
   });
 }
@@ -225,6 +227,7 @@ function getUSerStatus(userIndex) {
     },
     error:function(err) {
       console.log("couldn't get user status");
+      showFloaty("no connection");
     }
   });
 }
@@ -276,6 +279,7 @@ function showSelectBoardPopup() {
     },
     error:function(err) {
       console.log("couldn't get boards");
+      showFloaty("no connection");
     }
   });
 }
@@ -301,6 +305,7 @@ function showTwitter(userIndex) {
     },
     error:function(err) {
       console.log("couldn't get twitter content");
+      showFloaty("no connection");
     },
     timeout: 3000
   });
@@ -322,6 +327,7 @@ function getTwitterEmbed(twitterName,tweetID) {
     },
     error:function(err) {
       console.log(err);
+      showFloaty("no connection");
     }
   });
 }

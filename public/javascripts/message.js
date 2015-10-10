@@ -50,6 +50,7 @@ function loadMessagePopup(event) {
     },
     error:function(err) {
       console.log("couldn't get users for room");
+      showFloaty("no connection");
     },
     complete:function() {
       $("#popup").append("<div class='popupConfirm'>");
@@ -194,6 +195,7 @@ function submitMessage() {
       },
       error:function(err) {
         console.log(err);
+        showFloaty("no connection");
       },
       complete:function() {
         stopMessageTimer();
