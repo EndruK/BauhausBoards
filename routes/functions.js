@@ -307,7 +307,8 @@ function sendMail(users,mail,db,banquo) {
   var opts = {
     mode : 'base64',
     url: url,
-    delay: 10000
+    delay: 10000,
+    selector: "#EditorCanvas"
   };
   banquo.capture(opts, function(err, imageData) {
     if(err) {
