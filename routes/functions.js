@@ -305,12 +305,14 @@ function sendMail(users,mail,db,banquo) {
   var url = "http://localhost:3000/message?token="+users[0].token;
   //var url = "http://www.google.de";
   var opts = {
-    mode : 'base64',
+    mode : 'save',
     url: url,
     delay: 10000,
-    selector: "#EditorCanvas"
+    selector: "#EditorCanvas",
+    scrape: true
   };
-  banquo.capture(opts, function(err, imageData) {
+  //banquo.capture(opts, function(err, imageData) {
+  banquo.capture(opts, function(err, bodyMarkup) {
     if(err) {
       console.log(err);
     }
@@ -321,9 +323,12 @@ function sendMail(users,mail,db,banquo) {
           $userID:key.userID
         },function(err,row) {
           if(!err) {
-            var html = '<html><head></head><body><p>You received a new message on your board</p>'+
+            var html = '<html><head></head><body>'+
+                '<p>You received a new message on your board</p>'+
                 '<a href="http://igor.medien.uni-weimar.de:3000/message?token='+key.token+'">http://igor.medien.uni-weimar.de:3000/message?token='+key.token+'</a>'+
-                '<br><img src=\'data:image/png;base64,'+imageData.toString()+'\'></img></body></html>';
+                bodyMarkup+
+                //'<br><img src=\'data:image/png;base64,'+imageData.toString()+'\'></img>'+
+                '</body></html>';
             mail.send({
               text: 'You received a new message on your board.\nhttp://igor.medien.uni-weimar.de:3000/message?token='+key.token,
               attachment:
