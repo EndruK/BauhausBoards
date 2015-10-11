@@ -153,7 +153,7 @@ function initContent() {
 }
 
 function showUser(userIndex) {
-  stopSwitchUserTimer();
+  //stopSwitchUserTimer();
   startSwitchUserTimer();
   var buttons = $("#sidebarMain .sidebarUpper button");
   buttons.removeAttr("style");

@@ -50,7 +50,6 @@ $('.sidebarSwiper').click(function(){
 //###FUNCTIONS##################################################################
 function loadMain(event) {
   showMain = true;
-  usercollection = new Array();
   $("#header").empty();
   project.clear();
   $("#sidebarMain .sidebarUpper").empty();
