@@ -167,7 +167,6 @@ function logoutUser() {
     type:'GET',
     success:function(res) {
       showFloaty("Successfully logged out.");
-      getRoomUsers();
       loadMain();
     },
     error:function(err) {
