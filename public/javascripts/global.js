@@ -67,6 +67,7 @@ function loadMain(event) {
   addGifTicker();
   startSwitchUserTimer();
   closeEditorPopup();
+  $("#twitterDiv").remove();
 }
 
 function loadUserBackend(event) {
