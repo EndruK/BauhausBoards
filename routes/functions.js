@@ -141,7 +141,7 @@ router.get('/getUserTwitter', function(req,res,next) {
       res.send("error:"+err);
     }
     else {
-      if(row.twitter) {
+      if(row && row.twitter) {
         var twitter = req.twitter;
         var params = {screen_name: row.twitter}
         twitter.get('statuses/user_timeline', params, function(err,tweets,response) {

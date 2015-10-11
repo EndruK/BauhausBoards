@@ -24,6 +24,7 @@ function login(event) {
   var mail = $("#mailaddress").val();
   var password = $("#password").val();
   var hash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+  console.log(hash)
   $.ajax({
     url: '/functions/loginAdmin',
     type: 'POST',
