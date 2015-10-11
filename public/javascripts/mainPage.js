@@ -173,9 +173,9 @@ function showUserHeader(userIndex) {
   if(!imgURL) imgURL = "/images/default-user.png";
   $("#header").append("<div id='userImage'><img src='"+imgURL+"'>");
   if($("#userImage img").width() > $("#userImage img").height()) {
-    $("<div id='verticalAlignDiv'>").insertBefore("#userImage img");
+    //$("<div id='verticalAlignDiv'>").insertBefore("#userImage img");
     $("#userImage img").css("width","100%");
-    $("#verticalAlignDiv").css("height",($("#userImage").height()-$("#userImage img").height())/2);
+    //$("#verticalAlignDiv").css("height",($("#userImage").height()-$("#userImage img").height())/2);
   }
   else {
     $("#userImage img").css("height","100%");
