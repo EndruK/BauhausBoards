@@ -166,9 +166,9 @@ function logoutUser() {
     url:'/functions/logoutUser',
     type:'GET',
     success:function(res) {
-      //showFloaty("Successfully logged out.");
-      //loadMain();
-      window.location.reload(true);
+      showFloaty("Successfully logged out.");
+      loadMain();
+      //window.location.reload(true);
     },
     error:function(err) {
       console.log("couldn't logout user");
