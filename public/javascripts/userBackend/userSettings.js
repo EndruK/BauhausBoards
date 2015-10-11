@@ -1,4 +1,5 @@
 var loggedInPassword;
+var userData;
 function loadUserSettingsPopup(event) {
   if(loggedInPassword) {
     checkSession(showUserSettings);
@@ -59,32 +60,38 @@ function loginUserPassword() {
 }
 
 function showUserSettings() {
-  var userIndex;
-  for(var i=0; i<usercollection.length; i++) {
-    if(usercollection[i].userID == authenticatedUser) {
-      userIndex = i;
-      break;
+  userData = new Array();
+  $.ajax({
+    url:"/functions/getUser",
+    type:"GET",
+    data:{"userID":authenticatedUser},
+    success:function(res) {
+      userData = res;
+      removePopup();
+      $("#sidebarUserSettings .sidebarUpper").empty();
+      showSidebar('sidebarUserSettings');
+      $('#users').css('visibility','visible');
+      $("#sidebarUserSettings .sidebarUpper").append("<br>");
+      $("#sidebarUserSettings .sidebarUpper").append("<button onclick='changeUserPopup()'>Change User");
+      $("#sidebarUserSettings .sidebarUpper").append("<br>");
+      $("#sidebarUserSettings .sidebarUpper").append("<button onclick='changeUserMailPopup()'>Change Mail");
+      $("#sidebarUserSettings .sidebarUpper").append("<br>");
+      $("#sidebarUserSettings .sidebarUpper").append("<button onclick='changeUserPWPopup()'>Change PW");
+      $("#sidebarUserSettings .sidebarUpper").append("<br>");
+      $("#sidebarUserSettings .sidebarUpper").append("<button onclick='changeUserPinPopup()'>Change Pin");
+      if(userData.userAdminFlag == 1) {
+        $("#sidebarUserSettings .sidebarUpper").append("<br>");
+        $("#sidebarUserSettings .sidebarUpper").append("<button onclick='changeBoardResolutionPopup()'>Change Resolution");
+      }
+    },
+    error:function(err) {
+      console.log("couldn't get user data");
+      showFloaty("no connection");
     }
-  }
-  removePopup();
-  $("#sidebarUserSettings .sidebarUpper").empty();
-  showSidebar('sidebarUserSettings');
-  $('#users').css('visibility','visible');
-  $("#sidebarUserSettings .sidebarUpper").append("<br>");
-  $("#sidebarUserSettings .sidebarUpper").append("<button onclick='changeUserPopup("+userIndex+")'>Change User");
-  $("#sidebarUserSettings .sidebarUpper").append("<br>");
-  $("#sidebarUserSettings .sidebarUpper").append("<button onclick='changeUserMailPopup("+userIndex+")'>Change Mail");
-  $("#sidebarUserSettings .sidebarUpper").append("<br>");
-  $("#sidebarUserSettings .sidebarUpper").append("<button onclick='changeUserPWPopup("+userIndex+")'>Change PW");
-  $("#sidebarUserSettings .sidebarUpper").append("<br>");
-  $("#sidebarUserSettings .sidebarUpper").append("<button onclick='changeUserPinPopup("+userIndex+")'>Change Pin");
-  if(usercollection[userIndex].adminFlag == 1) {
-    $("#sidebarUserSettings .sidebarUpper").append("<br>");
-    $("#sidebarUserSettings .sidebarUpper").append("<button onclick='changeBoardResolutionPopup("+userIndex+")'>Change Resolution");
-  }
+  });
 }
 
-function changeUserPopup(userIndex) {
+function changeUserPopup() {
   showPopup();
   stopLoginPopupTimer();
   $("#popup").append("<h2>User");
@@ -94,16 +101,16 @@ function changeUserPopup(userIndex) {
   $("#popup").append("<div id='changeUserInfoDiv' class='changeUserForm'>");
   $("#changeUserInfoDiv").append("<form>");
   $("#changeUserInfoDiv form").append("<label>Name");
-  $("#changeUserInfoDiv form").append("<input maxlength='30' type='text' id='nameInput' value='"+usercollection[userIndex].userName+"'>");
+  $("#changeUserInfoDiv form").append("<input maxlength='30' type='text' id='nameInput' value='"+userData.userName+"'>");
   $("#changeUserInfoDiv form").append("<br><br>");
   $("#changeUserInfoDiv form").append("<label>Description");
-  $("#changeUserInfoDiv form").append("<input maxlength='30' type='text' id='descriptionInput' value='"+usercollection[userIndex].userDescription+"'>");
+  $("#changeUserInfoDiv form").append("<input maxlength='30' type='text' id='descriptionInput' value='"+userData.userDescription+"'>");
   $("#changeUserInfoDiv form").append("<br><br>");
   $("#changeUserInfoDiv form").append("<label>Twitter");
-  $("#changeUserInfoDiv form").append("<input type='text' id='twitterInput' value='"+usercollection[userIndex].userTwitter+"'>");
+  $("#changeUserInfoDiv form").append("<input type='text' id='twitterInput' value='"+userData.userTwitter+"'>");
   $("#changeUserInfoDiv form").append("<br><br>");
   $("#changeUserInfoDiv form").append("<label>Profile Pic");
-  $("#changeUserInfoDiv form").append("<input type='text' id='picURLInput' value='"+usercollection[userIndex].userProfilePic+"'>");
+  $("#changeUserInfoDiv form").append("<input type='text' id='picURLInput' value='"+userData.userProfilePic+"'>");
   $("#changeUserInfoDiv form").append("<br class='clear'>");
   $("#changeUserInfoDiv form").append("<button onclick='uploadImage()'>Upload Image");
   $("#changeUserInfoDiv form").append("<input id='picUploadInput' accept='image/*' name='file' type='file' style='display:none'>");
@@ -113,12 +120,12 @@ function changeUserPopup(userIndex) {
   });
   $("#popup").append("<div class='clear'>");
   $("#popup").append("<div class='popupConfirm'>");
-  $(".popupConfirm").append("<button onclick='changeUserInfo("+userIndex+")'>Change");
+  $(".popupConfirm").append("<button onclick='changeUserInfo()'>Change");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
   $(".popupConfirm button").focus();
 }
 
-function changeUserInfo(userIndex) {
+function changeUserInfo() {
   $("#nameInput").removeAttr("style");
   var userName = $("#nameInput").val();
   var userDescription = $("#descriptionInput").val();
@@ -134,13 +141,13 @@ function changeUserInfo(userIndex) {
     type:"POST",
     data:{"userName":userName,"userDescription":userDescription,"userTwitter":userTwitter,"userProfilePic":userProfilePic},
     success:function(res) {
-      usercollection[userIndex].userName = userName;
-      usercollection[userIndex].userDescription = userDescription;
-      usercollection[userIndex].userTwitter = userTwitter;
-      usercollection[userIndex].userProfilePic = userProfilePic;
+      //usercollection[userIndex].userName = userName;
+      //usercollection[userIndex].userDescription = userDescription;
+      //usercollection[userIndex].userTwitter = userTwitter;
+      //usercollection[userIndex].userProfilePic = userProfilePic;
       removePopup();
       stopLoginPopupTimer();
-      showUserHeader(userIndex);
+      //showUserHeader(userIndex);
       showFloaty("User info successfully changed");
     },
     error:function(err) {
@@ -150,7 +157,7 @@ function changeUserInfo(userIndex) {
   });
 }
 
-function changeUserMailPopup(userIndex) {
+function changeUserMailPopup() {
   showPopup();
   stopLoginPopupTimer();
   $("#popup").append("<h2>Email");
@@ -164,15 +171,15 @@ function changeUserMailPopup(userIndex) {
     changeUserMail();
   });
   $("#popup").append("<div class='popupConfirm'>");
-  $(".popupConfirm").append("<button onclick='changeUserMail("+userIndex+")'>Change");
+  $(".popupConfirm").append("<button onclick='changeUserMail()'>Change");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
   $(".popupConfirm button").focus();
 }
 
-function changeUserMail(userIndex) {
+function changeUserMail() {
   $("#userMailInput").removeAttr("style");
   var mail = $("#userMailInput").val();
-  if(mail == usercollection[userIndex].userMail) {
+  if(mail == userData.userMail) {
     removePopup();
     stopLoginPopupTimer();
     return;
@@ -187,7 +194,7 @@ function changeUserMail(userIndex) {
       type:"POST",
       data:{"userMail":mail},
       success:function(res) {
-        usercollection[userIndex].userMail = mail;
+        //usercollection[userIndex].userMail = mail;
         removePopup();
         stopLoginPopupTimer();
         showFloaty("Mail successfully changed");
@@ -200,7 +207,7 @@ function changeUserMail(userIndex) {
   });
 }
 
-function changeUserPWPopup(userIndex) {
+function changeUserPWPopup() {
   showPopup();
   stopLoginPopupTimer();
   $("#popup").append("<h2>Password");
@@ -219,16 +226,16 @@ function changeUserPWPopup(userIndex) {
   $("#changeUserPWDiv form").append("<input type='password' id='newPasswordCheck'>");
   $("#changeUserPWDiv form").submit(function(event) {
     event.preventDefault();
-    changeUserPW(userIndex);
+    changeUserPW();
   });
   $("#popup").append("<div class='clear'>");
   $("#popup").append("<div class='popupConfirm'>");
-  $(".popupConfirm").append("<button onclick='changeUserPW("+userIndex+")'>Change");
+  $(".popupConfirm").append("<button onclick='changeUserPW()'>Change");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
   $(".popupConfirm button").focus();
 }
 
-function changeUserPW(userIndex) {
+function changeUserPW() {
   $("#oldPasswordInput").removeAttr("style");
   $("#newPassword").removeAttr("style");
   $("#newPasswordCheck").removeAttr("style");
@@ -272,8 +279,6 @@ function changeUserPW(userIndex) {
       showFloaty("no connection");
     }
   });
-  var newPW = "";
-  var newPWCheck = "";
 }
 
 function markPWRed() {
@@ -285,7 +290,7 @@ function markPWRed() {
   $("#newPasswordCheck").val("");
 }
 
-function changeUserPinPopup(userIndex) {
+function changeUserPinPopup() {
   showPopup();
   stopLoginPopupTimer();
   $("#popup").append("<h2>Pin");
@@ -298,16 +303,16 @@ function changeUserPinPopup(userIndex) {
   $("#changeUserPinDiv form").append("<input maxlength='4' type='password' id='newPinInput'>");
   $("#changeUserPinDiv form").submit(function(event) {
     event.preventDefault();
-    changeUserPin(userIndex);
+    changeUserPin();
   });
   $("#popup").append("<div class='clear'>");
   $("#popup").append("<div class='popupConfirm'>");
-  $(".popupConfirm").append("<button onclick='changeUserPin("+userIndex+")'>Change");
+  $(".popupConfirm").append("<button onclick='changeUserPin()'>Change");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
   $(".popupConfirm button").focus();
 }
 
-function changeUserPin(userIndex) {
+function changeUserPin() {
   $("#newPinInput").removeAttr("style");
   if(!validatePin($("#newPinInput").val())) {
     $("#newPinInput").css("border","solid 2px red");

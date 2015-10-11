@@ -922,6 +922,23 @@ router.post('/removeUserFromRoom',restrictAdmin,function(req,res) {
   });
 });
 
+router.get('/getUser', restrictUserPW, function(req,res) {
+  var db = req.db;
+  var userID = req.query.userID;
+  var query = "SELECT u_name AS userName,u_mail AS userMail,u_profilePic AS userProfilePic,u_descr AS userDescription,u_twitter AS userTwitter,u_adminFlag AS userAdminFlag FROM user WHERE u_id=$userID";
+  db.get(query,{
+    $userID:userID
+  }, function(err,row) {
+    if(err) {
+      res.status = 500;
+      res.send("error: " + err);
+    }
+    else {
+      res.send(row);
+    }
+  });
+});
+
 //backend
 router.get('/getUserForChange',restrictAdmin,function(req,res) {
   var db =req.db;

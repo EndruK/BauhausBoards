@@ -34,6 +34,7 @@ function resize () {
 }
 
 function getBoard() {
+  console.log(usercollection);
   $.ajax({
     url:"functions/getBoard",
     type:"GET",
@@ -187,6 +188,7 @@ function showUserHeader(userIndex) {
 function showUserContent(userIndex) {
   project.clear();
   view.update();
+  console.log(usercollection[userIndex].userID);
   $.ajax({
     url: "/functions/getUserContent",
     type: "GET",
