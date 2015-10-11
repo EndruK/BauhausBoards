@@ -91,7 +91,7 @@ function switchButtonColor() {
     $("#userImage span").css("color",rgbToHex(activeColor));
   }
   else {
-    $("#userImage span").css("color",rgbToHex(colors["black"]));
+    $("#userImage span").css("color",'white');
   }
 }
 

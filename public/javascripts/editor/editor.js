@@ -137,6 +137,6 @@ function showIcon(type) {
     $("#userImage span").css("color",rgbToHex(activeColor));
   }
   else {
-    $("#userImage span").css("color",rgbToHex(colors["black"]));
+    $("#userImage span").css("color",rgbToHex(colors["white"]));
   }
 }

@@ -165,7 +165,7 @@ function changeUserMailPopup() {
   $("#popup").append("<h4>Change your mail address");
   $("#popup").append("<hr>");
   $("#popup").append("<form>");
-  $("#popup form").append("<input maxlength='60' type='text' id='userMailInput' value='"+usercollection[userIndex].userMail+"'>");
+  $("#popup form").append("<input maxlength='60' type='text' id='userMailInput' value='"+userData.userMail+"'>");
   $("#popup form").submit(function(event) {
     event.preventDefault();
     changeUserMail();
