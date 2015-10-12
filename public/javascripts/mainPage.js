@@ -310,7 +310,7 @@ function showTwitter(userIndex) {
     },
     error:function(err) {
       console.log("couldn't get twitter content");
-      showFloaty("no connection");
+      //showFloaty("no connection");
     },
     timeout: 3000
   });
@@ -332,7 +332,7 @@ function getTwitterEmbed(twitterName,tweetID) {
     },
     error:function(err) {
       console.log(err);
-      showFloaty("no connection");
+      //showFloaty("no connection");
     }
   });
 }
