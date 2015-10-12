@@ -5,6 +5,8 @@ var selectedUser;
 var switchUserTimerHandler = null;
 var switchUserTime = 20000;
 var showMain;
+var twitterAjax;
+var twitterEmbedAjax;
 
 //initial functions
 $( document ).ready(function() {
@@ -292,9 +294,10 @@ function selectBoard() {
 }
 
 function showTwitter(userIndex) {
-
+  twitterAjax.abort();
+  twitterEmbedAjax.abort();
   $("#twitterDiv").remove();
-  $.ajax({
+  twitterAjax = $.ajax({
     url:"/functions/getUserTwitter",
     type:"GET",
     data:{"userID":usercollection[userIndex].userID},
@@ -315,7 +318,7 @@ function showTwitter(userIndex) {
 
 function getTwitterEmbed(twitterName,tweetID) {
   var url = "https://api.twitter.com/1/statuses/oembed.json?url=https://twitter.com/"+twitterName+"/status/"+tweetID;
-  $.ajax({
+  twitterEmbedAjax = $.ajax({
     url: url,
     dataType: "jsonp",
     success:function(res) {
