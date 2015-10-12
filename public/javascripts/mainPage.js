@@ -294,8 +294,8 @@ function selectBoard() {
 }
 
 function showTwitter(userIndex) {
-  twitterAjax.abort();
-  twitterEmbedAjax.abort();
+  if(twitterAjax) twitterAjax.abort();
+  if(twitterEmbedAjax) twitterEmbedAjax.abort();
   $("#twitterDiv").remove();
   twitterAjax = $.ajax({
     url:"/functions/getUserTwitter",
