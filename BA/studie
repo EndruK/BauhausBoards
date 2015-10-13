@@ -8,8 +8,8 @@ Studie:
   * Schreibe Feedback
 - Log In with Pin
 - Set a Status
-- Remove Status
 - Set a Status While another is still active
+- Remove Status
 - Change The Content Several Times
 - View the messages
 - login in the user settings
@@ -31,3 +31,10 @@ Testfragen:
   #Desktop nutzbarkeit
   #Smartphone nutzbarkeit
   
+
+
+Räume
+  - VR1: Scholli, Patrick, Hening
+  - VR2: Andreas, Sebastian, Steppo
+  - VR3: Alex, Andre
+  - Bit: Bernhard Bittorf, Banafshe Asari
