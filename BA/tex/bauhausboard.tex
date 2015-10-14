@@ -1,11 +1,70 @@
-\chapter{Umsetzung}\label{Bauhausboard}
+\chapter{BauhausBoards}\label{BauhausBoards}
 \section{Entwurf}\label{Entwurf}
 Alles was zur Vorüberlegung gehört kommt hier mit rein\\
 Seitenentwurf\\
 Skizzen\\
 
+%- Anforderungsanalyse
+%  * Display außerhalb von Büros
+%  * Applikation direkt auf dem Gerät oder Anzeige einer Schnittstelle der Applikation
+%  * --> Schnittstelle der Applikation
+%  * Webserver generiert Webseite, welche dann nur auf dem Gerät angezeigt werden muss
+%  * RestAPI -> Die Ausgelieferte Seite muss im Endeffekt nur einmal geladen werden, wodurch sie alle Funktionen erhält
+%  * Kommunikation nur wenn daten geholt oder gepusht werden müssen
+%  * wenn Verbindungsabbruch: Seite läuft weiter aber kann einfach nur keine Daten mehr holen/senden bis Verbindung wieder steht
+%- Struktur Seite
+%  * Grafik hier mit erklärung wofür die Views sind (Vllt auch mit erster Version)
+%  * Frontend
+%    # Main View
+%    # Message View
+%    # Feedback View
+%    # User Backend View
+%      + Status
+%      + Content
+%      + Received Messages
+%      + User Settings
+%  * Backend
+%    # Boards
+%      + add
+%      + del
+%      + set Room
+%      + set Resolution
+%    # Rooms
+%      + add
+%      + del
+%      + change name/descr
+%      + manage room users
+%    # Users
+%      + add
+%      + del
+%      + change User
+%    # Logs
+%      + Contents
+%      + Messages
+%      + Feedbacks
+%- Datenbankentwurf
+%  * Datenbankschema mit allen Variabeln erklärt
+
 \section{Umsetzung}\label{Umsetzung}
 Größter Part: Die Komplette Umsetzung im Detail
+
+%- NodeJS - Vorteile Nachteile
+%- Frontend: Javascript mit JQuery zum Dom-manipulieren
+%
+%Packages:
+%- Express
+%- SQLite
+%  * warum SQLite anstelle von MongoDB (relational vs dokument-orientiert)
+%- PaperJS
+%- SHA256 password/pin hashing
+%- ....
+%
+%Server
+%Struktur der Webseite
+%Editor
+%Backend
+
+
 \section{Features}\label{Features}
 Alle Features des Boards\\
 \\
@@ -37,6 +96,9 @@ Gif Layer Support\\
 Client Sessions\\
 mit npm plugin express-sessions serverseitig\\
 cookies client seitig
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%- 
 
 \section{Probleme}\label{Probleme}
 Die Probleme, auf die ich während der Arbeit gekommen bin\\
