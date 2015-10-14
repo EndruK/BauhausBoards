@@ -43,7 +43,8 @@ function printRoomTable() {
     },
     error:function(err) {
       console.log("couldn't load rooms");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -82,7 +83,8 @@ function createNewRoom() {
     },
     error:function(err) {
       console.log("couldn't create new room");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -121,7 +123,8 @@ function deleteRoomPopup(roomID) {
     },
     error:function(err) {
       console.log("couldn't get board count for room");
-    }
+    },
+    timeout: ajaxTimeout
   });
   $(".popupConfirm").append("<br>");
   $(".popupConfirm").append("<button onclick='deleteRoom("+roomID+")'>Delete");
@@ -141,7 +144,8 @@ function deleteRoom(roomID) {
     },
     error:function(err) {
       console.log("couldn't delete room");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -180,7 +184,8 @@ function setRoomName(roomID) {
       },
       error:function(err) {
         console.log("couldn't set room name");
-      }
+      },
+      timeout: ajaxTimeout
     });
   }
 }
@@ -214,7 +219,8 @@ function setRoomDescription(roomID) {
     },
     error:function(err) {
       console.log("couldn't set room description");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -256,7 +262,8 @@ function setRoomUsersPopup(roomID,roomName) {
     },
     error:function(err) {
       console.log("couldn't get users for room");
-    }
+    },
+    timeout: ajaxTimeout
   });
   $("#popup").append("<div class='clear'>");
   $("#popup").append("<br>");
@@ -311,9 +318,10 @@ function addUserToRoomPopup(roomID) {
         });
       }
     },
-    error(err) {
+    error:function(err) {
       console.log("couldn't get users which are not in room");
-    }
+    },
+    timeout: ajaxTimeout
   })
 }
 function removeUserFromRoomPopup(userID,roomID,userName) {
@@ -343,7 +351,8 @@ function removeUserFromRoom(userID,roomID) {
     },
     error:function(err) {
       console.log("couldn't remove user from room");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -358,6 +367,7 @@ function addUserToRoom(userID,roomID) {
     },
     error:function(err) {
       console.log("couldn't add user to room");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }

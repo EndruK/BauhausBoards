@@ -53,7 +53,8 @@ function submitFeedback() {
       error:function(err) {
         console.log("could not submit feedback");
         showFloaty("no connection");
-      }
+      },
+      timeout: ajaxTimeout
     });
   }
   else {

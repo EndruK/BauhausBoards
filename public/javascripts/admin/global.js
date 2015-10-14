@@ -2,7 +2,7 @@ var logedIn = false;
 var floatyTimer = null;
 var floatyTime = 5000;
 var popupVisible = false;
-
+var ajaxTimeout = 5000;
 $("#login").on("click",login);
 $(document).ready(function() {
   paper.setup('EditorCanvas');
@@ -43,7 +43,8 @@ function login(event) {
       console.log("Error, couldn't login");
       $("#password").val("");
       window.location.replace("/admin");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -74,7 +75,8 @@ function logout() {
     error:function(err) {
       console.log(err);
       window.location.replace("/admin");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -96,7 +98,8 @@ function checkSession(callback) {
     },
     error:function(err) {
       console.log(err);
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 function checkSessionIntermediate() {
@@ -114,7 +117,8 @@ function checkSessionIntermediate() {
     },
     error:function(err) {
       console.log(err);
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 function checkSessionLogin() {
@@ -132,7 +136,8 @@ function checkSessionLogin() {
     },
     error:function(err) {
       console.log(err);
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 

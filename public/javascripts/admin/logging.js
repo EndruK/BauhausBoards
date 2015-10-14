@@ -37,7 +37,8 @@ function loadContentLogs(event) {
     },
     error:function(err) {
       console.log("couldn't get users");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -62,7 +63,8 @@ function loadUserContent() {
     },
     error:function(err) {
       console.log("couldn't get all user content");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -99,7 +101,8 @@ function loadMessageLogs(event) {
     },
     error:function(err) {
       console.log("couldn't get messages");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -136,7 +139,8 @@ function loadFeedbackLogs(event) {
     },
     error:function(err) {
       console.log("couldn't get feedback");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 

@@ -51,7 +51,8 @@ function printUserTable() {
     },
     error:function(err) {
       console.log("couldn't get users");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -158,7 +159,8 @@ function createNewUser() {
     },
     error:function(err) {
       console.log("couldn't check mail address");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -188,7 +190,8 @@ function deleteUser(userID) {
     },
     error:function(err) {
       console.log("couldn't delete user");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -215,7 +218,8 @@ function changeUserPopup(userID) {
     },
     error:function(err) {
       console.log("couldn't get user to change");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -316,7 +320,8 @@ function changeUser(userID,userMail) {
       },
       error:function(err) {
         console.log("couldn't check mail address");
-      }
+      },
+      timeout: ajaxTimeout
     });
   }
   else {
@@ -350,7 +355,8 @@ function changeUserAjax(userID,name,password,mail,url,description,twitter,adminF
     },
     error:function(err) {
       console.log("couldn't change user");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -411,7 +417,8 @@ function uploadImage() {
         },
         complete: function() {
           //TODO remove uploading indicator
-        }
+        },
+        timeout: ajaxTimeout
       });
     };
     reader.readAsDataURL(file);

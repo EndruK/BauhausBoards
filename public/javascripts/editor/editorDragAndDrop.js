@@ -54,7 +54,8 @@ function drop(event) {
         complete: function() {
           removeLoadingGif();
           uploading = false;
-        }
+        },
+        timeout: ajaxTimeout
       });
     }
     r.readAsDataURL(key);

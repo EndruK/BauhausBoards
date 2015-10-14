@@ -153,7 +153,8 @@ function changeUserInfo() {
     error:function(err) {
       console.log("couldn't update user info");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -202,7 +203,8 @@ function changeUserMail() {
       error:function(err) {
         console.log(err);
         showFloaty("no connection");
-      }
+      },
+      timeout: ajaxTimeout
     });
   });
 }
@@ -277,7 +279,8 @@ function changeUserPW() {
     error:function(err) {
       console.log("couldn't check pw");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -330,7 +333,8 @@ function changeUserPin() {
     error:function(err) {
       console.log("couldn't update pin");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -382,7 +386,8 @@ function setBoardResolution(boardID,type) {
     error:function(err) {
       console.log("couldn't set board resolution");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -408,7 +413,8 @@ function checkSessionPW(callback) {
     error:function(err) {
       console.log(err);
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -436,7 +442,8 @@ function checkMail(mail,callback) {
     error:function(err) {
       console.log("couldn't check mail address");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -474,7 +481,8 @@ function uploadImage() {
         },
         complete: function() {
           //TODO remove uploading indicator
-        }
+        },
+        timeout: ajaxTimeout
       });
     };
     reader.readAsDataURL(file);
@@ -500,6 +508,7 @@ function getBoardResolution(boardID) {
     error:function(err) {
       console.log("couldn't get board resolution");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }

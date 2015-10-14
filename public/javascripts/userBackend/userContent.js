@@ -47,7 +47,8 @@ function loadChangeContent(event) {
     error:function(error) {
       console.log("couldn't get user content");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -79,7 +80,8 @@ function changeContent() {
     error:function(err) {
       console.log("couldn't set user content");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -119,6 +121,7 @@ function changeBackground() {
     error:function(err) {
       console.log("couldn't set content background");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }

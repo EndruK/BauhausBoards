@@ -41,7 +41,8 @@ function loadChangeStatus() {
     error:function(err) {
       console.log("couldn't get user status");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -81,6 +82,7 @@ function setStatus() {
     error:function(err) {
       console.log("couldn't set user status");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }

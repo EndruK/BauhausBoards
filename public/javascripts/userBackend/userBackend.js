@@ -54,7 +54,8 @@ function userLoginPopup() {
       $(".popupConfirm button").focus();
       // just a small hack to display the scrollbar on the tablet
       showUser(selectedUser);
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -103,7 +104,8 @@ function login(userID) {
     error:function(err) {
       console.log("couldn't login user with pin");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -153,7 +155,8 @@ function checkSession(callback) {
     error:function(err) {
       console.log(err);
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -173,6 +176,7 @@ function logoutUser() {
     error:function(err) {
       console.log("couldn't logout user");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }

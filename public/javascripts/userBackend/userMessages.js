@@ -42,7 +42,8 @@ function loadMessages() {
     error:function(err) {
       console.log("couldn't get user messages");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -93,7 +94,8 @@ function showMessage(messageIndex) {
       error:function(err) {
         console.log("couldn't mark message as seen");
         showFloaty("no connection");
-      }
+      },
+      timeout: ajaxTimeout
     });
   }
   updateTimer();
@@ -123,7 +125,8 @@ function markMessageUnseen(messageIndex) {
       error:function(err) {
         console.log("couldn't mark message as unseen");
         showFloaty("no connection");
-      }
+      },
+      timeout: ajaxTimeout
     });
   }
 }

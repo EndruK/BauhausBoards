@@ -61,7 +61,8 @@ function loadMessagePopup(event) {
       $(".popupConfirm button:last").focus();
       // just a small hack to display the scrollbar on the tablet
       //showUser(selectedUser);
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -200,7 +201,8 @@ function submitMessage() {
       complete:function() {
         stopMessageTimer();
         stopMessagePopupTimer();
-      }
+      },
+    timeout: ajaxTimeout
     });
   }
   else {

@@ -752,6 +752,24 @@ button:focus {
   background-color: rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 0 1px rgba(255,255,255,0.5);
 }
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+  font-size: 16px;
+}
 @-moz-keyframes spin {
   from {
     -webkit-transform: scale(1) rotate(0deg);

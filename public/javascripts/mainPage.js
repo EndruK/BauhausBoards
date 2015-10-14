@@ -7,6 +7,7 @@ var switchUserTime = 20000;
 var showMain;
 var twitterAjax;
 var twitterEmbedAjax;
+var ajaxTimeout = 5000;
 
 //initial functions
 $( document ).ready(function() {
@@ -69,7 +70,8 @@ function getBoard() {
     },
     error:function(err) {
       console.log("couldn't get board resolution");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -107,7 +109,8 @@ function getRoomUsers() {
     error:function(err) {
       console.log("couldn't get board users");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -205,7 +208,8 @@ function showUserContent(userIndex) {
     error:function(error) {
       console.log("couldn't get user content");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -232,7 +236,8 @@ function getUSerStatus(userIndex) {
     error:function(err) {
       console.log("couldn't get user status");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -284,7 +289,8 @@ function showSelectBoardPopup() {
     error:function(err) {
       console.log("couldn't get boards");
       showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -333,7 +339,8 @@ function getTwitterEmbed(twitterName,tweetID) {
     error:function(err) {
       console.log(err);
       //showFloaty("no connection");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 

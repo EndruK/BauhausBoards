@@ -56,7 +56,8 @@ function printBoardTable() {
     },
     error:function(err) {
       console.log("couldn't get boards");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -86,7 +87,8 @@ function createNewBoard() {
     },
     error:function(err) {
       console.log("couldn't create new board");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -116,7 +118,8 @@ function deleteBoard(boardID) {
     },
     error:function(err) {
       console.log("couldn't delete board");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -165,7 +168,8 @@ function setBoardResolution(boardID,type) {
     },
     error:function(err) {
       console.log("couldn't set board resolution");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -197,7 +201,8 @@ function setBoardRoomPopup(boardID,roomID) {
     },
     error:function(err) {
       console.log("couldn't get rooms");
-    }
+    },
+    timeout: ajaxTimeout
   });
   $(".popupConfirm").append("<div class='clear'>");
   $(".popupConfirm").append("<button onclick='setBoardRoom("+boardID+")'>Set");
@@ -226,7 +231,8 @@ function setBoardRoom(boardID) {
     },
     error:function(err) {
       console.log("couldn't update board room");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
 
@@ -241,6 +247,7 @@ function getBoardResolution(boardID) {
     },
     error:function(err) {
       console.log("couldn't get board resolution");
-    }
+    },
+    timeout: ajaxTimeout
   });
 }
