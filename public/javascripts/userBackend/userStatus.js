@@ -20,7 +20,10 @@ function loadChangeStatus() {
   $("#popup").append("<div class='clear'>");
   $("#popup").append("<br>");
   $("#popup").append("<div class='popupConfirm'>");
-  $(".popupConfirm").append("<button onclick='setStatus()'>Set");
+  $(".popupConfirm").append("<button onclick='setAvailable(1)'>Available");
+  $(".popupConfirm").append("<button onclick='setAvailable(0)'>Unavailable");
+  $(".popupConfirm").append("<div class='clear'>");
+  $(".popupConfirm").append("<button onclick='setStatus()'>Set New Status");
   $(".popupConfirm").append("<button onclick='removePopup()'>Cancel");
   $(".popupConfirm button:last").focus();
   $.ajax({
@@ -81,6 +84,27 @@ function setStatus() {
     },
     error:function(err) {
       console.log("couldn't set user status");
+      showFloaty("no connection");
+    },
+    timeout: ajaxTimeout
+  });
+}
+
+function setAvailable(mod) {
+  $.ajax({
+    url:"/functions/setUserAvailableStatus",
+    type:"POST",
+    data:{"roomID":roomID,"available":mod},
+    success:function(res) {
+      var string = "";
+      if(mod == 0) string = "unavailable";
+      else string = "available";
+      removePopup();
+      checkSession(showUserBackend);
+      showFloaty("Changed the status to "+string+".");
+    },
+    error:function(err) {
+      console.log("couldn't set user available status");
       showFloaty("no connection");
     },
     timeout: ajaxTimeout

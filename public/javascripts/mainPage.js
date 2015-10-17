@@ -177,6 +177,14 @@ function showUserHeader(userIndex) {
   var imgURL = usercollection[userIndex].userProfilePic;
   if(!imgURL) imgURL = "/images/default-user.png";
   $("#header").append("<div id='userImage'><img src='"+imgURL+"'>");
+  setUpHeaderImage();
+  $("#userInfo").append("<div id='userName'>"+usercollection[userIndex].userName);
+  $("#userInfo").append("<div id='userDescription'>"+usercollection[userIndex].userDescription);
+  getUSerStatus(userIndex);
+  getUserAvailableStatus(userIndex);
+}
+
+function setUpHeaderImage() {
   if($("#userImage img").width() > $("#userImage img").height()) {
     //$("<div id='verticalAlignDiv'>").insertBefore("#userImage img");
     $("#userImage img").css("width","100%");
@@ -185,9 +193,6 @@ function showUserHeader(userIndex) {
   else {
     $("#userImage img").css("height","100%");
   }
-  $("#userInfo").append("<div id='userName'>"+usercollection[userIndex].userName);
-  $("#userInfo").append("<div id='userDescription'>"+usercollection[userIndex].userDescription);
-  getUSerStatus(userIndex);
 }
 
 function showUserContent(userIndex) {
@@ -235,6 +240,36 @@ function getUSerStatus(userIndex) {
     },
     error:function(err) {
       console.log("couldn't get user status");
+      showFloaty("no connection");
+    },
+    timeout: ajaxTimeout
+  });
+}
+
+function getUserAvailableStatus(userIndex) {
+  $("#userImage img").removeAttr("style");
+  setUpHeaderImage();
+  $.ajax({
+    url:"/functions/getUserAvailableStatus",
+    type:"GET",
+    data:{"userID":usercollection[userIndex].userID,"roomID":roomID},
+    success:function(res) {
+      //TODO: grey out the not available users
+      if(res.available == 0) {
+        //if user is not available
+        console.log("user is not available");
+        $("#userImage img").css({
+          "background-color":"#fff",
+          "opacity":"0.6",
+          "filter":"alpha(opacity=60)"
+        });
+      }
+      else {
+        console.log("user is available");
+      }
+    },
+    error:function(err) {
+      console.log("couldn't get user available status");
       showFloaty("no connection");
     },
     timeout: ajaxTimeout

@@ -34,6 +34,46 @@ router.get('/getRoomUsers', function(req, res, next) {
   });
 });
 
+router.post('/setUserAvailableStatus',restrictUser,function(req,res) {
+  var db = req.db;
+  var userID = req.session.userID;
+  var roomID = req.body.roomID;
+  var available = req.body.available;
+  var query = "UPDATE roomusers SET ru_available=$available WHERE ru_user=$userID AND ru_room=$roomID";
+  db.run(query,{
+    $available:available,
+    $userID:userID,
+    $roomID:roomID
+  },function(err){
+    if(err) {
+      res.status = 500;
+      res.send("error: "+ err);
+    }
+    else {
+      res.send("successfully changed available status");
+    }
+  });
+});
+
+router.get('/getUserAvailableStatus',function(req,res,next) {
+  var db = req.db;
+  var userID = req.query.userID;
+  var roomID = req.query.roomID;
+  var query = "SELECT ru_available AS available FROM roomusers WHERE ru_user=$userID AND ru_room=$roomID";
+  db.get(query,{
+    $userID:userID,
+    $roomID:roomID
+  },function(err,row) {
+    if(err) {
+      res.status = 500;
+      res.send("error:"+err);
+    }
+    else {
+      res.send(row);
+    }
+  });
+});
+
 router.post('/feedback', function(req,res,next) {
   var db = req.db;
   var content = req.body.content;
