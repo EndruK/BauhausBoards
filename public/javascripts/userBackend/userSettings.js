@@ -14,7 +14,7 @@ function loadUserSettingsPopup(event) {
   }
   var profilePicURL = usercollection[userIndex].userProfilePic;
   if(!profilePicURL || profilePicURL == null) {
-    profilePicURL = "images/default-user.png";
+    profilePicURL = "images/no_user.jpg";
   }
   showPopup();
   startLoginPopupTimer();

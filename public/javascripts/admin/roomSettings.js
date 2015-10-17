@@ -251,7 +251,7 @@ function setRoomUsersPopup(roomID,roomName) {
           }
           var profilePicURL = key.userProfilePic;
           if(!profilePicURL || profilePicURL == null) {
-            profilePicURL = "images/default-user.png";
+            profilePicURL = "images/no_user.jpg";
           }
           $("#usersInRoom").append("<div class='userTile'><div>"+
             "<img title='Remove "+key.userName+" from board' src='"+profilePicURL+"' onclick='removeUserFromRoomPopup("+key.userID+","+roomID+",\""+key.userName+"\")'>");
@@ -309,7 +309,7 @@ function addUserToRoomPopup(roomID) {
           }
           var profilePicURL = key.userProfilePic;
           if(!profilePicURL || profilePicURL == null) {
-            profilePicURL = "images/default-user.png";
+            profilePicURL = "images/no_user.jpg";
           }
           $("#usersInRoom").append("<div class='userTile'><div>"+
             "<img Add='Add "+key.userName+" to board' src='"+profilePicURL+"' onclick='addUserToRoom("+key.userID+","+roomID+")'>");

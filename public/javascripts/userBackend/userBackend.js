@@ -35,7 +35,7 @@ function userLoginPopup() {
         res.forEach(function(key) {
           var profilePicURL = key.userProfilePic;
           if(!profilePicURL || profilePicURL == null) {
-            profilePicURL = "images/default-user.png";
+            profilePicURL = "images/no_user.jpg";
           }
           $("#usersInRoom").append("<div class='userTile'><div>"+
             "<img title='Login as "+key.userName+"' src='"+profilePicURL+"' onclick='loginPopup("+key.userID+",\""+key.userName+"\",\""+profilePicURL+"\")'>");

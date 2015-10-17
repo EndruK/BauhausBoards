@@ -23,6 +23,7 @@ $( document ).ready(function() {
 $(window).on("resize", resize);
 
 function resize () {
+  $(".sidebar").css("height","100%");
   //put the header div at the top right corner
   //put the twitter div at bottom right corner
   $("#header").css("right",$(window).width()-dim.resX);
@@ -175,7 +176,7 @@ function showUserHeader(userIndex) {
   $("#header").empty();
   $("#header").append("<div id='userInfo'>");
   var imgURL = usercollection[userIndex].userProfilePic;
-  if(!imgURL) imgURL = "/images/default-user.png";
+  if(!imgURL) imgURL = "/images/no_user.jpg";
   $("#header").append("<div id='userImage'><img src='"+imgURL+"'>");
   setUpHeaderImage();
   $("#userInfo").append("<div id='userName'>"+usercollection[userIndex].userName);
@@ -185,10 +186,11 @@ function showUserHeader(userIndex) {
 }
 
 function setUpHeaderImage() {
+  $("#userImage img").removeAttr("style");
   if($("#userImage img").width() > $("#userImage img").height()) {
-    //$("<div id='verticalAlignDiv'>").insertBefore("#userImage img");
+    $("<div id='verticalAlignDiv'>").insertBefore("#userImage img");
     $("#userImage img").css("width","100%");
-    //$("#verticalAlignDiv").css("height",($("#userImage").height()-$("#userImage img").height())/2);
+    $("#verticalAlignDiv").css("height",($("#userImage").height()-$("#userImage img").height())/2);
   }
   else {
     $("#userImage img").css("height","100%");
@@ -260,9 +262,10 @@ function getUserAvailableStatus(userIndex) {
         console.log("user is not available");
         $("#userImage img").css({
           "background-color":"#fff",
-          "opacity":"0.6",
-          "filter":"alpha(opacity=60)"
+          "opacity":"0.35",
+          "filter":"alpha(opacity=35)"
         });
+        $("#userImage").append("<div style='position:absolute; margin:5px; right:0;'>not available");
       }
       else {
         console.log("user is available");

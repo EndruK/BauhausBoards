@@ -40,7 +40,7 @@ function loadMessagePopup(event) {
         res.forEach(function(key) {
           var profilePicURL = key.userProfilePic;
           if(!profilePicURL || profilePicURL == null) {
-            profilePicURL = "images/default-user.png";
+            profilePicURL = "images/no_user.jpg";
           }
           $("#usersInRoom").append("<div class='userTile'><div>"+
             "<img title='Select "+key.userName+"' src='"+profilePicURL+"' value='"+key.userID+"' onclick='handleSelection("+key.userID+")'>");
