@@ -157,6 +157,8 @@ function initContent() {
   $("#EditorCanvas").attr("height",dim.resY);
   $("#EditorCanvas").css("width",dim.resX);
   $("#EditorCanvas").css("height",dim.resY);
+  $("#gifLayer").css({"width":dim.resX,"height":dim.resY});
+  
 }
 
 function showUser(userIndex) {
