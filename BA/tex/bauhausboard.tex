@@ -8,12 +8,32 @@ Für Bauhausboards fiel die Wahl auf Tablet PCs, die außerhalb der Büros aufge
 Diese sind wesentlich billiger als Widescreen Monitore mit Touch Oberfläche und benötigen keinen zusätzlich angeschlossenen PC.
 %---Draft
 Die Plattform der Applikation musste ausgewählt werden. Zum einen gab es die Möglichkeit sie als Android Applikation zu entwickeln, die dann auf jedem Tablet eigenständig hätte laufen können. Das Problem hierbei wäre gewesen, dass die Nutzer auch von Unterwegs auf ihre Pinnwand schreiben oder ihren Status ändern können sollen. Hierfür wäre ein eigenständiger Server notwendig gewesen, der die Daten verwalten muss. Hinzu kommt es, dass durch die unterschiedlichen Tablet Architekturen, wie IOS oder Windows Mobile die App für jede Architektur hätte portiert werden müssen.
-Deswegen viel die Wahl auf eine Web-Applikation. Ein Webserver generiert eine Webseite, um den ganzen Content des Programms anzubieten, wodurch alle Tablets  darauf zugreifen können. Dazu muss auf den Tablets nur ein Web-Browser installiert sein.
+Deswegen fiel die Wahl auf eine Web-Applikation. Ein Webserver generiert eine Webseite, um den ganzen Content des Programms anzubieten, wodurch alle Tablets  darauf zugreifen können. Dazu muss auf den Tablets nur ein Web-Browser installiert sein.
 Die Tablets dienen dabei als Input- / Output-Gerät zwischen Benutzern und Server. Die Webseite ist dann daruch, da sie von einem Webserver angeboten wird zusätzlich von jedem Smartphone oder PC erreichbar und jeder Nutzer kann damit interagieren, egal wo er sich gerade befindet.
 
-Wichtig war es, dass die Applikation nicht bei jeder kleinsten Interaktion den ganzen Kontent neu laden muss. Deswegen wurde das Prinzip des \"Representational State transfer\" kurz REST angewandt.
-% Erklärung REST-API
-% REST ist .....
+Wichtig war es, dass die Applikation nicht bei jeder kleinsten Interaktion den ganzen Kontent neu laden muss.
+Deswegen wird das Prinzip von \"Create, Read, Update and Delete\" kurz CRUD angewandt.
+Beim Aufruf der Webseite wird der ganze statische Inhalt, wie der Grundaufbau der Seite und alle Funktionen geladen. Bestimmte Funktionen laden dann Daten nach und erzeugen so dynamischen Kontent.
+Bei einem Verbindungsabbruch läuft die Seite dann weiter, kann aber keine Daten vom Server abrufen, bis die Verbindung wieder aufgebaut wurde.\\
+\\
+%Aufbau der Seite
+% - mehrere Personen in Raum --> wie realisieren?
+% - switch durch alle angemeldeten User im Raum
+% - Jeder hat eigenen Content
+% - Nutzer wollen vllt nur eine Person in einem Raum ansprechen oder mehrere oder vllt sogar alle
+% - Nutzer im Raum müssen in irgend einer Weise darüber informiert werden, dass sie eine Nachricht erhalten haben --> mail / app
+% - Administrator der Applikation muss die Möglichkeit haben neue Nutzer, neue Räume und neue Boards zu erstellen und initialisieren
+% - Zu Studienzwecken muss der Administrator zudem in der Lage sein alle Nachrichten und erstellte COntents auswerten zu können
+% - Nutzer die Vorbei gehen sollen in irgend einer weise Feedback senden können (in Vorstudie hat sich gezeigt, dass niemand auf die daneben aufgehangenen Zettel etwas schreiben wollte)
+% - Benutzer in den Räumen müssen die Möglichkeit haben alle Nachrichten, die sie erhalten haben einsehen zu können
+% - Zudem sollen sie Ihre Pinnwand anpassen können
+% - Sie sollen Skizzen machen können, Bilder und Gifs hochladen und Webseiten als Hintergrund laden können
+% - Sie sollen einen Status setzen können, um vorbeigehende Nutzer darüber zu Informieren, was sie jetzt zur Zeit machen, ob sie grade im Büro sind, nut kurz essen, den halben oder ganzen Tag nicht da sind oder im Labor anzutreffen sind
+% - ZUdem sollen sie die möglichkeit bekommen sich als nicht anwesend markieren zu können, damit Gäste, die auf die Boards schauen schnell sehen, wer da ist und wer nicht
+% 
+%Aufbau der Datenbank
+
+
 
 
 %---/Draft
@@ -24,7 +44,7 @@ Wichtig war es, dass die Applikation nicht bei jeder kleinsten Interaktion den g
 %  * Applikation direkt auf dem Gerät oder Anzeige einer Schnittstelle der Applikation
 %  * --> Schnittstelle der Applikation
 %  * Webserver generiert Webseite, welche dann nur auf dem Gerät angezeigt werden muss
-%  * RestAPI -> Die Ausgelieferte Seite muss im Endeffekt nur einmal geladen werden, wodurch sie alle Funktionen erhält
+%  * CRUD -> Die Ausgelieferte Seite muss im Endeffekt nur einmal geladen werden, wodurch sie alle Funktionen erhält
 %  * Kommunikation nur wenn daten geholt oder gepusht werden müssen
 %  * wenn Verbindungsabbruch: Seite läuft weiter aber kann einfach nur keine Daten mehr holen/senden bis Verbindung wieder steht
 %- Struktur Seite
