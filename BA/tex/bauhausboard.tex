@@ -24,15 +24,45 @@ Bei einem Verbindungsabbruch läuft die Seite dann weiter, kann aber keine Daten
 % - Nutzer im Raum müssen in irgend einer Weise darüber informiert werden, dass sie eine Nachricht erhalten haben --> mail / app
 % - Administrator der Applikation muss die Möglichkeit haben neue Nutzer, neue Räume und neue Boards zu erstellen und initialisieren
 % - Zu Studienzwecken muss der Administrator zudem in der Lage sein alle Nachrichten und erstellte COntents auswerten zu können
-% - Nutzer die Vorbei gehen sollen in irgend einer weise Feedback senden können (in Vorstudie hat sich gezeigt, dass niemand auf die daneben aufgehangenen Zettel etwas schreiben wollte)
+% - Nutzer die Vorbei gehen sollen in irgend einer weise Feedback senden können (in Vorstudie hat sich gezeigt, dass niemand auf die daneben aufgehangenen Zettel etwas schreiben wollte - deshalb direktes Feedback per app)
 % - Benutzer in den Räumen müssen die Möglichkeit haben alle Nachrichten, die sie erhalten haben einsehen zu können
+% - Neue Nachrichten müssen besonders gekennzeichnet sein
 % - Zudem sollen sie Ihre Pinnwand anpassen können
 % - Sie sollen Skizzen machen können, Bilder und Gifs hochladen und Webseiten als Hintergrund laden können
-% - Sie sollen einen Status setzen können, um vorbeigehende Nutzer darüber zu Informieren, was sie jetzt zur Zeit machen, ob sie grade im Büro sind, nut kurz essen, den halben oder ganzen Tag nicht da sind oder im Labor anzutreffen sind
-% - ZUdem sollen sie die möglichkeit bekommen sich als nicht anwesend markieren zu können, damit Gäste, die auf die Boards schauen schnell sehen, wer da ist und wer nicht
+% - Um schnell einen Status zu setzen, quasi wenn man schnell weg muss und an seinem Board vorbei geht, soll zum Authentisieren des Nutzers ein 4 Stelliger PIN genutzt werden. Der Nutzer soll angeben, welcher der registrierten Nutzern des Raumes er ist und dazu seinen PIN eingeben. Wenn er das getan hat kann er einen Status setzen oder sich als Verfügbar/Nicht Verfügbar kennzeichnen
+% - Sie sollen einen Status setzen können, um vorbeigehende Nutzer darüber zu Informieren, was sie jetzt zur Zeit machen, ob sie grade im Büro sind, nur kurz essen, den halben oder ganzen Tag nicht da sind oder im Labor anzutreffen sind
+% - Zudem sollen sie die möglichkeit bekommen sich als nicht anwesend markieren zu können, damit Gäste, die auf die Boards schauen schnell sehen, wer da ist und wer nicht
+% - Nutzer im Raum, die gern Twitter benutzen sollen die öglichkeit bekommen ihren TwitterAccount anzugeben, damit ihr letzter tweet auf ihrer Pinnwand angezeigt werden kann
+% - Nutzer im Raum sollen zudem Ihre ganzen Daten ändern können (Name, Beschreibung, Mail, ProfilePic, PAsswort, PIN, ...) Dazu ist aber das Passwort des Nutzers erforderlich
 % 
 %Aufbau der Datenbank
-
+% - Um die Daten Zentral auf dem Server verwalten zu können musste eine Datenbank eingerichtet werden
+% - Hierbei bestand die Frage, ob klassische Relationale DB oder dokument-orientierte DB
+% - dokument-orientiert vorteile wegen JSON strings, nachteile: keine Relationen, alles in Strings, starkes umdenken erforderlich für NUtzer mit Kenntnis über Relationale DBs
+%- Relationale DB wird genutzt (SQLITE), damit lassen sich Zusammenhänge leicht deklarieren, SQLite ist zudem lightweight und wird für nicht ganz so aufwändige Schemata genutzt
+% - zum Schema: (ER Diagramm hier einfügen)
+%   * User Tabelle
+%     zum Speichern der Nutzerdaten
+%     auf typen eingehen (warum Name und Descr. nur 30 Zeichen, warumn PIN und PW 64char - SHA256 hex string)
+%   * Room Tabelle
+%     name und description (zur Kennzeichnung von Physikalischen Räumen)
+%   * Roomusers Tabelle
+%     Nutzer können sich in mehreren Räumen anmelden
+%   * Board Tabelle
+%     resolution und roomID
+%     jedes Board hat eine andere Auflösung - um den Kontent auf jedem Board korrekt anzeigen zu können, muss die Auflösung des Boards ausgelesen werden, zudem hängt jedes Board nur vor einem Raum und kann dementsprechend auch nur einem Raum zugewiesen werden
+%   * Content Tabelle
+%     wenn ein Nutzer Kontent erzeugt oder ändert wird ein neuer Eintrag erzeugt, um jegliche Änderung später auswerten zu können
+%     Dazu gehört wann die änderung statt fand, was der neue Content ist und was als Background URL eingestellt ist
+%   * message Tabelle
+%     jedes mal wenn ein Nutzer auf einem Board eine Nachricht für einen oder mehrere Nutzer erstellt wird ein neues Element angelegt
+%     Zeit und INhalt der Nachricht werden hier gespeichert, die Relation mit USer wird über eine dritte Tabelle realisiert
+%   * msgTo Tabelle
+%     hier werden die PS von User und Message zusammengefasst. Zudem wird hier angegeben, ob der entsprechende Nutzer diese Nachricht schon gelesen hat und ein Token wird generiert, wodurch der Nutzer diese Nachricht direkt aufrufen kann, ohne sich vorher anmelden zu müssen
+%   * status Tabelle
+%     hier wird der Status der Nutzer gespeichert, jedes Mal wenn der Nutzer einen neuen Status angibt, wird ein neuer Eintrag erzeugt. Nur der neuste Status ist gültig
+%     gespeichert wird die erstellzeit, endzeit, der statustext und der dazugehörige Nutzer
+%   * 
 
 
 
