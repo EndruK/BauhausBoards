@@ -143,6 +143,7 @@ function initSidebar() {
 }
 
 function selectUser(userIndex) {
+  $('#twitterDiv').remove();
   updateTimer();
   selectedUser = userIndex;
   showUser(userIndex);
