@@ -1,8 +1,23 @@
 \chapter{BauhausBoards}\label{BauhausBoards}
 \section{Entwurf}\label{Entwurf}
-Alles was zur Vorüberlegung gehört kommt hier mit rein\\
-Seitenentwurf\\
-Skizzen\\
+%Alles was zur Vorüberlegung gehört kommt hier mit rein\\
+%Seitenentwurf\\
+%Skizzen\\
+
+Für Bauhausboards fiel die Wahl auf Tablet PCs, die außerhalb der Büros aufgehangen werden.
+Diese sind wesentlich billiger als Widescreen Monitore mit Touch Oberfläche und benötigen keinen zusätzlich angeschlossenen PC.
+%---Draft
+Die Plattform der Applikation musste ausgewählt werden. Zum einen gab es die Möglichkeit sie als Android Applikation zu entwickeln, die dann auf jedem Tablet eigenständig hätte laufen können. Das Problem hierbei wäre gewesen, dass die Nutzer auch von Unterwegs auf ihre Pinnwand schreiben oder ihren Status ändern können sollen. Hierfür wäre ein eigenständiger Server notwendig gewesen, der die Daten verwalten muss. Hinzu kommt es, dass durch die unterschiedlichen Tablet Architekturen, wie IOS oder Windows Mobile die App für jede Architektur hätte portiert werden müssen.
+Deswegen viel die Wahl auf eine Web-Applikation. Ein Webserver generiert eine Webseite, um den ganzen Content des Programms anzubieten, wodurch alle Tablets  darauf zugreifen können. Dazu muss auf den Tablets nur ein Web-Browser installiert sein.
+Die Tablets dienen dabei als Input- / Output-Gerät zwischen Benutzern und Server. Die Webseite ist dann daruch, da sie von einem Webserver angeboten wird zusätzlich von jedem Smartphone oder PC erreichbar und jeder Nutzer kann damit interagieren, egal wo er sich gerade befindet.
+
+Wichtig war es, dass die Applikation nicht bei jeder kleinsten Interaktion den ganzen Kontent neu laden muss. Deswegen wurde das Prinzip des \"Representational State transfer\" kurz REST angewandt.
+% Erklärung REST-API
+% REST ist .....
+
+
+%---/Draft
+
 
 %- Anforderungsanalyse
 %  * Display außerhalb von Büros
@@ -106,3 +121,4 @@ Editor:\\
 - Gif Layer Hack\\
 - Scale Problem\\
 - Stroke Size Problem\\
+- Größe des Tablets
