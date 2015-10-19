@@ -8,6 +8,9 @@ var showMain;
 var twitterAjax;
 var twitterEmbedAjax;
 var ajaxTimeout = 5000;
+var oldContent = new Array();
+var oldStatus = new Array();
+var oldAvailableStatus = new Array();
 
 //initial functions
 $( document ).ready(function() {
@@ -209,6 +212,7 @@ function showUserContent(userIndex) {
     type: "GET",
     data: {"userID":usercollection[userIndex].userID},
     success:function(response) {
+      oldContent[userIndex] = response.content;
       project.clear();
       project.importJSON(response.content);
       view.update();
@@ -218,6 +222,12 @@ function showUserContent(userIndex) {
     error:function(error) {
       console.log("couldn't get user content");
       showFloaty("no connection");
+      if(oldContent[userIndex]) {
+        project.clear();
+        project.importJSON(oldContent[userIndex]);
+        view.update();
+        showTwitter(userIndex);
+      }
     },
     timeout: ajaxTimeout
   });
@@ -230,6 +240,7 @@ function getUSerStatus(userIndex) {
     data:{"userID":usercollection[userIndex].userID},
     success:function(res) {
       if(res) {
+        oldStatus[userIndex] = res;
         var untilDate = moment(res.until);
         var now = moment();
         //var untilDate = new Date(res.until);
@@ -246,6 +257,19 @@ function getUSerStatus(userIndex) {
     error:function(err) {
       console.log("couldn't get user status");
       showFloaty("no connection");
+      if(oldStatus[userIndex]) {
+        var untilDate = moment(oldStatus[userIndex].until);
+        var now = moment();
+        //var untilDate = new Date(oldStatus.until);
+        if(untilDate > now) {
+          $("#userInfo").append("<hr>");
+          $("#userInfo").append("<div id='userStatus'>"+oldStatus[userIndex].text);
+          var time = untilDate.format("HH:mm");
+          var date = moment(untilDate).format("DD.MM.YYYY");
+          //untilString = moment(untilDate).format("HH:mm DD.MM.YYYY");
+          $("#userStatus").append("<br><div>until "+time+"<br>"+date);
+        }
+      }
     },
     timeout: ajaxTimeout
   });
@@ -259,6 +283,7 @@ function getUserAvailableStatus(userIndex) {
     type:"GET",
     data:{"userID":usercollection[userIndex].userID,"roomID":roomID},
     success:function(res) {
+      oldAvailableStatus[userIndex] = res;
       //TODO: grey out the not available users
       if(res.available == 0) {
         //if user is not available
@@ -277,6 +302,21 @@ function getUserAvailableStatus(userIndex) {
     error:function(err) {
       console.log("couldn't get user available status");
       showFloaty("no connection");
+      if(oldAvailableStatus[userIndex]) {
+        if(oldAvailableStatus[userIndex].available == 0) {
+          //if user is not available
+          console.log("user is not available");
+          $("#userImage img").css({
+            "background-color":"#fff",
+            "opacity":"0.35",
+            "filter":"alpha(opacity=35)"
+          });
+          $("#userImage").append("<div style='position:absolute; margin:5px; right:0;'>not available");
+        }
+        else {
+          console.log("user is available");
+        }
+      }
     },
     timeout: ajaxTimeout
   });
@@ -389,9 +429,15 @@ function showBackground(background) {
   $("#background").remove();
   var url = background;
   if(!url) return;
-  $("body").append("<iframe id='background' scrolling='no' src='"+url+"'>");
-  $("#background").css({
-    "width":$("#EditorCanvas").width(),
-    "height":$("#EditorCanvas").height()
-  });
+  try {
+    $("body").append("<iframe id='background' scrolling='no' src='"+url+"'>");
+    $("#background").css({
+      "width":$("#EditorCanvas").width(),
+      "height":$("#EditorCanvas").height()
+    });
+  }
+  catch(err) {
+    console.log("couldn't get background " + err);
+    $("background").remove();
+  }
 }
