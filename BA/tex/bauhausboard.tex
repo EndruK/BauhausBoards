@@ -62,23 +62,11 @@ Bei einem Verbindungsabbruch läuft die Seite dann weiter, kann aber keine Daten
 %   * status Tabelle
 %     hier wird der Status der Nutzer gespeichert, jedes Mal wenn der Nutzer einen neuen Status angibt, wird ein neuer Eintrag erzeugt. Nur der neuste Status ist gültig
 %     gespeichert wird die erstellzeit, endzeit, der statustext und der dazugehörige Nutzer
-%   * 
-
-
-
-%---/Draft
-
-
-%- Anforderungsanalyse
-%  * Display außerhalb von Büros
-%  * Applikation direkt auf dem Gerät oder Anzeige einer Schnittstelle der Applikation
-%  * --> Schnittstelle der Applikation
-%  * Webserver generiert Webseite, welche dann nur auf dem Gerät angezeigt werden muss
-%  * CRUD -> Die Ausgelieferte Seite muss im Endeffekt nur einmal geladen werden, wodurch sie alle Funktionen erhält
-%  * Kommunikation nur wenn daten geholt oder gepusht werden müssen
-%  * wenn Verbindungsabbruch: Seite läuft weiter aber kann einfach nur keine Daten mehr holen/senden bis Verbindung wieder steht
-%- Struktur Seite
-%  * Grafik hier mit erklärung wofür die Views sind (Vllt auch mit erster Version)
+%   * feedback Tabelle
+%     hier werden alle feedback drafts abgelegt mit timestamp
+% - Grundüberlegung des Seitenaufbaus
+% - erster Entwurf der Seitenstruktur als Bild
+% - Routen im ganzen System
 %  * Frontend
 %    # Main View
 %    # Message View
@@ -107,14 +95,46 @@ Bei einem Verbindungsabbruch läuft die Seite dann weiter, kann aber keine Daten
 %      + Contents
 %      + Messages
 %      + Feedbacks
-%- Datenbankentwurf
-%  * Datenbankschema mit allen Variabeln erklärt
+% - Sidebar zum Navigieren
+% - Überlegung zur Auslagerung des Admin Backends
+% - Hinleitung zur Umsetzung
 
+
+%---/Draft
 \section{Umsetzung}\label{Umsetzung}
 Größter Part: Die Komplette Umsetzung im Detail
 
-%- NodeJS - Vorteile Nachteile
-%- Frontend: Javascript mit JQuery zum Dom-manipulieren
+% - NodeJS
+%   * da frontend größtenteils mit Javascript laufen sollte und ich mich auf eine einheitliche programmiersprache festlegen wollte
+%   * Server liefert nur Grundaufbau und JS der Seite aus
+%   * Ansonsten wartet er nur auf CRUD befehle um den datenbank state zu ändern oder zu erwiedern
+%   * Express app für mvc policy
+%   * banquo           -- dafür da umhtml seiten zu einem image zu rendern
+%    body-parser       -- middleware für express zum parsen des bodys ??? was macht das ding??
+%    canvas            -- teil von paperjs
+%    cookie-parser     -- cookie tool
+%    crypto-js         -- crypto library für passwort hashes
+%    debug             -- debug tool
+%    emailjs           -- tool zum senden von mails
+%    express           -- mvc framework
+%    express-session   -- session tool for express
+%    jade              -- template engine
+%    jquery            -- JS DOM manipulation tool
+%    jquery-touchswipe -- small tool to enable a swipe gesture
+%    moment            -- JS time tool
+%    morgan            -- http request logger
+%    nib               -- middleware for stylus
+%    paper             -- canvas manipulation tool
+%    serve-favicon     -- express enable favicon
+%    sqlite3           -- database api
+%    stylus            -- css generator
+%    twitter           -- twitter api tool
+%    uuid              -- session uuid generator
+% - Frontend: HTML mit Javascript und JQuery zum Dom-manipulieren
+%   * Webseite wird nur einmal geladen, um damit alles nötige zu holen
+%   * Dynamischer Content wird per ajax vom Server geholt
+%   * bei verbindungsabbrüchen werden bestimmte states gehalten und andere sind durch inconnectivität nicht möglich
+%   
 %
 %Packages:
 %- Express
@@ -128,6 +148,7 @@ Größter Part: Die Komplette Umsetzung im Detail
 %Struktur der Webseite
 %Editor
 %Backend
+%Design CSS
 
 
 \section{Features}\label{Features}
