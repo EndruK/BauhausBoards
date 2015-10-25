@@ -185,8 +185,14 @@ function submitMessage() {
   removeSelectionPopup();
   var message = project.exportJSON();
   var canvas = document.getElementById("EditorCanvas");
-  var imgURL = canvas.toDataURL();
-  console.log(imgURL);
+  var context = canvas.getContext("2d");
+  var img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.onload = function() {
+    var dataURL = canvas.toDataURL();
+    console.log(dataURL);
+  };
+  
   if(JSON.parse(message).length > 0) {
     $.ajax({
       url:"functions/createMessage",
