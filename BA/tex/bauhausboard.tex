@@ -226,3 +226,6 @@ Die Probleme, auf die ich während der Arbeit gekommen bin\\
 %  # "toter winkel" oben rechts in den raw datas der images
 %- die ganze css datei muss angepasst werden, da positionen und größen relativ zum header gesetzt waren
 %- random server deadlock --> restart script
+%- Message Email mit image direkt in der NAchricht im HTML als <img> element ging nicht, da  cross origin resource sharing(CORS) nicht aktiviert ist (origin-clean flag false) deswegen geht die Funktion .toDataURL("image/png") nicht
+%   * Zudem ist es schwer in der mail ein paperJS project in ein canvas einzubinden
+%   * deswegen die Überlegung beim erstellen der message das canvas objekt direkt zu exportieren
