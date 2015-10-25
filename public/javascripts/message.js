@@ -184,7 +184,7 @@ function submitMessage() {
   removeBoundingBox();
   removeSelectionPopup();
   var message = project.exportJSON();
-  var image = $("#EditorCanvas").toDataURL("image/png");
+  var image = document.getElementById("EditorCanvas").toDataURL("image/png");
   console.log(image);
   if(JSON.parse(message).length > 0) {
     $.ajax({
