@@ -185,12 +185,8 @@ function submitMessage() {
   removeSelectionPopup();
   var message = project.exportJSON();
   var canvas = document.getElementById("EditorCanvas");
-  var context = canvas.getContext("2d");
-  var image = new Image();
-  image.onload = function() {
-    context.drawImage(image,0,0);
-  };
-  console.log(image.src);
+  var imgURL = canvas.toDataURL();
+  console.log(imgURL);
   if(JSON.parse(message).length > 0) {
     $.ajax({
       url:"functions/createMessage",
