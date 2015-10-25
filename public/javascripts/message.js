@@ -184,14 +184,9 @@ function submitMessage() {
   removeBoundingBox();
   removeSelectionPopup();
   var message = project.exportJSON();
-  var canvas = document.getElementById("EditorCanvas");
-  var context = canvas.getContext("2d");
-  var img = new Image();
-  img.crossOrigin = "Anonymous";
-  img.onload = function() {
-    var dataURL = canvas.toDataURL();
-    console.log(dataURL);
-  };
+  var canvas = document.getElementById('EditorCanvas');
+  var img = canvas.toDataURL();
+  console.log(img);
   
   if(JSON.parse(message).length > 0) {
     $.ajax({
