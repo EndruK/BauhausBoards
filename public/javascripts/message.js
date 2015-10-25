@@ -184,8 +184,13 @@ function submitMessage() {
   removeBoundingBox();
   removeSelectionPopup();
   var message = project.exportJSON();
-  var image = document.getElementById("EditorCanvas").toDataURL("image/png");
-  console.log(image);
+  var canvas = document.getElementById("EditorCanvas");
+  var context = canvas.getContext("2d");
+  var image = new Image();
+  image.onload = function() {
+    context.drawImage(image,0,0);
+  };
+  console.log(image.src);
   if(JSON.parse(message).length > 0) {
     $.ajax({
       url:"functions/createMessage",
