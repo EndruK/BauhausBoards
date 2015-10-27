@@ -21,6 +21,7 @@ $( document ).ready(function() {
   }
   getBoard();
   showMain = true;
+  addSidebarArrow();
 });
 
 $(window).on("resize", resize);
@@ -38,6 +39,21 @@ function resize () {
     var sidebarUpperHeight = sidebarHeight-sidebarLowerHeight-20;
     $("#userContainer").css("height",sidebarUpperHeight+"px");
   }
+  addSidebarArrow();
+}
+
+function addSidebarArrow() {
+  $(".sidebarSwiper").empty();
+  $(".sidebarSwiper").append("<div class='sidebarArrowSpacer'>");
+  $(".sidebarSwiper").append("<div class='sidebarArrow'>")
+  if(sidebarStatus) {
+    $(".sidebarArrow").append("<span class='glyphicon glyphicon-menu-left'>");
+  }
+  else {
+    $(".sidebarArrow").append("<span class='glyphicon glyphicon-menu-right'>");
+  }
+  $(".sidebarArrow span").css("font-size","35px");
+  $(".sidebarArrowSpacer").css("height",$(".sidebarSwiper").height()/2 - $(".sidebarArrow").height()/2);
 }
 
 function getBoard() {
@@ -174,8 +190,27 @@ function showUser(userIndex) {
     if($(this).attr("name") == userIndex) 
       $(this).css("border","2px solid white");
   });
+  reloadUserImage(userIndex);
   showUserHeader(userIndex);
   showUserContent(userIndex);
+}
+
+function reloadUserImage(userIndex) {
+  var userID = usercollection[userIndex].userID;
+  $.ajax({
+    url: "/functions/getUserImage",
+    type: "GET",
+    data: {"userID":userID},
+    success: function(res) {
+      console.log(res);
+      usercollection[userIndex].userProfilePic = res.userImage;
+    },
+    error: function(err) {
+      console.log("couldn't get user image");
+      showFloaty("no connection");
+    },
+    timeout: ajaxTimeout
+  });
 }
 
 function showUserHeader(userIndex) {

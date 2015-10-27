@@ -34,6 +34,21 @@ router.get('/getRoomUsers', function(req, res, next) {
   });
 });
 
+router.get('/getUserImage',function(req,res,next) {
+  var db = req.db;
+  var userID = req.query.userID;
+  var query = "SELECT u_profilePic AS userImage FROM user WHERE u_id = $userID";
+  db.get(query,{$userID:userID},function(err,row) {
+    if(err) {
+      res.status = 500;
+      res.send("error:"+err);
+    }
+    else {
+      res.send(row);
+    }
+  });
+});
+
 router.post('/setUserAvailableStatus',restrictUser,function(req,res) {
   var db = req.db;
   var userID = req.session.userID;

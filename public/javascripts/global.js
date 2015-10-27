@@ -78,6 +78,7 @@ function openSidebar(){
   sidebarStatus = true;
   $('.sidebar').removeClass('close-sidebar');
   $('.sidebar').addClass("open-sidebar");
+  addSidebarArrow();
 };
 function closeSidebar() {
   sidebarStatus = false;
@@ -85,6 +86,7 @@ function closeSidebar() {
   $('.sidebar').addClass("close-sidebar");
   clearTimeout(sidebarTimeoutHandler);
   closeEditorPopup();
+  addSidebarArrow();
 }
 
 function showSidebar(sidebar) {
