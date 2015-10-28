@@ -89,6 +89,38 @@ router.get('/getUserAvailableStatus',function(req,res,next) {
   });
 });
 
+router.post('/setBackground',restrictUser,function(req,res) {
+  var db = req.db;
+  var userID = req.session.userID;
+  var url = req.body.background;
+  var now = req.moment().format("YYYY-MM-DD\THH:mm");
+  var query = "INSERT INTO background(bg_user,bg_url,bg_time) VALUES($userID,$url,$time)";
+  db.run(query,{$userID:userID,$url:url,$time:now},function(err) {
+    if(err) {
+      res.status = 500;
+      res.send("error: "+err);
+    }
+    else {
+      res.send("successfully changed background");
+    }
+  });
+});
+
+router.get('/getBackground',function(req,res,next) {
+  var db = req.db;
+  var userID = req.query.userID;
+  var query = "SELECT * FROM background WHERE bg_user=$userID ORDER BY bg_id DESC LIMIT 1";
+  db.get(query,{$userID:userID},function(err,row) {
+    if(err) {
+      res.status = 500;
+      res.send("error: "+err);
+    }
+    else {
+      res.send(row);
+    }
+  });
+});
+
 router.post('/feedback', function(req,res,next) {
   var db = req.db;
   var content = req.body.content;
@@ -157,6 +189,7 @@ router.post('/setStatus', restrictUser, function(req,res) {
   });
 });
 
+//TODO: change here
 //frontend
 router.get('/getUserContent', function(req,res,next) {
   var db = req.db;
@@ -221,6 +254,7 @@ router.get('/getUserTwitter', function(req,res,next) {
   });
 });
 
+//TODO: change here
 router.post('/changeUserContent', restrictUser, function(req,res) {
   var db = req.db;
   var userID = req.session.userID;
@@ -246,6 +280,7 @@ router.post('/changeUserContent', restrictUser, function(req,res) {
   });
 });
 
+//TODO: change here
 router.post('/setContentBackground', restrictUser, function(req, res) {
   var db = req.db;
   var userID = req.session.userID;
@@ -766,6 +801,7 @@ router.get('/getAllMessages', restrictAdmin, function(req,res) {
   });
 });
 
+//TODO: change here
 router.get('/getAllUserContent', restrictAdmin, function(req,res) {
   var db = req.db;
   var userID = req.query.userID;
