@@ -197,7 +197,7 @@ router.get('/getUserContent', function(req,res,next) {
 
   var query = 
     "SELECT "+
-      "c_contentJSON as content, c_date as date, c_background as background "+
+      "c_contentJSON as content, c_date as date "+
     "FROM "+
       "content "+
     "WHERE c_user = $userID "+
@@ -260,15 +260,13 @@ router.post('/changeUserContent', restrictUser, function(req,res) {
   var userID = req.session.userID;
   var contentJSON = req.body.content;
   var now = req.moment().format("YYYY-MM-DD\THH:mm");
-  var background = req.body.background;
 
-  var query = "INSERT INTO content (c_user,c_date,c_contentJSON,c_background) "+
-    "VALUES($userID,$now,$contentJSON,$background)";
+  var query = "INSERT INTO content (c_user,c_date,c_contentJSON) "+
+    "VALUES($userID,$now,$contentJSON)";
   db.run(query,{
     $userID:userID,
     $now:now,
-    $contentJSON:contentJSON,
-    $background:background
+    $contentJSON:contentJSON
   },function(err) {
     if(err) {
       res.status = 500;
@@ -279,7 +277,7 @@ router.post('/changeUserContent', restrictUser, function(req,res) {
     }
   });
 });
-
+/*
 //TODO: change here
 router.post('/setContentBackground', restrictUser, function(req, res) {
   var db = req.db;
@@ -314,7 +312,7 @@ router.post('/setContentBackground', restrictUser, function(req, res) {
     }
   });
 });
-
+*/
 //frontend and maybe backend???
 router.post('/setBoardDim', function(req,res,next) {
   var db = req.db;
@@ -801,7 +799,6 @@ router.get('/getAllMessages', restrictAdmin, function(req,res) {
   });
 });
 
-//TODO: change here
 router.get('/getAllUserContent', restrictAdmin, function(req,res) {
   var db = req.db;
   var userID = req.query.userID;

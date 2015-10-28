@@ -193,6 +193,7 @@ function showUser(userIndex) {
   reloadUserImage(userIndex);
   showUserHeader(userIndex);
   showUserContent(userIndex);
+  showUserBackground(userIndex);
 }
 
 function reloadUserImage(userIndex) {
@@ -252,7 +253,6 @@ function showUserContent(userIndex) {
       project.importJSON(response.content);
       view.update();
       showTwitter(userIndex);
-      showBackground(response.background);
     },
     error:function(error) {
       console.log("couldn't get user content");
@@ -263,6 +263,22 @@ function showUserContent(userIndex) {
         view.update();
         showTwitter(userIndex);
       }
+    },
+    timeout: ajaxTimeout
+  });
+}
+
+function showUserBackground(userIndex) {
+  $.ajax({
+    url:"/functions/getBackground",
+    type: "GET",
+    data: {"userID":usercollection[userIndex].userID},
+    success: function(res) {
+      showBackground(res.bg_url);
+    },
+    error: function(err) {
+      console.log("couldn't get user background");
+      showFloaty("no connection");
     },
     timeout: ajaxTimeout
   });

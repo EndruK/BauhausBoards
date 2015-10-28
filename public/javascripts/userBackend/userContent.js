@@ -37,15 +37,31 @@ function loadChangeContent(event) {
     data: {"userID":authenticatedUser},
     success:function(response) {
       if(response) {
-        background = response.background;
+        //background = response.background;
         project.clear();
         project.importJSON(response.content);
         view.update();
-        showBackground(background)
+        //showBackground(background)
       }
     },
     error:function(error) {
       console.log("couldn't get user content");
+      showFloaty("no connection");
+    },
+    timeout: ajaxTimeout
+  });
+  $.ajax({
+    url: "/functions/getBackground",
+    type: "GET",
+    data: {"userID":authenticatedUser},
+    success: function(res) {
+      if(res) {
+        background = res.bg_url;
+        showBackground(background);
+      }
+    },
+    error: function(err) {
+      console.log("couldn't get user background");
       showFloaty("no connection");
     },
     timeout: ajaxTimeout
@@ -72,7 +88,7 @@ function changeContent() {
   $.ajax({
     url:"functions/changeUserContent",
     type:"POST",
-    data:{"content":contentJSON,"background":background},
+    data:{"content":contentJSON},
     success:function(res) {
       removePopup();
       showFloaty("Content changed.");
@@ -111,7 +127,7 @@ function changeBackground() {
 
   if(background.length > 0 && background.substring(0,http.length) !== http) background = http+background;
   $.ajax({
-    url:"functions/setContentBackground",
+    url:"functions/setBackground",
     type:"POST",
     data:{"background":background},
     success:function(res) {
