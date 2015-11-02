@@ -76,10 +76,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Load base class (report) and basic utilities
 \LoadClass[a4paper,12pt]{report}
+\RequirePackage[ngerman]{babel}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{ifpdf}
 \RequirePackage{ifthen}
+%\RequirePackage{selinput}
+%\SelectInputMappings{
+%  adieresis={ä},
+%  germandbls={ß}
+%}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Options
