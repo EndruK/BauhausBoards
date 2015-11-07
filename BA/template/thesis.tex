@@ -1,0 +1,109 @@
+%\documentclass[german,bachelor]{webisthesis}
+\documentclass[english,master]{webisthesis}
+% When you change the language, pdflatex may halt on recompilation.
+% Just hit enter to continue and recompile again. This should fix it.
+
+%
+% Values
+% ------
+\ThesisSetTitle{The Title of my Thesis}
+\ThesisSetKeywords{These, Are, My keywords} % only for PDF meta attributes
+
+\ThesisSetAuthor{First name Surname}
+\ThesisSetStudentNumber{01234}
+\ThesisSetDateOfBirth{1}{1}{1984}
+\ThesisSetPlaceOfBirth{Duckburg}
+
+\ThesisSetSupervisors{Prof.\ Dr.\ Benno Stein,Prof.\ Dr.\ Unknown Yet}
+
+\ThesisSetSubmissionDate{31}{2}{2022}
+
+%
+% Suggested Packages
+% ------------------
+\usepackage[sort&compress]{natbib}
+%   Allows citing in different ways (e.g., only the authors if you use the
+%   citation again within a short time).
+%
+\usepackage{booktabs}
+%    For tables ``looking the right way''.
+%
+%\usepackage{tabularx}
+%    Enables tables with columns that automatically fill the page width.
+%
+%\usepackage[ruled,algochapter]{algorithm2e}
+%    A package for pseudo code algorithms.
+%
+%\usepackage{amsmath}
+%    For tabular-style formatting of mathematical environments.
+%
+
+% Create links in the pdf document
+% Hyperref has some incompatibilities with other packages
+% Some other packages must be loaded before, some after hyperref
+% Additional options to the hyperref package can be provided in the braces []
+\usehyperref[backref] % This will add back references in the bibliography
+
+\begin{document}
+\begin{frontmatter}
+  \begin{abstract}
+    A short summary.
+  \end{abstract}
+
+  \tableofcontents
+
+  %\chapter*{Acknowledgements} % optional
+  %I thank the authors of the webisthesis template for their excellent work!
+
+  %\listoffigures % optional
+
+  %\listoftables % optional
+
+  %\listofalgorithms % optional
+  %    requires package algorithm2e
+
+  % optional: list of symbols/notation (e.g., using the nomencl package)
+\end{frontmatter}
+
+\chapter{Introduction}\label{introduction}
+% Showing natbib citation commands
+Let us get started by citing \citet{manning:1999}!
+So what did \citeauthor{manning:1999} do in \citeyear{manning:1999}?
+Good question!
+% Showing hyperref reference commands
+Maybe it is answered in \autoref{introduction} on page~\pageref{introduction}?
+Just to have something show up in the list of figures, I included \autoref{fig:a}.
+\begin{figure}[bt]% bottom or top of page (for small figures/tables)
+  \begin{center}{\huge\bf A}\end{center}
+  \caption{The first letter in the Roman alphabet.}\label{fig:a}
+\end{figure}
+% \formatdate (or \formatdateshort)
+This date does not exist: \formatdateshort{30}{2}{2014}
+and is the same as \formatdate{30}{2}{2014}.
+% An example table
+And here is some table with some numbers (\autoref{tab:numbers})
+which deserves to be on an extra page.
+\begin{table}[p]% extra page (usually for large figures/tables)
+  \caption{Tables have their captions above, figures below.}
+  \begin{center}
+    \begin{tabular}{lccc}\toprule
+      \multicolumn{4}{c}{Some numbers}\\\midrule
+      & 1999 & 2000 & 2001 \\\cmidrule(l){2-4}
+      % cmidrule: A line from 2nd to 4th column, trimmed on the left hand side
+      Distance (km) & 23 & 18 & 42 \\
+      Awesomeness (aws) & 3.2 & 8.1 & 2.4 \\\bottomrule
+    \end{tabular}
+  \end{center}\label{tab:numbers}%
+\end{table}
+
+% Appendix
+\appendix
+\chapter{My First Appendix}
+This was just missing.
+
+% Bibliography
+\bibliographystyle{plainnat} % requires package natbib. An alternative is apalike
+\bibliography{literature}    % load file literature.bib
+
+\end{document}
+
