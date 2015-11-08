@@ -1,29 +1,42 @@
 \chapter{Verwandte Arbeiten}
 \section{Hermes}
-Das Hermes System\cite{cheverest:2003:paper}\cite{cheverest:2003:article}\cite{cheveres:2005:hermes-bluetooth}\cite{cheverest:2012} ist mit eines der ersten Versionen von interaktiven digitalen Türschildern im Bürobereich.
-Es diente dazu herauszufinden, ob die \textit{``traditionelle Methode Nachrichten in einem halbwegs öffentlichem Raum (wie beispielsweise vor Büros in einem Forschungsinstitut) mittels Post-It Zetteln zu hinterlassen durch eine digitale Methode verbessert werden könnte''}\cite{cheverest:2003:paper}.
+Das Hermes System\cite{cheverest:2003:paper}\cite{cheverest:2003:article}\cite{cheveres:2005:hermes-bluetooth}\cite{cheverest:2012} ist eines der ersten Versionen interaktiver digitaler Türschilder im Bürobereich.
+Es diente dazu herauszufinden, ob die \textquote{traditionelle Methode Nachrichten in einem halbwegs öffentlichem Raum (wie beispielsweise vor Büros in einem Forschungsinstitut) mittels Post-It Zetteln zu hinterlassen durch eine digitale Methode verbessert werden könnte}\cite{cheverest:2003:paper}\cite{cheverest:2003:article}.
 Zu diesem Zweck haben die Forscher ein digitales asynchrones Nachrichtensystem entwickelt, welches direkte Interaktion mittels einem vor den Büros angebrachten Interfaces, sowie Fernzugriff durch ein Web-Portal und SMS ermöglicht.
-Das System besteht aus einem Web-Server und mehreren PDAs, welche an die Wände neben den Büroeingängen geschraubt werden.
-% BILD VON HERMES PDA
-Der Server wurde mit Java Servlets realisiert und generiert HTML Webseiten, die auf den Displays angezeigt werden. Er bietet eine zentrale Datenbank für alle Daten des Systems und dient als Kommunikationseinheit mit einem SMS Gateway.
+Das System besteht aus einem Web-Server und mehreren PDAs, welche an die Wände neben den Büroeingängen geschraubt werden (Abb. \ref{img:hermesDisplay}).
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.5\textwidth]{./img/hermes_display.png}
+  \caption{Das erste Hermes Display\cite{cheverest:2003:paper}}
+  \label{img:hermesDisplay} %referenzierbar mit \ref{img:hermesDisplay}
+\end{figure}
+Der Server wurde mit Java-Servlets realisiert und generiert HTML Webseiten, die auf den Displays angezeigt werden. Er bietet eine zentrale Datenbank für alle Daten des Systems und dient als Kommunikationseinheit mit einem SMS Gateway.
 Eines der Hauptblickpunkte von Hermes war, dass das System leicht einsetzbar ist. Deswegen fiel die Entscheidung zur Wahl der Geräte auf PDAs. Zu der Zeit, als das Paper entstand waren PDAs die beste Wahl für kleine, handliche Geräte, welche per WLAN mit einem Server kommunizieren können. Zudem mussten die Geräte mit der Umweltpolitik der Universität übereinstimmen und sollten daher nicht viel Energie verbrauchen.
 Um die Geräte vor Diebstahl zu schützen wurden Aluminiumhüllen für die PDAs entworfen, welche neben den Büroeingängen an die Wand geschraubt werden konnten und zudem auch als Diebstahlsicherung dienten. Um ungewünschte Interaktion zu verhindern wurden die Hülle so konzipiert, dass die Tasten nicht direkt zugänglich waren.\\
 
 Die Funktionen von Hermes wurden in zwei Perspektiven aufgeteilt: Die Besitzerperspektive und die Besucherperspektive.
 \subsubsection{Besitzerperspektive}
-\textit{``Diese Perspektive ermöglicht dem Besitzer des Displays Nachrichten oder Bilder zu erstellen, die dann direkt auf dem PDA angezeigt werden oder Nachrichten zu lesen, die von Gästen für ihn hinterlassen wurden''}\cite{cheverest:2003:paper}. Zudem kann der Nutzer animierte Gifs hochladen.
+\textquote{Diese Perspektive ermöglicht dem Besitzer des Displays Nachrichten oder Bilder zu erstellen, die dann direkt auf dem PDA angezeigt werden oder Nachrichten zu lesen, die von Gästen für ihn hinterlassen wurden}\cite{cheverest:2003:paper}. Zudem kann der Nutzer animierte Gifs hochladen.
 Der Nutzer kann die Perspektive von einem PC oder direkt am Display aufrufen, was ihm ermöglicht schnell beim Verlassen des Büros eine Nachricht zu schreiben. Um sich zu authentisieren muss er entweder seinen Nutzernamen und sein Passwort eingeben oder sich mit seinem iButton\footnote{Ein iButton ist ein Mikrochip in einer Metallhülle und dient beispielsweise zum Authentisieren des Besitzers\cite{iButton:website}} anmelden.
 \subsubsection{Besucherperspektive}
-\textit{``Besucher müssen sich vor dem PDA befinden, um mit dem System interagieren zu können''}\cite{cheverest:2003:paper}. Sie können dem Besitzer des Raumes Nachrichten schreiben. Andere Besucher können jedoch nur die Nachricht sehen, die der Besitzer des Raumes eingestellt hat. Die Nachrichten von anderen Besucher kann nur der Besitzer einsehen, wodurch ein Vorteil im Bereich der Privatsphäre gegenüber Post-It Zetteln erzielt wurde.
+\textquote{Besucher müssen sich vor dem PDA befinden, um mit dem System interagieren zu können}\cite{cheverest:2003:paper}. Sie können dem Besitzer des Raumes Nachrichten schreiben. Andere Besucher können jedoch nur die Nachricht sehen, die der Besitzer des Raumes eingestellt hat. Die Nachrichten von anderen Besucher kann nur der Besitzer einsehen, wodurch ein Vorteil im Bereich der Privatsphäre gegenüber Post-It Zetteln erzielt wurde.
 \\
 \\
-Um das System zu testen haben die Entwickler eine Langzeitstudie über 15 Monate durchgeführt. Dabei haben sie im Vorfeld Bedenken geäußert, dass \textit{``die Nutzer Zeit brauchen bis sie neue Technologien in ihre tägliche Routine eingliedern''}\cite{cheverest:2003:paper}.
+Um das System zu testen haben die Entwickler eine Langzeitstudie über 15 Monate durchgeführt. Dabei haben sie im Vorfeld Bedenken geäußert, dass \textquote{die Nutzer Zeit brauchen bis sie neue Technologien in ihre tägliche Routine eingliedern}\cite{cheverest:2003:paper}.
 Eines der enttäuschensten Ergebnisse war, dass es Nutzer gab, die trotz aufgehangenem Hermes Display weiterhin Post-Its an die Türen gehangen haben\cite{cheverest:2003:paper}.
-Ein Ergebnis der Studie war, dass die Nutzer erst Vertrauen aufbauen müssen. \textit{``Nutzer nutzen ein neues System erst, wenn sie wissen, dass es funktioniert''}\cite{cheverest:2003:paper}. Durch Verbindungsprobleme über das WLAN kam es dazu, dass das System ab und an nicht reagierte, wodurch es für die Nutzer schien, das Gerät wäre abgestürzt. Um dies zu beheben wurde das Metallgehäuse an der Stelle des WLAN Adapters geöffnet, damit das Gehäuse das Signal nicht weiter abschwächen konnte.
+Ein Ergebnis der Studie war, dass die Nutzer erst Vertrauen aufbauen müssen. \textquote{Nutzer nutzen ein neues System erst, wenn sie wissen, dass es funktioniert}\cite{cheverest:2003:paper}. Durch Verbindungsprobleme über das WLAN kam es dazu, dass das System ab und an nicht reagierte, wodurch es für die Nutzer schien, das Gerät wäre abgestürzt. Um dies zu beheben wurde das Metallgehäuse an der Stelle des WLAN Adapters geöffnet, damit das Gehäuse das Signal nicht weiter abschwächen konnte.
+%%%%%%% nächsten Absatz wirklich mit einbauen?
+Es kam auch vor, dass Besucher vergaßen ihre Nachricht abzuschicken, wodurch deren Nachricht nicht mehr privat war und andere Nutzer sie sehen konnten. Das ermöglichte anderen Nutzern die Nachricht zu verändern oder sie zu missbrauchen um unangebrachte Nachrichten zu schreiben. Wenn der eigentliche Benutzer sich zudem auch authentisiert hat wurde die Nachricht dann in seinem Namen geschickt\cite{cheverest:2003:article}.
+%%Einbauen, dass die Besitzer keinen Gebrauch der Authentisierten Nachrichten machten, sondern lieber anonyme Nachrichten schrieben?/cite{cheverest:2003:article}
+Manche Nutzer fanden es frustrierend nachdem sie eine temporäre Mitteilung eingestellt hatten eine alte Nachricht wiederherzustellen, da sie wieder durch den Prozess einer neuen Mitteilung gehen mussten. Als Lösung dafür wurde eine Möglichkeit eingebaut, mit der die Nutzer eine Standardnachricht einstellen konnten, die nach entfernen der temporären Nachricht wieder angezeigt wurde\cite{cheverest:2003:article}.
+\\
+\\
+Um das Hermes System zu erweitern wurde später ein Foto-Display entwickelt\cite{cheveres:2005:hermes-bluetooth}. Da die Hermes-Displays sehr klein waren wurde dieses Display ausschließlich für Bilder verwendet.
+Mit dieser Erweiterung war es den Nutzern möglich Bilder per MMS oder Bluetooth an das Gerät zu schicken oder mit der vorhandenen Displaykamera ein Bild zu schießen.
+% conference pictures
+% users can send pictures via bluetooth or take pictures with the builtIn camera
 
 
-%Langzeitstudie hier
-%Bluetooth paper hier ansprechen
 
 
 
@@ -32,29 +45,6 @@ Ein Ergebnis der Studie war, dass die Nutzer erst Vertrauen aufbauen müssen. \t
 \section{NetBoards}
 Das NetBoards Projekt von Errol Wood\cite{wood:2014} ist sehr aktuell.
 \cite{netboards:website}
-
-
-\section{Andere}
-
-% - Situated Displays outside offices  %cite Netboards Wood Netboards
-% - Hermes by Keith Cheverest, Dan Fitton
-%   %"Experiences Managing and Maintaining a Collection of Interactive Office Door Displays" by Dan Fitton & Keith Cheverest
-%   %Zusatz: "Exploring Bluetooth based Mobile Phone Interaction with the Hermes Photo Display"
-%   * altes Projekt (2003)
-%   * basierend auf Post-its
-%   * langzeitstudie (24/7 15 monate)
-%   * PDA
-%   * 2 Perspektiven: owner / visitor  --> hab ich quasi auch so gemacht
-%   * möglichkeit Nachrichten zu Hinterlassen für Besucher
-%   * möglichkeit Nachrichten zu lesen für Besitzer
-%   * Freehand Message beim Verlassen des Raumes am Gerät an der Tür
-%   * Authentication des Nutzers wenn er das macht
-%   * Besitzer können Nachrichten auf Browser lesen
-%   * Besucher dürfen keine Nachrichten lesen, die erstellt wurden
-%   * Dongle Authentisierung
-%   * Bluetooth Authentisierung (paper)
-%   * Langzeitstudie durchgeführt
-%   * Ergebnisse der Langzeitstudie
 % - Netboards by Errol Wood, Peter Robinson
 %   * neues Projekt (2014)
 %   * basierend auf Whiteboards
@@ -68,6 +58,9 @@ Das NetBoards Projekt von Errol Wood\cite{wood:2014} ist sehr aktuell.
 %   * PaperJS als Editor Grundlage
 %   * Drag & Drop Bilder vom PC aufs Board
 %   * Set Status
+
+\section{Andere}
+McCarthy: OutCast\cite{mccarthy:2001}
 % - Andere Displays außerhalb von Büros:
 %   * Dynamic Door Displays by Nguyen et al
 %   * OutCast by McCarthy et al
@@ -77,3 +70,4 @@ Das NetBoards Projekt von Errol Wood\cite{wood:2014} ist sehr aktuell.
 % - Andere Zusammenhängende Arbeiten:
 %   * Semi-Public-Displays for Small, Co-located Groups by Elaine M. Huang, Elizabeth D. Mynatt
 %   * UniCast, OutCast & GroupCast: Three Steps Toward Ubiquitous, Peripheral Displays
+%   * ben Schneiderman 2002 Leonardos Laptop 

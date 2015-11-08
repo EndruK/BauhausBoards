@@ -80,6 +80,8 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage{ifpdf}
 \RequirePackage{ifthen}
+\RequirePackage{csquotes}
+\RequirePackage{graphicx}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Options
