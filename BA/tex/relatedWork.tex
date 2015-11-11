@@ -1,4 +1,8 @@
 \chapter{Verwandte Arbeiten}
+Die Idee für interaktive Türschilder wurde schon in verschiedenen wissenschaftlichen Ausarbeitungen sowie in der Praxis aufgefasst.
+Die Gruppe um Keith Cheverest et al. von der Universität Lancaster hat mehrere Paper für ihr Türschild-System ``Hermes''\cite{cheverest:2003:paper} bereits ab 2003 veröffentlicht.
+Das Projekt ``NetBoards'' von Errol Wood\cite{wood:2014} von der Universität Cambridge behandelt eine aktuellere Version interaktiver Türschilder.
+
 \section{Hermes}
 Das Hermes System\cite{cheverest:2003:paper}\cite{cheverest:2003:article}\cite{cheveres:2005:hermes-bluetooth} ist eines der ersten Versionen interaktiver digitaler Türschilder im Bürobereich.
 Es diente dazu herauszufinden, ob die \textquote{traditionelle Methode Nachrichten in einem halbwegs öffentlichem Raum (wie beispielsweise vor Büros in einem Forschungsinstitut) mittels Post-It Zetteln zu hinterlassen durch eine digitale Methode verbessert werden könnte}\cite{cheverest:2003:paper}\cite{cheverest:2003:article}.
@@ -6,9 +10,9 @@ Zu diesem Zweck haben die Forscher ein digitales asynchrones Nachrichtensystem e
 Das System besteht aus einem Web-Server und mehreren PDAs, welche an die Wände neben den Büroeingängen geschraubt werden (Abb. \ref{img:hermesDisplay}).
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=0.5\textwidth]{./img/hermes_display.png}
+  \includegraphics[width=0.5\textwidth]{./img/hermes_display.png}
   \caption{Das erste Hermes Display\cite{cheverest:2003:paper}}
-  \label{img:hermesDisplay} %referenzierbar mit \ref{img:hermesDisplay}
+  \label{img:hermesDisplay}
 \end{figure}
 Der Server wurde mit Java-Servlets realisiert und generiert HTML Webseiten, die auf den Displays angezeigt werden. Er bietet eine zentrale Datenbank für alle Daten des Systems und dient als Kommunikationseinheit mit einem SMS Gateway.
 Eines der Hauptblickpunkte von Hermes war, dass das System leicht einsetzbar ist. Deswegen fiel die Entscheidung zur Wahl der Geräte auf PDAs. Zu der Zeit, als das Paper entstand waren PDAs die beste Wahl für kleine, handliche Geräte, welche per WLAN mit einem Server kommunizieren können. Zudem mussten die Geräte mit der Umweltpolitik der Universität übereinstimmen und sollten daher nicht viel Energie verbrauchen.
@@ -25,16 +29,19 @@ Der Nutzer kann die Perspektive von einem PC oder direkt am Display aufrufen, wa
 Um das System zu testen haben die Entwickler eine Langzeitstudie über 15 Monate durchgeführt. Dabei haben sie im Vorfeld Bedenken geäußert, dass \textquote{die Nutzer Zeit brauchen bis sie neue Technologien in ihre tägliche Routine eingliedern}\cite{cheverest:2003:paper}.
 Eines der enttäuschensten Ergebnisse war, dass es Nutzer gab, die trotz aufgehangenem Hermes Display weiterhin Post-Its an die Türen gehangen haben\cite{cheverest:2003:paper}.
 Ein Ergebnis der Studie war, dass die Nutzer erst Vertrauen aufbauen müssen. \textquote{Nutzer nutzen ein neues System erst, wenn sie wissen, dass es funktioniert}\cite{cheverest:2003:paper}. Durch Verbindungsprobleme über das WLAN kam es dazu, dass das System ab und an nicht reagierte, wodurch es für die Nutzer schien, das Gerät wäre abgestürzt. Um dies zu beheben wurde das Metallgehäuse an der Stelle des WLAN Adapters geöffnet, damit das Gehäuse das Signal nicht weiter abschwächen konnte.
-%%%%%%% nächsten Absatz wirklich mit einbauen?
 Es kam auch vor, dass Besucher vergaßen ihre Nachricht abzuschicken, wodurch deren Nachricht nicht mehr privat war und andere Nutzer sie sehen konnten. Das ermöglichte anderen Nutzern die Nachricht zu verändern oder sie zu missbrauchen um unangebrachte Nachrichten zu schreiben. Wenn der eigentliche Benutzer sich zudem auch authentisiert hat wurde die Nachricht dann in seinem Namen geschickt\cite{cheverest:2003:article}.
-%%Einbauen, dass die Besitzer keinen Gebrauch der Authentisierten Nachrichten machten, sondern lieber anonyme Nachrichten schrieben?/cite{cheverest:2003:article}
 Manche Nutzer fanden es frustrierend nachdem sie eine temporäre Mitteilung eingestellt hatten eine alte Nachricht wiederherzustellen, da sie wieder durch den Prozess einer neuen Mitteilung gehen mussten. Als Lösung dafür wurde eine Möglichkeit eingebaut, mit der die Nutzer eine Standardnachricht einstellen konnten, die nach entfernen der temporären Nachricht wieder angezeigt wurde\cite{cheverest:2003:article}.
 \\
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.5\textwidth]{./img/hermes_photoDisplay_short.png}
+  \caption{Das erste Hermes Foto-Display\cite{cheverest:2012}}
+  \label{img:hermesPhotoDisplay}
+\end{figure}
 \\
-Um das Hermes System zu erweitern wurde später ein Foto-Display entwickelt\cite{cheveres:2005:hermes-bluetooth}. Da die Hermes-Displays sehr klein waren wurde dieses Display ausschließlich für Bilder verwendet.
+Um das Hermes System zu erweitern wurde später ein Foto-Display (Abb. \ref{img:hermesPhotoDisplay}) entwickelt\cite{cheveres:2005:hermes-bluetooth}. Da die Hermes-Displays sehr klein waren wurde dieses Display ausschließlich für Bilder verwendet.
 Mit dieser Erweiterung war es den Nutzern möglich Bilder per MMS oder Bluetooth an das Gerät zu schicken oder mit der vorhandenen Displaykamera ein Bild zu schießen.
 \\
-% noch eine conclusion??
 
 \section{NetBoards}
 NetBoards\cite{wood:2014}\cite{netboards:website} ist ein weiteres interessantes Projekt im Bereich interaktiver digitaler Türschilder. Es wurde 2014 an der Universität von Camebridge entwickelt und zielte darauf hin \textquote{die bereits vorhandenen Whiteboards und Pinnwände neben den Universitätsbüros mit großen, Touch-fähigen Bildschirmen zu erweitern oder zu ersetzen}\cite{wood:2014}.\\

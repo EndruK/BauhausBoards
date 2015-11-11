@@ -82,6 +82,7 @@
 \RequirePackage{ifthen}
 \RequirePackage{csquotes}
 \RequirePackage{graphicx}
+\RequirePackage{subfigure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Options
