@@ -3,6 +3,7 @@ Die Idee für interaktive Türschilder wurde schon in verschiedenen wissenschaft
 Die Gruppe um Keith Cheverest et al. von der Universität Lancaster hat mehrere Paper für ihr Türschild-System ``Hermes''\cite{cheverest:2003:paper} bereits ab 2003 veröffentlicht.
 Das Projekt ``NetBoards'' von Errol Wood\cite{wood:2014} von der Universität Cambridge behandelt eine aktuellere Version interaktiver Türschilder.
 % Andere Projekte Einleitung
+\todo
 
 \section{Hermes}
 Das Hermes System\cite{cheverest:2003:paper}\cite{cheverest:2003:article}\cite{cheveres:2005:hermes-bluetooth} ist eines der ersten Versionen interaktiver digitaler Türschilder im Bürobereich.
@@ -22,7 +23,7 @@ Um die Geräte vor Diebstahl zu schützen wurden Aluminiumhüllen für die PDAs 
 Die Funktionen von Hermes wurden in zwei Perspektiven aufgeteilt: Die Besitzerperspektive und die Besucherperspektive.
 \subsubsection{Besitzerperspektive}
 \textquote{Diese Perspektive ermöglicht dem Besitzer des Displays Nachrichten oder Bilder zu erstellen, die dann direkt auf dem PDA angezeigt werden oder Nachrichten zu lesen, die von Gästen für ihn hinterlassen wurden}\cite{cheverest:2003:paper}. Zudem kann der Nutzer animierte Gifs hochladen.
-Der Nutzer kann die Perspektive von einem PC oder direkt am Display aufrufen, was ihm ermöglicht schnell beim Verlassen des Büros eine Nachricht zu schreiben. Um sich zu authentisieren muss er entweder seinen Nutzernamen und sein Passwort eingeben oder sich mit seinem iButton\footnote{Ein iButton ist ein Mikrochip in einer Metallhülle und dient beispielsweise zum Authentisieren des Besitzers\cite{iButton:website}} anmelden.
+Der Nutzer kann die Perspektive von einem PC oder direkt am Display aufrufen, was ihm ermöglicht schnell beim Verlassen des Büros eine Nachricht zu schreiben. Um sich zu authentisieren muss er entweder seinen Nutzernamen und sein Passwort eingeben oder sich mit seinem iButton\footnote{Ein iButton ist ein Mikrochip in einer Metallhülle und dient beispielsweise zum Authentisieren des Besitzers \cite{iButton:website}} anmelden.
 \subsubsection{Besucherperspektive}
 \textquote{Besucher müssen sich vor dem PDA befinden, um mit dem System interagieren zu können}\cite{cheverest:2003:paper}. Sie können dem Besitzer des Raumes Nachrichten schreiben. Andere Besucher können jedoch nur die Nachricht sehen, die der Besitzer des Raumes eingestellt hat. Die Nachrichten von anderen Besucher kann nur der Besitzer einsehen, wodurch ein Vorteil im Bereich der Privatsphäre gegenüber Post-It Zetteln erzielt wurde.
 \\
@@ -54,10 +55,35 @@ Dadurch konnten für NetBoards größere Bildschirme mit höherer Auflösung (Ab
   \caption{Das NetBoards Display\cite{wood:2014}}
   \label{img:netBoardsDisplay}
 \end{figure}
-Das System bestand aus einem 22\dq
 \\
+% Prototyp Entwicklung
+Die ersten Prototypen des NetBoard Systems bestanden jeweils aus einem 22 Zoll großem Touchscreen Monitor, der von einem Raspberry Pi\footnote{Ein Raspberry Pi ist ein kompakter Einplatinencomputer \cite{raspberrypi:website}} betrieben wurde.
+Im ersten Experiment der Entwickler wurden fünf Prototypen verwendet um herauszufinden, ob die Boards akzeptiert werden und um typische Nutzerverhalten zu bestimmen.
+\textquote{Diese wurden vor den Büros von Doktoranden, Post-Doktoranden und eines Professors aufgehangen um herauszufinden, wie diese unterschiedlichen Mitarbeiter mit dem System umgehen würden}\cite{wood:2014}
+\textquote{Die Probanden konnten bei diesem Experiment Skizzen und Nachrichten zeichnen und Bilder per Web-Interface hochladen}\cite{wood:2014}. Zudem war es möglich Webseiten zu laden, die dann in einer Hintergrundschicht angezeigt werden konnten.
 \\
-Benutzer hatten die Möglichkeit Nachrichten zu schreiben, Skizzen zu zeichnen oder Bilder anzeigen zu lassen.\cite{wood:2014}.
+Während des Experiments fanden die Entwickler heraus, dass die Boards schnell Aufmerksamkeit erzeugten. \textquote{Vorbeigehende Leute begannen spontan mit den Bildschirmen zu interagieren oder sogar die Besitzer direkt auf die Boards anzusprechen}\cite{wood:2014}.
+Als Ergebnis des Experiments fanden die Entwickler heraus, dass 2 wichtige Faktoren die Akzeptanz der Nutzer gegenüber den Boards beeinflussen:
+%Dependability
+%Ease of use
+\begin{itemize}
+  \item \textbf{Zuverlässigkeit}: \textquote{Nutzer werden ein System nur benutzen wenn sie denken es funktioniert}\cite{wood:2014}
+  \item \textbf{Benutzerfreundlichkeit}: \textquote{Angewöhnung der Nutzer an das System ist unwahrscheinlich, wenn das System schwer zu benutzen ist oder zu viel lernen erfordert}\cite{wood:2014}
+\end{itemize}
+Dadurch, dass für die Prototypen Touchscreens mit SAW-Technologie\footnote{Surface-Accoustic-Wave (dt.: Akkustische Oberflächenwelle) ist eine Technik um die Position von Fingern auf Displays zu ermitteln.} eingesetzt wurden war die Interaktion mit den Boards sehr ungenau, wodurch die Benutzerfreundlichkeit stark beeinträchtigt wurde.
+% Raspberry Pi - zu schwach -> nutzung eines leistungsfähigerem rechners
+
+%Das System bestand auch aus einem 22 Zoll großem Touchscreen, der im Hochformat an die Wand neben einem Büro geschraubt werden konnte. 
+%\\
+%\\
+% System Spezifikationen
+% Wie war die Testumgebung bei Wood?
+% Irgendwelche Klassifizierungen? Views
+% Wood Studie? - alles dazu - Ergebnisse
+% Erweiterungen
+%Benutzer hatten die Möglichkeit Nachrichten zu schreiben, Skizzen zu zeichnen oder Bilder anzeigen zu lassen.\cite{wood:2014}.
+
+
 
 %Besitzer sowie Besucher konnten den Inhalt, der auf dem Display angezeigt wurde ändern, wodurch jedem Benutzer direkt in den präsentierten Inhalt eingreifen konnte. (Eben genau so wie ein öffentliches Whiteboard, wo jeder der vorbei geht etwas ändern kann)  -- hier könnte ich vllt auch das beispiel der mensa whiteboards bringen ---- Kinderhacksteak anstelle vom Rinderhacksteak
 
