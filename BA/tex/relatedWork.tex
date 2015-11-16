@@ -3,7 +3,7 @@ Die Idee für interaktive Türschilder wurde schon in verschiedenen wissenschaft
 Die Gruppe um Keith Cheverest et al. von der Universität Lancaster hat mehrere Paper für ihr Türschild-System ``Hermes''\cite{cheverest:2003:paper} bereits ab 2003 veröffentlicht.
 Das Projekt ``NetBoards'' von Errol Wood\cite{wood:2014} von der Universität Cambridge behandelt eine aktuellere Version interaktiver Türschilder.
 % Andere Projekte Einleitung
-\todo
+\todotext{andere Arbeiten}
 
 \section{Hermes}
 Das Hermes System\cite{cheverest:2003:paper}\cite{cheverest:2003:article}\cite{cheveres:2005:hermes-bluetooth} ist eines der ersten Versionen interaktiver digitaler Türschilder im Bürobereich.
@@ -63,7 +63,7 @@ Im ersten Experiment der Entwickler wurden fünf Prototypen verwendet um herausz
 \textquote{Die Probanden konnten bei diesem Experiment Skizzen und Nachrichten zeichnen und Bilder per Web-Interface hochladen}\cite{wood:2014}. Zudem war es möglich Webseiten zu laden, die dann in einer Hintergrundschicht angezeigt werden konnten.
 \\
 Während des Experiments fanden die Entwickler heraus, dass die Boards schnell Aufmerksamkeit erzeugten. \textquote{Vorbeigehende Leute begannen spontan mit den Bildschirmen zu interagieren oder sogar die Besitzer direkt auf die Boards anzusprechen}\cite{wood:2014}.
-Als Ergebnis des Experiments fanden die Entwickler heraus, dass 2 wichtige Faktoren die Akzeptanz der Nutzer gegenüber den Boards beeinflussen:
+Als Ergebnis des Experiments fanden die Entwickler heraus, dass zwei wichtige Faktoren die Akzeptanz der Nutzer gegenüber den Boards beeinflussen:
 %Dependability = Zuverlässigkeit
 %Ease of use = Benutzerfreundlichkeit
 \begin{itemize}
@@ -76,8 +76,8 @@ Zudem waren die Raspberry Pi's zu schwach, um ein funktionreiches Interface zu b
 \\
 Nach dem Experiment passten die Entwickler ihr System an.
 Sie ersetzten die Raspberry's mit leistungsfähigeren Maschinen, die jeweils in der Lage waren zwei Monitore simultan anzusprechen.
-\\
-Die Ansicht der Displays wurde in 3 Schichten aufgeteilt\cite{wood:2014}:
+Um es von überall erreichen zu können wurde das NetBoards-System mit Web-Technologien implementiert. \textquote{Es musste möglich sein, mit mobilen Telefonen oder Tablet-PC's das System zu erreichen}\cite{wood:2014}.
+Der Server bestand deswegen aus einem einfachen Webserver, der beim Aufruf eine HTML Webseite auslieferte. Frontend Funktionen wurden per Javascript realisiert, wobei die Ansicht der Displays in drei Schichten aufgeteilt wurde\cite{wood:2014}:
 \begin{itemize}
   \item \textbf{UI (Benutzerinterface)}\\
     für Interface Widgets und Details über die Bewohner des Büros
@@ -86,28 +86,12 @@ Die Ansicht der Displays wurde in 3 Schichten aufgeteilt\cite{wood:2014}:
   \item \textbf{Web-Page Background (Hintergrund Webseite)}\\
     zur Anzeige einer beliebigen Webseite
 \end{itemize}
-
-\todo
+\todotext{Angabe, dass Editor per PaperJS realisiert wurde?}
 % Studienergebnisse
+\\
+Mit diesen neuen Spezifikationen wurde ein Testlauf über mehrere Monate durchgeführt. \textquote{Die Boards erzeugten in diesem neuen Test mehr Aufmerksamkeit und die Besitzer nutzten sie mehr, um ihre Kollegen von ihren Abwesenheiten zu informieren, selbst wenn sie nicht selbst vor Ort waren}\cite{wood:2014}. \textquote{Im ersten Test änderten die Nutzer nur den Inhalt ihres eigenen Boards, was sich im zweiten Test änderte. Sie begannen auch den Inhalt der Boards ihrer Kollegen zu ändern.}\cite{wood:2014}
+% Hier wieder ein Ende?
 
-
-
-%Besitzer sowie Besucher konnten den Inhalt, der auf dem Display angezeigt wurde ändern, wodurch jedem Benutzer direkt in den präsentierten Inhalt eingreifen konnte. (Eben genau so wie ein öffentliches Whiteboard, wo jeder der vorbei geht etwas ändern kann)  -- hier könnte ich vllt auch das beispiel der mensa whiteboards bringen ---- Kinderhacksteak anstelle vom Rinderhacksteak
-
-
-% - Netboards by Errol Wood, Peter Robinson
-%   * neues Projekt (2014)
-%   * basierend auf Whiteboards
-%   * für große, mit dem Netzwerk verbundene, touch Displays % cite wood Netboards
-%   * Nutzer können Nachrichten, Sketches, Bilder auf dem Board schreiben
-%   * Problem: jeder kann auf Board schreiben --> abusing (hab ich sehr stark gemerkt)
-%   * Drei Frontend Layer
-%     # UI Elements (Sidebar,Büronutzer infos)
-%     # Content Layer
-%     # Webpage backround layer
-%   * PaperJS als Editor Grundlage
-%   * Drag & Drop Bilder vom PC aufs Board
-%   * Set Status
 
 \section{Andere}
 McCarthy: OutCast\cite{mccarthy:2001}
