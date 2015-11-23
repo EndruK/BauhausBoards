@@ -26,6 +26,7 @@ Dadurch, da sich die Rückwand des Tablets abschrauben ließ konnte ich zwei Lö
 Für die Stromversorgung wurde das Ladekabel des Tablets verlängert, damit es an eine Steckdose im Büro angeschlossen werden konnte.\\
 Als Testnutzer für das Experiment konnte ich zwei Mitarbeiter der Professur für Webtechnologien und Informationssysteme organisieren.
 Diese Nutzer teilten sich ein Büro, wodurch nur ein Anzeigegerät benötigt wurde. Nach einer Einweisung zur Benutzung des Systems wurde klar, dass die zwei Tester nicht damit einverstanden waren, dass durch die Interaktivität des Boards jeder vorbeigehende Gast den dargestellten Inhalt nach belieben ändern konnte. Es hätte sein können, da durch die Anonymität der Gäste, das Board missbraucht werden könnte, um unangebrachte Skizzen zu zeichnen.
+% Hier Beispiel mit Mensa Kinderhacksteak anstelle Rinderhacksteak
 Aus diesem Grund habe ich für die Nutzer zwei verschiedene Ansichten erstellt:
 \begin{itemize}
   \item Eine Backend-Sicht, auf der die Tester ihre Änderungen machen konnten.
@@ -47,6 +48,7 @@ Aus diesem Grund habe ich für die Nutzer zwei verschiedene Ansichten erstellt:
 Das Experiment lief 12 Tage. Die Nutzer erstellten sich zu Beginn einen Nutzeraccount und richteten ihr Board ein (Abb. \ref{img:experiment02}). Jeder der beiden lud ein Profilbild hoch und gab seinen Namen, sowie seinen akademischen Grad an.
 Einer der Tester benutzte das Display um das Banner der Professur zu präsentieren und um Gäste beispielsweise darüber zu informieren, dass er sich zur Zeit im Büro befindet (Abb. \ref{img:experiment03}).\\
 Sehr erfreudig war, dass das Board viel Aufmerksamkeit zu erzeugen schien. Viele vorbeigehende Nutzer blieben stehen, um sich das Display genauer anzusehen und interagierten sogar damit. Dadurch entstanden viele Zeichnungen, wovon viele keinen tieferen Sinn hatten wie Beispielsweise die Zeichnung in Abb. \ref{img:experiment04}. Jedoch gab es auch ab und an Nachrichten, die direkt an die Besitzer des Boards gerichtet waren, wie das Bild einer Kaffeetasse mit einem Fragezeichen aus Abb. \ref{img:experiment05}, was die Frage nach einer Kaffeepause darstellen sollte.
+\todotext{Bilder zurecht schneiden}
 \begin{figure}[h!]
   \centering
     \subfigure[erste Änderung der Nutzer]{
@@ -73,10 +75,8 @@ Nach Beendigung des Experiments führte ich ein Gespräch mit den Testnutzern, s
 Es stellte sich dabei heraus, dass durch die geringe Auflösung des Tablets den meisten Benutzern gar nicht klar wurde, dass zwei Nutzer auf dem Board angemeldet waren. Man musste manuell in der Ansicht scrollen, um den Inhalt des zweiten Nutzers einsehen zu können. Jedoch war auch das ein Problem, da Scrolling nur möglich war, wenn die Sidebar ausgeblendet war. Die meisten Nutzer interagierten demnach nur mit der oberen Hälfte des eigentlichen Inhalts.\\
 Ein weiteres Problem war, dass das Tablet eine sehr geringe Leistung hatte und das Touch-Interface nicht sehr genau war. Dadurch waren Interaktionen mit dem Board sehr langsam und ruckelig.\\
 Positive Äußerungen gab es bezüglich angezeigter Statusmeldungen wie beispielsweise ``I am inside''. Die meisten Besucher fanden diese Meldung hilfreich, da sie deshalb wussten, ob der Mitarbeiter zur Zeit im Raum ist.
-%hier kommt noch:
-%- Die Nutzer im Raum haben nicht mitbekommen, wenn jemand etwas auf ihr Board geschrieben haben - Da das Plugin nicht installiert wurde
-%Besitzer sowie Besucher konnten den Inhalt, der auf dem Display angezeigt wurde ändern, wodurch jedem Benutzer direkt in den präsentierten Inhalt eingreifen konnte. (Eben genau so wie ein öffentliches Whiteboard, wo jeder der vorbei geht etwas ändern kann)  -- hier könnte ich vllt auch das beispiel der mensa whiteboards bringen ---- Kinderhacksteak anstelle vom Rinderhacksteak
+Weil zum Empfangen einer Benachrichtigung eine Browserapp erforderlich war, was den Testern nicht bewusst war, hatten sie keine Möglichkeiten darüber benachrichtigt zu werden, wenn jemand etwas auf ihrem Board änderte. Es wäre besser gewesen, wenn die Besitzer einfach eine Email erhalten hätten, wenn ihnen jemand etwas mitteilen wollte.
 \\
 \\
 Als Schlussfolgerung des Experimentes entschied ich mich dazu ein eigenes System zu entwerfen.
-Dieses System sollte gut auf Tablets laufen und für eine kleinere Bildschirmgröße angepasst sein. Dies erforderte, dass jeder Nutzer eine eigene Sicht bekommen sollte, da ansonsten auf dem Tablet zu wenig Platz wäre. Außerdem sollte es weniger als interaktives Whiteboard zu benutzen sein und mehr die Funktion von digitalen Pinnwänden übernehmen. Dadurch sollten nur noch die Besitzer die Möglichkeit haben den Angezeigten Inhalt zu ändern. Den Besuchern sollte dennoch möglich sein, mit den Besitzern in Kontakt zu treten.
+Dieses System sollte gut auf Tablets laufen und für eine kleinere Bildschirmgröße angepasst sein. Dies erforderte, dass jeder Nutzer eine eigene Sicht bekommen sollte, da ansonsten auf dem Tablet zu wenig Platz wäre. Außerdem sollte es weniger als interaktives Whiteboard zu benutzen sein und mehr die Funktion von digitalen Pinnwänden übernehmen. Dadurch sollten nur noch die Besitzer die Möglichkeit haben den Angezeigten Inhalt zu ändern. Den Besuchern sollte dennoch möglich sein, mit den Besitzern in Kontakt zu treten, welche darauf eine Benachrichtiguns-Email erhalten sollten.
