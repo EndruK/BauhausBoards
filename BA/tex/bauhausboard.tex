@@ -4,18 +4,25 @@
 %Seitenentwurf\\
 %Skizzen\\
 
-Für Bauhausboards fiel die Wahl auf Tablet PCs, die außerhalb der Büros aufgehangen werden.
-Diese sind wesentlich billiger als Widescreen Monitore mit Touch Oberfläche und benötigen keinen zusätzlich angeschlossenen PC.
+%Für Bauhausboards fiel die Wahl auf Tablet PCs, die außerhalb der Büros aufgehangen werden.
+%Diese sind wesentlich billiger als Widescreen Monitore mit Touch Oberfläche und benötigen keinen zusätzlich angeschlossenen PC.
 %---Draft
-Die Plattform der Applikation musste ausgewählt werden. Zum einen gab es die Möglichkeit sie als Android Applikation zu entwickeln, die dann auf jedem Tablet eigenständig hätte laufen können. Das Problem hierbei wäre gewesen, dass die Nutzer auch von Unterwegs auf ihre Pinnwand schreiben oder ihren Status ändern können sollen. Hierfür wäre ein eigenständiger Server notwendig gewesen, der die Daten verwalten muss. Hinzu kommt es, dass durch die unterschiedlichen Tablet Architekturen, wie IOS oder Windows Mobile die App für jede Architektur hätte portiert werden müssen.
-Deswegen fiel die Wahl auf eine Web-Applikation. Ein Webserver generiert eine Webseite, um den ganzen Content des Programms anzubieten, wodurch alle Tablets  darauf zugreifen können. Dazu muss auf den Tablets nur ein Web-Browser installiert sein.
-Die Tablets dienen dabei als Input- / Output-Gerät zwischen Benutzern und Server. Die Webseite ist dann daruch, da sie von einem Webserver angeboten wird zusätzlich von jedem Smartphone oder PC erreichbar und jeder Nutzer kann damit interagieren, egal wo er sich gerade befindet.
+%Die Plattform der Applikation musste ausgewählt werden. Zum einen gab es die Möglichkeit sie als Android Applikation zu entwickeln, die dann auf jedem Tablet eigenständig hätte laufen können. Das Problem hierbei wäre gewesen, dass die Nutzer auch von Unterwegs auf ihre Pinnwand schreiben oder ihren Status ändern können sollen. Hierfür wäre ein eigenständiger Server notwendig gewesen, der die Daten verwalten muss. Hinzu kommt es, dass durch die unterschiedlichen Tablet Architekturen, wie IOS oder Windows Mobile die App für jede Architektur hätte portiert werden müssen.
+%Deswegen fiel die Wahl auf eine Web-Applikation. Ein Webserver generiert eine Webseite, um den ganzen Content des Programms anzubieten, wodurch alle Tablets  darauf zugreifen können. Dazu muss auf den Tablets nur ein Web-Browser installiert sein.
+%Die Tablets dienen dabei als Input- / Output-Gerät zwischen Benutzern und Server. Die Webseite ist dann daruch, da sie von einem Webserver angeboten wird zusätzlich von jedem Smartphone oder PC erreichbar und jeder Nutzer kann damit interagieren, egal wo er sich gerade befindet.
 
-Wichtig war es, dass die Applikation nicht bei jeder kleinsten Interaktion den ganzen Kontent neu laden muss.
-Deswegen wird das Prinzip von ``Create, Read, Update and Delete'' kurz CRUD angewandt.
-Beim Aufruf der Webseite wird der ganze statische Inhalt, wie der Grundaufbau der Seite und alle Funktionen geladen. Bestimmte Funktionen laden dann Daten nach und erzeugen so dynamischen Kontent.
-Bei einem Verbindungsabbruch läuft die Seite dann weiter, kann aber keine Daten vom Server abrufen, bis die Verbindung wieder aufgebaut wurde.\\
-\\
+%Wichtig war es, dass die Applikation nicht bei jeder kleinsten Interaktion den ganzen Kontent neu laden muss.
+%Deswegen wird das Prinzip von ``Create, Read, Update and Delete'' kurz CRUD angewandt.
+%Beim Aufruf der Webseite wird der ganze statische Inhalt, wie der Grundaufbau der Seite und alle Funktionen geladen. Bestimmte Funktionen laden dann Daten nach und erzeugen so dynamischen Kontent.
+%Bei einem Verbindungsabbruch läuft die Seite dann weiter, kann aber keine Daten vom Server abrufen, bis die Verbindung wieder aufgebaut wurde.\\
+%\\
+
+
+
+
+
+
+
 %Aufbau der Seite
 % - mehrere Personen in Raum --> wie realisieren?
 % - switch durch alle angemeldeten User im Raum
