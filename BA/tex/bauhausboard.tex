@@ -1,15 +1,41 @@
 \chapter{BauhausBoards}\label{BauhausBoards}
+Das neue Projekt bekam den Namen ``BauhausBoards''.
+In einer Entwurfsphase entschied ich, wie das System aussehen und welche Funktionen es bieten sollte. Dabei flossen die Ergebnisse der Vorstudie und anderer Projekte mit ein.\\
+Als Voraussetzung sollten die Anzeigegeräte für die Türschilder weiterhin Tablets sein.
+Der Entwurf wurde darauf in ein Programm umgesetzt, wobei manche geplante Funktionen geändert, entfernt oder neue hinzugefügt wurden. An manchen Stellen der Umsetzung kam es auch zu Problemen, die es zu lösen galt. 
+% - Neues System mit Namen BauhausBoards
+% - Ergebnisse der Vorstudie sollten enbezogen werden
+% - sollte weiterhin auf Tablets als Anzeigegerät laufen
+% - --> abkapselung in Entwurf
+% - das was im Entwurf geplant wurde musste umgesetzt werden
+% - dadurch entstanden Features
+% - Während der Umsetzung traten diverse Probleme auf
+
+
 \section{Entwurf}\label{Entwurf}
+\subsection{Systementwurf}\label{Systementwurf}
 %Alles was zur Vorüberlegung gehört kommt hier mit rein\\
 %Seitenentwurf\\
 %Skizzen\\
+Die Planung des Systems begann damit, die Plattform des Systems auszuwählen. Es gab die Möglichkeit eine Android-Applikation zu erstellen, die auf jedem Tablet installiert werden müsste. Dabei gäb es jedoch das Problem, dass die Nutzer auch von unterwegs mit der Anwendung interagieren sollten, wofür ein eigenständiger Server für die Datenverwaltung notwendig gewesen wäre. Außerdem müsste durch die unterschiedlichen Tablet- und Smartphone-Betriebssysteme neben Android, wie Apple IOS oder Windows Mobile, die App für jede Architektur portiert werden.\\
+Deswegen fiel die Wahl auf eine Web-Applikation. Zum einen, weil jedes Tablet, jedes Smartphone und jeder PC Webseiten darstellen kann und es nicht nötig ist, extra eine App auf den Geräten zu installieren.
+\\ \todotext{darauf eingehen, dass NetBoards auch eine Web-Applikation benutzt hat?}\\
+%Zudem setzte das NetBoards Projekt ebenfalls auf eine Web-Applikation
+Ein zentraler Webserver generiert eine Webseite mit allen nötigen Frontend Funktionen an, die von allen Geräten mit Web-Browser (Clients) angezeigt werden kann. Dadurch sollte sich der Programmieraufwand auf Server- und Client-Funktionen einschränken.\\
+Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu laden müssen. Dies hätte einen viel zu großen Overhead erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
+Deswegen sollte der Server nur beim ersten Aufruf das Grundgerüst der Webseite mit allen Client-Funktionen ausliefern. Ein Teil dieser Funktionen würde dann Daten nachladen oder an den Server schicken, wodurch ein dynamischer Inhalt erzeugt wird.
+Dies sollte mit dem CRUD (Create, Read, Update and Delete) Prinzip realisiert werden.\\
+\todotext{hier noch genauer auf CRUD eingehen}\\
+Das Gerüst der Webseite sollte auf HTML basieren, wobei die hauptsächlichen Client-Funktionen üblicherweise in Javascript umgesetzt werden. Da die Clients viele Funktionen bieten sollten und der Server nur zum Ausliefern der Webseite und für den Datenaustausch dienen sollte machte es Sinn für den Server Node.js zu verwenden. \textquote{Node.js ist serverseitiges Javascript basierend auf Google Chrome's V8 Javascript engine}\cite{nodejs:website}.
+\todotext{Datenbank noch anreißen}
 
-%Für Bauhausboards fiel die Wahl auf Tablet PCs, die außerhalb der Büros aufgehangen werden.
-%Diese sind wesentlich billiger als Widescreen Monitore mit Touch Oberfläche und benötigen keinen zusätzlich angeschlossenen PC.
-%---Draft
-%Die Plattform der Applikation musste ausgewählt werden. Zum einen gab es die Möglichkeit sie als Android Applikation zu entwickeln, die dann auf jedem Tablet eigenständig hätte laufen können. Das Problem hierbei wäre gewesen, dass die Nutzer auch von Unterwegs auf ihre Pinnwand schreiben oder ihren Status ändern können sollen. Hierfür wäre ein eigenständiger Server notwendig gewesen, der die Daten verwalten muss. Hinzu kommt es, dass durch die unterschiedlichen Tablet Architekturen, wie IOS oder Windows Mobile die App für jede Architektur hätte portiert werden müssen.
-%Deswegen fiel die Wahl auf eine Web-Applikation. Ein Webserver generiert eine Webseite, um den ganzen Content des Programms anzubieten, wodurch alle Tablets  darauf zugreifen können. Dazu muss auf den Tablets nur ein Web-Browser installiert sein.
-%Die Tablets dienen dabei als Input- / Output-Gerät zwischen Benutzern und Server. Die Webseite ist dann daruch, da sie von einem Webserver angeboten wird zusätzlich von jedem Smartphone oder PC erreichbar und jeder Nutzer kann damit interagieren, egal wo er sich gerade befindet.
+% Wahl der Programmiersprache/n
+% Bild meines Grundsystementwurfs?
+
+
+
+
+%Die Tablets dienen dabei als Input- / Output-Gerät zwischen Benutzern und Server. Die Webseite ist dann dadurch, da sie von einem Webserver angeboten wird zusätzlich von jedem Smartphone oder PC erreichbar und jeder Nutzer kann damit interagieren, egal wo er sich gerade befindet.
 
 %Wichtig war es, dass die Applikation nicht bei jeder kleinsten Interaktion den ganzen Kontent neu laden muss.
 %Deswegen wird das Prinzip von ``Create, Read, Update and Delete'' kurz CRUD angewandt.
@@ -19,8 +45,24 @@
 
 
 
+\subsection{Interface-Entwurf}\label{Interface-Entwurf}
+\subsection{Datenbankentwurf}\label{Datenbankentwurf}
+% Screen
+% Sidebar
 
+% Da Screen zu klein war in der Vorstudie den gästen nicht bewusst, dass sich zwei leute den Raum teilten
+% -> Teilen des Screens für alle Nutzer des Raumes? nein!
+% -> Jeder Nutzer sollte den Ganzen Screen für die ANzeige ihres Contents bekommen
+% -> Deswegen Switch der Contentseite über alle Nutzer im Raum nach bestimmter Zeit + Feste Boardgröße ohne Scroll (Zumindest auf dem Tablet)
 
+% Statusmeldungen für jeden Nutzer
+% -> jeder Nutzer sollte die Möglichkeit bekommen einen Status für sich setzten zu können, der aus einem kurzen Text (wie: bin Mittag essen oder bin im Meeting) und die angepeilte dauer des Status (~ bis 12:00)
+
+% Kommunikation der Besucher mit den Besitzern
+% -> es sollte den Besuchern möglich sein mit den Besitzern des Raumes in verbindung zu treten
+% -> Nachrichtensystem erstellt
+% -> Besucher sollen einem, mehreren oder allen Nutzern des Raumes eine Nachricht hinterlassen können
+% -> Die Besitzer sollen darauf eine Email bekommen, dass jemand an ihr Board geschrieben hat (Mit Inhalt der Nachricht)
 
 
 %Aufbau der Seite
@@ -164,6 +206,9 @@ Größter Part: Die Komplette Umsetzung im Detail
 %Design CSS
 %Bootstrap
 %Javascript Code??
+
+% Emailtoken
+% wenn eine Nachricht an einen Besitzer abgeschickt wird, wird ein Token generiert, der mit der Nachricht verbunden wird, dieser Token wird dann in der url in der benachrichtigungsmail mitgeschickt und ruft beim Aufruf der der url die Nachricht ab
 
 \section{Features}\label{Features}
 Alle Features des Boards\\
