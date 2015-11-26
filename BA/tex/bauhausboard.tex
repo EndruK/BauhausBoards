@@ -3,14 +3,20 @@ Das neue Projekt bekam den Namen ``BauhausBoards''.
 In einer Entwurfsphase entschied ich, wie das System aussehen und welche Funktionen es bieten sollte. Dabei flossen die Ergebnisse der Vorstudie und anderer Projekte mit ein.
 \\
 Als Voraussetzung sollten die Anzeigegeräte für die Türschilder weiterhin Tablets sein.
-Der Entwurf wurde darauf in ein Programm umgesetzt, wobei manche geplante Funktionen geändert, entfernt oder neue hinzugefügt wurden. An manchen Stellen der Umsetzung kam es auch zu Problemen, die es zu lösen galt. 
-% - Neues System mit Namen BauhausBoards
+Der Entwurf wurde darauf in ein Programm umgesetzt, wobei manche geplante Funktionen geändert, entfernt oder neue hinzugefügt wurden. An manchen Stellen der Umsetzung kam es auch zu Problemen, die es zu lösen galt.
 % - Ergebnisse der Vorstudie sollten enbezogen werden
 % - sollte weiterhin auf Tablets als Anzeigegerät laufen
-% - --> abkapselung in Entwurf
 % - das was im Entwurf geplant wurde musste umgesetzt werden
 % - dadurch entstanden Features
 % - Während der Umsetzung traten diverse Probleme auf
+
+
+
+
+
+
+
+
 
 
 \section{Entwurf}\label{Entwurf}
@@ -31,14 +37,39 @@ Die anfallenden Daten des Systems mussten in irgend einer Form auf dem Server ge
 \\
 Die Wahl des Datenbanksystems fiel auf SQLite\cite{sqlite:website}, da es das am meisten verbreitete relationale Datenbanksystem der Welt ist. Es war einfach zu benutzen und hatte eine gute Dokumentation.
 \\
-Das Gerüst der Webseite sollte auf HTML basieren, wobei die hauptsächlichen Client-Funktionen üblicherweise in Javascript umgesetzt werden. Da die Clients viele Funktionen bieten sollten und der Server nur zum Ausliefern der Webseite und für den Datenaustausch dienen sollte, machte es Sinn für den Server Node.js zu verwenden. \quelle{Node.js ist serverseitiges Javascript basierend auf Google Chrome's V8 Javascript engine}{nodejs:website}.
+Das Gerüst der Webseite sollte auf HTML basieren, wobei die hauptsächlichen Client-Funktionen üblicherweise in Javascript umgesetzt werden. Da die Clients viele Funktionen bieten sollten und der Server nur zum Ausliefern der Webseite und für den Datenaustausch dienen sollte, machte es Sinn für den Server Node.js zu verwenden. \quelle{Node.js ist serverseitiges Javascript basierend auf Google Chrome's V8 Javascript Engine}{nodejs:website}.
+\\
+\\
+In der Abb. \ref{img:Systemaufbau} ist der Aufbau des Systems zusammengefasst. Auf dem Server befinden sich der Webserver und die Datenbank. Der Webserver stellt Anfragen an die Datenbank und erhält dafür entsprechende Ergebnisse zurückgeliefert.
+\\
+Wenn ein Client die Adresse des Servers aufruft generiert der Webserver die Webseite und sendet sie mit allen benötigten Funktionen an den Client. Der Client kommuniziert danach nur durch CRUD Interaktionen mit dem Server.
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.8\textwidth]{./img/Systemaufbau.png}
+  \caption{Bauhausboards - Grober Systemaufbau}
+  \label{img:Systemaufbau}
+\end{figure}
+% PaperJS als Editorgrundlage
 
 
 
-% Bild meines Grundsystementwurfs
 
 \subsection{Interface-Entwurf}\label{Interface-Entwurf}
-\subsection{Datenbankentwurf}\label{Datenbankentwurf}
+% \begin{figure}[h!]
+%   \centering
+%     \includegraphics[width=1\textwidth]{./img/LocationsFrontend.png}
+%   \caption{Bauhausboards - View Navigation Frontend}
+%   \label{img:locationsFrontend}
+% \end{figure}
+% \begin{figure}[h!]
+%   \centering
+%     \includegraphics[width=1\textwidth]{./img/LocationsBackend.png}
+%   \caption{Bauhausboards - View Navigation Backend}
+%   \label{img:locationsBackend}
+% \end{figure}
+
+
+
 % Screen
 % Sidebar
 
@@ -46,17 +77,13 @@ Das Gerüst der Webseite sollte auf HTML basieren, wobei die hauptsächlichen Cl
 % -> Teilen des Screens für alle Nutzer des Raumes? nein!
 % -> Jeder Nutzer sollte den Ganzen Screen für die ANzeige ihres Contents bekommen
 % -> Deswegen Switch der Contentseite über alle Nutzer im Raum nach bestimmter Zeit + Feste Boardgröße ohne Scroll (Zumindest auf dem Tablet)
-
 % Statusmeldungen für jeden Nutzer
 % -> jeder Nutzer sollte die Möglichkeit bekommen einen Status für sich setzten zu können, der aus einem kurzen Text (wie: bin Mittag essen oder bin im Meeting) und die angepeilte dauer des Status (~ bis 12:00)
-
 % Kommunikation der Besucher mit den Besitzern
 % -> es sollte den Besuchern möglich sein mit den Besitzern des Raumes in verbindung zu treten
 % -> Nachrichtensystem erstellt
 % -> Besucher sollen einem, mehreren oder allen Nutzern des Raumes eine Nachricht hinterlassen können
 % -> Die Besitzer sollen darauf eine Email bekommen, dass jemand an ihr Board geschrieben hat (Mit Inhalt der Nachricht)
-
-
 %Aufbau der Seite
 % - mehrere Personen in Raum --> wie realisieren?
 % - switch durch alle angemeldeten User im Raum
@@ -75,6 +102,49 @@ Das Gerüst der Webseite sollte auf HTML basieren, wobei die hauptsächlichen Cl
 % - Zudem sollen sie die möglichkeit bekommen sich als nicht anwesend markieren zu können, damit Gäste, die auf die Boards schauen schnell sehen, wer da ist und wer nicht
 % - Nutzer im Raum, die gern Twitter benutzen sollen die öglichkeit bekommen ihren TwitterAccount anzugeben, damit ihr letzter tweet auf ihrer Pinnwand angezeigt werden kann
 % - Nutzer im Raum sollen zudem Ihre ganzen Daten ändern können (Name, Beschreibung, Mail, ProfilePic, PAsswort, PIN, ...) Dazu ist aber das Passwort des Nutzers erforderlich
+
+% - Grundüberlegung des Seitenaufbaus
+% - erster Entwurf der Seitenstruktur als Bild
+% - Routen im ganzen System
+%  * Frontend
+%    # Main View
+%    # Message View
+%    # Feedback View
+%    # User Backend View
+%      + Status
+%      + Content
+%      + Received Messages
+%      + User Settings
+%  * Backend
+%    # Boards
+%      + add
+%      + del
+%      + set Room
+%      + set Resolution
+%    # Rooms
+%      + add
+%      + del
+%      + change name/descr
+%      + manage room users
+%    # Users
+%      + add
+%      + del
+%      + change User
+%    # Logs
+%      + Contents
+%      + Messages
+%      + Feedbacks
+% - Sidebar zum Navigieren
+% - Überlegung zur Auslagerung des Admin Backends
+% - Hinleitung zur Umsetzung
+
+\subsection{Datenbankentwurf}\label{Datenbankentwurf}
+% \begin{figure}[h!]
+%   \centering
+%     \includegraphics[width=1\textwidth]{./img/ER01.png}
+%   \caption{Bauhausboards - Datenbankentwurf}
+%   \label{img:ER01}
+% \end{figure}
 % 
 %Aufbau der Datenbank
 %SQLITE anstelle von MONGODB
@@ -111,41 +181,25 @@ Das Gerüst der Webseite sollte auf HTML basieren, wobei die hauptsächlichen Cl
 %     gespeichert wird die erstellzeit, endzeit, der statustext und der dazugehörige Nutzer
 %   * feedback Tabelle
 %     hier werden alle feedback drafts abgelegt mit timestamp
-% - Grundüberlegung des Seitenaufbaus
-% - erster Entwurf der Seitenstruktur als Bild
-% - Routen im ganzen System
-%  * Frontend
-%    # Main View
-%    # Message View
-%    # Feedback View
-%    # User Backend View
-%      + Status
-%      + Content
-%      + Received Messages
-%      + User Settings
-%  * Backend
-%    # Boards
-%      + add
-%      + del
-%      + set Room
-%      + set Resolution
-%    # Rooms
-%      + add
-%      + del
-%      + change name/descr
-%      + manage room users
-%    # Users
-%      + add
-%      + del
-%      + change User
-%    # Logs
-%      + Contents
-%      + Messages
-%      + Feedbacks
-% - Sidebar zum Navigieren
-% - Überlegung zur Auslagerung des Admin Backends
-% - Hinleitung zur Umsetzung
-%---/Draft
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \section{Umsetzung}\label{Umsetzung}
@@ -202,6 +256,17 @@ Größter Part: Die Komplette Umsetzung im Detail
 % Emailtoken
 % wenn eine Nachricht an einen Besitzer abgeschickt wird, wird ein Token generiert, der mit der Nachricht verbunden wird, dieser Token wird dann in der url in der benachrichtigungsmail mitgeschickt und ruft beim Aufruf der der url die Nachricht ab
 
+% Sessions
+% Ajax zur realisierung von CRUD
+
+
+
+
+
+
+
+
+
 \section{Features}\label{Features}
 Alle Features des Boards\\
 \\
@@ -248,6 +313,22 @@ Alle Features des Boards\\
 
 %Backend
 % logs, user, room, board administration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \section{Probleme}\label{Probleme}
