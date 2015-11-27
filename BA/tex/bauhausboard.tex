@@ -66,10 +66,6 @@ Folgende Whiteboard-Funktionen musste der Editor daher abbilden:
 Als Grundlage für den Editor entschied ich mich für die Javascript Bibliothek ``Paper.js''\cite{paperjs:website}.
 Es ist ein Open Source Framework für die Darstellung und Manipulation von Vektorgrafiken, welches auch die Grundlage des Editors aus dem NetBoards Projekt bildete\cite{wood:2014}.
 
-
-
-
-
 \subsection{Interface-Entwurf}\label{Interface-Entwurf}
 % \begin{figure}[h!]
 %   \centering
@@ -83,7 +79,37 @@ Es ist ein Open Source Framework für die Darstellung und Manipulation von Vekto
 %   \caption{Bauhausboards - View Navigation Backend}
 %   \label{img:locationsBackend}
 % \end{figure}
+Da in der Vorstudie den Gästen nicht bewusst war, dass mehrere Personen auf dem Board registriert waren, was der Größe des Tablets zu verschulden war, musste der vorhandene Platz anders aufgeteilt werden.
 
+
+% Sidebar
+% Header
+
+% Übernahme aus meinem Entwurf:  (Frontend)
+% - Content: 2 Layers 
+%   * HTML page als Hintergrund
+%   * Vom Editor erstellter Content (Zeichnungen Bilder Gifs)
+% - Sidebar klappt nach 10sec wieder ein
+% - Wenn auf bestimmten Nutzer geklickt: dessen Content für 30sec fokused
+% - Content faded über alle Nutzer
+% - Gruppen Message möglich (= die Option nicht nur einer einzelnen Person eine Nachricht zu hinterlassen)
+% - Sidebar ist ein und ausklappbar per swipe (besser auf Tablet) und klick
+% - QR-Code, um mit Smartphone einzuscannen -> möglichkeit per smartphone Nachrichten zu hinterlassen
+
+% Übernahme aus meinem Entwurf:  (User Backend)
+% - Set Status kann einen Text setzen, der so lange angezeigt wird, wie der Nutzer es will
+% - Das Backend benötigt eine Passwortauthentication
+% - Change Content bietet selben Editor wie leave Message + Background layer change
+% - Nutzer müssen Möglichkeit bekommen Nachrichten einzusehen
+% - Ungelesene Nachrichten sollen gehighlighted werden
+% - Backendfunktionen nur für den Nutzer, der sich authentisiert hat
+
+% Übernahme aus meinem Entwurf:  (Admin Backend)
+% - Nur für Nutzer mit Adminstatus zugänglich
+% - Statistics
+% - Add, Change, Remove Users, Rooms, Boards
+% - 'sind sie sicher' prompts
+% - Logs, um sich den Inhalt des Raumes anzusehen
 
 
 % Screen
