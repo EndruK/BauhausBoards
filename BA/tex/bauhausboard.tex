@@ -28,8 +28,8 @@ Deswegen fiel die Wahl auf eine Web-Applikation. Zum Einen, weil jedes Tablet, j
 %Zudem setzte das NetBoards Projekt ebenfalls auf eine Web-Applikation
 Ein zentraler Webserver generiert eine Webseite mit allen nötigen Frontend Funktionen, die von allen Geräten mit Web-Browser (Clients) angezeigt werden kann. Dadurch sollte sich der Programmieraufwand auf Server- und Client-Funktionen einschränken.
 \\
-Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu laden müssen. Dies hätte einen viel zu großen Overhead erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
-Deswegen sollte der Server nur beim ersten Aufruf das Grundgerüst der Webseite mit allen Client-Funktionen ausliefern. Ein Teil dieser Funktionen würde dann Daten nachladen oder an den Server schicken, wodurch ein dynamischer Inhalt erzeugt wird.
+Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu laden müssen. Das hätte einen viel zu großen Overhead erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
+Deswegen musste der Server nur beim ersten Aufruf das Grundgerüst der Webseite mit allen Client-Funktionen ausliefern. Ein Teil der Funktionen würde dann Daten nachladen oder an den Server schicken, wodurch ein dynamischer Inhalt erzeugt wird.
 Dies sollte mit dem ``CRUD'' (Create, Read, Update and Delete) Prinzip realisiert werden.
 Der Server wartet, nachdem er eine Seite ausgeliefert hat, auf spezifische Anfragen des Clients und liefert dementsprechend Daten aus (Read) oder ändert den Zustand der Daten (Create, Update und Delete). Zudem gewährleistet dieses Prinzip, dass bei Verbindungsabbrüchen die Seite auf dem Client weiter läuft und nur so lange keine Daten ändern oder nachladen kann, bis die Verbindung wieder aufgebaut wurde.
 \\
@@ -62,7 +62,6 @@ Folgende Whiteboard-Funktionen musste der Editor daher abbilden:
   \item Anbringung von Bildern oder Ausdrücken per Magnet
   \item Neuanordnung von aufgehängten Elementen
 \end{itemize}
-
 Als Grundlage für den Editor entschied ich mich für die Javascript Bibliothek ``Paper.js''\cite{paperjs:website}.
 Es ist ein Open Source Framework für die Darstellung und Manipulation von Vektorgrafiken, welches auch die Grundlage des Editors aus dem NetBoards Projekt bildete\cite{wood:2014}.
 \\
@@ -72,35 +71,64 @@ Dadurch sollte ein weiterer Sicherheitsaspekt geschaffen werden, da keine andere
 \\
 Den Besuchern sollte jedoch weiterhin die Möglichkeit geboten werden mit den registrierten Nutzern in Kontakt treten zu können. Dies konnte mit einer separaten Nachrichtenfunktion realisiert werden.
 
+
+
+
+
+
+
+
+
+
+
 \subsection{Interface-Entwurf}\label{Interface-Entwurf}
-% \begin{figure}[h!]
-%   \centering
-%     \includegraphics[width=1\textwidth]{./img/LocationsFrontend.png}
-%   \caption{Bauhausboards - View Navigation Frontend}
-%   \label{img:locationsFrontend}
-% \end{figure}
-% \begin{figure}[h!]
-%   \centering
-%     \includegraphics[width=1\textwidth]{./img/LocationsBackend.png}
-%   \caption{Bauhausboards - View Navigation Backend}
-%   \label{img:locationsBackend}
-% \end{figure}
-Da in der Vorstudie den Gästen nicht bewusst war, dass mehrere Personen auf dem Board registriert waren, was der Größe des Tablets zu verschulden war, musste der vorhandene Platz anders aufgeteilt werden. Das NetBoards System teilte den Bereich verschiedener Benutzer räumlich, indem es den verfügbaren Platz durch die Anzahl der registrierten Benutzer teilte. Auf einem 10,1 Zoll großem Tablet macht dieser Ansatz jedoch wenig Sinn, da bei mehr als einem Benutzer der verfügbare Platz zu klein wäre.
-
-% Sidebar
-% Header
-
-% Übernahme aus meinem Entwurf:  (Frontend)
-% - Content: 2 Layers 
-%   * HTML page als Hintergrund
-%   * Vom Editor erstellter Content (Zeichnungen Bilder Gifs)
-% - Sidebar klappt nach 10sec wieder ein
-% - Wenn auf bestimmten Nutzer geklickt: dessen Content für 30sec fokused
-% - Content faded über alle Nutzer
-% - Gruppen Message möglich (= die Option nicht nur einer einzelnen Person eine Nachricht zu hinterlassen)
-% - Sidebar ist ein und ausklappbar per swipe (besser auf Tablet) und klick
+\subsubsection{Hauptansicht}\label{Hauptansicht}
+Da den Gästen in der Vorstudie nicht bewusst war, dass mehrere Personen auf dem Board registriert waren, was der Größe des Tablets zu verschulden war, musste der vorhandene Platz anders aufgeteilt werden. Das NetBoards System teilte den Bereich verschiedener Benutzer räumlich, indem es den verfügbaren Platz durch die Anzahl der registrierten Benutzer teilte.
+Auf einem 10,1 Zoll großem Tablet macht dieser Ansatz jedoch wenig Sinn, da bei mehr als einem Benutzer der verfügbare Platz zu klein wäre\abb{img:aufteilungMainView}.
+Deswegen sollte jeder registrierte Nutzer die ganze Fläche zu Verfügung haben, wobei nach einer festgelegten Zeit die Sicht wechselt und die Daten des nächsten Nutzers anzeigt.\\
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.68\textwidth]{./img/AufteilungMainView.png}
+  \caption{Vergleich der Platzverteilung NetBoards - Bauhausboards}
+  \label{img:aufteilungMainView}
+\end{figure}
+\\
+Die Datenansicht sollte in zwei Schichten aufgeteilt werden. Zum einen eine Editor-Schicht für selbst gezeichnete Skizzen, Texte, Bilder und animierte Gifs, sowie eine Hintergrundschicht, in der die Nutzer eine Webseite anzeigen lassen können. Da NetBoards diese Funktion bereits bot und die Testnutzer in der Vorstudie diese ebenfalls nutzten entschied ich mich sie ebenfalls umzusetzen.
+\\
+Um auf der Webseite navigieren zu können musste es dafür ein Menü geben, die auf den Tablets nicht viel Platz wegnahm. Die beste Variante dafür war ein Sidebar, der standardmäßig eingeklappt war und sich per Klick oder Swipe-Geste öffnen ließ.
+In diesem Menü sollten alle Navigationselemente zu untergebracht sein. 
+\\
+Um Informationen über die Nutzer anzeigen zu können wurde eine zusätzliche Fläche benötigt. Dafür sollte im oberen Bereich des Displays ein Teil nur für solche Informationen reserviert sein. In diesem Header konnte man das Profilbild, den Namen und eine Beschreibung des aktuell ausgewählten Nutzers darstellen.
+In der Vorstudie wurde es sehr gut aufgenommen, dass einer der Nutzer seinen aktuellen Status angegeben hat. Deswegen sollte diese Funktion neben den Nutzerinformationen im Header zu finden sein.
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.7\textwidth]{./img/MainViewAufbau.png}
+  \caption{Aufbau der Hauptansicht}
+  \label{img:mainView}
+\end{figure}
+\\
+%Messages
+Damit die Gäste mit den Besitzern in Kontakt treten können musste es eine Nachrichtenfunktion geben. Dabei sollten die Benutzer, die eine Nachricht erstellen wollen, einen oder mehrere Besitzer auswählen können. Wenn sie das getan haben, soll der Editor aktiviert werden und die Besucher können eine Zeichnung oder einen Text zeichnen. Die Besitzer müssen, nachdem die Nachricht abgeschickt wurde, darüber informiert werden, dass jemand ihnen etwas geschrieben hat.
 % - QR-Code, um mit Smartphone einzuscannen -> möglichkeit per smartphone Nachrichten zu hinterlassen
+%\\
+%Feedback
+%Um Feedback sammeln zu können, sollten die Besucher noch gesonderte Nachrichten
+% - Nutzer die Vorbei gehen sollen in irgend einer weise Feedback senden können (in Vorstudie hat sich gezeigt, dass niemand auf die daneben aufgehangenen Zettel etwas schreiben wollte - deshalb direktes Feedback per app)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Benutzer-Backend}\label{Nutzer-Backend}
 % Übernahme aus meinem Entwurf:  (User Backend)
 % - Set Status kann einen Text setzen, der so lange angezeigt wird, wie der Nutzer es will
 % - Das Backend benötigt eine Passwortauthentication
@@ -108,82 +136,49 @@ Da in der Vorstudie den Gästen nicht bewusst war, dass mehrere Personen auf dem
 % - Nutzer müssen Möglichkeit bekommen Nachrichten einzusehen
 % - Ungelesene Nachrichten sollen gehighlighted werden
 % - Backendfunktionen nur für den Nutzer, der sich authentisiert hat
+% - Benutzer in den Räumen müssen die Möglichkeit haben alle Nachrichten, die sie erhalten haben einsehen zu können
+% - Neue Nachrichten müssen besonders gekennzeichnet sein
+% - Zudem sollen sie Ihre Pinnwand anpassen können --> Content Change
+% - Sie sollen Skizzen machen können, Bilder und Gifs hochladen und Webseiten als Hintergrund laden können
+% - Sie sollen einen Status setzen können, um vorbeigehende Nutzer darüber zu Informieren, was sie jetzt zur Zeit machen, ob sie grade im Büro sind, nur kurz essen, den halben oder ganzen Tag nicht da sind oder im Labor anzutreffen sind
+% - Um schnell einen Status zu setzen, quasi wenn man schnell weg muss und an seinem Board vorbei geht, soll zum Authentisieren des Nutzers ein 4 Stelliger PIN genutzt werden. Der Nutzer soll angeben, welcher der registrierten Nutzern des Raumes er ist und dazu seinen PIN eingeben. Wenn er das getan hat kann er einen Status setzen oder sich als Verfügbar/Nicht Verfügbar kennzeichnen
+% - Nutzer im Raum sollen zudem Ihre ganzen Daten ändern können (Name, Beschreibung, Mail, ProfilePic, PAsswort, PIN, ...) Dazu ist aber das Passwort des Nutzers erforderlich
+% -> jeder Nutzer sollte die Möglichkeit bekommen einen Status für sich setzten zu können, der aus einem kurzen Text (wie: bin Mittag essen oder bin im Meeting) und die angepeilte dauer des Status (~ bis 12:00)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Administrator-Backend}\label{Administrator-Backend}
 % Übernahme aus meinem Entwurf:  (Admin Backend)
 % - Nur für Nutzer mit Adminstatus zugänglich
 % - Statistics
 % - Add, Change, Remove Users, Rooms, Boards
 % - 'sind sie sicher' prompts
 % - Logs, um sich den Inhalt des Raumes anzusehen
-
-
-% Screen
-% Sidebar
-
-% Da Screen zu klein war in der Vorstudie den gästen nicht bewusst, dass sich zwei leute den Raum teilten
-% -> Teilen des Screens für alle Nutzer des Raumes? nein!
-% -> Jeder Nutzer sollte den Ganzen Screen für die ANzeige ihres Contents bekommen
-% -> Deswegen Switch der Contentseite über alle Nutzer im Raum nach bestimmter Zeit + Feste Boardgröße ohne Scroll (Zumindest auf dem Tablet)
-% Statusmeldungen für jeden Nutzer
-% -> jeder Nutzer sollte die Möglichkeit bekommen einen Status für sich setzten zu können, der aus einem kurzen Text (wie: bin Mittag essen oder bin im Meeting) und die angepeilte dauer des Status (~ bis 12:00)
-% Kommunikation der Besucher mit den Besitzern
-% -> es sollte den Besuchern möglich sein mit den Besitzern des Raumes in verbindung zu treten
-% -> Nachrichtensystem erstellt
-% -> Besucher sollen einem, mehreren oder allen Nutzern des Raumes eine Nachricht hinterlassen können
-% -> Die Besitzer sollen darauf eine Email bekommen, dass jemand an ihr Board geschrieben hat (Mit Inhalt der Nachricht)
-%Aufbau der Seite
-% - mehrere Personen in Raum --> wie realisieren?
-% - switch durch alle angemeldeten User im Raum
-% - Jeder hat eigenen Content
-% - Nutzer wollen vllt nur eine Person in einem Raum ansprechen oder mehrere oder vllt sogar alle
-% - Nutzer im Raum müssen in irgend einer Weise darüber informiert werden, dass sie eine Nachricht erhalten haben --> mail / app
 % - Administrator der Applikation muss die Möglichkeit haben neue Nutzer, neue Räume und neue Boards zu erstellen und initialisieren
 % - Zu Studienzwecken muss der Administrator zudem in der Lage sein alle Nachrichten und erstellte COntents auswerten zu können
-% - Nutzer die Vorbei gehen sollen in irgend einer weise Feedback senden können (in Vorstudie hat sich gezeigt, dass niemand auf die daneben aufgehangenen Zettel etwas schreiben wollte - deshalb direktes Feedback per app)
-% - Benutzer in den Räumen müssen die Möglichkeit haben alle Nachrichten, die sie erhalten haben einsehen zu können
-% - Neue Nachrichten müssen besonders gekennzeichnet sein
-% - Zudem sollen sie Ihre Pinnwand anpassen können
-% - Sie sollen Skizzen machen können, Bilder und Gifs hochladen und Webseiten als Hintergrund laden können
-% - Um schnell einen Status zu setzen, quasi wenn man schnell weg muss und an seinem Board vorbei geht, soll zum Authentisieren des Nutzers ein 4 Stelliger PIN genutzt werden. Der Nutzer soll angeben, welcher der registrierten Nutzern des Raumes er ist und dazu seinen PIN eingeben. Wenn er das getan hat kann er einen Status setzen oder sich als Verfügbar/Nicht Verfügbar kennzeichnen
-% - Sie sollen einen Status setzen können, um vorbeigehende Nutzer darüber zu Informieren, was sie jetzt zur Zeit machen, ob sie grade im Büro sind, nur kurz essen, den halben oder ganzen Tag nicht da sind oder im Labor anzutreffen sind
-% - Zudem sollen sie die möglichkeit bekommen sich als nicht anwesend markieren zu können, damit Gäste, die auf die Boards schauen schnell sehen, wer da ist und wer nicht
-% - Nutzer im Raum, die gern Twitter benutzen sollen die öglichkeit bekommen ihren TwitterAccount anzugeben, damit ihr letzter tweet auf ihrer Pinnwand angezeigt werden kann
-% - Nutzer im Raum sollen zudem Ihre ganzen Daten ändern können (Name, Beschreibung, Mail, ProfilePic, PAsswort, PIN, ...) Dazu ist aber das Passwort des Nutzers erforderlich
 
-% - Grundüberlegung des Seitenaufbaus
+
+
+% Bild der Seitennavigation
+% vllt zu jeder View noch ein Beispielbild?
+
+
+
+
 % - erster Entwurf der Seitenstruktur als Bild
-% - Routen im ganzen System
-%  * Frontend
-%    # Main View
-%    # Message View
-%    # Feedback View
-%    # User Backend View
-%      + Status
-%      + Content
-%      + Received Messages
-%      + User Settings
-%  * Backend
-%    # Boards
-%      + add
-%      + del
-%      + set Room
-%      + set Resolution
-%    # Rooms
-%      + add
-%      + del
-%      + change name/descr
-%      + manage room users
-%    # Users
-%      + add
-%      + del
-%      + change User
-%    # Logs
-%      + Contents
-%      + Messages
-%      + Feedbacks
 % - Sidebar zum Navigieren
-% - Überlegung zur Auslagerung des Admin Backends
-% - Hinleitung zur Umsetzung
+
 
 \subsection{Datenbankentwurf}\label{Datenbankentwurf}
 % \begin{figure}[h!]
@@ -250,12 +245,9 @@ Da in der Vorstudie den Gästen nicht bewusst war, dass mehrere Personen auf dem
 
 
 \section{Umsetzung}\label{Umsetzung}
-Größter Part: Die Komplette Umsetzung im Detail
+% hier kommt eine Überleitung vom Entwurf hin
 
-% - NodeJS
-%   * da frontend größtenteils mit Javascript laufen sollte und ich mich auf eine einheitliche programmiersprache festlegen wollte
-%   * Server liefert nur Grundaufbau und JS der Seite aus
-%   * Ansonsten wartet er nur auf CRUD befehle um den datenbank state zu ändern oder zu erwiedern
+% NodeJS und JS
 %   * Express app für mvc policy
 %   * banquo           -- dafür da umhtml seiten zu einem image zu rendern
 %    body-parser       -- middleware für express zum parsen des bodys ??? was macht das ding??
@@ -305,10 +297,16 @@ Größter Part: Die Komplette Umsetzung im Detail
 %Javascript Code??
 
 % Emailtoken
+% - Nutzer im Raum müssen in irgend einer Weise darüber informiert werden, dass sie eine Nachricht erhalten haben --> mail / app
 % wenn eine Nachricht an einen Besitzer abgeschickt wird, wird ein Token generiert, der mit der Nachricht verbunden wird, dieser Token wird dann in der url in der benachrichtigungsmail mitgeschickt und ruft beim Aufruf der der url die Nachricht ab
 
 % Sessions
 % Ajax zur realisierung von CRUD
+
+% - Überlegung zur Auslagerung des Admin Backends
+
+% Sidebar Da manche Nutzer vergessen würden ihn wieder zu schließen, er sich nach einer bestimmten Zeit automatisch wieder schließen.
+
 
 
 
@@ -366,6 +364,8 @@ Alle Features des Boards\\
 % logs, user, room, board administration
 
 
+% - Zudem sollen sie die möglichkeit bekommen sich als nicht anwesend markieren zu können, damit Gäste, die auf die Boards schauen schnell sehen, wer da ist und wer nicht
+% - Nutzer im Raum, die gern Twitter benutzen sollen die öglichkeit bekommen ihren TwitterAccount anzugeben, damit ihr letzter tweet auf ihrer Pinnwand angezeigt werden kann
 
 
 
