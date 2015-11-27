@@ -2,7 +2,7 @@
 Das neue Projekt bekam den Namen ``BauhausBoards''.
 In einer Entwurfsphase entschied ich, wie das System aussehen und welche Funktionen es bieten sollte. Dabei flossen die Ergebnisse der Vorstudie und anderer Projekte mit ein.
 \\
-Als Voraussetzung sollten die Anzeigegeräte für die Türschilder weiterhin Tablets sein.
+Als Voraussetzung sollten als Anzeigegeräte für die Türschilder weiterhin Tablets genutzt werden.
 Der Entwurf wurde darauf in ein Programm umgesetzt, wobei manche geplante Funktionen geändert, entfernt oder neue hinzugefügt wurden. An manchen Stellen der Umsetzung kam es auch zu Problemen, die es zu lösen galt.
 % - Ergebnisse der Vorstudie sollten enbezogen werden
 % - sollte weiterhin auf Tablets als Anzeigegerät laufen
@@ -26,12 +26,12 @@ Die Planung des Systems begann damit, die Plattform des Systems auszuwählen. Es
 Deswegen fiel die Wahl auf eine Web-Applikation. Zum Einen, weil jedes Tablet, jedes Smartphone und jeder PC Webseiten darstellen kann und es nicht nötig ist, extra eine App auf den Geräten zu installieren.
 \\ \todotext{darauf eingehen, dass NetBoards auch eine Web-Applikation benutzt hat?}\\
 %Zudem setzte das NetBoards Projekt ebenfalls auf eine Web-Applikation
-Ein zentraler Webserver generiert eine Webseite mit allen nötigen Frontend Funktionen an, die von allen Geräten mit Web-Browser (Clients) angezeigt werden kann. Dadurch sollte sich der Programmieraufwand auf Server- und Client-Funktionen einschränken.
+Ein zentraler Webserver generiert eine Webseite mit allen nötigen Frontend Funktionen, die von allen Geräten mit Web-Browser (Clients) angezeigt werden kann. Dadurch sollte sich der Programmieraufwand auf Server- und Client-Funktionen einschränken.
 \\
 Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu laden müssen. Dies hätte einen viel zu großen Overhead erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
 Deswegen sollte der Server nur beim ersten Aufruf das Grundgerüst der Webseite mit allen Client-Funktionen ausliefern. Ein Teil dieser Funktionen würde dann Daten nachladen oder an den Server schicken, wodurch ein dynamischer Inhalt erzeugt wird.
 Dies sollte mit dem ``CRUD'' (Create, Read, Update and Delete) Prinzip realisiert werden.
-Der Server wartet, nachdem er eine Seite ausgeliefert hat, auf spezifische Anfragen des Clients und liefert dementsprechend Daten aus (Read) oder ändert den Zustand der Daten (Create, Update und Delete). Zudem wird gewährleistet dieses Prinzip, dass bei Verbindungsabbrüchen die Seite auf dem Client weiter läuft und nur so lange keine Daten ändern oder nachladen kann, bis die Verbindung wieder aufgebaut wurde.
+Der Server wartet, nachdem er eine Seite ausgeliefert hat, auf spezifische Anfragen des Clients und liefert dementsprechend Daten aus (Read) oder ändert den Zustand der Daten (Create, Update und Delete). Zudem gewährleistet dieses Prinzip, dass bei Verbindungsabbrüchen die Seite auf dem Client weiter läuft und nur so lange keine Daten ändern oder nachladen kann, bis die Verbindung wieder aufgebaut wurde.
 \\
 Die anfallenden Daten des Systems mussten in irgend einer Form auf dem Server gespeichert werden. Die beste Methode dafür war die Nutzung einer Datenbank. Anders als bei NetBoards, wo alle Daten als JSON-Dateien auf dem Server gespeichert wurden, sah ich diese Methode als geeigneter an. Mit einer Datenbank war es möglich Relationen besser darzustellen, Konsistenz zu bewahren und Redundanz zu vermeiden. Zudem sind damit Daten zentralisiert zusammengefasst, wodurch eine bessere Suche nach bestimmten Daten möglich ist.
 \\
@@ -65,6 +65,12 @@ Folgende Whiteboard-Funktionen musste der Editor daher abbilden:
 
 Als Grundlage für den Editor entschied ich mich für die Javascript Bibliothek ``Paper.js''\cite{paperjs:website}.
 Es ist ein Open Source Framework für die Darstellung und Manipulation von Vektorgrafiken, welches auch die Grundlage des Editors aus dem NetBoards Projekt bildete\cite{wood:2014}.
+\\
+\\
+Eine weitere wichtige Entscheidung war, dass nur die an den Boards registrierten Nutzer den dargestellten Inhalt ändern können sollten, da sich in der Vorstudie herausstellte, dass durch die Anonymität der Besucher es häufig zu unerwünschten Änderungen kam.
+Dadurch sollte ein weiterer Sicherheitsaspekt geschaffen werden, da keine andere Person die Daten ändern kann außer derjenige, der sie erstellt hat.
+\\
+Den Besuchern sollte jedoch weiterhin die Möglichkeit geboten werden mit den registrierten Nutzern in Kontakt treten zu können. Dies konnte mit einer separaten Nachrichtenfunktion realisiert werden.
 
 \subsection{Interface-Entwurf}\label{Interface-Entwurf}
 % \begin{figure}[h!]
@@ -79,8 +85,7 @@ Es ist ein Open Source Framework für die Darstellung und Manipulation von Vekto
 %   \caption{Bauhausboards - View Navigation Backend}
 %   \label{img:locationsBackend}
 % \end{figure}
-Da in der Vorstudie den Gästen nicht bewusst war, dass mehrere Personen auf dem Board registriert waren, was der Größe des Tablets zu verschulden war, musste der vorhandene Platz anders aufgeteilt werden.
-
+Da in der Vorstudie den Gästen nicht bewusst war, dass mehrere Personen auf dem Board registriert waren, was der Größe des Tablets zu verschulden war, musste der vorhandene Platz anders aufgeteilt werden. Das NetBoards System teilte den Bereich verschiedener Benutzer räumlich, indem es den verfügbaren Platz durch die Anzahl der registrierten Benutzer teilte. Auf einem 10,1 Zoll großem Tablet macht dieser Ansatz jedoch wenig Sinn, da bei mehr als einem Benutzer der verfügbare Platz zu klein wäre.
 
 % Sidebar
 % Header
