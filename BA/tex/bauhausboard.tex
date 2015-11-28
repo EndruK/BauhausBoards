@@ -115,35 +115,20 @@ Damit die Gäste mit den Besitzern in Kontakt treten können musste es eine Nach
 %Um Feedback sammeln zu können, sollten die Besucher noch gesonderte Nachrichten
 % - Nutzer die Vorbei gehen sollen in irgend einer weise Feedback senden können (in Vorstudie hat sich gezeigt, dass niemand auf die daneben aufgehangenen Zettel etwas schreiben wollte - deshalb direktes Feedback per app)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsubsection{Benutzer-Backend}\label{Nutzer-Backend}
+Die Besitzer der Boards sollen ihre angezeigten Daten ändern, einen Status setzten und empfangene Nachrichten lesen können.
+Damit sie diese Funktionen nutzen können, müssen sie sich vorher im Benutzer-Backend authentisieren.
+Zusätzlich soll das Backend den Nutzern die Möglichkeit bieten ihre Nutzerdaten, wie das Profilbild, die Benutzerbeschreibung oder das Passwort zu ändern.\\
+Mit einer ``Inhalt ändern'' Funktion können die Besitzer ihre angezeigten Daten der Hauptseite ändern. Dafür wird der selbe Editor benutzt, der auch bei der Erstellung von Besuchernachrichten zum Einsatz kommt. Zusammenhängend mit der Änderung in der Editor-Schicht müssen die Nutzer auch die Hintergrund-Schicht ändern.\\
+
+
 % Übernahme aus meinem Entwurf:  (User Backend)
 % - Set Status kann einen Text setzen, der so lange angezeigt wird, wie der Nutzer es will
-% - Das Backend benötigt eine Passwortauthentication
-% - Change Content bietet selben Editor wie leave Message + Background layer change
-% - Nutzer müssen Möglichkeit bekommen Nachrichten einzusehen
-% - Ungelesene Nachrichten sollen gehighlighted werden
-% - Backendfunktionen nur für den Nutzer, der sich authentisiert hat
-% - Benutzer in den Räumen müssen die Möglichkeit haben alle Nachrichten, die sie erhalten haben einsehen zu können
-% - Neue Nachrichten müssen besonders gekennzeichnet sein
-% - Zudem sollen sie Ihre Pinnwand anpassen können --> Content Change
-% - Sie sollen Skizzen machen können, Bilder und Gifs hochladen und Webseiten als Hintergrund laden können
 % - Sie sollen einen Status setzen können, um vorbeigehende Nutzer darüber zu Informieren, was sie jetzt zur Zeit machen, ob sie grade im Büro sind, nur kurz essen, den halben oder ganzen Tag nicht da sind oder im Labor anzutreffen sind
 % - Um schnell einen Status zu setzen, quasi wenn man schnell weg muss und an seinem Board vorbei geht, soll zum Authentisieren des Nutzers ein 4 Stelliger PIN genutzt werden. Der Nutzer soll angeben, welcher der registrierten Nutzern des Raumes er ist und dazu seinen PIN eingeben. Wenn er das getan hat kann er einen Status setzen oder sich als Verfügbar/Nicht Verfügbar kennzeichnen
+% - Nutzer müssen Möglichkeit bekommen Nachrichten einzusehen
+% - Ungelesene Nachrichten sollen gehighlighted werden
 % - Nutzer im Raum sollen zudem Ihre ganzen Daten ändern können (Name, Beschreibung, Mail, ProfilePic, PAsswort, PIN, ...) Dazu ist aber das Passwort des Nutzers erforderlich
-% -> jeder Nutzer sollte die Möglichkeit bekommen einen Status für sich setzten zu können, der aus einem kurzen Text (wie: bin Mittag essen oder bin im Meeting) und die angepeilte dauer des Status (~ bis 12:00)
 
 
 
