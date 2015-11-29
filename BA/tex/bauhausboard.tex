@@ -33,7 +33,7 @@ Deswegen musste der Server nur beim ersten Aufruf das Grundgerüst der Webseite 
 Dies sollte mit dem ``CRUD'' (Create, Read, Update and Delete) Prinzip realisiert werden.
 Der Server wartet, nachdem er eine Seite ausgeliefert hat, auf spezifische Anfragen des Clients und liefert dementsprechend Daten aus (Read) oder ändert den Zustand der Daten (Create, Update und Delete). Zudem gewährleistet dieses Prinzip, dass bei Verbindungsabbrüchen die Seite auf dem Client weiter läuft und nur so lange keine Daten ändern oder nachladen kann, bis die Verbindung wieder aufgebaut wurde.
 \\
-Die anfallenden Daten des Systems mussten in irgend einer Form auf dem Server gespeichert werden. Die beste Methode dafür war die Nutzung einer Datenbank. Anders als bei NetBoards, wo alle Daten als JSON-Dateien auf dem Server gespeichert wurden, sah ich diese Methode als geeigneter an. Mit einer Datenbank war es möglich Relationen besser darzustellen, Konsistenz zu bewahren und Redundanz zu vermeiden. Zudem sind damit Daten zentralisiert zusammengefasst, wodurch eine bessere Suche nach bestimmten Daten möglich ist.
+Die anfallenden Daten des Systems mussten in irgend einer Form auf dem Server gespeichert werden. Die beste Methode dafür war die Nutzung einer Datenbank. Anders als bei NetBoards, wo alle Daten als JSON\footnote{\quelle{JSON ist ein, für Menschen leicht zu lesendes und Maschinen leicht zu parsendes, Datenaustauschformat}{json:website}}-Dateien auf dem Server gespeichert wurden, sah ich diese Methode als geeigneter an. Mit einer Datenbank war es möglich Relationen besser darzustellen, Konsistenz zu bewahren und Redundanz zu vermeiden. Zudem sind damit Daten zentralisiert zusammengefasst, wodurch eine bessere Suche nach bestimmten Daten möglich ist.
 \\
 Die Wahl des Datenbanksystems fiel auf ``SQLite''\cite{sqlite:website}, da es das am meisten verbreitete relationale Datenbanksystem der Welt ist. Es war einfach zu benutzen und hatte eine gute Dokumentation.
 \\
@@ -117,46 +117,72 @@ Damit die Gäste mit den Besitzern in Kontakt treten können musste es eine Nach
 
 \subsubsection{Benutzer-Backend}\label{Benutzer-Backend}
 Die Besitzer der Boards sollten ihren öffentlichen Inhalt ändern, einen Status setzten und empfangene Nachrichten lesen können.
-Dafür müssen sie sich vorher im Benutzer-Backend authentisieren.\\
-Das Backend soll den Nutzern die Möglichkeit bieten, ihre Nutzerdaten, wie das Profilbild, die Benutzerbeschreibung oder das Passwort ändern zu können.\\
-Um die angezeigten Daten der Hauptseite anzupassen, wird der selbe Editor verwendet, der auch bei der Erstellung von Besuchernachrichten zum Einsatz kommt.\\
-Für den Status sollen die Nutzer einen kurzen Text und den Endzeitpunkt festlegen, der dann auf der Hauptseite angezeigt wird.\\
+Dafür müssen sie sich vorher im Benutzer-Backend authentisieren.
+\\
+Das Backend soll den Nutzern die Möglichkeit bieten, ihre Nutzerdaten, wie das Profilbild, die Benutzerbeschreibung oder das Passwort ändern zu können.
+\\
+Um die angezeigten Daten der Hauptseite anzupassen, wird der selbe Editor verwendet, der auch bei der Erstellung von Besuchernachrichten zum Einsatz kommt.
+\\
+Für den Status sollen die Nutzer einen kurzen Text und den Endzeitpunkt festlegen, der dann auf der Hauptseite angezeigt wird.
+\\
 Außerdem mussten sie die Möglichkeit bekommen, erhaltenen Nachrichten einsehen zu können. Ungelesene Nachrichten sollten dabei besonders gekennzeichnet sein.\\
-Die Änderung der Benutzerdaten sollten in einem gesonderten Einstellungsbereich möglich sein.\\
+Die Änderung der Benutzerdaten sollten in einem gesonderten Einstellungsbereich möglich sein.
+\\
 Da das Benutzer-Backend auch vom aufgehängtem Display aus erreichbar sein soll, damit die Nutzer beim verlassen des Raumes schnell einen Status setzen können, mussten sie sich schnell authentisieren können. Deswegen entschied ich mich für zwei Authentisierungsmethoden. Ein vierstelliger Pin sollte zur schnellen Anmeldung in das Backend dienen. Die Benutzereinstellungen konnten dann nach einer klassischen Passwortauthentisierung vorgenommen werden.
 
-\subsubsection{Administrator-Backend}\label{Administrator-Backend}
-Der Administrator der Boards muss die Funktionen bekommen, das System verwalten zu können. Das beinhaltet das erstellen, ändern und entfernen von Nutzern, sowie Board-Instanzen.\\
-Für Studienzwecke soll er die Inhalte und Nachrichten der Benutzer einsehen können.
-% Übernahme aus meinem Entwurf:  (Admin Backend)
-% - Nur für Nutzer mit Adminstatus zugänglich
-% - Statistics
-% - Add, Change, Remove Users, Rooms, Boards
-% - 'sind sie sicher' prompts
-% - Logs, um sich den Inhalt des Raumes anzusehen
-% - Administrator der Applikation muss die Möglichkeit haben neue Nutzer, neue Räume und neue Boards zu erstellen und initialisieren
-% - Zu Studienzwecken muss der Administrator zudem in der Lage sein alle Nachrichten und erstellte COntents auswerten zu können
-\\
-\todotext{Bild des Seitetnnavigations-Entwurfs}\\
-% Bild der ersten Seitennavigation
-% vllt zu jeder View noch ein Beispielbild?
-
-
-\subsection{Datenbankentwurf}\label{Datenbankentwurf}
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=0.8\textwidth]{./img/ER01.png}
-  \caption{Bauhausboards - Datenbankentwurf}
+    \includegraphics[width=0.9\textwidth]{./img/LocationsFrontend.png}
+  \caption{Bauhausboards - Interface Funktionen}
+  \label{img:Interface}
+\end{figure}
+
+\subsubsection{Administrator-Backend}\label{Administrator-Backend}
+Der Administrator der Boards muss die Funktionen bekommen, das System verwalten zu können. Das beinhaltet das erstellen, ändern und entfernen von Nutzern, sowie Board-Instanzen.
+\\
+Zudem soll er für Studienzwecke die Inhalte und Nachrichten der Benutzer einsehen können.b
+
+\subsection{Datenbankentwurf}\label{Datenbankentwurf}
+Durch die geplanten Funktionen mussten anfallende Daten in einer Datenbank gespeichert werden.
+Es bestand die Möglichkeit eine dokumentenbasierte oder eine relationale Datenbank dafür zu nutzen.
+Eine dokumentenbasierte Datenbank hätte den Vorteil gehabt, dass alle Anfragen eine JSON-Zeichenkette zurückgeben. JSON wird häufig in der Verbindung mit Javascript und dessen Serverkommunikation verwendet.
+Relationale Datenbanken hingegen verwenden eine Tabellenstruktur für die Speicherung von Daten. Mit ihnen lassen sich Beziehungen zwischen den Daten einfacher darstellen.
+\\
+Für die Datenbank von Bauhausboards entschied ich mich für eine relationale Datenbank, da die Einarbeitungszeit, um mit dokumentenbasierten Datenbanken umgehen zu können, zu lang gedauert hätte.
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.75\textwidth]{./img/ER01.png}
+  \caption{Bauhausboards - Entity Relationship Diagramm}
   \label{img:ER01}
 \end{figure}
+\\
+Der Datenbankentwurf beinhaltete 6 Objektklassen, dargestellt als Tabellen. Um alle Objekte eindeutig beschreiben zu können wurde in jeder Tabelle eine ID als Primärschlüssel\footnote{Ein Primärschlüssel ist ein Attribut zur eindeutigen Identifikation eines Datensatzes} hinzugefügt.
+\\\todotext{soll ich bei den Attributen noch auf die Datentypen eingehen?}\\
+\subsubsection{User Tabelle}\label{User Tabelle}
+Die User-Tabelle ist die Haupttabelle und dient zur Speicherung von Nutzeraccounts. Ein Nutzer muss auf jeden Fall einen Namen, eine Emailadresse, ein Passwort und einen Pin haben.
+Zusätzlich können die Nutzer auch ein Profilbild, eine eigene Beschreibung und, wenn erwünscht, ein Twitter-Account angegeben werden.
+Wenn ein Benutzeraccount erstellt wird, soll das aktuelle Datum mitgespeichert werden.
+\\
+Ein Benutzer kann entweder in einem oder keinem Raum arbeiten. Er kann beliebig viele Status und Inhalte erzeugen und beliebig viele Nachrichten erhalten.
+\subsubsection{Board Tabelle}\label{Board Tabelle}
+Diese Tabelle ist die digitale Repräsentation von tatsächlich aufgehängten Displays. Da verschiedene Tablets eine unterschiedliche Auflösung haben können, musste diese in der Datenbank für jedes Board gespeichert werden. Ein Board kann entweder noch keinem oder genau einem Raum zugeordnet sein.
+\subsubsection{Room Tabelle}\label{Room Tabelle}
+In dieser Tabelle werden die möglichen Räume, vor denen Boards aufgehangen werden können registriert. Jeder Raum hat einen Namen und möglicherweise eine Beschreibung. Ein Raum kann entweder keinem oder mehreren Boards zugeordnet sein. Zudem können beliebig viele Personen in einem Raum arbeiten.
+\subsubsection{Content Tabelle}\label{Content Tabelle}
+Mit dieser Tabelle werden die Inhalte von den Nutzern gespeichert. Ein Inhalt besteht aus einem JSON-Objekt und einem Erstelldatum. Wenn für den Inhalt eine Hintergrundwebseite angegeben wurde, wird deren Adresse ebenfalls an dieser Stelle eingetragen. Jeder Inhalt hat genau einen Nutzer, der ihn erstellt hat.
+\subsubsection{Status Tabelle}\label{Status Tabelle}
+Die Status Tabelle dient zur Speicherung von Nutzerstatus. Jeder Nutzerstatus hat einen Statustext, ein Erstelldatum, einen Endzeitpunkt und genau einen Ersteller. 
+\subsubsection{Message Tabelle}\label{Message Tabelle}
+In der Message Tabelle werden Nachrichten abgelegt, die von Besuchern erstellt wurden. Eine Nachricht hat einen Nachrichteninhalt und ein Erstelldatum. Da die Nachricht an mehrere Besitzer adressiert sein kann, hat jede mindestens einen Empfänger.
+\\
+\\
+Die Relationen zwischen User und Message, sowie zwischen User und Room müssen jeweils über eine dritte Tabelle dargestellt werden. In diesen Tabellen werden dann nur die Primärschlüssel der beiden beteiligten Objekte gespeichert.
+
+
+
 % 
-%Aufbau der Datenbank
-%SQLITE anstelle von MONGODB
-%- kein traditionelles Relationales Schema
-%- Mongodb hätte jedoch direkt JSON results
 %- Für kleines Umfeld ist SQLITE auch akzeptabel
 %- alternativen wären: mysql
-%- nodejs hat aber auch ein npm repo für sqlite
 % - Um die Daten Zentral auf dem Server verwalten zu können musste eine Datenbank eingerichtet werden
 % - Hierbei bestand die Frage, ob klassische Relationale DB oder dokument-orientierte DB
 % - dokument-orientiert vorteile wegen JSON strings, nachteile: keine Relationen, alles in Strings, starkes umdenken erforderlich für NUtzer mit Kenntnis über Relationale DBs
