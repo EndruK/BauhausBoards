@@ -85,13 +85,14 @@ Den Besuchern sollte jedoch weiterhin die Möglichkeit geboten werden mit den re
 \subsubsection{Hauptansicht}\label{Hauptansicht}
 Da den Gästen in der Vorstudie nicht bewusst war, dass mehrere Personen auf dem Board registriert waren, was der Größe des Tablets zu verschulden war, musste der vorhandene Platz anders aufgeteilt werden. Das NetBoards System teilte den Bereich verschiedener Benutzer räumlich, indem es den verfügbaren Platz durch die Anzahl der registrierten Benutzer teilte.
 Auf einem 10,1 Zoll großem Tablet macht dieser Ansatz jedoch wenig Sinn, da bei mehr als einem Benutzer der verfügbare Platz zu klein wäre\abb{img:aufteilungMainView}.
-Deswegen sollte jeder registrierte Nutzer die ganze Fläche zu Verfügung haben, wobei nach einer festgelegten Zeit die Sicht wechselt und die Daten des nächsten Nutzers anzeigt.\\
 \begin{figure}[h!]
   \centering
     \includegraphics[width=0.68\textwidth]{./img/AufteilungMainView.png}
   \caption{Vergleich der Platzverteilung NetBoards - Bauhausboards}
   \label{img:aufteilungMainView}
 \end{figure}
+\\
+Deswegen sollte jeder registrierte Nutzer die ganze Fläche zu Verfügung haben, wobei nach einer festgelegten Zeit die Sicht wechselt und die Daten des nächsten Nutzers anzeigt.
 \\
 Die Datenansicht sollte in zwei Schichten aufgeteilt werden. Zum einen eine Editor-Schicht für selbst gezeichnete Skizzen, Texte, Bilder und animierte Gifs, sowie eine Hintergrundschicht, in der die Nutzer eine Webseite anzeigen lassen können. Da NetBoards diese Funktion bereits bot und die Testnutzer in der Vorstudie diese ebenfalls nutzten entschied ich mich sie ebenfalls umzusetzen.
 \\
@@ -110,10 +111,6 @@ In der Vorstudie wurde es sehr gut aufgenommen, dass einer der Nutzer seinen akt
 %Messages
 Damit die Gäste mit den Besitzern in Kontakt treten können musste es eine Nachrichtenfunktion geben. Dabei sollten die Benutzer, die eine Nachricht erstellen wollen, einen oder mehrere Besitzer auswählen können. Wenn sie das getan haben, soll der Editor aktiviert werden und die Besucher können eine Zeichnung oder einen Text zeichnen. Die Besitzer müssen, nachdem die Nachricht abgeschickt wurde, darüber informiert werden, dass jemand ihnen etwas geschrieben hat.
 % - QR-Code, um mit Smartphone einzuscannen -> möglichkeit per smartphone Nachrichten zu hinterlassen
-%\\
-%Feedback
-%Um Feedback sammeln zu können, sollten die Besucher noch gesonderte Nachrichten
-% - Nutzer die Vorbei gehen sollen in irgend einer weise Feedback senden können (in Vorstudie hat sich gezeigt, dass niemand auf die daneben aufgehangenen Zettel etwas schreiben wollte - deshalb direktes Feedback per app)
 
 \subsubsection{Benutzer-Backend}\label{Benutzer-Backend}
 Die Besitzer der Boards sollten ihren öffentlichen Inhalt ändern, einen Status setzten und empfangene Nachrichten lesen können.
@@ -180,39 +177,6 @@ Die Relationen zwischen User und Message, sowie zwischen User und Room müssen j
 
 
 
-% 
-%- Für kleines Umfeld ist SQLITE auch akzeptabel
-%- alternativen wären: mysql
-% - Um die Daten Zentral auf dem Server verwalten zu können musste eine Datenbank eingerichtet werden
-% - Hierbei bestand die Frage, ob klassische Relationale DB oder dokument-orientierte DB
-% - dokument-orientiert vorteile wegen JSON strings, nachteile: keine Relationen, alles in Strings, starkes umdenken erforderlich für NUtzer mit Kenntnis über Relationale DBs
-%- Relationale DB wird genutzt (SQLITE), damit lassen sich Zusammenhänge leicht deklarieren, SQLite ist zudem lightweight und wird für nicht ganz so aufwändige Schemata genutzt
-% - zum Schema: (ER Diagramm hier einfügen)
-%   * User Tabelle
-%     zum Speichern der Nutzerdaten
-%     auf typen eingehen (warum Name und Descr. nur 30 Zeichen, warumn PIN und PW 64char - SHA256 hex string)
-%   * Room Tabelle
-%     name und description (zur Kennzeichnung von Physikalischen Räumen)
-%   * Roomusers Tabelle
-%     Nutzer können sich in mehreren Räumen anmelden
-%   * Board Tabelle
-%     resolution und roomID
-%     jedes Board hat eine andere Auflösung - um den Kontent auf jedem Board korrekt anzeigen zu können, muss die Auflösung des Boards ausgelesen werden, zudem hängt jedes Board nur vor einem Raum und kann dementsprechend auch nur einem Raum zugewiesen werden
-%   * Content Tabelle
-%     wenn ein Nutzer Kontent erzeugt oder ändert wird ein neuer Eintrag erzeugt, um jegliche Änderung später auswerten zu können
-%     Dazu gehört wann die änderung statt fand, was der neue Content ist und was als Background URL eingestellt ist
-%   * message Tabelle
-%     jedes mal wenn ein Nutzer auf einem Board eine Nachricht für einen oder mehrere Nutzer erstellt wird ein neues Element angelegt
-%     Zeit und INhalt der Nachricht werden hier gespeichert, die Relation mit USer wird über eine dritte Tabelle realisiert
-%   * msgTo Tabelle
-%     hier werden die PS von User und Message zusammengefasst. Zudem wird hier angegeben, ob der entsprechende Nutzer diese Nachricht schon gelesen hat und ein Token wird generiert, wodurch der Nutzer diese Nachricht direkt aufrufen kann, ohne sich vorher anmelden zu müssen
-%   * status Tabelle
-%     hier wird der Status der Nutzer gespeichert, jedes Mal wenn der Nutzer einen neuen Status angibt, wird ein neuer Eintrag erzeugt. Nur der neuste Status ist gültig
-%     gespeichert wird die erstellzeit, endzeit, der statustext und der dazugehörige Nutzer
-%   * feedback Tabelle
-%     hier werden alle feedback drafts abgelegt mit timestamp
-
-
 
 
 
@@ -233,92 +197,67 @@ Die Relationen zwischen User und Message, sowie zwischen User und Room müssen j
 
 
 \section{Umsetzung}\label{Umsetzung}
+\subsection{Funktionen}\label{Funktionen}
+\todotext{vll ein treffenderer name als Funktionen? vllt Bibliotheken?}\\
+% Ich muss hier nicht auf jede kleine lib eingehen -> nur auf die wichtigsten
 % hier kommt eine Überleitung vom Entwurf hin
-
-% NodeJS und JS
-%   * Express app für mvc policy
-%   * banquo           -- dafür da umhtml seiten zu einem image zu rendern
-%    body-parser       -- middleware für express zum parsen des bodys ??? was macht das ding??
-%    canvas            -- teil von paperjs
-%    cookie-parser     -- cookie tool
-%    crypto-js         -- crypto library für passwort hashes
-%    debug             -- debug tool
-%    emailjs           -- tool zum senden von mails
-%    express           -- mvc framework
-%    express-session   -- session tool for express
-%    jade              -- template engine
-%    jquery            -- JS DOM manipulation tool
-%    jquery-touchswipe -- small tool to enable a swipe gesture
-%    moment            -- JS time tool
-%    morgan            -- http request logger
-%    nib               -- middleware for stylus
-%    paper             -- canvas manipulation tool
-%    serve-favicon     -- express enable favicon
-%    sqlite3           -- database api
-%    stylus            -- css generator
-%    twitter           -- twitter api tool
-%    uuid              -- session uuid generator
-% - Frontend: HTML mit Javascript und JQuery zum Dom-manipulieren
-%   * Webseite wird nur einmal geladen, um damit alles nötige zu holen
-%   * Dynamischer Content wird per ajax vom Server geholt
-%   * bei verbindungsabbrüchen werden bestimmte states gehalten und andere sind durch inconnectivität nicht möglich
-%   
-%
-%Packages:
-%- Express
-%- SQLite
-%  * warum SQLite anstelle von MongoDB (relational vs dokument-orientiert)
-%- PaperJS
-%- crypto-JS for SHA256 password/pin hashing
-%- ....
-%
-%Server
-%Struktur der Webseite
-%Editor
-% -> Was ist besser gegenüber den Funktionen, die er anfangs haben sollte?
-% -> Privacy
-% -> Nur als Framework vorhanden -> Interface musste selbst erstellt werden
-% -> Voraussetzung: HTML5 Canvas Element
-%Backend
-%Design CSS
-%Bootstrap
-%Javascript Code??
-
-% Emailtoken
-% - Nutzer im Raum müssen in irgend einer Weise darüber informiert werden, dass sie eine Nachricht erhalten haben --> mail / app
-% wenn eine Nachricht an einen Besitzer abgeschickt wird, wird ein Token generiert, der mit der Nachricht verbunden wird, dieser Token wird dann in der url in der benachrichtigungsmail mitgeschickt und ruft beim Aufruf der der url die Nachricht ab
-
-% Sessions
-% Ajax zur realisierung von CRUD
-
-% - Überlegung zur Auslagerung des Admin Backends
-
-% Sidebar Da manche Nutzer vergessen würden ihn wieder zu schließen, er sich nach einer bestimmten Zeit automatisch wieder schließen.
-
-
-
-
-
-
-
-
-
-
-\section{Features}\label{Features}
-Alle Features des Boards\\
+Nachdem das der Aufbau des Systems geplant war, mussten diese Pläne in ein lauffähiges Programm umgesetzt werden.
+Um die Entwicklung mit Node.js zu vereinfachen wurde das Framework Express\cite{express:website} verwendet. Damit ließ sich eine einfache Webapplikation erstellen.
 \\
+Da die hauptsächlichen Funktionen auf den Clients ausgeführt werden sollten, mussten diese in Javascript geschrieben werden.
+Am wichtigsten war, dass die Seite sich nicht neu lud, wenn man durch sie navigierte. Dies wurde mit jQuery\cite{jquery:website} realisiert. jQuery ist eine Bibliothek zur einfachen Manipulation der HTML-Struktur einer Webseite. Mit ihr war es einfach, die dargestellte Ansicht anzupassen.
+\\
+Der Kern der Clientfunktionen war der Editor zum Erzeugen von Nutzer-Inhalten und Besuchernachrichten. Da Paper.js nur ein Framework war, musste das Interface dafür von Grund auf implementiert werden.
+Voraussetzungen für Paper.js war, dass die Webseite für dem neuesten HTML5 Standard entwickelt wurde, da diese Version ein neues Canvas-Element bot, mit dem Grafiken gezeichnet werden konnten.
+\\
+Falls an einer Stelle der Seite Daten vom Server benötigt wurden oder Daten auf dem Server geändert werden mussten, wurde dies mit Ajax-Anfragen durchgeführt. Ajax (Asynchronous Javascript and XML) ist eine Funktion für asynchronen Datenaustausch zwischen einem Client und einem Server.
+Während ein Client auf die Ajax-Antwort des Servers wartet können weiterhin andere Funktionen ausgeführt werden.
+\\
+% jquery touchswipe -> swipe tool für die swipe geste
+Um die Sidebar auf Tablets leichter öffnen zu können nutzte ich TouchSwipe\cite{touchswipe:website}. Mit dieser Bibliothek konnten Swipe-Gesten zum aufruf von Funktionen genutzt werden.
+\\
+% cryptoJS hash lib für passwort hashes
+Die Passwörter und Pins durften nicht im Klartext gespeichert werden.
+Dafür wurde die crypto-js\cite{cryptojs:website} Bibliothek verwendet, um die sicherheitsrelevanten Daten mit SHA256\footnote{SHA256 (Secure Hash Algorithm 256) ist eine Krypto-Hashfunktion} zu hashen.
+\\
+% emailJS = mail tool
+Damit die Besitzer der Boards benachrichtigt werden, wenn Gäste ihnen Nachrichten hinterlassen, musste der Server Emails verschicken können.
+Die Bibliothek emailjs\cite{emailjs:website} brachte diese Funktion mit. Zusätzlich benötigte der Server zum Verschicken einer Mail einen eigenen Mailserver oder wenigstens einen Account an einem anderen Mailserver.
+In den Benachrichtigungsmails sollte ein Link mit einem Token\footnote{Ein Token ist ein Attribut zur Freigabe von Daten zwischen Parteien(Wer den Token hat, kann die Datei lesen)} zu der jeweiligen erhaltenen Nachricht im System sein. Der Token wurde mit crypto-js beim Abspeichern der Nachricht auf dem Server erzeugt. Wenn der Empfänger auf den Link klickt, wird der Token geprüft und die Entsprechende Nachricht angezeigt ohne, dass sich der dieser authentisieren muss.
+\\
+Die Farbgestaltung der Seite wurde schlicht gehalten und orientierte sich an den Hausfarben der Medienfakultät der BUW.\\\todotext{mehr zur css gestaltung?}
+\\
+\\
+Während der Umsetzung änderte sich die Entscheidung, alle Funktionen in einer einzigen Seite anzubieten, vom geplanten Konzept.\\
+Im Konzept war ursprünglich geplant, dass der Administrator normal über die Seite die Administratorfunktionen ausführen kann. Da diese Funktionen aber rein funktional waren und nicht auf den Boards gebraucht wurden, ergab es mehr Sinn diese gesondert in eine zusätzlichen Webseite auszulagern.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Features}\label{Features}
 % Unterschied zu Hermes / NetBoards
 % jeder user hat eigene Pinnwand weil tablet resolution nicht so groß und dadurch wenig platz, mach keinen sinn für alle nutzer im raum nur eine pinnwand zu bieten (vergleich NetBoards) - switch betweeen them
-%so ein bischen gestalten, wie das how to pdf
-%Editor:
+% größeres Display als bei Hermes, kleineres als bei NetBoards
+% Ähnlicher Editor auf selber Basis wie bei NetBoards
+% Nutzer bekommen Mails, wie bei Hermes??
+
+% Editor Features
 %Drag and Drop Images - URL wird geholt und ein neues Image wird erzeugt
-% imgUR API
 %Pen
 %text
 %Stroke Size
 %Color
 %farbe von pen und text elementen ändern
-%
 %Auswahlwerkzeug:
 %selektierung von einzelnen Objekten
 %selektierung von mehreren objekten mit bounding box
@@ -331,29 +270,22 @@ Alle Features des Boards\\
 %Rotation der Objekte in der Bounding box
 %Eraser Tool
 %UNDO/REDO
-%Image Upload
-%Image Drag and Drop
 %Gif Layer Support
-%
+
 %Twitter API für den letzten Tweet eines bestimmten Nutzers 
-%
-%Client Sessions
-%mit npm plugin express-sessions serverseitig
-%cookie ID client seitig
+% - Nutzer im Raum, die gern Twitter benutzen sollen die öglichkeit bekommen ihren TwitterAccount anzugeben, damit ihr letzter tweet auf ihrer Pinnwand angezeigt werden kann
 %caching of content for disconnects
-%N/A marking of user image
 %status set
-%background layer
+%N/A marking of user image
+% - Zudem sollen sie die möglichkeit bekommen sich als nicht anwesend markieren zu können, damit Gäste, die auf die Boards schauen schnell sehen, wer da ist und wer nicht
+
+%background layer wie bei NetBoards
+
 %nachrichten schreiben >> mail versenden mit unique token >> nachricht content direkt lesen mittels token
 %  * nachricht an 1, 1+ oder alle im raum schicken
+%  * direkte nachrichten gab es nur bei Hermes, bei NetBoards konnte man nur die Pinnwand direkt manipulieren
 % feedback: hat einfach nur den editor
 
-%Backend
-% logs, user, room, board administration
-
-
-% - Zudem sollen sie die möglichkeit bekommen sich als nicht anwesend markieren zu können, damit Gäste, die auf die Boards schauen schnell sehen, wer da ist und wer nicht
-% - Nutzer im Raum, die gern Twitter benutzen sollen die öglichkeit bekommen ihren TwitterAccount anzugeben, damit ihr letzter tweet auf ihrer Pinnwand angezeigt werden kann
 
 
 
@@ -368,9 +300,7 @@ Alle Features des Boards\\
 
 
 
-
-
-\section{Probleme}\label{Probleme}
+\subsection{Probleme}\label{Probleme}
 Die Probleme, auf die ich während der Arbeit gekommen bin\\
 %Editor:\\
 %- Gif Layer Hack\\
@@ -394,3 +324,8 @@ Die Probleme, auf die ich während der Arbeit gekommen bin\\
 %- Message Email mit image direkt in der NAchricht im HTML als <img> element ging nicht, da  cross origin resource sharing(CORS) nicht aktiviert ist (origin-clean flag false) deswegen geht die Funktion .toDataURL("image/png") nicht
 %   * Zudem ist es schwer in der mail ein paperJS project in ein canvas einzubinden
 %   * deswegen die Überlegung beim erstellen der message das canvas objekt direkt zu exportieren
+
+% gif:
+% canvas element konnte nativ keine gifs anzeigen
+%  -> lösung: gif layer
+% wenn mehrere gifs des gleichen names: nur ein gif wird ausgeführt, die anderen sind statisch
