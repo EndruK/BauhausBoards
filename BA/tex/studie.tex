@@ -1,28 +1,53 @@
 \chapter{Studie}\label{Studie}
-\section{Entwurf}\label{Entwurf}
-Grunddesign der Studie, welche Aspekte wichtig sind
+Um das System in der Praxis zu testen, musste im Anschluss eine Nutzerstudie durchgeführt werden.
+Dies beinhaltete die Planung und Durchführung der Studie, sowie die Auswertung deren Ergebnisse.
+Es musste der Rahmen der Studie geplant und Testpersonen angeworben werden, die darauf einen standardisierten Fragebogen ausfüllen und in einem Interview Fragen beantworten mussten.
 
-%- Rahmen: 4 Tablets -> 4 Räume
+\section{Entwurf}\label{Entwurf}
+Nachdem die Umsetzung des Bauhausboards Systems abgeschlossen war, galt es einen Test mit Mitarbeitern der Medienfakultät der BUW durchzuführen.
+\\
+Dafür wurde am Uni-internen Rechenzentrum ein Linux Server mit 2,53GHz Intel Xeon Dualcore, 2GB RAM und Ubuntu Version 14.04 aufgesetzt.
+Auf dem Server liefen Node.js, damit Bauhausboards ausgeführt werden konnte und Postfix\footurl{http://www.postfix.org} als Mailserver.
+Dieser Mailserver konnte nur Emails an Adressen innerhalb des Universitätsnetzes verschicken, was für die Studie jedoch kein Problem darstellte.
+\\
+Als Displays wurden neue Tablets angeschafft, die mehr Leistung besaßen, als das Tablet aus der Vorstudie.
+Es handelte sich dabei um vier Blaupunkt Discovery 1000c mit 10,1 Zoll Display, 1,33GHz AllWinner A33 Quadcore, 1GB RAM und Android\todotext{4.4 oder 5}. Mit vier Tablets konnten für die Studie vier Räume mit Displays ausgestattet werden.
+\\
+Damit die Benutzer, wie in der Vorstudie, nicht mit den vorinstallierten Applikationen der Tablets interagieren konnten, musste auch auf den neuen Tablets eine Kiosk-Applikation\footurl{http://www.android-kiosk.com} installiert werden.
+\\
+Zusätzlich zum Kiosk wurde eine Tasker-App\footurl{http://tasker.dinglisch.net} installiert.
+Damit konnte man Aufgaben nach bestimmten Systemereignissen ausführen lassen.
+Es wurde Task erstellt, der beim Start des Android-Systems automatisch die Kiosk-App startete, falls das System neu gestartet wurde.
+\\
+Als Diebstahlsicherung 
+% Nachdem Umsetzung abgeschlossen war: Test mit echten Nutzern
+% Server mit NodeJS und Postfix aufgesetzt
+% - Programm auf Server in Uni eingerichtet -> Spezifikationen? oder wurde das schon vorher angegeben?
+% - Mailserver installiert, damit Server mails verschicken konnte (nur uni-intern)
+% 4 Tablets angeschafft (Durch 4 Tablets -> 4 Räume zum Testen möglich)
 %- Blaupunkt Discovery 1000c
 %   * 10,1"
 %   * CPU: Quadcore @ 1,33GHz
 %   * Android 5.1
 %   * 1GB RAM
 %   * 1024x600 Auflösung (~17:10)
+% Alle Tablets mit Kiosk-Mode Browser bestückt
 %- Kiosk Mode Browser App auf Tablets um beenden der Bauhausboards App zu verhindern
 %- Tasker zum automatischen start des kiosk modes nach systemstart - falls schlaue leute denken, sie können damit den kiosk browser umschiffen
 %- Google Locate um Position des Tablets zu bestimmen, im falle eines Diebstahls
-% --> Daraus wurde dann auch die Entscheidung getroffen, dass Tablet im Querformat aufzuhängen (passt auch besser als Whiteboard Simulation)
+%- Rahmen: 4 Tablets -> 4 Räume
 %- Wandbefestigung
 %  * 3D gedruckte Eckstücke mit Loch um Tablets zu halten + zu sichern
 %  * Holz/Blech Rückwand >> plexiglas
 %  * Nutzung des vorhandenen Türschildes
 %  * Fotos und 3D Model
-%- Server mit NodeJS und Postfix aufgesetzt
 %- Nutzer Tutorial zur Nutzung des Tools entworfen
 
+
+
+
 \section{Durchführung}\label{Durchführung}
-Wie viele Leute mitgemacht haben, wie lang die Studie ging usw.
+% Wie viele Leute mitgemacht haben, wie lang die Studie ging usw.
 
 %- Bauhausstraße 11 Fakultät Medien
 %- Da 4 Tablets 4 Räume für einen Testdurchlauf
@@ -42,7 +67,7 @@ Wie viele Leute mitgemacht haben, wie lang die Studie ging usw.
 
 
 \section{Auswertung}\label{Auswertung}
-Einfach die Ergebnisse der Studie und wie gut die Boards aufgenommen wurden
+% Einfach die Ergebnisse der Studie und wie gut die Boards aufgenommen wurden
 
 %- manche Nutzer haben nichtmal das Tutorial gelesen ...
 % - Ein Großteil der Nutzer meinte, dass es unersichtlich ist, wer alles im Raum arbeite und es besser wäre, dass man auf den ersten Blick erkennen könnte, wer alles drin arbeitet (sowas wie Nutzerliste Rechts unter Header)
