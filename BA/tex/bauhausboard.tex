@@ -85,7 +85,7 @@ Zur Planung, wie das System aussehen sollte, erstellte ich zu Beginn einen Paper
 \subsection{Interface-Entwurf}\label{Interface-Entwurf}
 \subsubsection{Hauptansicht}\label{Hauptansicht}
 Da den Gästen in der Vorstudie nicht bewusst war, dass mehrere Personen auf dem Board registriert waren, was der Größe des Tablets zu verschulden war, musste der vorhandene Platz anders aufgeteilt werden. Das NetBoards System teilte den Bereich verschiedener Benutzer räumlich, indem es den verfügbaren Platz durch die Anzahl der registrierten Benutzer teilte.
-Auf einem 10,1 Zoll großem Tablet macht dieser Ansatz jedoch wenig Sinn, da bei mehr als einem Benutzer der verfügbare Platz zu klein wäre\abb{img:aufteilungMainView}.
+Auf einem 10,1 Zoll großem Tablet macht dieser Ansatz jedoch wenig Sinn, da bei mehr als einem Benutzer der verfügbare Platz zu klein wäre \abb{img:aufteilungMainView}.
 \begin{figure}[h!]
   \centering
     \includegraphics[width=0.68\textwidth]{./img/AufteilungMainView.png}
@@ -200,7 +200,7 @@ Die Relationen zwischen User und Message, sowie zwischen User und Room müssen j
 
 
 \section{Umsetzung}\label{Umsetzung}
-Die im Entwurf geplanten Konzepte wurden dann in ein lauffähiges System umgesetzt\abb{img:finalHauptseite}. Dabei änderten sich einige Ansätze und andere kamen neu hinzu.
+Die im Entwurf geplanten Konzepte wurden dann in ein lauffähiges System umgesetzt \abb{img:finalHauptseite}. Dabei änderten sich einige Ansätze und andere kamen neu hinzu.
 \begin{figure}[h!]
   \centering
     \frame{\includegraphics[width=1\textwidth]{./img/Hauptseite.png}}
@@ -220,7 +220,7 @@ Falls an einer Stelle der Seite Daten vom Server benötigt wurden oder Daten auf
 Während ein Client auf die Ajax-Antwort des Servers wartet können weiterhin andere Funktionen ausgeführt werden.
 \\
 % jquery touchswipe -> swipe tool für die swipe geste
-Der Sidebar sollte keinen Platz wegnehmen und musste daher ein- und ausklappbar sein. Zudem sollten die Benutzer direkt erkennen, dass es sich um einen Sidebar handelt, wodurch ein Pfeil als Kennzeichnung daran angebracht wurde\abb{img:sidebar}.
+Der Sidebar sollte keinen Platz wegnehmen und musste daher ein- und ausklappbar sein. Zudem sollten die Benutzer direkt erkennen, dass es sich um einen Sidebar handelt, wodurch ein Pfeil als Kennzeichnung daran angebracht wurde \abb{img:sidebar}.
 Damit er auf Tablets leichter zu öffnen war, nutzte ich TouchSwipe\cite{touchswipe:website}. Mit dieser Bibliothek konnten Swipe-Gesten zum Aufruf von Funktionen genutzt werden.
 \begin{figure}[h!]
   \centering
@@ -262,7 +262,7 @@ Zur geplanten Statusfunktion kam während der Umsetzung noch die Idee auf, dass 
   \caption{Bauhausboards - Nutzerstatus}
   \label{img:UserAvailable}
 \end{figure}
-Zudem kam eine Twitter-Funktion hinzu. Die Besitzer der Boards konnten einen Twitteraccount in ihren Einstellungen eintragen, wodurch auf ihrer Seite ihr aktuellster Tweet geladen und angezeigt wurde\abb{img:twitter}. 
+Zudem kam eine Twitter-Funktion hinzu. Die Besitzer der Boards konnten einen Twitteraccount in ihren Einstellungen eintragen, wodurch auf ihrer Seite ihr aktuellster Tweet geladen und angezeigt wurde \abb{img:twitter}. 
 % \\\todotext{twitter Bild}
 \begin{figure}
   \centering
@@ -280,7 +280,7 @@ Voraussetzungen für Paper.js war, dass die Webseite mit dem neuesten HTML5 Stan
 Die Funktionen des Editors erfüllten die Anforderungen des Entwurfs sehr gut.
 Mit einer Stiftfunktion ist es möglich, Zeichnungen per Hand anzufertigen. Dabei kann der Benutzer die Linien in vier verschiedenen Linienstärken zeichnen.
 \\
-Um den Nutzern, die einen Text schreiben wollen und nicht auf die Lesbarkeit einer freihändig gezeichneten Mitteilung vertrauen, eine Alternative zu bieten, wurde ein Textwerkzeug implementiert, wodurch ein Text per Tastatur eingegeben werden konnte\abb{img:editorTextSketch}.
+Um den Nutzern, die einen Text schreiben wollen und nicht auf die Lesbarkeit einer freihändig gezeichneten Mitteilung vertrauen, eine Alternative zu bieten, wurde ein Textwerkzeug implementiert, wodurch ein Text per Tastatur eingegeben werden konnte \abb{img:editorTextSketch}.
 \begin{figure}
   \centering
     \frame{\includegraphics[width=0.85\textwidth]{./img/EditorTextAndSketch.png}}
@@ -288,7 +288,7 @@ Um den Nutzern, die einen Text schreiben wollen und nicht auf die Lesbarkeit ein
   \label{img:editorTextSketch}
 \end{figure}
 \\
-Damit das Gezeichnete beliebig auf der Zeichenfläche angeordnet werden kann, musste es ein Auswahlwerkzeug geben\abb{img:editorObjectSelection}.
+Damit das Gezeichnete beliebig auf der Zeichenfläche angeordnet werden kann, musste es ein Auswahlwerkzeug geben \abb{img:editorObjectSelection}.
 Die Nutzer konnten damit einen Auswahlrahmen um Objekte ziehen, welche dadurch markiert wurden.
 Die Markierung zeichnete sich dadurch aus, dass um die markierten Objekte ein Auswahlrechteck mit Kreisen an den Ecken und der oberen Mitte, sowie einem kleinen Menü erschien.
 Durch Ziehen des Auswahlrechteckes wurde die Auswahl an eine gewünschte Stelle verschoben.
