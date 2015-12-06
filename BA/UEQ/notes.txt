@@ -1,0 +1,41 @@
+Notes:
+
+"The tool contains the following work sheets.
+Data: Here you can enter the data of your study.
+DT: The order of the items (i.e. if the positive term is left or right in an item) is randomized in the questionnaire to minimized answer tendencies. Here the items are changed to a common order (negative term left, positive term right). The transformed data are used for the further calculations.
+Results: Main results of the questionnaire. Here the scale means and the mean and standard deviation per item are calculated.
+Confidence_Intervals: Confidence intervals for the scale means and for the mean of each item are calculated.
+Scale_Consistency: Here the Cronbach-Alpha Coefficient per scale is calculated. Check here if the scales have a sufficiently high Alpha-Value. Scales with a small value (<0.6) should be treated carefully in the interpretation.
+Benchmark: The benchmark shows you in an easy way how good the evaluated product is compared to the products in the benchmark data set. There is also a graphic that shows for each scale how the results are related to the products in the benchmark data set.
+Inconsistencies: On this work sheet the data are analysed for inconsistent answers, i.e. answers from participants that answered at least a part of the items randomly.
+Items: Contains the item and dimension names in the different languages. Used for switching the language. "     
+################################################################################
+Transformed Data
+The order of the positive and negative term for an item is randomized in the questionnaire. Per dimension half of the items start with the positive and half with the negative term. 
+Here you can find the transformed values per item. You can use these values for example for own statistical calculations. The +3 represent the most positive and the -3 the most negative value. "                                                                                                  
+################################################################################
+Results
+You can interpret the means of the scales. The UEQ does not produce an overall score for the user experience. Because of the construction of the questionnaire it does make no sense to built such an overall score (for example by calculating the mean over all scales), since this value can not be interpreted properly. The values for the single items are listed to allow you to detect outliers in the evaluations. If an item shows big deviations to the evaluations of the other items of the same scale this can be a hint that the item is misinterpreted (for example because of a special context in your evaluation) by a higher number of participants. 
+Values between -0.8and 0.8 represent a neural evaluation of the corresponding scale,  values > 0,8 represent a positive evaluation and values < -0,8 represent a negative evaluation.
+The range of the scales is between -3 (horribly bad) and +3 (extremely good). But in real applications in general only values in a restricted range will be observed. It is due to the calculation of means over a range of different persons with different opinions and answer tendencies, for example the avoidance of extreme answer categories, extremely unlikely to observe values above +2 or below -2. 
+Thus, even a quite good value of +1.5 for a scale looks from the purely visual standpoint on a scale range of -3 to +3 not as positive as it really is. For this reason this sheet contains two variants for the figure that depicts the scale means. Use the figure with the reduced scale -2 to +2 if you communicate the results to persons that have not much knolwedge on the interpretation of this type of data and in situations where you don't want to explain in detail how building mean values and answer tendencies influence the observed data. 
+################################################################################
+Confidence intervals for items and scales
+Here the 5% confidence intervals for the scale means and the means of the single items are shown. The confidence interval is a measure for the precision of the estimation of the mean. The smaller the confidence interval the higher is the precision of the estimation and the more you can trust your results. The width of the confidence interval depends on the number of available data and on how consistenly the persons judged the evaluated product. The more consistent their opinion is the smaller is the confidence interval. 
+################################################################################
+Correlations of the items per scale and Cronbachs Alpha-Coefficient
+Items that belong to the same scale should show in general a high correaltion. The Alpha-Coefficient (Cronbach, 1951) is a measure for the consistence of a scale. There is no generally accepted rule how big the value of the coefficient should be. Many authors assuem that a scale should show an alpha value > 0.7 to be considered as sufficiently consistent. However, from an methodological standpoint such a use of a cut-off criterium is not really well-founded (see for example Schmitt, N., 1996). Especially if you have only a small sample the value of the Alpha-Coefficient should be interpreted carefully. 
+If the value of the Alpha-Coefficient for a scale shows a massive deviation from a reasonable target value, for example 0.7, this can be a hint that some items of the scale are in the given context interpreted by several participants in an unexpected way. In such cases the corresponding scale should be interpreted very carefully.
+################################################################################
+Benchmark
+The measured scale means are set in relation to existing values from a benchmark data set. This data set contains data from 4818 persons from 163 studies concerning different products (business software, web pages, web shops, social networks). 
+The comparison of the results for the evaluated product with the data in the benchmark allows conclusions about the relative quality of the evaluated product compared to other products.
+
+Please help to increase the data basis for the benchmark! If you use the UEQ to evaluate products it would be quite helpful for us if you will share information concerning the type of product, the number of participants in your study and the scale means. We will of course handle these information absolutely confidential and will use it solely to improve the benchmark.
+
+
+
+
+
+------
+EIn Nutzer hat sehr Inkonsistente Daten geliefert

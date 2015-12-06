@@ -64,10 +64,7 @@
 			}
 		},
 		{
-			"contents": "\\chapter{Ausblick}\\label{Ausblick}\n\\section{Zusätzliche Features}\\label{Zusätzliche Features}\nWelche Features noch nützlich wären\n\n%- Beakon Authentifizierung mit dem Tablet\n%- Nutzergruppen\n%- Gruppen Nachrichten, für bspw gruppen von mitarbeitern in mehreren Räumen\n%- gespeicherte Statustexte (die häfigsten statustexte als template anbieten)\n%- Image direkt in der Email\n%- Browser/Desktop Plugin\n%- Touch Projector??\n%- Key Support für Desktop\n%- Nummern ziehen\n%- Frage-Antwort Spiel\n%- VR - Glücksrad\n\n% aus studie:\n%- calendar-integration\n% - Content history\n% - Emotikons im Editor\n% - voicemail\n% - videomail\n% - fotomessage\n% - 2factor Auth\n\n\n\n\\section{Nutzung}\\label{Nutzung}\nZiel: Nutzung in der ganzen Uni\n\n\n%- es wäre schön, dass wenn das Tool in der ganzen uni genutzt wird\n%- abwesenheits information\n%- informationen über wichtige daten\n%- auflockerung des Arbeitsumfelds\n%- anregung zum nachfragen zu arbeiten",
 			"file": "BA/tex/ausblick.tex",
-			"file_size": 819,
-			"file_write_time": 130938199475256347,
 			"settings":
 			{
 				"buffer_size": 928,
@@ -237,7 +234,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 7,
 			"sheets":
 			[
 				{
@@ -439,7 +436,7 @@
 						"translation.y": 5239.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -467,7 +464,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
