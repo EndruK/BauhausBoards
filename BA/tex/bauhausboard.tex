@@ -3,7 +3,7 @@ Das neue Projekt bekam den Namen ``BauhausBoards''.
 In einer Entwurfsphase wurde entschieden, wie das System aussehen und welche Funktionen es bieten sollte. Dabei flossen die Ergebnisse der Vorstudie und anderer Projekte mit ein.
 \\
 Als Voraussetzung sollten als Anzeigegeräte für die Türschilder weiterhin Tablets genutzt werden.
-Der Entwurf wurde darauf in ein Programm umgesetzt, wobei manche geplante Funktionen geändert, entfernt oder neue hinzugefügt wurden. An manchen Stellen der Umsetzung kam es auch zu Problemen, die es zu lösen galt.
+Der Entwurf wurde darauf in ein Programm umgesetzt, wobei manche geplanten Funktionen geändert, entfernt oder neue hinzugefügt wurden. An manchen Stellen der Umsetzung kam es auch zu Problemen, die es zu lösen galt.
 % - Ergebnisse der Vorstudie sollten enbezogen werden
 % - sollte weiterhin auf Tablets als Anzeigegerät laufen
 % - das was im Entwurf geplant wurde musste umgesetzt werden
@@ -13,22 +13,22 @@ Der Entwurf wurde darauf in ein Programm umgesetzt, wobei manche geplante Funkti
 \todotext{Fußnote für lib-quotations}\\
 \todotext{Literaturverzeichnis ein wenig zu kurz -> vllt noch deren related work noch ein wenig analysieren}\\
 \todotext{Quellcode vom System dann auf CD im Endeffekt}
-
+\todotext{DIE sidebar!! prüfen!}
 
 
 \section{Entwurf}\label{Entwurf}
-\subsection{Systementwurf}\label{Systementwurf}
+\subsection{Entwurf des Systems}\label{Entwurf des Systems}
 Die Planung des Systems begann damit, die Plattform des Systems auszuwählen.
-Es gab die Möglichkeit eine Android-Applikation zu erstellen, die auf jedem Tablet hätte installiert werden müsste.
-Dabei gäb es jedoch das Problem, dass die Nutzer auch von unterwegs mit der Anwendung interagieren sollten, wofür ein eigenständiger Server für die Datenverwaltung notwendig gewesen wäre.
+Es gab die Möglichkeit eine Android-Applikation zu erstellen, die auf jedem Tablet hätte installiert werden müssen.
+Dabei gab es jedoch das Problem, dass die Nutzer auch von unterwegs mit der Anwendung interagieren sollten, wofür ein eigenständiger Server für die Datenverwaltung notwendig gewesen wäre.
 Außerdem müsste durch die unterschiedlichen Tablet- und Smartphone-Betriebssysteme neben Android, wie Apple IOS oder Windows Mobile, die App für jede Architektur portiert werden.
 \\
-Deswegen fiel, wie bei NetBoards, die Wahl auf eine Web-Applikation. Zum Einen, weil jedes Tablet, jedes Smartphone und jeder PC Webseiten darstellen kann und es nicht nötig ist, extra eine App auf den Geräten zu installieren.
+Deswegen fiel, wie bei NetBoards, die Wahl auf eine Web-Applikation. Zum einen, weil jedes Tablet, jedes Smartphone und jeder PC Webseiten darstellen kann und es nicht nötig ist, extra eine App auf den Geräten zu installieren.
 % \\ \todotext{darauf eingehen, dass NetBoards auch eine Web-Applikation benutzt hat?}\\
 %Zudem setzte das NetBoards Projekt ebenfalls auf eine Web-Applikation
 Ein zentraler Webserver generiert eine Webseite mit allen nötigen Frontend Funktionen, die von allen Geräten mit Web-Browser (Clients) angezeigt werden können. Dadurch sollte sich der Programmieraufwand auf Server- und Client-Funktionen einschränken.
 \\
-Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu laden müssen. Das hätte einen viel zu großen Overhead erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
+Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu geladen werden müssen. Das hätte einen viel zu großen Overhead\footnote{\todo} erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
 Deswegen musste der Server nur beim ersten Aufruf das Grundgerüst der Webseite mit allen Client-Funktionen ausliefern. Ein Teil der Funktionen würde dann Daten nachladen oder an den Server schicken, wodurch ein dynamischer Inhalt erzeugt wird.
 Dies sollte mit dem ``CRUD'' (Create, Read, Update and Delete) Prinzip realisiert werden.
 Der Server wartet, nachdem er eine Seite ausgeliefert hat, auf spezifische Anfragen des Clients und liefert dementsprechend Daten aus (Read) oder ändert den Zustand der Daten (Create, Update und Delete). Zudem gewährleistet dieses Prinzip, dass bei Verbindungsabbrüchen die Seite auf dem Client weiter läuft und nur so lange keine Daten ändern oder nachladen kann, bis die Verbindung wieder aufgebaut wurde.
@@ -37,12 +37,12 @@ Die anfallenden Daten des Systems mussten in irgend einer Form auf dem Server ge
 \\
 Die Wahl des Datenbanksystems fiel auf ``SQLite''\cite{sqlite:website}, da es das am meisten verbreitete relationale Datenbanksystem der Welt ist. Es war einfach zu benutzen und hatte eine gute Dokumentation.
 \\
-Das Gerüst der Webseite sollte auf HTML basieren, wobei die hauptsächlichen Client-Funktionen üblicherweise in Javascript umgesetzt werden. Da die Clients viele Funktionen bieten und der Server nur zum Ausliefern der Webseite und für den Datenaustausch dienen sollte, machte es Sinn für den Server ``Node.js'' zu verwenden.\quelle{Node.js ist serverseitiges Javascript basierend auf Google Chrome's V8 Javascript Engine}{nodejs:website}.
+Das Gerüst der Webseite sollte auf HTML basieren, wobei die hauptsächlichen Client-Funktionen üblicherweise in Javascript umgesetzt werden. Da die Clients viele Funktionen bieten und der Server nur zum Ausliefern der Webseite und für den Datenaustausch dienen sollte, machte es Sinn für den Server ``Node.js'' zu verwenden. \quelle{Node.js ist serverseitiges Javascript basierend auf Google Chrome's V8 Javascript Engine}{nodejs:website}.
 \\
 \\
 In der Abb. \ref{img:Systemaufbau} ist der Aufbau des Systems zusammengefasst. Auf dem Server befinden sich der Webserver und die Datenbank. Der Webserver stellt Anfragen an die Datenbank und erhält dafür entsprechende Ergebnisse zurückgeliefert.
 \\
-Wenn ein Client die Adresse des Servers aufruft generiert der Webserver die Webseite und sendet sie mit allen benötigten Funktionen an den Client. Solange die Seite nicht explizit neu geladen werden soll, kommuniziert der Client danach nur durch CRUD Interaktionen mit dem Server.
+Wenn ein Client die Adresse des Servers aufruft generiert der Webserver die Webseite und sendet sie mit allen benötigten Funktionen an den Client. Solange die Seite nicht explizit neu geladen werden soll, kommuniziert der Client danach nur durch CRUD-Interaktionen mit dem Server.
 \\
 \begin{figure}[h!]
   \centering
@@ -66,12 +66,12 @@ Als Grundlage für den Editor entschied ich mich für die Javascript Bibliothek 
 Es ist ein Open Source Framework für die Darstellung und Manipulation von Vektorgrafiken, welches auch die Grundlage des Editors aus dem NetBoards Projekt bildete\cite{wood:2014}.
 \\
 \\
-Eine weitere wichtige Entscheidung war, dass nur die an den Boards registrierten Nutzer den dargestellten Inhalt ändern können sollten, da sich in der Vorstudie herausstellte, dass durch die Anonymität der Besucher es häufig zu unerwünschten Änderungen kam.
-Dadurch sollte ein Sicherheitsaspekt geschaffen werden, da keine andere Person die Daten ändern konnte außer derjenige, der sie erstellt hat.
+Eine weitere wichtige Entscheidung war, dass nur die an den Boards registrierten Nutzer den dargestellten Inhalt ändern können sollten, da sich in der Vorstudie herausstellte, dass es durch die Anonymität der Besucher häufig zu unerwünschten Änderungen kam.
+Dadurch sollte ein Sicherheitsaspekt geschaffen werden, weil keine andere Person die Daten ändern durfte außer derjenige, der sie erstellt hat.
 \\
-Den Besuchern sollte jedoch weiterhin die Möglichkeit geboten werden mit den registrierten Nutzern in Kontakt zu treten. Dies konnte mit einer separaten Nachrichtenfunktion realisiert werden.
+Den Besuchern sollte jedoch weiterhin die Möglichkeit geboten werden, mit den registrierten Nutzern in Kontakt zu treten. Dies konnte mit einer separaten Nachrichtenfunktion realisiert werden.
 \\
-Zur Planung, wie das System aussehen sollte, erstellte ich zu Beginn einen Paper-Prototype\footnote{Ein Paper-Prototype ist ein auf Papier gezeichneter Entwurf} für das Interface und die Funktionen, die es bieten sollte. Dieser Entwurf befindet sich im Anhang.
+Zur Planung erstellte ich zu Beginn einen Paper-Prototype\footnote{Ein Paper-Prototype ist ein auf Papier gezeichneter Entwurf} für das Interface und die Funktionen, die es bieten sollte. Dieser Entwurf befindet sich im Anhang.
 
 
 
@@ -82,7 +82,7 @@ Zur Planung, wie das System aussehen sollte, erstellte ich zu Beginn einen Paper
 
 
 
-\subsection{Interface-Entwurf}\label{Interface-Entwurf}
+\subsection{Entwurf des Interfaces}\label{Entwurf des Interfaces}
 \subsubsection{Hauptansicht}\label{Hauptansicht}
 Da den Gästen in der Vorstudie nicht bewusst war, dass mehrere Personen auf dem Board registriert waren, was der Größe des Tablets zu verschulden war, musste der vorhandene Platz anders aufgeteilt werden. Das NetBoards System teilte den Bereich verschiedener Benutzer räumlich, indem es den verfügbaren Platz durch die Anzahl der registrierten Benutzer teilte.
 Auf einem 10,1 Zoll großem Tablet macht dieser Ansatz jedoch wenig Sinn, da bei mehr als einem Benutzer der verfügbare Platz zu klein wäre \abb{img:aufteilungMainView}.
@@ -93,15 +93,18 @@ Auf einem 10,1 Zoll großem Tablet macht dieser Ansatz jedoch wenig Sinn, da bei
   \label{img:aufteilungMainView}
 \end{figure}
 \\
-Deswegen sollte jeder registrierte Nutzer die ganze Fläche zu Verfügung haben, wobei nach einer festgelegten Zeit die Sicht wechselt und die Daten des nächsten Nutzers anzeigt.
+Deswegen sollte jeder registrierte Nutzer die ganze Fläche zu Verfügung haben, wobei nach einer festgelegten Zeit die Sicht wechselt und die Daten des nächsten Nutzers angezeigt wird.
 \\
-Die Datenansicht sollte in zwei Schichten aufgeteilt werden. Zum einen eine Editor-Schicht für selbst gezeichnete Skizzen, Texte, Bilder und animierte Gifs, sowie eine Hintergrundschicht, in der die Nutzer eine Webseite anzeigen lassen können. Da NetBoards diese Funktion bereits bot und die Testnutzer in der Vorstudie diese ebenfalls nutzten, entschied ich mich sie ebenfalls umzusetzen.
+Die Datenansicht sollte in zwei Schichten aufgeteilt werden. Zum einen eine Editor-Schicht für selbst gezeichnete Skizzen, Texte, Bilder und animierte Gifs sowie eine Hintergrundschicht, in der die Nutzer eine Webseite anzeigen lassen können. Da NetBoards diese Funktion bereits bot und die Testnutzer in der Vorstudie diese ebenfalls nutzten, entschied ich mich, sie auch umzusetzen.
 \\
-Um auf der Webseite navigieren zu können musste es dafür ein Menü geben, das auf den Tablets nicht viel Platz wegnahm. Die beste Variante dafür war ein Sidebar, der standardmäßig eingeklappt war und sich per Klick oder Swipe-Geste öffnen ließ.
-In diesem Menü sollten alle Navigationselemente zu untergebracht sein. 
+Um auf der Webseite navigieren zu können musste es dafür ein Menü geben, das auf den Tablets nicht viel Platz benötigte. Die beste Variante dafür war eine Sidebar\footnote{\todo}, die standardmäßig eingeklappt war und sich per Klick oder Swipe-Geste\footnote{\todo} öffnen ließ.
+In diesem Menü sollten alle Navigationselemente untergebracht sein. 
 \\
-Um Informationen über die Nutzer anzeigen zu können wurde eine zusätzliche Fläche benötigt. Dafür sollte im oberen Bereich des Displays ein Teil nur für solche Informationen reserviert sein. In diesem Header konnte man das Profilbild, den Namen und eine Beschreibung des aktuell ausgewählten Nutzers darstellen.
-In der Vorstudie wurde es sehr gut aufgenommen, dass einer der Nutzer seinen aktuellen Status angegeben hat. Deswegen sollte diese Funktion neben den Nutzerinformationen im Header zu finden sein.
+Um Informationen über die Nutzer anzeigen zu können, wurde eine zusätzliche Fläche benötigt.
+Dafür sollte im oberen Bereich des Displays ein Teil nur für solche Informationen reserviert sein. 
+In diesem Header\footnote{\todo} konnte man das Profilbild, den Namen und eine Beschreibung des aktuell ausgewählten Nutzers darstellen.
+In der Vorstudie wurde es sehr gut aufgenommen, dass einer der Nutzer seinen aktuellen Status angegeben hat.
+Deswegen sollte diese Funktion neben den Nutzerinformationen im Header zu finden sein.
 \begin{figure}[h!]
   \centering
     \includegraphics[width=0.7\textwidth]{./img/MainViewAufbau.png}
@@ -110,9 +113,12 @@ In der Vorstudie wurde es sehr gut aufgenommen, dass einer der Nutzer seinen akt
 \end{figure}
 \\
 %Messages
-\todotext{können,können,können ... -> ändern}\\
-Damit die Gäste mit den Besitzern in Kontakt treten können musste es eine Nachrichtenfunktion geben. Dabei sollten die Benutzer, die eine Nachricht erstellen wollen, einen oder mehrere Besitzer auswählen können. Wenn sie das getan haben, soll der Editor aktiviert werden und die Besucher können eine Zeichnung oder einen Text zeichnen. Die Besitzer müssen, nachdem die Nachricht abgeschickt wurde, darüber informiert werden, dass jemand ihnen etwas geschrieben hat.
-% - QR-Code, um mit Smartphone einzuscannen -> möglichkeit per smartphone Nachrichten zu hinterlassen
+% \todotext{können,können,können ... -> ändern}\\
+Damit die Gäste mit den Besitzern in Kontakt treten können, musste es eine Nachrichtenfunktion geben.
+Dabei sollten die Benutzer, die eine Nachricht erstellen wollen, einen oder mehrere Besitzer auswählen dürfen.
+Danach soll der Editor aktiviert werden.
+Die Besucher können eine Zeichnung oder einen Text erstellen.
+Die Besitzer müssen, nachdem die Nachricht abgeschickt wurde, darüber informiert werden, dass ihnen eine Nachricht hinterlassen wurde.
 
 \subsubsection{Benutzer-Backend}\label{Benutzer-Backend}
 Die Besitzer der Boards sollten ihren öffentlichen Inhalt ändern, einen Status setzten und empfangene Nachrichten lesen können.
@@ -124,10 +130,13 @@ Um die angezeigten Daten der Hauptseite anzupassen, wird der selbe Editor verwen
 \\
 Für den Status sollen die Nutzer einen kurzen Text und den Endzeitpunkt festlegen, der dann auf der Hauptseite angezeigt wird.
 \\
-Außerdem mussten sie die Möglichkeit bekommen, erhaltenen Nachrichten einsehen zu können. Ungelesene Nachrichten sollten dabei besonders gekennzeichnet sein.\\
+Außerdem mussten sie die Möglichkeit bekommen, erhaltenen Nachrichten einsehen zu können. Ungelesene Nachrichten mussten dabei besonders gekennzeichnet werden.\\
 Die Änderung der Benutzerdaten sollten in einem gesonderten Einstellungsbereich möglich sein.
 \\
-Da das Benutzer-Backend auch vom aufgehängtem Display aus erreichbar sein soll, damit die Nutzer beim verlassen des Raumes schnell einen Status setzen können, mussten sie sich schnell authentisieren können. Deswegen entschied ich mich für zwei Authentisierungsmethoden. Ein vierstelliger Pin sollte zur schnellen Anmeldung in das Backend dienen. Die Benutzereinstellungen konnten dann nach einer klassischen Passwortauthentisierung vorgenommen werden.
+Da das Benutzer-Backend auch vom aufgehängten Display aus erreichbar sein sollte, damit die Nutzer beim Verlassen des Raumes schnell einen Status setzen konnten, mussten sie sich schnell authentisieren können.
+Deswegen entschied ich mich für zwei Authentisierungsmethoden.
+Ein vierstelliger Pin sollte zur schnellen Anmeldung in das Backend dienen.
+Die Benutzereinstellungen konnten dann nach einer klassischen Passwortauthentisierung vorgenommen werden.
 % \\\todotext{Angeben bei den Routen: was macht der Doppelkreis}\\
 \begin{figure}[h!]
   \centering
@@ -137,17 +146,17 @@ Da das Benutzer-Backend auch vom aufgehängtem Display aus erreichbar sein soll,
 \end{figure}
 
 \subsubsection{Administrator-Backend}\label{Administrator-Backend}
-Der Administrator der Boards muss die Funktionen bekommen, das System verwalten zu können. Das beinhaltet das erstellen, ändern und entfernen von Nutzern, sowie Board-Instanzen.
+Der Administrator der Boards muss die Funktionen bekommen, das System verwalten zu können. Das beinhaltet das Erstellen, Ändern und Entfernen von Nutzern, sowie Board-Instanzen.
 \\
 Zudem soll er für Studienzwecke die Inhalte und Nachrichten der Benutzer einsehen können.
 
-\subsection{Datenbankentwurf}\label{Datenbankentwurf}
+\subsection{Entwurf der Datenbank}\label{Entwurf der Datenbank}
 Durch die geplanten Funktionen mussten anfallende Daten in einer Datenbank gespeichert werden.
-Es bestand die Möglichkeit eine dokumentenbasierte oder eine relationale Datenbank dafür zu nutzen.
-Eine dokumentenbasierte Datenbank hätte den Vorteil gehabt, dass alle Anfragen eine JSON-Zeichenkette zurückgeben hätten. JSON wird häufig in der Verbindung mit Javascript und dessen Serverkommunikation verwendet.
+Es bestand die Möglichkeit, eine dokumentenbasierte oder eine relationale Datenbank dafür zu nutzen.
+Eine dokumentenbasierte Datenbank hätte den Vorteil gehabt, dass alle Anfragen eine JSON-Zeichenkette zurückgegeben hätten. JSON wird häufig in der Verbindung mit Javascript und dessen Serverkommunikation verwendet.
 Relationale Datenbanken hingegen verwenden eine Tabellenstruktur für die Speicherung von Daten. Mit ihnen lassen sich Beziehungen zwischen den Daten einfacher darstellen.
 \\
-Für die Datenbank von Bauhausboards entschied ich mich für eine relationale Datenbank, da die Einarbeitungszeit, um mit dokumentenbasierten Datenbanken umgehen zu können, zu lang gedauert hätte.
+Für die Datenbank von Bauhausboards entschied ich mich für eine relationale Datenbank, weil die Einarbeitungszeit zu lang gedauert hätte, um mit dokumentenbasierten Datenbanken umgehen zu können.
 % \\\todotext{ER Diagram zu groß}\\
 \begin{figure}[h!]
   \centering
@@ -156,7 +165,7 @@ Für die Datenbank von Bauhausboards entschied ich mich für eine relationale Da
   \label{img:ER01}
 \end{figure}
 \\
-Der Datenbankentwurf beinhaltete 6 Objektklassen, dargestellt als Tabellen. Um alle Objekte eindeutig beschreiben zu können wurde in jeder Tabelle eine ID als Primärschlüssel\footnote{Ein Primärschlüssel ist ein Attribut zur eindeutigen Identifikation eines Datensatzes} hinzugefügt.
+Der Datenbankentwurf beinhaltete 6 Objektklassen, dargestellt als Tabellen. Um alle Objekte eindeutig beschreiben zu können, wurde in jeder Tabelle eine ID als Primärschlüssel\footnote{Ein Primärschlüssel ist ein Attribut zur eindeutigen Identifikation eines Datensatzes} hinzugefügt.
 % \\\todotext{soll ich bei den Attributen noch auf die Datentypen eingehen?}\\
 \subsubsection{User Tabelle}\label{User Tabelle}
 Die User-Tabelle ist die Haupttabelle und dient zur Speicherung von Nutzeraccounts. Ein Nutzer muss auf jeden Fall einen Namen, eine Emailadresse, ein Passwort und einen Pin haben.
@@ -167,16 +176,17 @@ Ein Benutzer kann entweder in einem oder keinem Raum arbeiten. Er kann beliebig 
 \subsubsection{Board Tabelle}\label{Board Tabelle}
 Diese Tabelle ist die digitale Repräsentation von tatsächlich aufgehängten Displays. Da verschiedene Tablets eine unterschiedliche Auflösung haben können, musste diese in der Datenbank für jedes Board gespeichert werden. Ein Board kann entweder noch keinem oder genau einem Raum zugeordnet sein.
 \subsubsection{Room Tabelle}\label{Room Tabelle}
-In dieser Tabelle werden die möglichen Räume, vor denen Boards aufgehangen werden können registriert. Jeder Raum hat einen Namen und möglicherweise eine Beschreibung. Ein Raum kann entweder keinem oder mehreren Boards zugeordnet sein. Zudem können beliebig viele Personen in einem Raum arbeiten.
+In dieser Tabelle werden die möglichen Räume, vor denen Boards angebracht werden können, registriert. Jeder Raum hat einen Namen und möglicherweise eine Beschreibung. Ein Raum kann entweder keinem oder mehreren Boards zugeordnet sein. Zudem können beliebig viele Personen in einem Raum arbeiten.
 \subsubsection{Content Tabelle}\label{Content Tabelle}
-Mit dieser Tabelle werden die Inhalte von den Nutzern gespeichert. Ein Inhalt besteht aus einem JSON-Objekt und einem Erstelldatum. Wenn für den Inhalt eine Hintergrundwebseite angegeben wurde, wird deren Adresse ebenfalls an dieser Stelle eingetragen. Jeder Inhalt hat genau einen Nutzer, der ihn erstellt hat.
+Mit dieser Tabelle werden die Inhalte der Nutzer gespeichert. Ein Inhalt besteht aus einem JSON-Objekt und einem Erstelldatum. Wenn für den Inhalt eine Hintergrundwebseite angegeben wurde, wird deren Adresse ebenfalls an dieser Stelle eingetragen. Jeder Inhalt hat genau einen Nutzer, der ihn erstellt hat.
 \subsubsection{Status Tabelle}\label{Status Tabelle}
-Die Status Tabelle dient zur Speicherung von Nutzerstatus. Jeder Nutzerstatus hat einen Statustext, ein Erstelldatum, einen Endzeitpunkt und genau einen Ersteller. 
+Die Status Tabelle dient zur Speicherung von Nutzerstatus. Jeder Nutzerstatus hat einen Statustext, ein Erstelldatum, einen Endzeitpunkt und genau einen Ersteller.
 \subsubsection{Message Tabelle}\label{Message Tabelle}
 In der Message Tabelle werden Nachrichten abgelegt, die von Besuchern erstellt wurden. Eine Nachricht hat einen Nachrichteninhalt und ein Erstelldatum. Da die Nachricht an mehrere Besitzer adressiert sein kann, hat jede mindestens einen Empfänger.
 \\
 \\
-Die Relationen zwischen User und Message, sowie zwischen User und Room müssen jeweils über eine dritte Tabelle dargestellt werden. In diesen Tabellen werden dann nur die Primärschlüssel der beiden beteiligten Objekte gespeichert.
+Die Relationen zwischen User und Message, sowie zwischen User und Room müssen jeweils über eine dritte Tabelle dargestellt werden.
+In diesen Tabellen sind dann nur die Primärschlüssel der beiden beteiligten Objekte gespeichert.
 
 
 
@@ -211,17 +221,17 @@ Die im Entwurf geplanten Konzepte wurden dann in ein lauffähiges System umgeset
 \subsection{Funktionen}\label{Funktionen}
 \todotext{vllt ``Clientfunktionen'' als Kapitelname von ``Funktionen''}\\
 Nachdem der Aufbau des Systems geplant war, mussten diese Pläne in ein lauffähiges Programm umgesetzt werden.
-Um die Entwicklung mit Node.js zu vereinfachen wurde das Framework Express\cite{express:website} verwendet. Damit ließ sich eine einfache Webapplikation erstellen.
+Um die Entwicklung mit Node.js zu vereinfachen, wurde das Framework Express\cite{express:website} verwendet. Damit ließ sich eine einfache Webapplikation erstellen.
 \\
 Da die hauptsächlichen Funktionen auf den Clients ausgeführt werden sollten, mussten diese in Javascript geschrieben werden.
-Am wichtigsten war, dass die Seite sich nicht neu lud, wenn man durch sie navigierte. Dies wurde mit jQuery\cite{jquery:website} realisiert. jQuery ist eine Bibliothek zur einfachen Manipulation der HTML-Struktur einer Webseite. Mit ihr war es einfach, die dargestellte Ansicht anzupassen.
+Am wichtigsten war, dass sich die Seite nicht neu lud, wenn man durch sie navigierte. Dies wurde mit jQuery\cite{jquery:website} realisiert. jQuery ist eine Bibliothek zur einfachen Manipulation der HTML-Struktur einer Webseite. Mit ihr war es einfach, die dargestellte Ansicht anzupassen.
 \\
 Falls an einer Stelle der Seite Daten vom Server benötigt wurden oder Daten auf dem Server geändert werden mussten, wurde dies mit Ajax-Anfragen durchgeführt. Ajax (Asynchronous Javascript and XML) ist eine Funktion für asynchronen Datenaustausch zwischen einem Client und einem Server.
-Während ein Client auf die Ajax-Antwort des Servers wartet können weiterhin andere Funktionen ausgeführt werden.
+Während ein Client auf die Ajax-Antwort des Servers wartet, können weiterhin andere Funktionen ausgeführt werden.
 \\
 % jquery touchswipe -> swipe tool für die swipe geste
-Der Sidebar sollte keinen Platz wegnehmen und musste daher ein- und ausklappbar sein. Zudem sollten die Benutzer direkt erkennen, dass es sich um einen Sidebar handelt, wodurch ein Pfeil als Kennzeichnung daran angebracht wurde \abb{img:sidebar}.
-Damit er auf Tablets leichter zu öffnen war, nutzte ich TouchSwipe\cite{touchswipe:website}. Mit dieser Bibliothek konnten Swipe-Gesten zum Aufruf von Funktionen genutzt werden.
+Die Sidebar sollte keinen Platz wegnehmen und musste daher ein- und ausklappbar sein. Zudem sollten die Benutzer direkt erkennen, dass es sich um eine Sidebar handelt, wodurch ein Pfeil als Kennzeichnung daran angebracht wurde \abb{img:sidebar}.
+Damit sie auf Tablets leichter zu öffnen war, nutzte ich TouchSwipe\cite{touchswipe:website}. Mit dieser Bibliothek konnten Swipe-Gesten zum Aufruf von Funktionen genutzt werden.
 \begin{figure}[h!]
   \centering
     \includegraphics[width=0.4\textwidth]{./img/Sidebar.png}
@@ -237,17 +247,16 @@ Dafür wurde die crypto-js\cite{cryptojs:website} Bibliothek verwendet, um die s
 % emailJS = mail tool
 Damit die Besitzer der Boards benachrichtigt werden, wenn Gäste ihnen Nachrichten hinterlassen, musste der Server Emails verschicken können.
 Die Bibliothek emailjs\cite{emailjs:website} brachte diese Funktion mit. Zusätzlich benötigte der Server zum Verschicken von Emails einen eigenen Mailserver oder wenigstens einen Account an einem anderen Mailserver.
-In den Benachrichtigungsmails sollte ein Link mit einem Token\footnote{Ein Token ist ein Attribut zur Freigabe von Daten zwischen Parteien(Wer den Token hat, kann die Datei lesen)} zu der jeweiligen erhaltenen Nachricht im System sein. Der Token wurde mit crypto-js beim Abspeichern der Nachricht auf dem Server erzeugt. Wenn der Empfänger auf den Link klickt, wird der Token geprüft und die Entsprechende Nachricht angezeigt ohne, dass sich der dieser authentisieren muss.
+In den Benachrichtigungsmails sollte ein Link mit einem Token\footnote{Ein Token ist ein Attribut zur Freigabe von Daten zwischen Parteien(Wer den Token hat, kann die Datei lesen)} zu der jeweiligen erhaltenen Nachricht im System sein. Der Token wurde mit crypto-js beim Abspeichern der Nachricht auf dem Server erzeugt. Wenn der Empfänger auf den Link klickt, wird der Token geprüft und die entsprechende Nachricht angezeigt. Dafür muss er sich nicht extra authentisieren.
 \\
 Die Farbgestaltung der Seite wurde schlicht gehalten und orientierte sich an den Hausfarben der Medienfakultät der BUW.
-% \\\todotext{mehr zur css gestaltung?}
 \\
 Während der Umsetzung änderte sich die Entscheidung, alle Funktionen in einer einzigen Seite anzubieten, vom geplanten Konzept.
 \\
 Es war ursprünglich geplant, dass der Administrator normal über die Seite die Administratorfunktionen ausführen kann. Da diese Funktionen aber rein funktional waren und nicht auf den Boards gebraucht wurden, ergab es mehr Sinn diese gesondert in eine zusätzlichen Webseite auszulagern.
 \\
 \\
-Zur geplanten Statusfunktion kam während der Umsetzung noch die Idee auf, dass sich Nutzer als Abwesend markieren konnten. Dazu sollte im Benutzer-Backend eine zusätzliche Option eingebaut werden. Um diesen Status zu kennzeichnen wurden dabei die Profilbilder der Nutzer ausgegraut und ein Text darüber angezeigt, dass der Nutzer zur Zeit nicht verfügbar ist (Abb. \ref{img:UserAvailable}).
+Zur geplanten Statusfunktion kam während der Umsetzung noch die Idee auf, dass sich Nutzer als ``Abwesend'' markieren konnten. Dazu sollte im Benutzer-Backend eine zusätzliche Option eingebaut werden. Um diesen Status zu kennzeichnen, wurden dabei die Profilbilder der Nutzer ausgegraut und ein Text darüber angezeigt, dass der Nutzer zur Zeit nicht verfügbar ist (Abb. \ref{img:UserAvailable}).
 % \todotext{Bilder vergleich Anwesend / nicht anwesend}\\
 \begin{figure}
   \centering
@@ -262,7 +271,7 @@ Zur geplanten Statusfunktion kam während der Umsetzung noch die Idee auf, dass 
   \caption{Bauhausboards - Nutzerstatus}
   \label{img:UserAvailable}
 \end{figure}
-Zudem kam eine Twitter-Funktion hinzu. Die Besitzer der Boards konnten einen Twitteraccount in ihren Einstellungen eintragen, wodurch auf ihrer Seite ihr aktuellster Tweet geladen und angezeigt wurde \abb{img:twitter}. 
+Außerdem kam eine Twitter-Funktion hinzu. Die Besitzer der Boards konnten einen Twitteraccount in ihren Einstellungen eintragen, wodurch auf ihrer Seite ihr aktuellster Tweet geladen und angezeigt wurde \abb{img:twitter}. 
 % \\\todotext{twitter Bild}
 \begin{figure}
   \centering
@@ -275,12 +284,12 @@ Zudem kam eine Twitter-Funktion hinzu. Die Besitzer der Boards konnten einen Twi
 
 \subsection{Editor}\label{Editor}
 Der Kern der Client-Funktionen war der Editor zum Erzeugen von Nutzer-Inhalten und Besuchernachrichten. Da Paper.js nur ein Framework war, musste das Interface dafür von Grund auf implementiert werden.
-Voraussetzungen für Paper.js war, dass die Webseite mit dem neuesten HTML5 Standard entwickelt wurde, da diese Version ein neues Canvas-Element bot, mit dem Grafiken gezeichnet werden konnten.
+Voraussetzungen für Paper.js war, dass die Webseite mit dem neuesten HTML5 Standard entwickelt wurde, weil diese Version ein neues Canvas-Element bot, mit dem Grafiken gezeichnet werden konnten.
 \\
 Die Funktionen des Editors erfüllten die Anforderungen des Entwurfs sehr gut.
 Mit einer Stiftfunktion ist es möglich, Zeichnungen per Hand anzufertigen. Dabei kann der Benutzer die Linien in vier verschiedenen Linienstärken zeichnen.
 \\
-Um den Nutzern, die einen Text schreiben wollen und nicht auf die Lesbarkeit einer freihändig gezeichneten Mitteilung vertrauen, eine Alternative zu bieten, wurde ein Textwerkzeug implementiert, wodurch ein Text per Tastatur eingegeben werden konnte \abb{img:editorTextSketch}.
+Außerdem wurde ein Textwerkzeug implementiert, mit dem ein Text per Tastatur eingegeben werden konnte \abb{img:editorTextSketch}.
 \begin{figure}
   \centering
     \frame{\includegraphics[width=0.85\textwidth]{./img/EditorTextAndSketch.png}}
@@ -290,7 +299,8 @@ Um den Nutzern, die einen Text schreiben wollen und nicht auf die Lesbarkeit ein
 \\
 Damit das Gezeichnete beliebig auf der Zeichenfläche angeordnet werden kann, musste es ein Auswahlwerkzeug geben \abb{img:editorObjectSelection}.
 Die Nutzer konnten damit einen Auswahlrahmen um Objekte ziehen, welche dadurch markiert wurden.
-Die Markierung zeichnete sich dadurch aus, dass um die markierten Objekte ein Auswahlrechteck mit Kreisen an den Ecken und der oberen Mitte, sowie einem kleinen Menü erschien.
+Die Markierung zeichnete sich durch ein Auswahlrechteck mit Kreisen an den Ecken, in der oberen Mitte sowie einem kleinen Menü aus.
+%, dass um die markierten Objekte ein Auswahlrechteck mit Kreisen an den Ecken und der oberen Mitte, sowie einem kleinen Menü erschien.
 Durch Ziehen des Auswahlrechteckes wurde die Auswahl an eine gewünschte Stelle verschoben.
 Zudem war es möglich, die Auswahl durch Klick auf die Kreise in den Ecken des Auswahlrechteckes zu skalieren oder durch Klick auf den Kreis in der oberen Mitte zu rotieren.
 Die Funktionen des kleinen Menüs beinhalteten das Löschen oder Kopieren der Auswahl, sowie das Platzieren vor oder hinter anderen Objekten auf der Zeichenfläche.
@@ -305,18 +315,18 @@ Da es für Whiteboards und Tafeln Stifte oder Kreide in unterschiedlichen Farben
 \\
 Die Funktion eines Tafelschwamms wurde mit einem einfachen Radiergummi-Werkzeug implementiert.
 \\
-Wie in jedem Editor musste es eine Möglichkeit geben, die letzte Interaktion rückgängig zu machen oder wiederherzustellen. Dafür wurden Undo- und Redo-Funktionen eingebaut.
+Wie in jedem Editor, musste es eine Möglichkeit geben, die letzte Interaktion rückgängig zu machen oder wiederherzustellen. Dafür wurden Undo- und Redo-Funktionen eingebaut.
 \\
-Um Bilder darzustellen konnten diese von einem anderen Browserfenster oder einem Dateibrowser per Drag-and-Drop in den Editor geschoben werden, wodurch diese auf den Server geladen und im Editor angezeigt wurden.
+Um Bilder darzustellen, konnten diese von einem anderen Browserfenster oder einem Dateibrowser per Drag-and-Drop in den Editor geschoben werden, wodurch diese auf den Server geladen und im Editor angezeigt wurden.
 Damit war es auch möglich animierte Gifs hochzuladen.
 \\
 \\
-Dadurch, da man mit dem Editor alle Objekte verschieben, skalieren und rotieren konnte, hatte er einen Vorteil gegenüber klassischen Whiteboards und Tafeln.
-Dort war es bisher nur möglich, per Magnet aufgehängte Papiere zu verschieben oder zu rotieren.
+Da man mit dem Editor alle Objekte verschieben, skalieren und rotieren konnte, hatte er einen Vorteil gegenüber klassischen Whiteboards und Tafeln.
+Dort war es bisher nur möglich, per Magnet angebrachte Papiere zu verschieben oder zu rotieren.
 Der Editor hatte durch die Skalierung von Objekten deswegen einen Freiheitsgrad mehr.
 Zeichnungen konnten nur entfernt und an anderer Stelle wieder neu gezeichnet werden, welche in der digitalen Variante nur verschoben werden brauchten. Außerdem konnte man am Editor nachträglich die Farbe von Zeichnungen ändern, was am Whiteboard nicht möglich ist.
 \\
-Den größten Vorteil hat der Editor durch die Möglichkeit animierte Gifs anzeigen zu lassen, da Whiteboards und Tafeln nur statischen Inhalt präsentieren können.
+Den größten Vorteil hat der Editor durch die Möglichkeit, animierte Gifs anzeigen zu lassen, da Whiteboards und Tafeln nur statischen Inhalt präsentieren können.
 \\
 \todotext{High Level View (wo laufen welche bibliotheken?)}\\
 
@@ -342,7 +352,7 @@ Wenn sich ein Gif-Objekt in der Editor-Schicht befand, wurde dieses Objekt in di
 %  # content hat dadurch tatsächlich die größe des tablets
 %  # platz wird nicht so stark verschwendet
 Ein weiteres Problem war, dass durch die horizontale Ausrichtung der Tablets der Platz des Headers zu groß war, da er über die gesamte Breite des Tablets lief.
-Da er aber nur das Profilbild, den Namen, die Beschreibung und den Status eines angezeigten Nutzers beinhalten sollte, wurde er verkleinert.
+Weil er aber nur das Profilbild, den Namen, die Beschreibung und den Status eines angezeigten Nutzers beinhalten sollte, wurde er verkleinert.
 Dadurch entstand mehr Platz für den Inhalt der Nutzer.
 \\
 %Problem: Desktop Version dimensions
@@ -387,9 +397,9 @@ Im Vergleich zu NetBoards wurde bei Bauhausboards der Platz nicht durch die Anza
 Das hatte den Vorteil, dass jeder Benutzer die ganze Fläche zur Verfügung bekam.
 Dadurch konnte jedoch immer nur ein Nutzer zur selben Zeit angezeigt werden.
 \\
-Bauhausboards bot wie Hermes die Funktion, den Besitzern der Boards Nachrichten zu hinterlassen, wohingegen Netboards diese Funktion nicht hatte.
+Bauhausboards bot, wie Hermes, die Funktion, den Besitzern der Boards Nachrichten zu hinterlassen, wohingegen NetBoards diese Funktion nicht hatte.
 \\
-Bei NetBoards kann jeder Gast den angezeigten Inhalt nach belieben ändern.
+Bei NetBoards kann jeder Gast den angezeigten Inhalt nach Belieben ändern.
 Da sich in der Vorstudie von Bauhausboards gezeigt hatte, dass diese Funktion so nicht angebracht war, durften bei Bauhausboards nur die Besitzer diesen ändern und die Besucher in einer extra Funktion Nachrichten hinterlassen.
 Wenn dann ein Besucher einem Besitzer eine Nachricht hinterlässt, wird dem Empfänger, wie beim Hermes System, eine Email geschickt.
 \\

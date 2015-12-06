@@ -6,7 +6,7 @@ Es mussten die Rahmenbedingungen der Studie geplant und Testpersonen angeworben 
 \section{Entwurf}\label{Entwurf}
 Nachdem die Umsetzung des Bauhausboards Systems abgeschlossen war, galt es einen Test mit Mitarbeitern der Medienfakultät der BUW durchzuführen.
 \\
-Dafür wurde am Uni-internen Rechenzentrum ein Linux Server mit 2,53GHz Intel Xeon Dualcore, 2GB RAM und Ubuntu Version 14.04 aufgesetzt.
+Dafür wurde am internen Rechenzentrum der Uni ein Linux Server mit 2,53GHz Intel Xeon Dualcore, 2GB RAM und Ubuntu Version 14.04 aufgesetzt.
 Auf dem Server liefen Node.js, damit Bauhausboards ausgeführt werden konnte und Postfix\footurl{http://www.postfix.org} als Mailserver.
 Dieser Mailserver konnte nur Emails an Adressen innerhalb des Universitätsnetzes verschicken, was für die Studie jedoch kein Problem darstellte.
 \\
@@ -17,7 +17,7 @@ Damit die Benutzer, wie in der Vorstudie, nicht mit den vorinstallierten Applika
 \\
 Zusätzlich zum Kiosk wurde eine Tasker-App\footurl{http://tasker.dinglisch.net} installiert.
 Damit konnte man Aufgaben nach bestimmten Systemereignissen ausführen lassen.
-Es wurde Task erstellt, der beim Start des Android-Systems automatisch die Kiosk-App startete, falls das System neu gestartet wurde.
+Es wurde Task erstellt, der beim Start des Android-Systems automatisch die Kiosk-App startete, falls das System neu bootete.
 \\
 Als Diebstahlsicherung konnte man auf den Tablets Google Locate aktivieren.
 Es diente zur Ortung der Geräte, falls diese gestohlen worden wären.
@@ -25,8 +25,8 @@ Es diente zur Ortung der Geräte, falls diese gestohlen worden wären.
 \\
 Um die Displays aufhängen zu können, musste eine geeignete Befestigungsmöglichkeit gefunden werden.
 Jedoch sollten keine neuen Löcher zur Aufhängung an den Wänden neben den Büros entstehen.
-Deswegen sollten die Displays erneut mit Hilfe der bereits aufgehängten Türschilder befestigt werden.
-Da bei dieser Studie die Tablets nicht wie in der Vorstudie, durch Löcher in der Tablet-Rückwand, aufgehangen werden konnten, musste die Befestigung anders ausfallen.
+Deswegen mussten die Displays erneut mit Hilfe der bereits aufgehängten Türschilder befestigt werden.
+Da bei dieser Studie die Tablets nicht, wie in der Vorstudie, durch Löcher in der Tablet-Rückwand, angebracht werden konnten, musste die Befestigung anders ausfallen.
 Zu diesem Zweck wurden 3D gedruckte Eckstücke \abb{img:Eckstuecke}, mit denen die Tablets befestigt werden konnten, auf eine Plexiglasplatte geschraubt \abb{img:fertigeAufhaengung}.
 Diese Aufhängung nutzte die Bohrlöcher für die bereits vorhandenen Türschilder mit, wodurch keinerlei Eingriff in die Bausubstanz entstand.
 \\\todotext{Bild von den Eckstücken und von der fertigen Aufhängung}\\
@@ -37,7 +37,7 @@ Diese Aufhängung nutzte die Bohrlöcher für die bereits vorhandenen Türschild
   \label{img:fertigeAufhaengung}
 \end{figure}
 \\
-Damit sich die Testnutzer mit der Grundlegenden Funktion von Bauhausboards vertraut machen konnten, habe ich ein Benutzerhandbuch erstellt.
+Damit sich die Testnutzer mit der grundlegenden Funktion von Bauhausboards vertraut machen konnten, habe ich ein Benutzerhandbuch erstellt \todotext{in den ANhang oder so}.
 
 % Nachdem Umsetzung abgeschlossen war: Test mit echten Nutzern
 % Server mit NodeJS und Postfix aufgesetzt
@@ -67,28 +67,28 @@ Damit sich die Testnutzer mit der Grundlegenden Funktion von Bauhausboards vertr
 
 \section{Durchführung}\label{Durchführung}
 Da nur vier Räume mit Tablets ausgestattet werden konnten, war es von Vorteil, mit den vorhandenen Mitteln möglichst viele Testnutzer organisieren zu können.
-Nachdem mehrere verschiedene Leute der Medienfakultät der BUW nach Teilnahme an der Studie gefragt wurden, war es mir möglich einige Mitarbeiter der Professur für Systeme der virtuellen Realität (VR) und der Professur für grafische Datenverarbeitung (CG) zur Teilnahme an der Studie zu bewegen.
+Mir war es möglich, einige Mitarbeiter der Professur für Systeme der virtuellen Realität (VR) und der Professur für grafische Datenverarbeitung (CG) zur Teilnahme an meiner Studie zu gewinnen.
 \\
-Bei der virtuellen Realität gab es drei Büroräume.
+Im Fachbereich der virtuellen Realität gab es drei Büroräume.
 Zwei davon mit jeweils drei und einer mit zwei Mitarbeitern.
 An der Professur für grafische Datenverarbeitung gab es zwei Mitarbeiter, die sich einen Raum teilten.
 Diese Räume befanden sich alle im selben Gang der Fakultät.
 \\
 Da ein Mitarbeiter der VR Professur durch seine Forschungsarbeit nicht in seinem Büro sein konnte, nahm er nicht an der Studie teil.
 \\
-Somit konnten insgesamt 9 \todotext{Doktoranden und wie heißen die fertigen Doktoranden?} Testnutzer organisiert werden.
+Somit konnten insgesamt 9 \todotext{Doktoranden und wie heißen die fertigen Doktoranden?} Testnutzer gewonnen werden.
 \\
 \\
 Bevor die Studie beginnen konnte, mussten die Boards angebracht werden.
 \\\todotext{Bild von aufgehängten Boards}\\
 Außerdem musste eine gute WLAN Verbindung für sie gewährleistet sein.
 \\\todotext{Grundriss des Gangs mit Tablets + Accesspoint}\\
-Nachdem die Boards aufgehangen waren, wurde für jeden Benutzer ein Account erstellt, die Boards eingerichtet und die Nutzer kurz eingewiesen.
+Nachdem die Boards angebracht waren, wurde für jeden Benutzer ein Account erstellt, die Boards eingerichtet und die Nutzer kurz eingewiesen.
 \\
-Die Dauer der Studie beschränkte sich auf zwei Wochen.
-Damit sollte mindestens ein Wochenende mit eingeplant sein, da sich das Benutzerverhalten nach diesen zwei Tagen ändern konnte.
+Die Dauer der Studie beschränkte sich leider nur auf zwei Wochen.
+Es sollte mindestens ein Wochenende eingeplant sein, weil sich das Benutzerverhalten nach diesen zwei freien Tagen ändern konnte.
 \\
-Während der Studie kam es von Zeit zu Zeit dazu, dass einige Testnutzern Fragen zu bestimmten Funktionen hatten, welche direkt geklärt wurden.
+Während der Studie kam es gelegentlich dazu, dass einige Testnutzern Fragen zu bestimmten Funktionen hatten, welche direkt geklärt wurden.
 Das System wurde gut genutzt und einige Gäste hinterließen den Testern Nachrichten.
 
 
@@ -97,7 +97,7 @@ Das System wurde gut genutzt und einige Gäste hinterließen den Testern Nachric
 Nach Abschluss der Studie sollten alle Teilnehmer Interviewt werden.
 Dazu musste vorher ein Fragenkatalog erstellt werden, um von den Testnutzern Feedback zu den wichtigsten Funktionen des Systems zu erhalten.
 \\\todotext{mehr}
-\subsection{Interview}\label{Interview}
+\subsection{Interview}\label{Interviews}
 %- Aufnahme des Interviews (Audiofile)
 % 330min Interview = 5h30min
 % Aufteilung in Nachrichten empfangen, Nachrichten schreiben, Statusmeldungen, Nutzerinhalte, Editor, Boardfunktionen, Allgemeines
