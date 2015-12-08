@@ -1,4 +1,5 @@
 \chapter{Verwandte Arbeiten}
+\todotext{Literaturverzeichnis ein wenig zu kurz -> vllt noch deren related work noch ein wenig analysieren}\\
 Die Idee für interaktive Türschilder wurde schon in verschiedenen wissenschaftlichen Ausarbeitungen sowie in der Praxis erarbeitet.
 Die Gruppe um Keith Cheverest et al. von der Universität Lancaster hat mehrere Paper für ihr Türschild-System ``Hermes''\cite{cheverest:2003:paper} bereits ab 2003 veröffentlicht.
 Das Projekt ``NetBoards'' von Errol Wood\cite{wood:2014} von der Universität Cambridge behandelt eine aktuellere Version interaktiver Türschilder.
@@ -20,9 +21,8 @@ Eines der Hauptblickpunkte von Hermes war, dass das System leicht einsetzbar ist
 Um die Geräte vor Diebstahl zu schützen, wurden Aluminiumhüllen für die PDA's entworfen, welche neben den Büroeingängen an die Wand geschraubt werden konnten und zudem auch als Diebstahlsicherung dienten. Um unerwünschte Interaktion zu verhindern, wurden die Hüllen so konzipiert, dass die Tasten nicht direkt zugänglich waren.
 \\
 Die Funktionen von Hermes wurden in zwei Perspektiven aufgeteilt: Die Besitzerperspektive und die Besucherperspektive.
-\\\todotext{fußnote für was ist ein gif machen}
 \subsubsection{Besitzerperspektive}
-\quelle{Diese Perspektive ermöglicht dem Besitzer des Displays entweder Nachrichten oder Bilder zu erstellen, die dann direkt auf dem PDA angezeigt werden oder Nachrichten zu lesen, die von Gästen für ihn hinterlassen wurden}{cheverest:2003:paper}. Zudem kann der Nutzer animierte Gifs hochladen.
+\quelle{Diese Perspektive ermöglicht dem Besitzer des Displays entweder Nachrichten oder Bilder zu erstellen, die dann direkt auf dem PDA angezeigt werden oder Nachrichten zu lesen, die von Gästen für ihn hinterlassen wurden}{cheverest:2003:paper}. Zudem kann der Nutzer animierte Gifs\footnote{Ein Gif (Graphic Interchange Format) ist ein Grafikformat mit dem mehrere Bilder in einer Datei gespeichert und von Webbrowsern als Animation interpretiert werden können.} hochladen.
 Der Nutzer kann die Perspektive von einem PC oder direkt am Display aufrufen, was ihm ermöglicht, schnell beim Verlassen des Büros eine Nachricht zu schreiben. Um sich zu authentisieren, muss er entweder seinen Nutzernamen und sein Passwort eingeben oder sich mit seinem iButton\footnote{Ein iButton ist ein Mikrochip in einer Metallhülle und dient \bspw zum Authentisieren des Besitzers \cite{iButton:website}} anmelden.
 \subsubsection{Besucherperspektive}
 \quelle{Besucher müssen sich vor dem PDA befinden, um mit dem System interagieren zu können}{cheverest:2003:paper}. Sie können dem Besitzer des Raumes Nachrichten schreiben. Andere Besucher können jedoch nur die Nachricht sehen, die der Besitzer des Raumes eingestellt hat. Die Nachrichten von anderen Besuchern kann nur der Besitzer einsehen, wodurch ein Vorteil im Bereich der Privatsphäre gegenüber Post-It-Zetteln erzielt wurde.
@@ -84,7 +84,7 @@ Um es von überall erreichen zu können wurde das NetBoards-System mit Web-Techn
 Der Server bestand deswegen aus einem einfachen Webserver, der beim Aufruf eine HTML Webseite auslieferte. Frontend Funktionen wurden per Javascript realisiert, wobei die Ansicht der Displays in drei Schichten aufgeteilt wurde\cite{wood:2014}:
 \begin{itemize}
   \item \textbf{UI (Benutzerinterface)}\\
-    für Interface Widgets\footnote{\todo} und Details über die Bewohner des Büros
+    für Interface Komponenten und Details über die Bewohner des Büros
   \item \textbf{Board Content (Board-Inhalt)}\\
     für gezeichnete Nachrichten, Skizzen und Bilder
   \item \textbf{Web-Page Background (Hintergrund Webseite)}\\

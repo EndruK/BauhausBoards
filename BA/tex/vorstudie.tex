@@ -27,13 +27,21 @@ Damit die Benutzer nicht mit den auf dem Gerät installierten Applikationen inte
 Diese App schränkt die Interaktionsmöglichkeiten der Nutzer nur auf eine ausgewählte Webseite ein. Nur der Administrator des Gerätes hatte die Möglichkeit, diese zu ändern oder die Applikation ganz zu beenden.
 \\
 Ein weiteres Problem war die Befestigung des Displays.
-Ich entschied mich dafür, das Tablet an den bereits vorhanden Türschildern anzubringen \abb{img:tuerschild}.
+Ich entschied mich dafür, das Tablet an den bereits vorhanden Türschildern anzubringen \abb{img:Versuchsaufbau}.
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=0.5\textwidth]{./img/Tuerschild.jpg}
-  \caption{Ein typisches Türschild in der Medienfakultät\\\todotext{hier das Bild daneben von Augehangenen Tablet}}
-  \label{img:tuerschild}
-\end{figure}\\
+    \subfigure[Ein typisches Türschild]{
+      \includegraphics[width=0.34\textwidth]{./img/Tuerschild.jpg}
+      \label{img:tuerschild}
+    }
+    \subfigure[Ein Türschild mit Board]{
+      \includegraphics[width=0.605\textwidth]{./img/experiment01.jpg}
+      \label{img:experiment01}
+    }
+  \caption{Versuchsaufbau des Experiments}
+  \label{img:Versuchsaufbau}
+\end{figure}
+\\
 Da sich die Rückwand des Tablets abschrauben ließ, konnte ich zwei Löcher hinein bohren. Diese dienten zur Anbringung eines Drahtes, welcher über das Türschild gehängt werden konnte. Für das Experiment war diese Aufhängung vollkommen ausreichend.
 \\
 Für die Stromversorgung wurde das Ladekabel des Tablets verlängert, damit es an eine Steckdose im Büro angeschlossen werden konnte.
@@ -49,12 +57,12 @@ Aus diesem Grund habe ich für die Nutzer zwei verschiedene Ansichten erstellt:
   \item eine Backend-Sicht, auf der sie ihre Änderungen machen konnten
   \item eine Frontend-Sicht, die auf dem Tablet angezeigt wurde, nach 5 Minuten den aktuellen Stand abspeicherte und die Sicht auf den aktuellsten Stand der Backend-Sicht setzte
 \end{itemize}
-\begin{figure}[h!]
-  \centering
-    \includegraphics[width=0.7\textwidth]{./img/experiment01.jpg}
-  \caption{Versuchsaufbau des Experiments}
-  \label{img:experiment01}
-\end{figure}
+% \begin{figure}[h!]
+%   \centering
+%     \includegraphics[width=0.7\textwidth]{./img/experiment01.jpg}
+%   \caption{Versuchsaufbau des Experiments}
+%   \label{img:experiment01}
+% \end{figure}
 
 
 

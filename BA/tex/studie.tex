@@ -11,7 +11,7 @@ Auf dem Server liefen Node.js, damit Bauhausboards ausgeführt werden konnte und
 Dieser Mailserver konnte nur Emails an Adressen innerhalb des Universitätsnetzes verschicken, was für die Studie jedoch kein Problem darstellte.
 \\
 Als Displays wurden neue Tablets angeschafft, die mehr Leistung besaßen, als das Tablet aus der Vorstudie.
-Es handelte sich dabei um vier Blaupunkt Discovery 1000c mit 10,1 Zoll Display, 1,33GHz AllWinner A33 Quadcore, 1GB RAM und Android\todotext{4.4 oder 5}. Mit vier Tablets konnten für die Studie vier Räume mit Displays ausgestattet werden.
+Es handelte sich dabei um vier Blaupunkt Discovery 1000c mit 10,1 Zoll Display, 1,33GHz AllWinner A33 Quadcore, 1GB RAM und Android 5. Mit vier Tablets konnten für die Studie vier Räume mit Displays ausgestattet werden.
 \\
 Damit die Benutzer, wie in der Vorstudie, nicht mit den vorinstallierten Applikationen der Tablets interagieren konnten, musste auch auf den neuen Tablets eine Kiosk-Applikation\footurl{http://www.android-kiosk.com} installiert werden.
 \\
@@ -27,17 +27,25 @@ Um die Displays aufhängen zu können, musste eine geeignete Befestigungsmöglic
 Jedoch sollten keine neuen Löcher zur Aufhängung an den Wänden neben den Büros entstehen.
 Deswegen mussten die Displays erneut mit Hilfe der bereits aufgehängten Türschilder befestigt werden.
 Da bei dieser Studie die Tablets nicht, wie in der Vorstudie, durch Löcher in der Tablet-Rückwand, angebracht werden konnten, musste die Befestigung anders ausfallen.
-Zu diesem Zweck wurden 3D gedruckte Eckstücke \abb{img:Eckstuecke}, mit denen die Tablets befestigt werden konnten, auf eine Plexiglasplatte geschraubt \abb{img:fertigeAufhaengung}.
+Zu diesem Zweck wurden 3D gedruckte Eckstücke \abb{img:3DEckstueck}, mit denen die Tablets befestigt werden konnten, auf eine Plexiglasplatte geschraubt \abb{img:fertigeBoardaufhaengung}.
 Diese Aufhängung nutzte die Bohrlöcher für die bereits vorhandenen Türschilder mit, wodurch keinerlei Eingriff in die Bausubstanz entstand.
-\\\todotext{Bild von den Eckstücken und von der fertigen Aufhängung}\\
+% \\\todotext{Bild von den Eckstücken und von der fertigen Aufhängung}\\
 \begin{figure}%[h!]
   \centering
-    \includegraphics[width=0.85\textwidth]{./img/fertigeAufhaengung.png}
-  \caption{Bauhausboards - Aufhängung}
-  \label{img:fertigeAufhaengung}
+    \subfigure[3D gedrucktes Eckstück]{
+      \includegraphics[width=0.327\textwidth]{./img/3DEcke.png}
+      \label{img:3DEckstueck}
+    }
+    \subfigure[fertige Boardaufhängung]{
+      \includegraphics[width=0.55\textwidth]{./img/fertigeAufhaengung.png}
+      \label{img:fertigeBoardaufhaengung}
+    }
+  \caption{Bauhausboards - Ergebnis der Vorarbeit}
+  \label{img:Vorarbeit}
 \end{figure}
 \\
-Damit sich die Testnutzer mit der grundlegenden Funktion von Bauhausboards vertraut machen konnten, habe ich ein Benutzerhandbuch erstellt \todotext{in den ANhang oder so}.
+Damit sich die Testnutzer mit der grundlegenden Funktion von Bauhausboards vertraut machen konnten, habe ich ein Benutzerhandbuch erstellt.
+\\\todotext{in den Anhang}.
 
 % Nachdem Umsetzung abgeschlossen war: Test mit echten Nutzern
 % Server mit NodeJS und Postfix aufgesetzt
@@ -76,14 +84,20 @@ Diese Räume befanden sich alle im selben Gang der Fakultät.
 \\
 Da ein Mitarbeiter der VR Professur durch seine Forschungsarbeit nicht in seinem Büro sein konnte, nahm er nicht an der Studie teil.
 \\
-Somit konnten insgesamt 9 \todotext{Doktoranden und wie heißen die fertigen Doktoranden?} Testnutzer gewonnen werden.
+Somit konnten insgesamt 9 Doktoranden und Post-Doktoranden als Testnutzer gewonnen werden.
 \\
 \\
-Bevor die Studie beginnen konnte, mussten die Boards angebracht werden.
-\\\todotext{Bild von aufgehängten Boards}\\
-Außerdem musste eine gute WLAN Verbindung für sie gewährleistet sein.
-\\\todotext{Grundriss des Gangs mit Tablets + Accesspoint}\\
-Nachdem die Boards angebracht waren, wurde für jeden Benutzer ein Account erstellt, die Boards eingerichtet und die Nutzer kurz eingewiesen.
+Bevor die Studie beginnen konnte, mussten die Boards angebracht werden \abb{img:StudieAufgehaengesBoard}.
+% \\\todotext{Bild von aufgehängten Boards}\\
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{./img/StudieAufgehaengtesBoard.jpg}
+  \caption{Aufgehängtes Board}
+  \label{img:StudieAufgehaengesBoard}
+\end{figure}
+Außerdem musste es eine gute WLAN Verbindung für sie geben, was durch zwei WLAN-Access-Points im Gang gewährleistet wurde.
+% \\\todotext{Grundriss des Gangs mit Tablets + Accesspoint}\\
+Nachdem die Tablets angebracht waren, wurde für jeden Benutzer ein Account erstellt, die Boards eingerichtet und die Nutzer kurz eingewiesen.
 \\
 Die Dauer der Studie beschränkte sich leider nur auf zwei Wochen.
 Es sollte mindestens ein Wochenende eingeplant sein, weil sich das Benutzerverhalten nach diesen zwei freien Tagen ändern konnte.
@@ -103,37 +117,43 @@ Der Fragenkatalog der Interviews zielte darauf ab, die Erfahrungen und Anregunge
 Zur besseren Auswertung wurden die Gespräche aufgezeichnet, wodurch ungefähr 5 Stunden und 30 Minuten an Gesprächsmitschnitten entstanden. 
 \\
 Die Fragen wurden in unterschiedliche Kategorien geteilt.
-Es ging darum herauszufinden, wie es für die Testnutzer war Nachrichten zu empfangen und ob sie selber Nachrichten geschrieben haben.
+Es ging darum herauszufinden, wie es für die Testnutzer war, Nachrichten zu empfangen und ob sie selber Nachrichten geschrieben haben.
 Außerdem wurde die Benutzung des Status- und Inhalts-System evaluiert und es musste herausgefunden werden, wie die Testnutzer die Benutzung des Editors fanden.
 Zum Schluss wurden sie danach gefragt, was sie von den allgemeinen Boardfunktionen hielten und was sie für zusätzliche Anmerkungen haben.
 \subsubsection{Nachrichten empfangen}\label{Nachrichten Empfangen}
-\todotext{ein bild einer Nachricht}\\
+% \todotext{ein bild einer Nachricht}\\
+\begin{figure}[h!]
+  \centering
+  \frame{\includegraphics[width=0.4\textwidth]{./img/StudieMessageExample.png}}
+  \caption{Ein Beispiel einer Spaß-Nachricht}
+  \label{img:StudieExampleMessage}
+\end{figure}
 Als erstes ging ich mit den Testnutzern deren empfangenen Nachrichten durch.
 Ich fragte sie, um was es in diesen Nachrichten ging.
-Es ging darum herauszufinden, wofür die Besucher die Nachrichtenfunktion genutzt haben.
+Es galt herauszufinden, wofür die Besucher die Nachrichtenfunktion genutzt haben.
 \\
-Dies waren größtenteils Spaßnachrichten oder hatten keinen speziellen Bezug. Ein Testnutzer bezeichnete seine erhaltenen Nachrichten als ``temporäres Graffiti''.
+Dies waren größtenteils Spaßnachrichten \abb{img:StudieExampleMessage} oder hatten keinen speziellen Bezug. Ein Testnutzer bezeichnete seine erhaltenen Nachrichten als ``temporäres Graffiti''.
 Teilweise gab es auch Nachrichten mit direktem Bezug.
-Ein paar Nutzer wurden gefragt, ob sie mit dem Ersteller der Nachricht essen gehen wollten oder wurden auf ihren angezeigten Inhalt angesprochen.
+Ein paar Nutzer wurden durch die Nachricht gefragt, ob sie mit dem Autor essen gehen wollten oder wurden auf ihren angezeigten Inhalt angesprochen.
 Außerdem wurde ein Nutzer gefragt, ob er zur Zeit in der Uni anzutreffen war.
 \\
 Ein weiterer Bestandteil der Befragung war, wie die Autoren der Nachrichten identifiziert werden konnten.
-Alle Nachrichten, die während der Studie erstellt wurden hatten keine Autorenkennzeichnung.
+Alle Nachrichten, die während der Studie erstellt wurden, hatten keine Autorenkennzeichnung.
 Das wurde von den meisten Testnutzern als größte Schwäche bemängelt, da sie bei bestimmten Nachrichten nur raten konnten, wer sie erstellt hatte.
 \\
-Interessant war es zu wissen, wie die Testnutzer alternativ zu Bauhausboards für Gäste erreichbar waren.
+Interessant war es zu wissen, wie die Testnutzer, alternativ zu Bauhausboards, für Gäste erreichbar waren.
 Der Großteil meinte darauf, dass sie üblicherweise per Mail erreichbar waren.
-Andere meinten, Besucher könnten sie per per Post-It-Zetteln oder Klopfen an ihrer Tür erreichen.
+Andere meinten, Besucher könnten sie per Post-It-Zetteln oder Klopfen an ihrer Tür erreichen.
 \\
 Für die Kommunikation untereinander gaben einige an, Telefon, SMS oder Instant-Messenger zu nutzen.
 \\
-Auf die Frage, wie schnell die Testnutzer ihre Nachrichten gelesen haben, meinten alle (bis auf einen), dass sie direkt die Mail erhalten und auf den enthaltenen Link geklickt haben.
+Auf die Frage, wie schnell die Testnutzer ihre Nachrichten gelesen haben, meinten alle (bis auf einen), dass sie direkt die Mail erhalten und auf den eingebetteten Link geklickt haben.
 Die Funktion des direkten Nachrichtenaufrufs per Link in der Email wurde von allen Testnutzern sehr gut empfunden, da sie sich somit nicht extra im System anmelden mussten.
 \\
 Ich fragte die Nutzer, ob es für sie in irgend einer Form anders war, über das Board eine Nachricht zu erhalten.
-Da mit dem System Zeichnungen verschickt werden konnten meinte ein Testnutzer darauf, dass es eine persönliche Note verschafft: ``Die Zeichnungen machen es anders''.
-Die anderen empfanden es nicht viel anderes als eine normale Email und demnach gut.
-Es wurde besonders gut aufgenommen, dass die Tester von Besuchern über das System angesprochen werden können, wenn sie sich derzeit nicht im Büro aufhielten und die Besucher dafür nicht extra ein eigenes Gerät benötigten.
+Da mit dem System Zeichnungen verschickt werden konnten meinte ein Testnutzer, dass es eine persönliche Note verschafft: ``Die Zeichnungen machen es anders''.
+Die Anderen sahen es als eine normale Email-Nachricht, was demnach gut war.
+Es wurde besonders gut aufgenommen, dass die Tester von den Besuchern über das System angesprochen werden konnten, wenn sie sich derzeit nicht im Büro aufhielten und die Besucher dafür nicht extra ein eigenes Gerät benötigten.
 \\
 Zur Verbesserung des Nachrichtensystems meinten einige, dass es vereinfacht werden müsste, da sie es als zu kompliziert erachteten.
 Es sollten weniger Klicks notwendig sein, bis eine Nachricht abgeschickt werden könne und weniger Untermenüs enthalten.
@@ -172,8 +192,8 @@ Außerdem meinten sie, dass die Funktion eine Nachricht an mehrere Personen glei
 % -> Kommunikation per postIt: da kann man Zettel klauen
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Nachrichten schreiben}\label{Nachrichten schreiben}
-Ich fragte die Testnutzer, ob sie in der Laufzeit der Studie einem anderen Nutzer eine Nachricht geschrieben hatten.
-Die meisten hatten jedoch nur die Besitzerrolle wahrgenommen, da sie entweder keine Zeit hatten jemanden eine Nachricht zu schreiben oder persönlich mit diesen Personen redeten.
+Ich fragte die Testnutzer, ob sie in der Laufzeit der Studie einem anderen Nutzer eine Nachricht hinterlassen haben.
+Die meisten meinten jedoch, dass sie nur über die Besitzerrolle das System nutzten, weil sie entweder keine Zeit hatten jemanden eine Nachricht zu schreiben oder persönlich mit diesen Personen redeten.
 Da sich die Testnutzer untereinander gut kannten, war es für sie einfacher, miteinander zu reden anstatt über das Board eine Nachricht zu schreiben.
 Einem der Nutzer war der Prozess, eine Nachricht zu erstellen, zu aufwändig und hat deswegen keine Nachrichten geschrieben.
 % selber Nachrichten schreiben
@@ -183,24 +203,32 @@ Einem der Nutzer war der Prozess, eine Nachricht zu erstellen, zu aufwändig und
 % - ein paar Testnutzer nutzen es, um einen anderen Nutzer zu fragen, ob er mit zum Mittagessen mitkommen wollte
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Nutzerinhalt}\label{Nutzerinhalt}
-\todotext{ein Bild von einem guten Content}\\
-Am wichtigsten war es, herauszufinden was die Testnutzer während der Studie für Inhalte erzeugten und wie für die Benutzung dieses Features war.
+% \todotext{ein Bild von einem guten Content}\\
+Am wichtigsten war es, herauszufinden, was die Testnutzer während der Studie für Inhalte erzeugten und wie für die Benutzung dieses Features war.
 Hauptsächlich wurde es dazu genutzt, um Spaß-Informationen zu präsentieren.
 Dazu wurden meist Bilder und Gifs hochgeladen.
-Von einigen Nutzern wurde dieses Feature auch genutzt, um die aktuelle Arbeit zu beschreiben. Ein Nutzer meinte dazu: ``um von außen einen schnellen Eindruck zu gewähren, was ich mache''.
+Von einigen Nutzern wurde dieses Feature auch genutzt, um die aktuelle Arbeit zu beschreiben \abb{img:StudieExampleContent}.
+Einer meinte, er nutze es gern ``um von außen einen schnellen Eindruck zu gewähren, was er macht''.
+\begin{figure}[h!]
+  \centering
+  \frame{\includegraphics[width=0.7\textwidth]{./img/StudieContentExample.png}}
+  \caption{Ein Beispiel eines Nutzerinhalts zur aktuellen Arbeit}
+  \label{img:StudieExampleContent}
+\end{figure}
 \\
-Einige Tester nutzten diese Funktion zum Anzeigen ihres Status, obwohl es dafür eine extra Funktion gab.
+Einige Tester nutzten diese Funktion zum Anzeigen ihres Status, obwohl es dafür ein eigenes Feature gab.
 \\
 Ansonsten wurde die Hintergrundschicht von einigen zur Anzeige von Webseiten, wie die Seiten der jeweiligen Professur, genutzt.
-Ein Nutzer meinte, der Editor zum Erzeugen von Inhalt würde vollkommen ausreichen und die Hintergrundschicht sollte maximal als Poweruser\footnote{ein Poweruser ist ein Nutzer, der deutlich mehr Kenntnisse über das System hat, als normale Nutzer}-Funktion angeboten werden, wobei diese über die Interaktivität des Hintergrunds selber entscheiden sollen.
+Ein Nutzer meinte, dass der Editor zum Erzeugen von Inhalt vollkommen ausreichen würde und die Hintergrundschicht maximal als Poweruser\footnote{ein Poweruser ist ein Nutzer, der deutlich mehr Kenntnisse über das System hat, als normale Nutzer}-Funktion angeboten werden sollte.
 \\
 Leider nutzte keiner der Tester die Twitterfunktion.
-Das lag daran, dass alle Tester, bis auf einen, keinen Twitteraccount besaßen.
+Das lag daran, da alle Tester, bis auf einen, keinen Twitteraccount besaßen.
 Dieser wollte jedoch nicht seine privaten Twittermeldungen in der Universität präsentieren.
 \\
-Einige Tester fanden diesen Ansatz der Informationsdarbietung interessant, da es eine neue Technologie war und man damit sogar bewegten Inhalt erstellen konnte.
 \\
-Leider gab es auch Nutzer, die das Feature gar nicht nutzten.
+Einige Tester fanden den Ansatz der Informationsdarbietung interessant, da es eine neue Technologie war und man damit sogar bewegten Inhalt erstellen konnte.
+\\
+Bedauerlicherweise gab es auch Nutzer, die das Feature gar nicht nutzten.
 Diese meinten jedoch, dass sie keine Zeit hatten, einen Inhalt zu erstellen oder ihnen einfach nichts eingefallen ist.
 \\
 % Auf die Frage, ob es Besucher gab, die auf den Inhalt der Tester eingegangen sind 
@@ -208,7 +236,7 @@ Es war zudem sehr erfreulich, dass es Besucher gab, die auf den Inhalt von einig
 Dadurch wurde sogar über das System eine Gesprächsgrundlage geschaffen.
 \\
 \\
-Die Inhaltsfunktion als solche wurde von den meisten positiv aufgenommen, da sie einen persönlichen Aspekt bot: ``Sehr gut war die Möglichkeit selber Kreativ zu werden''.
+Die Inhaltsfunktion als solche wurde von den meisten positiv aufgenommen, da sie einen persönlichen Aspekt bot: ``Sehr gut war die Möglichkeit, selber Kreativ zu werden''.
 Zudem wurde es begrüßt, dass über das Board Informationen, Bilder und animierte Gifs präsentiert werden konnten.
 \\
 Einige waren jedoch der Meinung, dass das System zu kompliziert sei und es zu viele Funktionen bot.
@@ -246,7 +274,7 @@ Einem Nutzer waren es zu viele Schritte nötig, bis er seinen Inhalt ändern kon
 Die meisten Tester haben diese Funktion gelegentlich genutzt.
 Einige haben ihren Status jedoch lieber mit der Inhaltsfunktion angegeben.
 % Alle Tester haben ihren Status vom Desktop-PC geändert
-Nur ein Nutzer gab seinen Status beim Verlassen des Raumes am Board an, die anderen taten dies an ihren PC's.
+Nur ein Nutzer gab seinen Status beim Verlassen des Raumes am Board an, die anderen taten dies an ihrem PC.
 \\
 Als Statustexte wurde zum Beispiel angegeben, ob man derzeit beschäftigt war: ``busy'' oder wo man zu finden ist: ``im DBL zu finden''.
 \\
@@ -256,7 +284,7 @@ Es waren ihnen zu viele Klicks notwendig und das Interface zu schwer zu bedienen
 Von einigen Testnutzern wurde es gut aufgenommen, dass es diese Funktion gab und dass sie damit angeben konnten, wo sich sich befanden oder nicht gestört werden wollten.
 Zudem wussten Gäste dadurch, wann ein bestimmter Nutzer wieder anzutreffen war und mussten sich nicht bei dessen Kollegen nach ihm erkundigen.
 \\
-Der Status wurde von den meisten Nutzern üblicherweise vor dem Verlassen des Büros geändert, um anzugeben, dass er zum Essen oder zum Meeting unterwegs ist.
+Der Status wurde von den meisten Nutzern üblicherweise vor dem Verlassen des Büros geändert, um anzugeben, dass sie zum Essen oder zum Meeting unterwegs sind.
 \\
 Auf die Frage, ob die Nutzer das Feature häufiger verwenden würden, wenn es vordefinierte Status geben würde, antworteten die meisten mit ja.
 Die anderen meinten, dass sie es nicht für nötig hielten, ihren aktuellen Status anzugeben, da sie eh die meiste Zeit im Büro waren.
@@ -293,7 +321,7 @@ Da die Icons nicht wie in üblichen Editoren waren, konnten sie nicht alle einde
 Sie hätten es besser gefunden, wenn die Gestaltung der Icons sich nach den üblichen Standards richten würde.
 \\
 Da manchen Benutzern anfangs nicht klar war, dass sie Bilder und Gifs per Drag-and-Drop hochladen konnten, nutzten sie dafür nur die Hintergrundschicht.
-Die Mehrzahl der Nutzer meinte deswegen, dass eine eigene Schaltfläche, um Bilder hochladen zu können angebrachter wäre.
+Die Mehrzahl der Nutzer meinte deswegen, dass eine eigene Schaltfläche, um Bilder hochladen zu können, angebrachter wäre.
 \\
 Einigen Testern war es beim Zeichnen nicht klar, welches Werkzeug sie zur Zeit ausgewählt hatten und wünschten sich eine bessere Kennzeichnung.
 \\
@@ -321,22 +349,22 @@ Einige Tester meinten, dass der Editor allein schon vollkommen als einzige Bauha
 Für einige Testnutzer war es nicht ersichtlich, wo sie sich im Backend befanden und ob sie noch angemeldet sind.
 Deswegen war es der Wunsch von mehreren Benutzern, das Frontend auch vom Benutzer-Backend zu trennen und auf den Displays nur das Frontend anzubieten.
 \\
-Zudem sollte der durchschnittliche Klickaufwand reduziert werden, damit Funktionen sich schneller durchführen lassen.
+Zudem sollte der durchschnittliche Klickaufwand reduziert werden, damit sich Funktionen schneller durchführen lassen.
 \\
 Als sie nach den Authentisierungsmethoden gefragt wurden, meinten die meisten, dass zwei Authentisierungen übertrieben sind.
 Wenn das Frontend vom Backend getrennt wäre, bräuchte man nur ein Passwort am Backend.
 Einer der Nutzer war sogar der Meinung, die Authentisierung komplett weg zu lassen ``auch wenn es Vandalismus Tür und Tor öffnet''.
 \\
-Außerdem waren einige Nutzer nicht mit dem zeitlichen Wechsel der Nutzer einverstanden.
+Außerdem waren einige Tester nicht mit dem zeitlichen Wechsel der Nutzer einverstanden.
 Sie hätten es lieber gehabt, wenn alle Nutzer parallel angezeigt werden, wodurch alle Benutzer und deren Status auf einen Blick sichtbar wären.
 \\
 \\
 Ich fragte die Testnutzer, was sie in Bauhausboards als Vorteil oder Nachteil gegenüber Post-It's, Whiteboards und Pinnwänden sehen.
-Fast alle Benutzer meinten, dass sehr gut war, dynamischen Inhalt erstellen zu können und dass sie über Nachrichten informiert werden.
+Fast alle Benutzer meinten, dass sehr gut war, dynamischen Inhalt erstellen zu können und dass sie über Besuchernachrichten informiert werden.
 Die Boards produzieren nicht wie Post-It's Müll und können nicht einfach entfernt werden.
 Zudem wissen nur der Ersteller und der Empfänger einer Nachricht deren Inhalt.
 \\
-Als Nachteil wurde die Tatsache angesehen, dass die kontinuierlich Energie verbrauchen und sie teurer als Post-It's sind.
+Als Nachteil wurde die Tatsache angesehen, dass die Boards kontinuierlich Energie verbrauchen und teurer als Post-It's sind.
 Einer der Testnutzer war der Meinung, dass die Boards im Vergleich zu Post-It-Statusmeldungen nur periphere Aufmerksamkeit erzeugen.
 
 % Allgemeine Boardfunktionen
@@ -406,7 +434,7 @@ Ein Nutzer meinte, dass die Boards sehr gute Notleuchten für den Gang sind, da 
 Um das System zusätzlich auszuwerten sollten die Testnutzer einen Fragebogen ausfüllen.
 Das User Experience Questionaire\footurl{http://www.ueq-online.org} (UEQ) ist eine einfache und schnell durchführbare Möglichkeit, interaktive Systeme zu evaluieren.
 Es beinhaltet einen Fragebogen mit 26 sorgfältig ausgewählten Fragen zu 6 Klassen: Attraktivität, Durchschaubarkeit, Effizienz, Steuerbarkeit, Stimulation und Originalität.
-Zu jeder Frage gab es 7 Möglichkeiten zum ankreuzen. Sie gingen von -3 (unattraktiv) bis 3 (attraktiv).
+Zu jeder Frage gab es 7 Ankreuzmöglichkeiten. Sie gingen von -3 (unattraktiv) bis 3 (attraktiv).
 Diese Fragen durften nicht abgeändert oder entfernt sowie keine neuen hinzugefügt werden.
 \begin{figure}[h!]
   \centering
@@ -418,7 +446,7 @@ Diese Fragen durften nicht abgeändert oder entfernt sowie keine neuen hinzugef�
 \\
 In Abb. \ref{img:UEQScales} kann man erkennen, dass die Testnutzer das System vorwiegend als Attraktiv, Stimulierend und Originell empfanden.
 \\
-Da Bauhausbaords ein neues System für die Testnutzer war, ist die Attraktivität positiv annähernd bei 1 und daher positiv.
+Da Bauhausbaords ein neues System für die Testnutzer war, ist die Attraktivität annähernd bei 1 und daher positiv.
 \\
 Viele Nutzer meinten, dass es im Gang eine höhere Aufmerksamkeit erzeugte. Zum einen, da die Tablets von selbst leuchten und zum anderen, da sie animierte Gifs anzeigen können. Deswegen ist das Ergebnis in der Klasse Stimulation ungefähr 1 ebenfalls positiv.
 \\

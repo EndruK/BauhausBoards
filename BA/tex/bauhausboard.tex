@@ -9,12 +9,6 @@ Der Entwurf wurde darauf in ein Programm umgesetzt, wobei manche geplanten Funkt
 % - das was im Entwurf geplant wurde musste umgesetzt werden
 % - dadurch entstanden Features
 % - Während der Umsetzung traten diverse Probleme auf
-\\
-\todotext{Fußnote für lib-quotations}\\
-\todotext{Literaturverzeichnis ein wenig zu kurz -> vllt noch deren related work noch ein wenig analysieren}\\
-\todotext{Quellcode vom System dann auf CD im Endeffekt}
-\todotext{DIE sidebar!! prüfen!}
-
 
 \section{Entwurf}\label{Entwurf}
 \subsection{Entwurf des Systems}\label{Entwurf des Systems}
@@ -28,16 +22,16 @@ Deswegen fiel, wie bei NetBoards, die Wahl auf eine Web-Applikation. Zum einen, 
 %Zudem setzte das NetBoards Projekt ebenfalls auf eine Web-Applikation
 Ein zentraler Webserver generiert eine Webseite mit allen nötigen Frontend Funktionen, die von allen Geräten mit Web-Browser (Clients) angezeigt werden können. Dadurch sollte sich der Programmieraufwand auf Server- und Client-Funktionen einschränken.
 \\
-Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu geladen werden müssen. Das hätte einen viel zu großen Overhead\footnote{\todo} erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
+Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu geladen werden müssen. Das hätte einen viel zu großen Mehraufwand erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
 Deswegen musste der Server nur beim ersten Aufruf das Grundgerüst der Webseite mit allen Client-Funktionen ausliefern. Ein Teil der Funktionen würde dann Daten nachladen oder an den Server schicken, wodurch ein dynamischer Inhalt erzeugt wird.
 Dies sollte mit dem ``CRUD'' (Create, Read, Update and Delete) Prinzip realisiert werden.
 Der Server wartet, nachdem er eine Seite ausgeliefert hat, auf spezifische Anfragen des Clients und liefert dementsprechend Daten aus (Read) oder ändert den Zustand der Daten (Create, Update und Delete). Zudem gewährleistet dieses Prinzip, dass bei Verbindungsabbrüchen die Seite auf dem Client weiter läuft und nur so lange keine Daten ändern oder nachladen kann, bis die Verbindung wieder aufgebaut wurde.
 \\
-Die anfallenden Daten des Systems mussten in irgend einer Form auf dem Server gespeichert werden. Die beste Methode dafür war die Nutzung einer Datenbank. Anders als bei NetBoards, wo alle Daten als JSON\footnote{\quelle{JSON ist ein, für Menschen leicht zu lesendes und Maschinen leicht zu parsendes, Datenaustauschformat}{json:website}}-Dateien auf dem Server gespeichert wurden, sah ich diese Methode als geeigneter an. Mit einer Datenbank war es möglich Relationen besser darzustellen, Konsistenz zu bewahren und Redundanz zu vermeiden. Zudem sind damit Daten zentralisiert zusammengefasst, wodurch eine bessere Suche möglich ist.
+Die anfallenden Daten des Systems mussten in irgend einer Form auf dem Server gespeichert werden. Die beste Methode dafür war die Nutzung einer Datenbank. Anders als bei NetBoards, wo alle Daten als JSON\footnote{``JSON ist ein, für Menschen leicht zu lesendes und Maschinen leicht zu parsendes, Datenaustauschformat'' - \url{http://www.json.org}}-Dateien auf dem Server gespeichert wurden, sah ich diese Methode als geeigneter an. Mit einer Datenbank war es möglich Relationen besser darzustellen, Konsistenz zu bewahren und Redundanz zu vermeiden. Zudem sind damit Daten zentralisiert zusammengefasst, wodurch eine bessere Suche möglich ist.
 \\
-Die Wahl des Datenbanksystems fiel auf ``SQLite''\cite{sqlite:website}, da es das am meisten verbreitete relationale Datenbanksystem der Welt ist. Es war einfach zu benutzen und hatte eine gute Dokumentation.
+Die Wahl des Datenbanksystems fiel auf SQLite\footnote{\url{https://www.sqlite.org}}, da es das am meisten verbreitete relationale Datenbanksystem der Welt ist. Es war einfach zu benutzen und hatte eine gute Dokumentation.
 \\
-Das Gerüst der Webseite sollte auf HTML basieren, wobei die hauptsächlichen Client-Funktionen üblicherweise in Javascript umgesetzt werden. Da die Clients viele Funktionen bieten und der Server nur zum Ausliefern der Webseite und für den Datenaustausch dienen sollte, machte es Sinn für den Server ``Node.js'' zu verwenden. \quelle{Node.js ist serverseitiges Javascript basierend auf Google Chrome's V8 Javascript Engine}{nodejs:website}.
+Das Gerüst der Webseite sollte auf HTML basieren, wobei die hauptsächlichen Client-Funktionen üblicherweise in Javascript umgesetzt werden. Da die Clients viele Funktionen bieten und der Server nur zum Ausliefern der Webseite und für den Datenaustausch dienen sollte, machte es Sinn für den Server Node.js\footnote{``Node.js ist serverseitiges Javascript basierend auf Google Chrome's V8 Javascript Engine'' - \url{https://nodejs.org}} zu verwenden.
 \\
 \\
 In der Abb. \ref{img:Systemaufbau} ist der Aufbau des Systems zusammengefasst. Auf dem Server befinden sich der Webserver und die Datenbank. Der Webserver stellt Anfragen an die Datenbank und erhält dafür entsprechende Ergebnisse zurückgeliefert.
@@ -62,7 +56,7 @@ Folgende Whiteboard-Funktionen musste der Editor daher abbilden:
   \item Anbringung von Bildern oder Ausdrücken per Magnet
   \item Neuanordnung von aufgehängten Elementen
 \end{itemize}
-Als Grundlage für den Editor entschied ich mich für die Javascript Bibliothek ``Paper.js''\cite{paperjs:website}.
+Als Grundlage für den Editor entschied ich mich für die Javascript Bibliothek Paper.js\footnote{\url{http://paperjs.org}}.
 Es ist ein Open Source Framework für die Darstellung und Manipulation von Vektorgrafiken, welches auch die Grundlage des Editors aus dem NetBoards Projekt bildete\cite{wood:2014}.
 \\
 \\
@@ -97,12 +91,12 @@ Deswegen sollte jeder registrierte Nutzer die ganze Fläche zu Verfügung haben,
 \\
 Die Datenansicht sollte in zwei Schichten aufgeteilt werden. Zum einen eine Editor-Schicht für selbst gezeichnete Skizzen, Texte, Bilder und animierte Gifs sowie eine Hintergrundschicht, in der die Nutzer eine Webseite anzeigen lassen können. Da NetBoards diese Funktion bereits bot und die Testnutzer in der Vorstudie diese ebenfalls nutzten, entschied ich mich, sie auch umzusetzen.
 \\
-Um auf der Webseite navigieren zu können musste es dafür ein Menü geben, das auf den Tablets nicht viel Platz benötigte. Die beste Variante dafür war eine Sidebar\footnote{\todo}, die standardmäßig eingeklappt war und sich per Klick oder Swipe-Geste\footnote{\todo} öffnen ließ.
+Um auf der Webseite navigieren zu können musste es dafür ein Menü geben, das auf den Tablets nicht viel Platz benötigte. Die beste Variante dafür war eine Sidebar, die standardmäßig eingeklappt ist und sich per Klick oder Swipe-Geste\footnote{Eine Swipe-Geste ist eine Fingergeste, bei der eine Aktion durch seitliches Wischen des Fingers auf dem Interface ausgeführt wird.} öffnen ließ.
 In diesem Menü sollten alle Navigationselemente untergebracht sein. 
 \\
 Um Informationen über die Nutzer anzeigen zu können, wurde eine zusätzliche Fläche benötigt.
 Dafür sollte im oberen Bereich des Displays ein Teil nur für solche Informationen reserviert sein. 
-In diesem Header\footnote{\todo} konnte man das Profilbild, den Namen und eine Beschreibung des aktuell ausgewählten Nutzers darstellen.
+In diesem Header konnte man das Profilbild, den Namen und eine Beschreibung des aktuell ausgewählten Nutzers darstellen.
 In der Vorstudie wurde es sehr gut aufgenommen, dass einer der Nutzer seinen aktuellen Status angegeben hat.
 Deswegen sollte diese Funktion neben den Nutzerinformationen im Header zu finden sein.
 \begin{figure}[h!]
@@ -219,19 +213,18 @@ Die im Entwurf geplanten Konzepte wurden dann in ein lauffähiges System umgeset
 \end{figure}
 
 \subsection{Funktionen}\label{Funktionen}
-\todotext{vllt ``Clientfunktionen'' als Kapitelname von ``Funktionen''}\\
 Nachdem der Aufbau des Systems geplant war, mussten diese Pläne in ein lauffähiges Programm umgesetzt werden.
-Um die Entwicklung mit Node.js zu vereinfachen, wurde das Framework Express\cite{express:website} verwendet. Damit ließ sich eine einfache Webapplikation erstellen.
+Um die Entwicklung mit Node.js zu vereinfachen, wurde das Framework Express\footnote{\url{http://expressjs.com}} verwendet. Damit ließ sich eine einfache Webapplikation erstellen.
 \\
 Da die hauptsächlichen Funktionen auf den Clients ausgeführt werden sollten, mussten diese in Javascript geschrieben werden.
-Am wichtigsten war, dass sich die Seite nicht neu lud, wenn man durch sie navigierte. Dies wurde mit jQuery\cite{jquery:website} realisiert. jQuery ist eine Bibliothek zur einfachen Manipulation der HTML-Struktur einer Webseite. Mit ihr war es einfach, die dargestellte Ansicht anzupassen.
+Am wichtigsten war, dass sich die Seite nicht neu lud, wenn man durch sie navigierte. Dies wurde mit jQuery\footnote{\url{https://jquery.com}} realisiert. jQuery ist eine Bibliothek zur einfachen Manipulation der HTML-Struktur einer Webseite. Mit ihr war es einfach, die dargestellte Ansicht anzupassen.
 \\
 Falls an einer Stelle der Seite Daten vom Server benötigt wurden oder Daten auf dem Server geändert werden mussten, wurde dies mit Ajax-Anfragen durchgeführt. Ajax (Asynchronous Javascript and XML) ist eine Funktion für asynchronen Datenaustausch zwischen einem Client und einem Server.
 Während ein Client auf die Ajax-Antwort des Servers wartet, können weiterhin andere Funktionen ausgeführt werden.
 \\
 % jquery touchswipe -> swipe tool für die swipe geste
 Die Sidebar sollte keinen Platz wegnehmen und musste daher ein- und ausklappbar sein. Zudem sollten die Benutzer direkt erkennen, dass es sich um eine Sidebar handelt, wodurch ein Pfeil als Kennzeichnung daran angebracht wurde \abb{img:sidebar}.
-Damit sie auf Tablets leichter zu öffnen war, nutzte ich TouchSwipe\cite{touchswipe:website}. Mit dieser Bibliothek konnten Swipe-Gesten zum Aufruf von Funktionen genutzt werden.
+Damit sie auf Tablets leichter zu öffnen war, nutzte ich TouchSwipe\footnote{\url{http://labs.rampinteractive.co.uk/touchSwipe}}. Mit dieser Bibliothek konnten Swipe-Gesten zum Aufruf von Funktionen genutzt werden.
 \begin{figure}[h!]
   \centering
     \includegraphics[width=0.4\textwidth]{./img/Sidebar.png}
@@ -242,11 +235,11 @@ Damit sie auf Tablets leichter zu öffnen war, nutzte ich TouchSwipe\cite{touchs
 % cryptoJS hash lib für passwort hashes
 Die Passwörter und Pins durften nicht im Klartext gespeichert werden.
 % \\\todotext{Nebensatz Hashes werden in DB gespeichert}\\
-Dafür wurde die crypto-js\cite{cryptojs:website} Bibliothek verwendet, um die sicherheitsrelevanten Daten mit SHA256\footnote{SHA256 (Secure Hash Algorithm 256) ist eine Krypto-Hashfunktion} zu hashen und sie danach in der Datenbank zu speichern oder sie mit den Werten der Datenbank abzugleichen.
+Dafür wurde die crypto-js\footnote{\url{https://code.google.com/p/crypto-js}} Bibliothek verwendet, um die sicherheitsrelevanten Daten mit SHA256\footnote{SHA256 (Secure Hash Algorithm 256) ist eine Krypto-Hashfunktion} zu hashen und sie danach in der Datenbank zu speichern oder sie mit den Werten der Datenbank abzugleichen.
 \\
 % emailJS = mail tool
 Damit die Besitzer der Boards benachrichtigt werden, wenn Gäste ihnen Nachrichten hinterlassen, musste der Server Emails verschicken können.
-Die Bibliothek emailjs\cite{emailjs:website} brachte diese Funktion mit. Zusätzlich benötigte der Server zum Verschicken von Emails einen eigenen Mailserver oder wenigstens einen Account an einem anderen Mailserver.
+Die Bibliothek emailjs\footnote{\url{https://travis-ci.org/eleith/emailjs}} brachte diese Funktion mit. Zusätzlich benötigte der Server zum Verschicken von Emails einen eigenen Mailserver oder wenigstens einen Account an einem anderen Mailserver.
 In den Benachrichtigungsmails sollte ein Link mit einem Token\footnote{Ein Token ist ein Attribut zur Freigabe von Daten zwischen Parteien(Wer den Token hat, kann die Datei lesen)} zu der jeweiligen erhaltenen Nachricht im System sein. Der Token wurde mit crypto-js beim Abspeichern der Nachricht auf dem Server erzeugt. Wenn der Empfänger auf den Link klickt, wird der Token geprüft und die entsprechende Nachricht angezeigt. Dafür muss er sich nicht extra authentisieren.
 \\
 Die Farbgestaltung der Seite wurde schlicht gehalten und orientierte sich an den Hausfarben der Medienfakultät der BUW.
@@ -404,6 +397,5 @@ Da sich in der Vorstudie von Bauhausboards gezeigt hatte, dass diese Funktion so
 Wenn dann ein Besucher einem Besitzer eine Nachricht hinterlässt, wird dem Empfänger, wie beim Hermes System, eine Email geschickt.
 \\
 Der Editor von Bauhausboards basiert auf der gleichen Bibliothek, wie bei NetBoards. Zudem wurde die Idee zur Anzeige von Webseiten als Hintergrundschicht ebenfalls vom NetBoars System übernommen.
-\\
-\todotext{hier mehr?}
+% \\\todotext{hier mehr?}
 % Das Bauhausboards System übernimmt daher einige Ideen von früheren Projekten und
