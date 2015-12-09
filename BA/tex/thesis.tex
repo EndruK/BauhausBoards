@@ -69,7 +69,9 @@
     \input{abstract}
   \end{abstract}
 
+  \doublespacing
   \tableofcontents
+  \singlespacing
 
   %\chapter*{Acknowledgements} % optional
   %I thank the authors of the webisthesis template for their excellent work!
@@ -87,13 +89,15 @@
 \input{relatedWork}
 \input{vorstudie}
 \input{bauhausboard}
+% \addtocontents{toc}{\protect\newpage}
 \input{studie}
-\input{ausblick}
-%\input{anhang}
+\input{fazit}
+
 % Bibliography
 %\bibliographystyle{plainnat} % requires package natbib. An alternative is apalike
 \bibliographystyle{unsrt}
 \bibliography{literature}    % load file literature.bib
-
+\appendix
+\input{anhang}
 \end{document}
 

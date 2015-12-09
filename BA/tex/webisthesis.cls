@@ -84,6 +84,7 @@
 \RequirePackage{graphicx}
 \RequirePackage{subfigure}
 \RequirePackage{color}
+\RequirePackage{setspace}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Options
