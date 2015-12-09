@@ -1,23 +1,23 @@
-- Tablet PC
-- SMS
-- Post-It
-- SMS Gateway
-- MMS
-- Bluetooth
-- Touchscreen
-- Raspberry Pi (700MHz CPU, 512MB RAM)
-- responsive
-- UI
-- Apache-Webserver
-- Java
-- Javascript
-- V-Server
-- Frontend
-- Sidebar
-- Android
-- Apple IOS
-- Overhead
-- Open Source
-- Framework
-- Swipe
-- Header
+Android
+Apache-Webserver
+Apple IOS
+Bluetooth
+Entity Relationship Diagram
+Framework
+Frontend
+Header
+Java
+Javascript
+MMS
+Open Source
+Post-It
+Raspberry Pi (700MHz CPU, 512MB RAM)
+responsive
+Sidebar
+SMS
+SMS Gateway
+Swipe
+Tablet PC
+Touchscreen
+UI
+V-Server
