@@ -85,6 +85,7 @@
 \RequirePackage{subfigure}
 \RequirePackage{color}
 \RequirePackage{setspace}
+\RequirePackage{pdfpages}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Options
