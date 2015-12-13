@@ -3,7 +3,10 @@ Das neue Projekt bekam den Namen ``BauhausBoards''.
 In einer Entwurfsphase wurde entschieden, wie das System aussehen und welche Funktionen es bieten sollte. Dabei flossen die Ergebnisse der Vorstudie und anderer Projekte mit ein.
 \\
 Als Voraussetzung sollten als Anzeigegeräte für die Türschilder weiterhin Tablets genutzt werden.
-Der Entwurf wurde darauf in ein Programm umgesetzt, wobei manche geplanten Funktionen geändert, entfernt oder neue hinzugefügt wurden. An manchen Stellen der Umsetzung kam es auch zu Problemen, die es zu lösen galt.
+Daraufhin wurde der Entwurf in ein Programm umgesetzt, wobei manche geplanten Funktionen geändert, entfernt oder neue hinzugefügt wurden.
+An manchen Stellen der Umsetzung kam es auch zu Problemen, die es zu lösen galt.
+\\\todotext{entweder letzter satz weg oder zusatz, mit verweis auf kapitel}
+
 % - Ergebnisse der Vorstudie sollten enbezogen werden
 % - sollte weiterhin auf Tablets als Anzeigegerät laufen
 % - das was im Entwurf geplant wurde musste umgesetzt werden
@@ -12,17 +15,18 @@ Der Entwurf wurde darauf in ein Programm umgesetzt, wobei manche geplanten Funkt
 
 \section{Entwurf}\label{Entwurf}
 \subsection{Entwurf des Systems}\label{Entwurf des Systems}
-Die Planung des Systems begann damit, die Plattform des Systems auszuwählen.
+Die Planung begann damit, die Plattform des Systems auszuwählen.
 Es gab die Möglichkeit eine Android-Applikation zu erstellen, die auf jedem Tablet hätte installiert werden müssen.
 Dabei gab es jedoch das Problem, dass die Nutzer auch von unterwegs mit der Anwendung interagieren sollten, wofür ein eigenständiger Server für die Datenverwaltung notwendig gewesen wäre.
-Außerdem müsste durch die unterschiedlichen Tablet- und Smartphone-Betriebssysteme neben Android, wie Apple iOS oder Windows Mobile, die App für jede Architektur portiert werden.
+Außerdem müsste durch die unterschiedlichen Tablet- und Smartphone-Betriebssysteme wie Android, Apple iOS oder Windows Mobile, die App für jede Architektur portiert werden.
 \\
-Deswegen fiel, wie bei NetBoards, die Wahl auf eine Web-Applikation. Zum einen, weil jedes Tablet, jedes Smartphone und jeder PC Webseiten darstellen kann und es nicht nötig ist, extra eine App auf den Geräten zu installieren.
+Deswegen fiel, wie bei NetBoards, die Wahl auf eine Web-Applikation, da jedes Tablet, jedes Smartphone und jeder PC Webseiten darstellen kann und es nicht nötig ist, extra eine App auf den Geräten zu installieren.
 % \\ \todotext{darauf eingehen, dass NetBoards auch eine Web-Applikation benutzt hat?}\\
 %Zudem setzte das NetBoards Projekt ebenfalls auf eine Web-Applikation
-Ein zentraler Webserver generiert eine Webseite mit allen nötigen Frontend Funktionen, die von allen Geräten mit Web-Browser (Clients) angezeigt werden können. Dadurch sollte sich der Programmieraufwand auf Server- und Client-Funktionen einschränken.
+Ein zentraler Webserver generiert eine Webseite mit allen nötigen Frontend Funktionen, die von allen Geräten mit Web-Browser (Clients) angezeigt werden können.
+Dadurch wird sich der Programmieraufwand auf Server- und Client-Funktionen einschränken.
 \\
-Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu geladen werden müssen. Das hätte einen viel zu großen Mehraufwand erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
+Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu laden müssen. Das hätte einen viel zu großen Mehraufwand erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
 Deswegen musste der Server nur beim ersten Aufruf das Grundgerüst der Webseite mit allen Client-Funktionen ausliefern. Ein Teil der Funktionen würde dann Daten nachladen oder an den Server schicken, wodurch ein dynamischer Inhalt erzeugt wird.
 Dies sollte mit dem ``CRUD'' (Create, Read, Update and Delete) Prinzip realisiert werden.
 Der Server wartet, nachdem er eine Seite ausgeliefert hat, auf spezifische Anfragen des Clients und liefert dementsprechend Daten aus (Read) oder ändert den Zustand der Daten (Create, Update und Delete). Zudem gewährleistet dieses Prinzip, dass bei Verbindungsabbrüchen die Seite auf dem Client weiter läuft und nur so lange keine Daten ändern oder nachladen kann, bis die Verbindung wieder aufgebaut wurde.
@@ -118,7 +122,7 @@ Die Besitzer müssen, nachdem die Nachricht abgeschickt wurde, darüber informie
 Die Besitzer der Boards sollten ihren öffentlichen Inhalt ändern, einen Status setzten und empfangene Nachrichten lesen können.
 Dafür müssen sie sich vorher im Benutzer-Backend authentisieren.
 \\
-Das Backend soll den Nutzern die Möglichkeit bieten, ihre Nutzerdaten, wie das Profilbild, die Benutzerbeschreibung oder das Passwort ändern zu können.
+Das Backend soll den Nutzern die Möglichkeit bieten, ihre Daten, wie das Profilbild, die Benutzerbeschreibung oder das Passwort ändern zu können.
 \\
 Um die angezeigten Daten der Hauptseite anzupassen, wird der selbe Editor verwendet, der auch bei der Erstellung von Besuchernachrichten zum Einsatz kommt.
 \\
@@ -135,12 +139,12 @@ Die Benutzereinstellungen konnten dann nach einer klassischen Passwortauthentisi
 \begin{figure}[h!]
   \centering
     \includegraphics[width=0.9\textwidth]{./img/LocationsFrontend.png}
-  \caption{Bauhausboards - Interface Funktionen mit Editorkomponenten}
+  \caption{Bauhausboards - Interface Funktionen mit Editorkomponenten\todotext{verlinkung}}
   \label{img:Interface}
 \end{figure}
 
 \subsubsection{Administrator-Backend}\label{Administrator-Backend}
-Der Administrator der Boards muss die Funktionen bekommen, das System verwalten zu können. Das beinhaltet das Erstellen, Ändern und Entfernen von Nutzern, sowie Board-Instanzen.
+Der Administrator der Boards muss die Funktionen bekommen, das System verwalten zu können. Das beinhaltet das Erstellen, Ändern und Entfernen von Nutzern, sowie das Registrieren von neuen Tablets.
 \\
 Zudem soll er für Studienzwecke die Inhalte und Nachrichten der Benutzer einsehen können.
 
@@ -155,7 +159,7 @@ Für die Datenbank von Bauhausboards entschied ich mich für eine relationale Da
 \begin{figure}[h!]
   \centering
     \includegraphics[width=1\textwidth]{./img/ER01.png}
-  \caption{Bauhausboards - Entity Relationship Diagramm}
+  \caption{Bauhausboards - Entity Relationship Diagramm\todotext{link}}
   \label{img:ER01}
 \end{figure}
 % \begin{figure}
@@ -393,7 +397,7 @@ Die Lösung dafür war, die Größe des Editors auf die Auflösung des Tablets a
 
 
 
-\section{Vergleich zu Hermes und NetBoards}\label{Vergleich zu Hermes und Netboards}
+\section{Vergleich mit NetBoards und Hermes}\label{Vergleich zu Hermes und Netboards}
 % \todotext{ist dieses Kapitel Notwendig?}\\
 Im Vergleich zu NetBoards wurde bei Bauhausboards der Platz nicht durch die Anzahl der angemeldeten Benutzer geteilt.
 Das hatte den Vorteil, dass jeder Benutzer die ganze Fläche zur Verfügung bekam.
