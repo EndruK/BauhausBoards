@@ -4,8 +4,7 @@ In einer Entwurfsphase wurde entschieden, wie das System aussehen und welche Fun
 \\
 Als Voraussetzung sollten als Anzeigegeräte für die Türschilder weiterhin Tablets genutzt werden.
 Daraufhin wurde der Entwurf in ein Programm umgesetzt, wobei manche geplanten Funktionen geändert, entfernt oder neue hinzugefügt wurden.
-An manchen Stellen der Umsetzung kam es auch zu Problemen, die es zu lösen galt.
-\\\todotext{entweder letzter satz weg oder zusatz, mit verweis auf kapitel}
+% \\\todotext{entweder letzter satz weg oder zusatz, mit verweis auf kapitel}
 
 % - Ergebnisse der Vorstudie sollten enbezogen werden
 % - sollte weiterhin auf Tablets als Anzeigegerät laufen
@@ -26,16 +25,16 @@ Deswegen fiel, wie bei NetBoards, die Wahl auf eine Web-Applikation, da jedes Ta
 Ein zentraler Webserver generiert eine Webseite mit allen nötigen Frontend Funktionen, die von allen Geräten mit Web-Browser (Clients) angezeigt werden können.
 Dadurch wird sich der Programmieraufwand auf Server- und Client-Funktionen einschränken.
 \\
-Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu laden müssen. Das hätte einen viel zu großen Mehraufwand erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
+Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu laden müssen. Das hätte einen viel zu großen Kommunikationsmehraufwand erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
 Deswegen musste der Server nur beim ersten Aufruf das Grundgerüst der Webseite mit allen Client-Funktionen ausliefern. Ein Teil der Funktionen würde dann Daten nachladen oder an den Server schicken, wodurch ein dynamischer Inhalt erzeugt wird.
 Dies sollte mit dem ``CRUD'' (Create, Read, Update and Delete) Prinzip realisiert werden.
 Der Server wartet, nachdem er eine Seite ausgeliefert hat, auf spezifische Anfragen des Clients und liefert dementsprechend Daten aus (Read) oder ändert den Zustand der Daten (Create, Update und Delete). Zudem gewährleistet dieses Prinzip, dass bei Verbindungsabbrüchen die Seite auf dem Client weiter läuft und nur so lange keine Daten ändern oder nachladen kann, bis die Verbindung wieder aufgebaut wurde.
 \\
-Die anfallenden Daten des Systems mussten in irgend einer Form auf dem Server gespeichert werden. Die beste Methode dafür war die Nutzung einer Datenbank. Anders als bei NetBoards, wo alle Daten als JSON\footnote{``JSON ist ein, für Menschen leicht zu lesendes und Maschinen leicht zu parsendes, Datenaustauschformat'' \cite{json:website}}-Dateien auf dem Server gespeichert wurden, sah ich diese Methode als geeigneter an. Mit einer Datenbank war es möglich Relationen besser darzustellen, Konsistenz zu bewahren und Redundanz zu vermeiden. Zudem sind damit Daten zentralisiert zusammengefasst, wodurch eine bessere Suche möglich ist.
+Die anfallenden Daten des Systems mussten in irgend einer Form auf dem Server gespeichert werden. Die beste Methode dafür war die Nutzung einer Datenbank. Anders als bei NetBoards, wo alle Daten als JSON\footnote{``JSON ist ein, für Menschen leicht zu lesendes und Maschinen leicht zu parsendes, Datenaustauschformat.'' \cite{json:website}}-Dateien auf dem Server gespeichert wurden, sah ich diese Methode als geeigneter an. Mit einer Datenbank war es möglich Relationen besser darzustellen, Konsistenz zu bewahren und Redundanz zu vermeiden. Zudem sind damit Daten zentralisiert zusammengefasst, wodurch eine bessere Suche möglich ist.
 \\
 Die Wahl des Datenbanksystems fiel auf SQLite\footurl{https://www.sqlite.org}{01.12.2015}, da es das am meisten verbreitete relationale Datenbanksystem der Welt ist. Es war einfach zu benutzen und hatte eine gute Dokumentation.
 \\
-Das Gerüst der Webseite sollte auf HTML basieren, wobei die hauptsächlichen Client-Funktionen üblicherweise in Javascript umgesetzt werden. Da die Clients viele Funktionen bieten und der Server nur zum Ausliefern der Webseite und für den Datenaustausch dienen sollte, machte es Sinn für den Server Node.js\footnote{``Node.js ist serverseitiges Javascript basierend auf Google Chrome's V8 Javascript Engine'' \cite{nodejs:website}} zu verwenden.
+Das Gerüst der Webseite sollte auf HTML basieren, wobei die hauptsächlichen Client-Funktionen üblicherweise in Javascript umgesetzt werden. Da die Clients viele Funktionen bieten und der Server nur zum Ausliefern der Webseite und für den Datenaustausch dienen sollte, machte es Sinn für den Server Node.js\footnote{``Node.js ist serverseitiges Javascript basierend auf Google Chrome's V8 Javascript Engine.'' \cite{nodejs:website}} zu verwenden.
 \\
 \\
 In der Abb. \ref{img:Systemaufbau} ist der Aufbau des Systems zusammengefasst. Auf dem Server befinden sich der Webserver und die Datenbank. Der Webserver stellt Anfragen an die Datenbank und erhält dafür entsprechende Ergebnisse zurückgeliefert.
@@ -57,11 +56,11 @@ Folgende Whiteboard-Funktionen musste der Editor daher abbilden:
 \begin{itemize}
   \item Zeichnen mit verschiedenfarbigen Stiften
   \item Entfernen von Zeichnungen mit einem Schwamm
-  \item Anbringung von Bildern oder Ausdrücken per Magnet
-  \item Neuanordnung von aufgehängten Elementen
+  \item Anheften Bildern oder Zettel per Magnet
+  \item Neuanordnung von angehefteten Elementen
 \end{itemize}
 Als Grundlage für den Editor entschied ich mich für die Javascript Bibliothek Paper.js\footurl{http://paperjs.org}{01.12.2015}.
-Es ist ein Open Source Framework für die Darstellung und Manipulation von Vektorgrafiken, welches auch die Grundlage des Editors aus dem NetBoards Projekt bildete\cite{wood:2014}.
+Es ist ein Open Source Framework für die Darstellung und Manipulation von Vektorgrafiken, welches auch die Grundlage des Editors aus dem NetBoards Projekt bildete \cite{wood:2014}.
 \\
 \\
 Eine weitere wichtige Entscheidung war, dass nur die an den Boards registrierten Nutzer den dargestellten Inhalt ändern können sollten, da sich in der Vorstudie herausstellte, dass es durch die Anonymität der Besucher häufig zu unerwünschten Änderungen kam.
@@ -69,7 +68,9 @@ Dadurch sollte ein Sicherheitsaspekt geschaffen werden, weil keine andere Person
 \\
 Den Besuchern sollte jedoch weiterhin die Möglichkeit geboten werden, mit den registrierten Nutzern in Kontakt zu treten. Dies konnte mit einer separaten Nachrichtenfunktion realisiert werden.
 \\
-Zur Planung erstellte ich zu Beginn einen Paper-Prototype\footnote{Ein Paper-Prototype ist ein auf Papier gezeichneter Entwurf} für das Interface und die Funktionen, die es bieten sollte. Dieser Entwurf befindet sich im Anhang.
+Zur Planung erstellte ich zu Beginn einen Paper-Prototype\footnote{Ein Paper-Prototype ist ein auf Papier gezeichneter Entwurf.} für das Interface und die Funktionen, die es bieten sollte.
+\\
+Dieser Entwurf befindet sich im [\hyperref[paperPrototype]{Anhang}].
 
 
 
@@ -114,9 +115,10 @@ Deswegen sollte diese Funktion neben den Nutzerinformationen im Header zu finden
 % \todotext{können,können,können ... -> ändern}\\
 Damit die Gäste mit den Besitzern in Kontakt treten können, musste es eine Nachrichtenfunktion geben.
 Dabei sollten die Benutzer, die eine Nachricht erstellen wollen, einen oder mehrere Besitzer auswählen dürfen.
-Danach soll der Editor aktiviert werden.
-Die Besucher können eine Zeichnung oder einen Text erstellen.
-Die Besitzer müssen, nachdem die Nachricht abgeschickt wurde, darüber informiert werden, dass ihnen eine Nachricht hinterlassen wurde.
+Danach soll der Editor aktiviert werden, wo die Besucher eine Zeichnung oder einen Text erstellen können.
+Die Besitzer müssen, nachdem die Nachricht abgeschickt wurde, darüber informiert werden, dass ihnen eine Nachricht hinterlassen wurde. 
+\\
+In Abb. \ref{img:mainView} ist der konzeptionelle Aufbau der Hauptansicht mit Sidebar, Header und Nutzerinhalt skizziert.
 
 \subsubsection{Benutzer-Backend}\label{Benutzer-Backend}
 Die Besitzer der Boards sollten ihren öffentlichen Inhalt ändern, einen Status setzten und empfangene Nachrichten lesen können.
@@ -135,11 +137,15 @@ Da das Benutzer-Backend auch vom aufgehängten Display aus erreichbar sein sollt
 Deswegen entschied ich mich für zwei Authentisierungsmethoden.
 Ein vierstelliger Pin sollte zur schnellen Anmeldung in das Backend dienen.
 Die Benutzereinstellungen konnten dann nach einer klassischen Passwortauthentisierung vorgenommen werden.
+\\
+\\
+In Abb. \ref{img:Interface} wird der Aufbau der Seitenstruktur mit Hauptansicht (Main View) und Benutzer-Backend (User Backend) dargestellt.
+Zudem wird gezeigt, welche Funktionen wo zu finden sind und in welchen davon der Editor zum Einsatz kommt.
 % \\\todotext{Angeben bei den Routen: was macht der Doppelkreis}\\
 \begin{figure}[h!]
   \centering
     \includegraphics[width=0.9\textwidth]{./img/LocationsFrontend.png}
-  \caption{Bauhausboards - Interface Funktionen mit Editorkomponenten\todotext{verlinkung}}
+  \caption{Bauhausboards - Interface Funktionen mit Editorkomponenten}
   \label{img:Interface}
 \end{figure}
 
@@ -154,12 +160,13 @@ Es bestand die Möglichkeit, eine dokumentenbasierte oder eine relationale Daten
 Eine dokumentenbasierte Datenbank hätte den Vorteil gehabt, dass alle Anfragen eine JSON-Zeichenkette zurückgegeben hätten. JSON wird häufig in der Verbindung mit Javascript und dessen Serverkommunikation verwendet.
 Relationale Datenbanken hingegen verwenden eine Tabellenstruktur für die Speicherung von Daten. Mit ihnen lassen sich Beziehungen zwischen den Daten einfacher darstellen.
 \\
-Für die Datenbank von Bauhausboards entschied ich mich für eine relationale Datenbank, weil die Einarbeitungszeit zu lang gedauert hätte, um mit dokumentenbasierten Datenbanken umgehen zu können.
+Für die Datenbank von Bauhausboards entschied ich mich für eine relationale Datenbank.
+% , weil die Einarbeitungszeit zu lang gedauert hätte, um mit dokumentenbasierten Datenbanken umgehen zu können.
 % \\\todotext{ER Diagram zu groß}\\
 \begin{figure}[h!]
   \centering
     \includegraphics[width=1\textwidth]{./img/ER01.png}
-  \caption{Bauhausboards - Entity Relationship Diagramm\todotext{link}}
+  \caption{Bauhausboards - Datenbankentwurf}
   \label{img:ER01}
 \end{figure}
 % \begin{figure}
@@ -168,7 +175,7 @@ Für die Datenbank von Bauhausboards entschied ich mich für eine relationale Da
 %   \caption{asdasd}
 % \end{figure}
 \\
-Der Datenbankentwurf beinhaltete 6 Objektklassen, dargestellt als Tabellen. Um alle Objekte eindeutig beschreiben zu können, wurde in jeder Tabelle eine ID als Primärschlüssel\footnote{Ein Primärschlüssel ist ein Attribut zur eindeutigen Identifikation eines Datensatzes} hinzugefügt.
+Der Datenbankentwurf \abb{img:ER01} beinhaltete 6 Objektklassen, dargestellt als Tabellen. Um alle Objekte eindeutig beschreiben zu können, wurde in jeder Tabelle eine ID als Primärschlüssel\footnote{Ein Primärschlüssel ist ein Attribut zur eindeutigen Identifikation eines Datensatzes.} hinzugefügt.
 % \\\todotext{soll ich bei den Attributen noch auf die Datentypen eingehen?}\\
 \subsubsection{User Tabelle}\label{User Tabelle}
 Die User-Tabelle ist die Haupttabelle und dient zur Speicherung von Nutzeraccounts. Ein Nutzer muss auf jeden Fall einen Namen, eine Emailadresse, ein Passwort und einen Pin haben.
@@ -244,12 +251,12 @@ Damit sie auf Tablets leichter zu öffnen war, nutzte ich TouchSwipe\footurl{htt
 % cryptoJS hash lib für passwort hashes
 Die Passwörter und Pins durften nicht im Klartext gespeichert werden.
 % \\\todotext{Nebensatz Hashes werden in DB gespeichert}\\
-Dafür wurde die crypto-js\footurl{https://code.google.com/p/crypto-js}{05.12.2015} Bibliothek verwendet, um die sicherheitsrelevanten Daten mit SHA256\footnote{SHA256 (Secure Hash Algorithm 256) ist eine Krypto-Hashfunktion} zu hashen und sie danach in der Datenbank zu speichern oder sie mit den Werten der Datenbank abzugleichen.
+Dafür wurde die crypto-js\footurl{https://code.google.com/p/crypto-js}{05.12.2015} Bibliothek verwendet, um die sicherheitsrelevanten Daten mit SHA256\footnote{SHA256 (Secure Hash Algorithm 256) ist eine Krypto-Hashfunktion.} zu hashen und sie danach in der Datenbank zu speichern oder sie mit den Werten der Datenbank abzugleichen.
 \\
 % emailJS = mail tool
 Damit die Besitzer der Boards benachrichtigt werden, wenn Gäste ihnen Nachrichten hinterlassen, musste der Server Emails verschicken können.
 Die Bibliothek emailjs\footurl{https://travis-ci.org/eleith/emailjs}{05.12.2015} brachte diese Funktion mit. Zusätzlich benötigte der Server zum Verschicken von Emails einen eigenen Mailserver oder wenigstens einen Account an einem anderen Mailserver.
-In den Benachrichtigungsmails sollte ein Link mit einem Token\footnote{Ein Token ist ein Attribut zur Freigabe von Daten zwischen Parteien(Wer den Token hat, kann die Datei lesen)} zu der jeweiligen erhaltenen Nachricht im System sein. Der Token wurde mit crypto-js beim Abspeichern der Nachricht auf dem Server erzeugt. Wenn der Empfänger auf den Link klickt, wird der Token geprüft und die entsprechende Nachricht angezeigt. Dafür muss er sich nicht extra authentisieren.
+In den Benachrichtigungsmails sollte ein Link mit einem Token\footnote{Ein Token ist ein Attribut zur Freigabe von Daten zwischen Parteien. Wer den Token hat, kann die Datei lesen.} zu der jeweiligen erhaltenen Nachricht im System sein. Der Token wurde mit crypto-js beim Abspeichern der Nachricht auf dem Server erzeugt. Wenn der Empfänger auf den Link klickt, wird der Token geprüft und die entsprechende Nachricht angezeigt. Dafür muss er sich nicht extra authentisieren.
 \\
 Die Farbgestaltung der Seite wurde schlicht gehalten und orientierte sich an den Hausfarben der Medienfakultät der BUW.
 \\

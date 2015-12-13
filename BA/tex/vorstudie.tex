@@ -11,7 +11,7 @@ Zu Beginn war es wichtig eine Anforderungsanalyse durchzuführen. Deshalb musste
 \\
 Um zu erproben, wie ein bereits fertiges System funktioniert und wie es von Studenten und Mitarbeitern der Medienfakultät der BUW aufgenommen werden würde, habe ich ein bereits vorhandenes Projekt verwendet und in der Praxis getestet.
 Da das Hermes System schon relativ alt war und hauptsächlich für PDA's entworfen wurde, kam es für diesen Test nicht in Frage.
-Die Entscheidung fiel auf die zweite Version des NetBoards Projekts\cite{netboards:website}, da dieses Projekt das aktuellste war.
+Die Entscheidung fiel auf die zweite Version des NetBoards Projekts \cite{netboards:website}, da dieses Projekt das aktuellste war.
 \section{NetBoards Experiment}\label{NetBoards Experiment}
 %\cite{apache:website}
 Als Grundlage für mein Experiment diente ein virtueller Debian-Linux Server mit 1,5GHz AMD CPU und 2GB RAM auf dem Apache2 als Webserver und Python2 für serverseitige Scripts liefen. Das öffentlich zugängliche NetBoards2 Projekt wurde installiert und konfiguriert.
@@ -35,7 +35,8 @@ Ich entschied mich dafür, das Tablet an den bereits vorhanden Türschildern anz
       \label{img:tuerschild}
     }
     \subfigure[Ein Türschild mit Board]{
-      \includegraphics[width=0.605\textwidth]{./img/experiment01.jpg}
+      % \includegraphics[width=0.605\textwidth]{./img/experiment01.jpg}
+      \includegraphics[width=0.375\textwidth]{./img/experiment01_v2.png}
       \label{img:experiment01}
     }
   \caption{Versuchsaufbau des Experiments}
@@ -52,7 +53,9 @@ Nach einer Einweisung zur Benutzung des Systems stellte sich heraus klar, dass b
 Jeder Gast konnte den dargestellten Inhalt beliebig ändern.
 Durch die Anonymität der Gäste hätte es zu missbräuchlicher Nutzung und Vandalismus kommen können.
 % Hier Beispiel mit Mensa Kinderhacksteak anstelle Rinderhacksteak
+\\
 Aus diesem Grund habe ich für die Nutzer zwei verschiedene Ansichten erstellt:
+\\
 \begin{itemize}
   \item eine Backend-Sicht, auf der sie ihre Änderungen machen konnten
   \item eine Frontend-Sicht, die auf dem Tablet angezeigt wurde, nach 5 Minuten den aktuellen Stand abspeicherte und die Sicht auf den aktuellsten Stand der Backend-Sicht setzte
@@ -108,9 +111,11 @@ Besser wäre es gewesen, wenn die Besitzer eine Email erhalten hätten, sobald i
 \\
 \\
 Als Schlussfolgerung des Experimentes entschied ich mich dazu, ein eigenes System zu entwerfen.
-Es war Sinnvoller, dieses System nach den benötigten Anforderungen zu entwickeln, anstatt das NetBoards System so anzupassen, dass es die Anforderungen erfüllte.
-\\\todotext{nächster satz mit dieses}
-Dieses sollte gut auf Tablets laufen und für eine kleinere Bildschirmgröße angepasst sein. Es erforderte, dass jeder Nutzer eine eigene Sicht bekam, da ansonsten auf dem Tablet zu wenig Platz wäre.
+Es war Sinnvoller, dieses System nach den benötigten Anforderungen zu entwickeln, anstatt NetBoards so anzupassen, dass es die Anforderungen erfüllte.
+% \\\todotext{nächster satz mit dieses}
+Das neue Projekt sollte gut auf Tablets laufen und für eine kleinere Bildschirmgröße angepasst sein.
+Außerdem sollte jeder Nutzer eine eigene Sicht bekommen, da sonst auf dem Tablet zu wenig Platz wäre.
 Nur die Besitzer durften die Möglichkeit bekommen, den angezeigten Inhalt zu ändern.
 Den Besuchern musste es dennoch möglich sein, mit den Besitzern in Kontakt zu treten, welche darauf eine Benachrichtiguns-Email erhalten sollten.
-\\\todotext{abschlusssatz?}
+% \\\todotext{abschlusssatz?}
+% Mit diesen Erkenntnissen 
