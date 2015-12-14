@@ -1,8 +1,9 @@
-\chapter{BauhausBoards}\label{BauhausBoards}
-Das neue Projekt bekam den Namen ``BauhausBoards''.
+\chapter{Bauhausboards}\label{BauhausBoards}
+Das neue Projekt bekam den Namen ``Bauhausboards''.
 In einer Entwurfsphase wurde entschieden, wie das System aussehen und welche Funktionen es bieten sollte. Dabei flossen die Ergebnisse der Vorstudie und anderer Projekte mit ein.
 \\
-Als Voraussetzung sollten als Anzeigegeräte für die Türschilder weiterhin Tablets genutzt werden.
+Die Voraussetzung war, dass als Anzeigegeräte für die Türschilder weiterhin Tablets genutzt werden sollten.
+% Als Voraussetzung sollten als Anzeigegeräte für die Türschilder weiterhin Tablets genutzt werden.
 Daraufhin wurde der Entwurf in ein Programm umgesetzt, wobei manche geplanten Funktionen geändert, entfernt oder neue hinzugefügt wurden.
 % \\\todotext{entweder letzter satz weg oder zusatz, mit verweis auf kapitel}
 
@@ -22,8 +23,8 @@ Außerdem müsste durch die unterschiedlichen Tablet- und Smartphone-Betriebssys
 Deswegen fiel, wie bei NetBoards, die Wahl auf eine Web-Applikation, da jedes Tablet, jedes Smartphone und jeder PC Webseiten darstellen kann und es nicht nötig ist, extra eine App auf den Geräten zu installieren.
 % \\ \todotext{darauf eingehen, dass NetBoards auch eine Web-Applikation benutzt hat?}\\
 %Zudem setzte das NetBoards Projekt ebenfalls auf eine Web-Applikation
-Ein zentraler Webserver generiert eine Webseite mit allen nötigen Frontend Funktionen, die von allen Geräten mit Web-Browser (Clients) angezeigt werden können.
-Dadurch wird sich der Programmieraufwand auf Server- und Client-Funktionen einschränken.
+Ein zentraler Webserver generiert eine Webseite mit allen nötigen Frontend Funktionen, die von allen Geräten mit Web-Browser (Clients) angezeigt werden kann.
+Dadurch schränkte sich der Programmieraufwand auf Server- und Client-Funktionen ein.
 \\
 Die Applikation sollte nicht bei jeder kleinsten Interaktion mit der Webseite diese neu laden müssen. Das hätte einen viel zu großen Kommunikationsmehraufwand erzeugt, da bei jeder Kommunikation statische Daten übertragen worden wären.
 Deswegen musste der Server nur beim ersten Aufruf das Grundgerüst der Webseite mit allen Client-Funktionen ausliefern. Ein Teil der Funktionen würde dann Daten nachladen oder an den Server schicken, wodurch ein dynamischer Inhalt erzeugt wird.
@@ -56,7 +57,7 @@ Folgende Whiteboard-Funktionen musste der Editor daher abbilden:
 \begin{itemize}
   \item Zeichnen mit verschiedenfarbigen Stiften
   \item Entfernen von Zeichnungen mit einem Schwamm
-  \item Anheften Bildern oder Zettel per Magnet
+  \item Anheften von Bildern oder Zettel per Magnet
   \item Neuanordnung von angehefteten Elementen
 \end{itemize}
 Als Grundlage für den Editor entschied ich mich für die Javascript Bibliothek Paper.js\footurl{http://paperjs.org}{01.12.2015}.
@@ -92,11 +93,11 @@ Auf einem 10,1 Zoll großem Tablet macht dieser Ansatz jedoch wenig Sinn, da bei
   \label{img:aufteilungMainView}
 \end{figure}
 \\
-Deswegen sollte jeder registrierte Nutzer die ganze Fläche zu Verfügung haben, wobei nach einer festgelegten Zeit die Sicht wechselt und die Daten des nächsten Nutzers angezeigt wird.
+Deswegen sollte jeder registrierte Nutzer die ganze Fläche zu Verfügung haben, wobei nach einer festgelegten Zeit die Sicht wechselt und die Daten des nächsten Nutzers angezeigt werden.
 \\
 Die Datenansicht sollte in zwei Schichten aufgeteilt werden. Zum einen eine Editor-Schicht für selbst gezeichnete Skizzen, Texte, Bilder und animierte Gifs sowie eine Hintergrundschicht, in der die Nutzer eine Webseite anzeigen lassen können. Da NetBoards diese Funktion bereits bot und die Testnutzer in der Vorstudie diese ebenfalls nutzten, entschied ich mich, sie auch umzusetzen.
 \\
-Um auf der Webseite navigieren zu können musste es dafür ein Menü geben, das auf den Tablets nicht viel Platz benötigte. Die beste Variante dafür war eine Sidebar, die standardmäßig eingeklappt ist und sich per Klick oder Swipe-Geste\footnote{Eine Swipe-Geste ist eine Fingergeste, bei der eine Aktion durch seitliches Wischen des Fingers auf dem Interface ausgeführt wird.} öffnen ließ.
+Um im System navigieren zu können musste es dafür ein Menü geben, das auf den Tablets nicht viel Platz benötigte. Die beste Variante dafür war eine Sidebar, die standardmäßig eingeklappt ist und sich per Klick oder Swipe-Geste\footnote{Eine Swipe-Geste ist eine Fingergeste, bei der eine Aktion durch seitliches Wischen des Fingers auf dem Interface ausgeführt wird.} öffnen ließ.
 In diesem Menü sollten alle Navigationselemente untergebracht sein. 
 \\
 Um Informationen über die Nutzer anzeigen zu können, wurde eine zusätzliche Fläche benötigt.
@@ -119,6 +120,7 @@ Danach soll der Editor aktiviert werden, wo die Besucher eine Zeichnung oder ein
 Die Besitzer müssen, nachdem die Nachricht abgeschickt wurde, darüber informiert werden, dass ihnen eine Nachricht hinterlassen wurde. 
 \\
 In Abb. \ref{img:mainView} ist der konzeptionelle Aufbau der Hauptansicht mit Sidebar, Header und Nutzerinhalt skizziert.
+Zudem sind auf der linken Seite von Abb. \ref{img:Interface} die Funktionen der Hauptansicht (Main View) im System eingeordnet.
 
 \subsubsection{Benutzer-Backend}\label{Benutzer-Backend}
 Die Besitzer der Boards sollten ihren öffentlichen Inhalt ändern, einen Status setzten und empfangene Nachrichten lesen können.
@@ -130,7 +132,7 @@ Um die angezeigten Daten der Hauptseite anzupassen, wird der selbe Editor verwen
 \\
 Für den Status sollen die Nutzer einen kurzen Text und den Endzeitpunkt festlegen, der dann auf der Hauptseite angezeigt wird.
 \\
-Außerdem mussten sie die Möglichkeit bekommen, erhaltenen Nachrichten einsehen zu können. Ungelesene Nachrichten mussten dabei besonders gekennzeichnet werden.\\
+Außerdem mussten sie die Möglichkeit bekommen, erhaltenen Nachrichten einsehen zu können, wobei ungelesene Nachrichten dabei besonders gekennzeichnet werden.\\
 Die Änderung der Benutzerdaten sollten in einem gesonderten Einstellungsbereich möglich sein.
 \\
 Da das Benutzer-Backend auch vom aufgehängten Display aus erreichbar sein sollte, damit die Nutzer beim Verlassen des Raumes schnell einen Status setzen konnten, mussten sie sich schnell authentisieren können.
@@ -138,8 +140,7 @@ Deswegen entschied ich mich für zwei Authentisierungsmethoden.
 Ein vierstelliger Pin sollte zur schnellen Anmeldung in das Backend dienen.
 Die Benutzereinstellungen konnten dann nach einer klassischen Passwortauthentisierung vorgenommen werden.
 \\
-\\
-In Abb. \ref{img:Interface} wird der Aufbau der Seitenstruktur mit Hauptansicht (Main View) und Benutzer-Backend (User Backend) dargestellt.
+In Abb. \ref{img:Interface} wird der Aufbau der Seitenstruktur mit dem Weg von der Hauptansicht (Main View) zum Benutzer-Backend (User Backend) dargestellt.
 Zudem wird gezeigt, welche Funktionen wo zu finden sind und in welchen davon der Editor zum Einsatz kommt.
 % \\\todotext{Angeben bei den Routen: was macht der Doppelkreis}\\
 \begin{figure}[h!]
@@ -150,7 +151,7 @@ Zudem wird gezeigt, welche Funktionen wo zu finden sind und in welchen davon der
 \end{figure}
 
 \subsubsection{Administrator-Backend}\label{Administrator-Backend}
-Der Administrator der Boards muss die Funktionen bekommen, das System verwalten zu können. Das beinhaltet das Erstellen, Ändern und Entfernen von Nutzern, sowie das Registrieren von neuen Tablets.
+Der Administrator der Boards muss die Funktionen bekommen, um das System verwalten zu können. Das beinhaltet das Erstellen, Ändern und Entfernen von Nutzern, sowie das Registrieren von neuen Tablets.
 \\
 Zudem soll er für Studienzwecke die Inhalte und Nachrichten der Benutzer einsehen können.
 
@@ -175,7 +176,7 @@ Für die Datenbank von Bauhausboards entschied ich mich für eine relationale Da
 %   \caption{asdasd}
 % \end{figure}
 \\
-Der Datenbankentwurf \abb{img:ER01} beinhaltete 6 Objektklassen, dargestellt als Tabellen. Um alle Objekte eindeutig beschreiben zu können, wurde in jeder Tabelle eine ID als Primärschlüssel\footnote{Ein Primärschlüssel ist ein Attribut zur eindeutigen Identifikation eines Datensatzes.} hinzugefügt.
+Der Datenbankentwurf \abb{img:ER01} beinhaltete 6 Objektklassen. Diese Objektklassen werden in der Datenbank jeweils als Tabelle gespeichert. Um alle Objekte eindeutig beschreiben zu können, wurde in jeder Tabelle eine ID als Primärschlüssel\footnote{Ein Primärschlüssel ist ein Attribut zur eindeutigen Identifikation eines Datensatzes.} hinzugefügt.
 % \\\todotext{soll ich bei den Attributen noch auf die Datentypen eingehen?}\\
 \subsubsection{User Tabelle}\label{User Tabelle}
 Die User-Tabelle ist die Haupttabelle und dient zur Speicherung von Nutzeraccounts. Ein Nutzer muss auf jeden Fall einen Namen, eine Emailadresse, ein Passwort und einen Pin haben.

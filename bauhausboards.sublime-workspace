@@ -11,7 +11,7 @@
 			"file": "BA/tex/thesis.tex",
 			"settings":
 			{
-				"buffer_size": 2792,
+				"buffer_size": 2809,
 				"line_ending": "Unix"
 			}
 		},
@@ -19,7 +19,7 @@
 			"file": "BA/tex/abstract.tex",
 			"settings":
 			{
-				"buffer_size": 1347,
+				"buffer_size": 1437,
 				"line_ending": "Unix"
 			}
 		},
@@ -27,7 +27,7 @@
 			"file": "BA/tex/einleitung.tex",
 			"settings":
 			{
-				"buffer_size": 3696,
+				"buffer_size": 4026,
 				"line_ending": "Unix"
 			}
 		},
@@ -35,7 +35,7 @@
 			"file": "BA/tex/relatedWork.tex",
 			"settings":
 			{
-				"buffer_size": 15014,
+				"buffer_size": 14891,
 				"line_ending": "Unix"
 			}
 		},
@@ -43,7 +43,7 @@
 			"file": "BA/tex/vorstudie.tex",
 			"settings":
 			{
-				"buffer_size": 8711,
+				"buffer_size": 8885,
 				"line_ending": "Unix"
 			}
 		},
@@ -51,7 +51,7 @@
 			"file": "BA/tex/bauhausboard.tex",
 			"settings":
 			{
-				"buffer_size": 29568,
+				"buffer_size": 29974,
 				"line_ending": "Unix"
 			}
 		},
@@ -59,7 +59,15 @@
 			"file": "BA/tex/studie.tex",
 			"settings":
 			{
-				"buffer_size": 33693,
+				"buffer_size": 34308,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "BA/tex/fazit.tex",
+			"settings":
+			{
+				"buffer_size": 5010,
 				"line_ending": "Unix"
 			}
 		},
@@ -67,7 +75,7 @@
 			"file": "BA/tex/anhang.tex",
 			"settings":
 			{
-				"buffer_size": 2785,
+				"buffer_size": 5578,
 				"line_ending": "Unix"
 			}
 		},
@@ -76,14 +84,6 @@
 			"settings":
 			{
 				"buffer_size": 6644,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "BA/glossar",
-			"settings":
-			{
-				"buffer_size": 250,
 				"line_ending": "Unix"
 			}
 		}
@@ -154,6 +154,12 @@
 	],
 	"file_history":
 	[
+		"/home/andre/Github/BauhausBoards/BA/tex/anhang.log",
+		"/home/andre/Github/BauhausBoards/BA/tex/anhang.fls",
+		"/home/andre/Github/BauhausBoards/BA/tex/anhang.tex",
+		"/home/andre/Github/BauhausBoards/BA/glossar",
+		"/home/andre/Github/BauhausBoards/BA/tex/webisthesis.cls",
+		"/run/media/andre/Games/SpellForce/Spellforce Platinum key.txt",
 		"/home/andre/Github/BauhausBoards/BA/tex/ausblick.tex",
 		"/mnt/LinuxDrive/Dropbox/games_after_BA.txt",
 		"/run/media/andre/Games/World of Warcraft/Data/config/9a/ea/9aea7f1d7b4a4a2e4f1a9d2b0b144e9e",
@@ -194,6 +200,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"todo",
+			"post",
+			"img:Interface",
+			"der entw",
+			"paper",
+			"img:mainView",
+			"todo",
+			"cite",
+			"foot",
+			"benutzerha",
 			"mittel",
 			"da die tab",
 			"SQLite",
@@ -231,7 +247,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 7,
 			"sheets":
 			[
 				{
@@ -240,15 +256,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2792,
+						"buffer_size": 2809,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								496,
+								496
 							]
 						],
 						"settings":
@@ -261,7 +277,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
@@ -270,43 +286,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1347,
+						"buffer_size": 1437,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1347,
-								1347
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "BA/tex/einleitung.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3696,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2076,
-								2076
+								819,
+								819
 							]
 						],
 						"settings":
@@ -321,136 +309,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "BA/tex/relatedWork.tex",
+					"buffer": 2,
+					"file": "BA/tex/einleitung.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15014,
+						"buffer_size": 4026,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 299.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "BA/tex/vorstudie.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8711,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5903,
-								5903
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 981.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "BA/tex/bauhausboard.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 29568,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								25774,
-								25774
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 7781.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "BA/tex/studie.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 33693,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								31973,
-								31973
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 9243.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "BA/tex/anhang.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2785,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
+								821,
+								821
 							]
 						],
 						"settings":
@@ -461,11 +333,185 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "BA/tex/relatedWork.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14891,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1752,
+								1752
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "BA/tex/vorstudie.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8885,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4951,
+								4951
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 900.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "BA/tex/bauhausboard.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 29974,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7883,
+								7883
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2040.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "BA/tex/studie.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 34308,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								24930,
+								24930
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 6621.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "BA/tex/fazit.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5010,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4508,
+								4508
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1441.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 8,
+					"file": "BA/tex/anhang.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5578,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4761,
+								4761
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1581.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
 					"file": "BA/tex/literature.bib",
 					"semi_transient": false,
 					"settings":
@@ -488,38 +534,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2680.0,
+						"translation.y": 180.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "BA/glossar",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 250,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -558,7 +576,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 32.0
+		"height": 36.0
 	},
 	"output.find_results":
 	{
