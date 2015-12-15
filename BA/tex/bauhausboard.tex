@@ -221,7 +221,9 @@ In diesen Tabellen sind dann nur die Primärschlüssel der beiden beteiligten Ob
 
 
 \section{Umsetzung}\label{Umsetzung}
-Die im Entwurf geplanten Konzepte wurden dann in ein lauffähiges System umgesetzt \abb{img:finalHauptseite}. Dabei änderten sich einige Ansätze und andere kamen neu hinzu.
+Die im Entwurf geplanten Konzepte wurden dann in ein lauffähiges System umgesetzt.
+Dabei änderten sich einige Ansätze und andere kamen neu hinzu.
+Die Hauptseite ist in Abb. \ref{img:finalHauptseite} zu sehen.
 \begin{figure}[h!]
   \centering
     \frame{\includegraphics[width=1\textwidth]{./img/Hauptseite.png}}
@@ -259,6 +261,13 @@ Damit die Besitzer der Boards benachrichtigt werden, wenn Gäste ihnen Nachricht
 Die Bibliothek emailjs\footurl{https://travis-ci.org/eleith/emailjs}{05.12.2015} brachte diese Funktion mit. Zusätzlich benötigte der Server zum Verschicken von Emails einen eigenen Mailserver oder wenigstens einen Account an einem anderen Mailserver.
 In den Benachrichtigungsmails sollte ein Link mit einem Token\footnote{Ein Token ist ein Attribut zur Freigabe von Daten zwischen Parteien. Wer den Token hat, kann die Datei lesen.} zu der jeweiligen erhaltenen Nachricht im System sein. Der Token wurde mit crypto-js beim Abspeichern der Nachricht auf dem Server erzeugt. Wenn der Empfänger auf den Link klickt, wird der Token geprüft und die entsprechende Nachricht angezeigt. Dafür muss er sich nicht extra authentisieren.
 \\
+In Abb. \ref{img:highLevelSystemDiagram} ist die Aufteilung der Bibliotheken im Gesamtsystem zu sehen.
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.75\textwidth]{./img/HighLevelSystemDiagram.png}
+  \caption{Bauhausboards - Aufteilung der Systembibliotheken}
+  \label{img:highLevelSystemDiagram}
+\end{figure}
 Die Farbgestaltung der Seite wurde schlicht gehalten und orientierte sich an den Hausfarben der Medienfakultät der BUW.
 \\
 Während der Umsetzung änderte sich die Entscheidung, alle Funktionen in einer einzigen Seite anzubieten, vom geplanten Konzept.
@@ -266,8 +275,14 @@ Während der Umsetzung änderte sich die Entscheidung, alle Funktionen in einer 
 Es war ursprünglich geplant, dass der Administrator normal über die Seite die Administratorfunktionen ausführen kann. Da diese Funktionen aber rein funktional waren und nicht auf den Boards gebraucht wurden, ergab es mehr Sinn diese gesondert in eine zusätzlichen Webseite auszulagern.
 \\
 \\
-Zur geplanten Statusfunktion kam während der Umsetzung noch die Idee auf, dass sich Nutzer als ``Abwesend'' markieren konnten. Dazu sollte im Benutzer-Backend eine zusätzliche Option eingebaut werden. Um diesen Status zu kennzeichnen, wurden dabei die Profilbilder der Nutzer ausgegraut und ein Text darüber angezeigt, dass der Nutzer zur Zeit nicht verfügbar ist (Abb. \ref{img:UserAvailable}).
+Während der Umsetzung kam zudem eine Twitter-Funktion hinzu. Die Besitzer der Boards konnten einen Twitteraccount in ihren Einstellungen eintragen, wodurch auf ihrer Seite ihr aktuellster Tweet geladen und angezeigt wurde \abb{img:twitter}.
 % \todotext{Bilder vergleich Anwesend / nicht anwesend}\\
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.4\textwidth]{./img/TwitterFeature.png}
+  \caption{Bauhausboards - Twitterfunktion}
+  \label{img:twitter}
+\end{figure}
 \begin{figure}
   \centering
     \subfigure[Nutzer verfügbar]{
@@ -281,26 +296,21 @@ Zur geplanten Statusfunktion kam während der Umsetzung noch die Idee auf, dass 
   \caption{Bauhausboards - Nutzerstatus}
   \label{img:UserAvailable}
 \end{figure}
-Außerdem kam eine Twitter-Funktion hinzu. Die Besitzer der Boards konnten einen Twitteraccount in ihren Einstellungen eintragen, wodurch auf ihrer Seite ihr aktuellster Tweet geladen und angezeigt wurde \abb{img:twitter}. 
+Außerdem kam zur geplanten Statusfunktion während der Umsetzung noch die Idee auf, dass sich Nutzer als ``Abwesend'' markieren konnten. Dazu sollte im Benutzer-Backend eine zusätzliche Option eingebaut werden. Um diesen Status zu kennzeichnen, wurden dabei die Profilbilder der Nutzer ausgegraut und ein Text darüber angezeigt, dass der Nutzer zur Zeit nicht verfügbar ist (Abb. \ref{img:UserAvailable}).
+
 % \\\todotext{twitter Bild}
-\begin{figure}
-  \centering
-    \includegraphics[width=0.4\textwidth]{./img/TwitterFeature.png}
-  \caption{Bauhausboards - Twitterfunktion}
-  \label{img:twitter}
-\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Editor}\label{Editor}
-Der Kern der Client-Funktionen war der Editor zum Erzeugen von Nutzer-Inhalten und Besuchernachrichten. Da Paper.js nur ein Framework war, musste das Interface dafür von Grund auf implementiert werden.
-Voraussetzungen für Paper.js war, dass die Webseite mit dem neuesten HTML5 Standard entwickelt wurde, weil diese Version ein neues Canvas-Element bot, mit dem Grafiken gezeichnet werden konnten.
+Der Kern der Client-Funktionen ist der Editor zum Erzeugen von Nutzer-Inhalten und Besuchernachrichten. Da Paper.js nur ein Framework war, musste das Interface dafür von Grund auf implementiert werden.
+Voraussetzungen für Paper.js war, dass die Webseite mit dem neuesten HTML5 Standard entwickelt wurde, weil diese Version ein neues Canvas-Element bot, mit dem Vektorgrafiken gezeichnet werden konnten.
 \\
 Die Funktionen des Editors erfüllten die Anforderungen des Entwurfs sehr gut.
 Mit einer Stiftfunktion ist es möglich, Zeichnungen per Hand anzufertigen. Dabei kann der Benutzer die Linien in vier verschiedenen Linienstärken zeichnen.
 \\
 Außerdem wurde ein Textwerkzeug implementiert, mit dem ein Text per Tastatur eingegeben werden konnte \abb{img:editorTextSketch}.
-\begin{figure}
+\begin{figure}[h!]
   \centering
     \frame{\includegraphics[width=0.85\textwidth]{./img/EditorTextAndSketch.png}}
   \caption{Bauhausboards - Text Sketch}
@@ -332,18 +342,13 @@ Damit war es auch möglich animierte Gifs hochzuladen.
 \\
 \\
 Da man mit dem Editor alle Objekte verschieben, skalieren und rotieren konnte, hatte er einen Vorteil gegenüber klassischen Whiteboards und Tafeln.
-Dort war es bisher nur möglich, per Magnet angebrachte Papiere zu verschieben oder zu rotieren.
-Der Editor hatte durch die Skalierung von Objekten deswegen einen Freiheitsgrad mehr.
+Dort war es bisher nur möglich, per Magnet angebrachte Objekte zu verschieben oder zu rotieren.
+Der Editor hatte durch die Skalierung folglich einen Freiheitsgrad mehr.
 Zeichnungen konnten nur entfernt und an anderer Stelle wieder neu gezeichnet werden, welche in der digitalen Variante nur verschoben werden brauchten. Außerdem konnte man am Editor nachträglich die Farbe von Zeichnungen ändern, was am Whiteboard nicht möglich ist.
 \\
 Den größten Vorteil hat der Editor durch die Möglichkeit, animierte Gifs anzeigen zu lassen, da Whiteboards und Tafeln nur statischen Inhalt präsentieren können.
 % \todotext{High Level View (wo laufen welche bibliotheken?)}\\
-\begin{figure}[h!]
-  \centering
-    \includegraphics[width=0.75\textwidth]{./img/HighLevelSystemDiagram.png}
-  \caption{Bauhausboards - Aufteilung der Systembibliotheken}
-  \label{img:highLevelSystemDiagram}
-\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Probleme}\label{Probleme}
