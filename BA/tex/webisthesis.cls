@@ -86,6 +86,7 @@
 \RequirePackage{color}
 \RequirePackage{setspace}
 \RequirePackage{pdfpages}
+\RequirePackage{tabularx}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Options
