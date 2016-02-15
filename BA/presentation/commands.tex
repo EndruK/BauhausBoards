@@ -1,0 +1,15 @@
+% ---------------------------------------------------------------------
+% Commands
+% ---------------------------------------------------------------------
+
+\newcommand{\eg}{\textit{e.g.,}\xspace}
+\newcommand{\shortsep}{||}
+\newcommand{\sep}{\ \shortsep \ }
+\def\getpdfpages#1#2{\begingroup
+  \setbeamercolor{background canvas}{bg=}
+  \includepdf[pages={#1},%
+  pagecommand={\global\setcounter{framenumber}{\value{page}}%
+    \expandafter\def\expandafter\insertshorttitle\expandafter{%
+      \insertshorttitle\hfill\insertframenumber\,/\,\inserttotalframenumber}}%
+  ]{#2}
+  \endgroup}

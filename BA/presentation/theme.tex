@@ -1,0 +1,55 @@
+% ---------------------------------------------------------------------
+% Theme
+% ---------------------------------------------------------------------
+
+\mode<all>
+\usetheme{CambridgeUS}
+\mode<presentation>
+{
+  \useinnertheme{rectangles}
+  %\useoutertheme{}
+  \setbeamercovered{transparent}
+  \setbeamertemplate{navigation symbols}{}
+}
+
+% \definecolor{darkred}{rgb}{0.625,0.125,0.25}
+\definecolor{darkred}{rgb}{0,0.4196,0.5803}
+% \definecolor{bauhausblue}{rgb}{0,0.107,0.148}
+
+\setbeamercolor{block body}{bg=gray!20}
+\setbeamercolor{block title}{bg=darkred,fg=white}
+\setbeamercolor{footlinecolorl}{fg=black,bg=lightgray}
+\setbeamercolor{footlinecolor}{fg=black,bg=gray}
+\setbeamercolor{footlinecolord}{fg=black,bg=darkgray}
+
+
+% Auskommentieren, für Section 1,2,3, ...
+\setbeamertemplate{section page}
+{
+    \begin{centering}
+    \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+    \end{beamercolorbox}
+    \end{centering}
+}
+
+\setbeamertemplate{footline}{%
+	\hbox{%
+	\begin{beamercolorbox}[wd=.40\paperwidth,ht=4.25ex,left,leftskip=3ex]{author in head/foot}%
+	    \vbox to4.25ex{\vfil\hbox{\usebeamerfont{author in head/foot} \insertshortauthor}\vfil}%
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[wd=.30\paperwidth,ht=4.25ex,center]{title in head/foot}%
+	    \vbox to4.25ex{\vfil\hbox{\usebeamerfont{date in head/foot}\insertshorttitle{}}\vfil}%
+	\end{beamercolorbox}%
+  % \begin{frame number}{}
+  % \end{frame number}%
+	\begin{beamercolorbox}[wd=.30\paperwidth,ht=4.25ex,right,rightskip=3ex]{date in head/foot}%
+	    % \vbox to4.25ex{\vfil\hbox{\insertshortdate{}}\vfil}%
+      % \vbox to4.25ex{\vfill\hbox{frame number}}
+      \vbox to4.25ex{\vfill\hbox{\insertframenumber{} / \inserttotalframenumber }\vfill}
+	\end{beamercolorbox}}%
+}
+%\setbeamertemplate{footline}{
+%  \quad \tiny \insertshortauthor \hfill \insertshorttitle \qquad \hfill \insertshortdate\ \qquad\qquad
+%}
+\setbeamertemplate{theorems}[numbered]
