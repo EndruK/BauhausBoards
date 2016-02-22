@@ -65,7 +65,9 @@
     - Hermes (2003)
     - Netboards (2014)
 
-  - 
+  - Ergebnis aus Vorstudie mit NetBoards: eigenes Projekt
+
+  % wie lange dauert der Abschnitt?? max 10min!!
 \end{frame}
 % ---------------------------------------------------------------------
 \section{Umsetzung}
@@ -82,6 +84,33 @@
 %     # Remote-Änderung des Contents
 %     # Remote-Einsicht von Messages da per Mail
 \begin{frame}{Umsetzung}
+  - Bauhausboards
+  - Web-Applikation
+    - Serverseitig
+      - NodeJS für Serversprache
+      - SQLite für Datenbank
+    - Clientseite
+      - HTML+CSS Webseite ausgeliefert
+      - Javascript mit JQuery für HTML-DOM Manipulation und Funktionalitäten
+    - Kommunikation Client-Server
+      - erster Aufruf liefert Webseite und Funktionalitäten (JS) aus
+      - Dynamisches Nachladen von Daten per Ajax (CRUD Prinzip)
+    - Komponenten
+      - Editor - Da Simulation von Tafel/Whiteboard
+        - Editorfunktionen
+          - Zeichnen mit verschiedenfarbigen Stiften
+          - Schwammfunktion zum Entfernen von gezeichneten/geschriebenen Elementen
+          - Anheften von Bildern/Zetteln per bspw.: Magneten
+          - Neuanordnung von angehefteten Elementen
+        - realisiert mit dem Javascript-Framework Paper.js
+      - Nutzerinhalt(auf Basis von Editor)
+      - Nachrichtensystem(auf Basis von Editor)
+    - Vorteile gegenüber Whiteboards/Tafeln:
+      - Da man von Überall auf den Server zugreifen kann: nicht notwendig direkt vor Ort zu sein
+      - Sicherheitsaspekt, da nur angemeldete Nutzer präsentierten Inhalt ändern können
+      - Präsentation von Animierten Inhalten (zur Zeit nur Gifs)
+  - Überleitung zur Studie
+    - Das System musste auf Nutzbarkeit getestet werden
 \end{frame}
 % ---------------------------------------------------------------------
 \section{Studie}
@@ -89,12 +118,30 @@
 %   * System musste getestet werden
 %   * 9 Tester á 4 Räume via 4 Tablets
 %   * Tutorial mit allen Funktionen erstellt
-%   * Tester kurz eingewiesen
 %   * 2 Wochen Laufzeit
 %   * Auswertung der Studie
 %     # Interview zum Sammeln von Feedback (Anzahl von Fragen mit angeben vllt noch Beispielfragen)
 %     # UEQ Fragebogen
 \begin{frame}{Studie}
+  - Testsystem aufgesetzt
+    - Webserver
+    - 4 Tablets mit Webprowser im Kiosk-Modus
+  - How-To-Pdf aufgestzt, mit allen Funktionen des System und wie sie zu benutzen sind
+  - Tablets vor Büros in der Bauhausstraße 11 angebracht
+  - Studienlaufzeit: 2 Wochen
+    - dabei:
+      - Nutzer erzeugten diverse Inhalte(meistens Fun aber auch informativ)
+      - Gäste hinterließen Nutzern Nachrichten (dabei aber auch ab und an ohne Kontext/ temporäres Graffiti)
+  - Auswertung der Studie durch Interviews + Fragebogen
+    - 5h 30min an Interview-Mitschnitten zur besseren Analyse
+    - Fragenkatalog mit Fragen zu bestimmten Systemfunktionen
+    - UEQ (User-Experience-Questionaire) als Standardevaluationsmethode
+  - Ergebnisse der Studie
+    - wurde größtenteils wegen der Möglichkeit bewegten Inhalt zu erstellen genutzt (das heißt viele Gifs usw.)
+    - 2 Eingebaute Authentisierungsmethoden waren hinderlich
+    - einigen Nutzern waren manche Schritte zu kompliziert
+    - Authorenkennzeichnung in Nachrichten hat gefehlt (größtes Manko)
+    - Emails bekommen durch Skizzen eine persönliche Note
 \end{frame}
 % ---------------------------------------------------------------------
 \section{Ausblick}
@@ -103,14 +150,15 @@
 %   * Poweruser Einstellung
 %   * Audio-/Video-/Fotonachrichten
 \begin{frame}{Ausblick}
+  - Als Schlussfolgerung:
+    - Änderungen am System müssen durchgeführt werden
+      - Poweruserfunktion
+      - Audio-/Video-/Fotonachrichten
+      - Strukturänderungen - Trennung Frontend-Backend
+    - erneute (längere+größere) Studie mit eingebauten Änderungen
 \end{frame}
 % ---------------------------------------------------------------------
 \section*{}
-\begin{frame}
-  \begin{center}
-    Danke für ihre Aufmerksamkeit!
-  \end{center}
-\end{frame}
 
 \begin{frame}
 % - Demo
@@ -119,13 +167,18 @@
 %   * Änderung des Wallcontents
 %   * Gifs + Twitter
   \begin{center}
-    Demo\\
-    \todo{vor oder nach Fragerunde?}
+    Demo
+    % \todo{vor oder nach Fragerunde?}
   \end{center}
 \end{frame}
 \begin{frame}
   \begin{center}
     Fragen?
+  \end{center}
+\end{frame}
+\begin{frame}
+  \begin{center}
+    Danke für ihre Aufmerksamkeit!
   \end{center}
 \end{frame}
 % % ---------------------------------------------------------------------
