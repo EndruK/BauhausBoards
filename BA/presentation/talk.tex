@@ -47,28 +47,94 @@
 % - Netboards als Vorlageprojekt
 %   * ein wenig Netboards erklären
 % - Entscheidungspunkt: Eigenes System "Bauhausboards" entwickeln
-\begin{frame}{Grundlagen}
-  - Türschilder
-    - Darbietung von persönlichen Daten (Informationen aller Art - Handskizzen, Texte, Ausdrucke, Statusmeldungen(bin gleich wieder da))
-    - Kommunikation zwischen Mitarbeitern / Gästen
-  - Problem?:
+\begin{frame}{Türschilder}
+  % \note<2>{
+  %   \begin{itemize}
+  %     \item Darbietung persönlicher Daten (sind Informationen aller Art)
+  %     \begin{itemize}
+  %       \item Handskizzen
+  %       \item Texte
+  %       \item Ausdrucke
+  %       \item Statusmeldungen (bspw.: bin gleich wieder da / die ganze Woche auf Forschungsreise)
+  %     \end{itemize}
+  %     \item Kommunikation zwischen Mitarbeitern / Gästen
+  %     \begin{itemize}
+  %       \item an was arbeiten die Kollegen / Arbeiter in den Büros
+  %       \item das heißt: Forschungsarbeit oder lustiger Inhalt
+  %     \end{itemize}
+  %   \end{itemize}
+  % }
+  Whiteboards in Forschungseinrichtungen:
+  \note<1>{
+  \todo{blabla}
+  }
+  \pause
+  \begin{itemize}
+    \item Darbietung persönlicher Informationen
+    \note<2>{
+    \begin{itemize}
+      \item Darbietung persönlicher Daten (sind Informationen aller Art)
+      \begin{itemize}
+        \item Handskizzen
+        \item Texte
+        \item Ausdrucke
+        \item Statusmeldungen (bspw.: bin gleich wieder da / die ganze Woche auf Forschungsreise)
+      \end{itemize}
+    \end{itemize}
+    }
+    \pause
+    \item Kommunikation zwischen Mitarbeitern und Gästen
+    \note<3>{
+      \begin{itemize}
+        \item Kommunikation zwischen Mitarbeitern / Gästen
+        \begin{itemize}
+          \item an was arbeiten die Kollegen / Arbeiter in den Büros
+          \item das heißt: Forschungsarbeit oder lustiger Inhalt
+        \end{itemize}
+      \end{itemize}
+    }
+  \end{itemize}
+    % - Darbietung von persönlichen Daten (Informationen aller Art - Handskizzen, Texte, Ausdrucke, Statusmeldungen(bin gleich wieder da))
+    % - Kommunikation zwischen Mitarbeitern / Gästen
+\end{frame}
+\begin{frame}{Nachteile}
     - Content kann nur geändert werden, wenn man persönlich vor Ort ist
     - Zudem können Gäste den bestimmte Sachen abwischen / neue hinzufügen (Vandalismus)
     - Hinterlassene Nachrichten können nur gelesen werden, wenn man selbst vor Ort ist
-  - Lösung:
+\end{frame}
+\begin{frame}{Lösung}
     - Interaktive Türschilder
     - Digitaler Ersatz für Whiteboards/Tafeln neben Büros
     - Nutzer müssen nicht mehr persönlich vor Ort sein, um Content zu ändern / Nachrichten zu empfangen
     - Vandalismus wird eingeschränkt
-
-  - Andere Projekte mit selbem Ansatz
+\end{frame}
+\begin{frame}{Vorarbeit}
     - Hermes (2003)
     - Netboards (2014)
-
   - Ergebnis aus Vorstudie mit NetBoards: eigenes Projekt
+\end{frame}
+
+  % - Türschilder
+  %   - Darbietung von persönlichen Daten (Informationen aller Art - Handskizzen, Texte, Ausdrucke, Statusmeldungen(bin gleich wieder da))
+  %   - Kommunikation zwischen Mitarbeitern / Gästen
+  % - Problem?:
+  %   - Content kann nur geändert werden, wenn man persönlich vor Ort ist
+  %   - Zudem können Gäste den bestimmte Sachen abwischen / neue hinzufügen (Vandalismus)
+  %   - Hinterlassene Nachrichten können nur gelesen werden, wenn man selbst vor Ort ist
+  % - Lösung:
+  %   - Interaktive Türschilder
+  %   - Digitaler Ersatz für Whiteboards/Tafeln neben Büros
+  %   - Nutzer müssen nicht mehr persönlich vor Ort sein, um Content zu ändern / Nachrichten zu empfangen
+  %   - Vandalismus wird eingeschränkt
+
+  % - Andere Projekte mit selbem Ansatz
+  %   - Hermes (2003)
+  %   - Netboards (2014)
+
+  % - Ergebnis aus Vorstudie mit NetBoards: eigenes Projekt
 
   % wie lange dauert der Abschnitt?? max 10min!!
-\end{frame}
+% \end{frame}
 % ---------------------------------------------------------------------
 \section{Umsetzung}
 % - Bauhausboards
@@ -83,8 +149,7 @@
 %     # (beides auf Editor-Grundlage)
 %     # Remote-Änderung des Contents
 %     # Remote-Einsicht von Messages da per Mail
-\begin{frame}{Umsetzung}
-  - Bauhausboards
+\begin{frame}{Bauhausboards}
   - Web-Applikation
     - Serverseitig
       - NodeJS für Serversprache
@@ -92,10 +157,13 @@
     - Clientseite
       - HTML+CSS Webseite ausgeliefert
       - Javascript mit JQuery für HTML-DOM Manipulation und Funktionalitäten
+\end{frame}
+\begin{frame}{Funktion}
     - Kommunikation Client-Server
       - erster Aufruf liefert Webseite und Funktionalitäten (JS) aus
       - Dynamisches Nachladen von Daten per Ajax (CRUD Prinzip)
-    - Komponenten
+\end{frame}
+\begin{frame}{Komponenten}
       - Editor - Da Simulation von Tafel/Whiteboard
         - Editorfunktionen
           - Zeichnen mit verschiedenfarbigen Stiften
@@ -105,13 +173,43 @@
         - realisiert mit dem Javascript-Framework Paper.js
       - Nutzerinhalt(auf Basis von Editor)
       - Nachrichtensystem(auf Basis von Editor)
-    - Vorteile gegenüber Whiteboards/Tafeln:
+\end{frame}
+\begin{frame}{Vorteile}
       - Da man von Überall auf den Server zugreifen kann: nicht notwendig direkt vor Ort zu sein
       - Sicherheitsaspekt, da nur angemeldete Nutzer präsentierten Inhalt ändern können
       - Präsentation von Animierten Inhalten (zur Zeit nur Gifs)
   - Überleitung zur Studie
     - Das System musste auf Nutzbarkeit getestet werden
 \end{frame}
+
+  % - Bauhausboards
+  % - Web-Applikation
+  %   - Serverseitig
+  %     - NodeJS für Serversprache
+  %     - SQLite für Datenbank
+  %   - Clientseite
+  %     - HTML+CSS Webseite ausgeliefert
+  %     - Javascript mit JQuery für HTML-DOM Manipulation und Funktionalitäten
+  %   - Kommunikation Client-Server
+  %     - erster Aufruf liefert Webseite und Funktionalitäten (JS) aus
+  %     - Dynamisches Nachladen von Daten per Ajax (CRUD Prinzip)
+  %   - Komponenten
+  %     - Editor - Da Simulation von Tafel/Whiteboard
+  %       - Editorfunktionen
+  %         - Zeichnen mit verschiedenfarbigen Stiften
+  %         - Schwammfunktion zum Entfernen von gezeichneten/geschriebenen Elementen
+  %         - Anheften von Bildern/Zetteln per bspw.: Magneten
+  %         - Neuanordnung von angehefteten Elementen
+  %       - realisiert mit dem Javascript-Framework Paper.js
+  %     - Nutzerinhalt(auf Basis von Editor)
+  %     - Nachrichtensystem(auf Basis von Editor)
+  %   - Vorteile gegenüber Whiteboards/Tafeln:
+  %     - Da man von Überall auf den Server zugreifen kann: nicht notwendig direkt vor Ort zu sein
+  %     - Sicherheitsaspekt, da nur angemeldete Nutzer präsentierten Inhalt ändern können
+  %     - Präsentation von Animierten Inhalten (zur Zeit nur Gifs)
+  % - Überleitung zur Studie
+  %   - Das System musste auf Nutzbarkeit getestet werden
+% \end{frame}
 % ---------------------------------------------------------------------
 \section{Studie}
 % - Studie
@@ -122,7 +220,7 @@
 %   * Auswertung der Studie
 %     # Interview zum Sammeln von Feedback (Anzahl von Fragen mit angeben vllt noch Beispielfragen)
 %     # UEQ Fragebogen
-\begin{frame}{Studie}
+\begin{frame}{Testsystem}
   - Testsystem aufgesetzt
     - Webserver
     - 4 Tablets mit Webprowser im Kiosk-Modus
@@ -132,17 +230,40 @@
     - dabei:
       - Nutzer erzeugten diverse Inhalte(meistens Fun aber auch informativ)
       - Gäste hinterließen Nutzern Nachrichten (dabei aber auch ab und an ohne Kontext/ temporäres Graffiti)
+\end{frame}
+\begin{frame}{Auswertung}
   - Auswertung der Studie durch Interviews + Fragebogen
     - 5h 30min an Interview-Mitschnitten zur besseren Analyse
     - Fragenkatalog mit Fragen zu bestimmten Systemfunktionen
     - UEQ (User-Experience-Questionaire) als Standardevaluationsmethode
-  - Ergebnisse der Studie
+\end{frame}
+\begin{frame}{Studienergebnisse}
     - wurde größtenteils wegen der Möglichkeit bewegten Inhalt zu erstellen genutzt (das heißt viele Gifs usw.)
     - 2 Eingebaute Authentisierungsmethoden waren hinderlich
     - einigen Nutzern waren manche Schritte zu kompliziert
     - Authorenkennzeichnung in Nachrichten hat gefehlt (größtes Manko)
     - Emails bekommen durch Skizzen eine persönliche Note
 \end{frame}
+%   - Testsystem aufgesetzt
+%     - Webserver
+%     - 4 Tablets mit Webprowser im Kiosk-Modus
+%   - How-To-Pdf aufgestzt, mit allen Funktionen des System und wie sie zu benutzen sind
+%   - Tablets vor Büros in der Bauhausstraße 11 angebracht
+%   - Studienlaufzeit: 2 Wochen
+%     - dabei:
+%       - Nutzer erzeugten diverse Inhalte(meistens Fun aber auch informativ)
+%       - Gäste hinterließen Nutzern Nachrichten (dabei aber auch ab und an ohne Kontext/ temporäres Graffiti)
+%   - Auswertung der Studie durch Interviews + Fragebogen
+%     - 5h 30min an Interview-Mitschnitten zur besseren Analyse
+%     - Fragenkatalog mit Fragen zu bestimmten Systemfunktionen
+%     - UEQ (User-Experience-Questionaire) als Standardevaluationsmethode
+%   - Ergebnisse der Studie
+%     - wurde größtenteils wegen der Möglichkeit bewegten Inhalt zu erstellen genutzt (das heißt viele Gifs usw.)
+%     - 2 Eingebaute Authentisierungsmethoden waren hinderlich
+%     - einigen Nutzern waren manche Schritte zu kompliziert
+%     - Authorenkennzeichnung in Nachrichten hat gefehlt (größtes Manko)
+%     - Emails bekommen durch Skizzen eine persönliche Note
+% \end{frame}
 % ---------------------------------------------------------------------
 \section{Ausblick}
 % - Ausblick
@@ -158,29 +279,48 @@
     - erneute (längere+größere) Studie mit eingebauten Änderungen
 \end{frame}
 % ---------------------------------------------------------------------
-\section*{}
-
-\begin{frame}
+\section*{Demo}
+% \begin{frame}
 % - Demo
 %   * Frontend Demo meiner Wall
 %   * --> Jemand schreibt eine Nachricht --> Mail erhalten / Einsicht im User-Backend
 %   * Änderung des Wallcontents
 %   * Gifs + Twitter
-  \begin{center}
-    Demo
-    % \todo{vor oder nach Fragerunde?}
-  \end{center}
-\end{frame}
-\begin{frame}
-  \begin{center}
-    Fragen?
-  \end{center}
-\end{frame}
-\begin{frame}
-  \begin{center}
-    Danke für ihre Aufmerksamkeit!
-  \end{center}
-\end{frame}
+  % \begin{center}
+  %   Demo
+  %   % \todo{vor oder nach Fragerunde?}
+  % \end{center}
+% \end{frame}
+\section*{Fragen?}
+% \begin{frame}
+%   \begin{center}
+%     Fragen?
+%   \end{center}
+% \end{frame}
+\section*{Danke für ihre Aufmerksamkeit!}
+% \begin{frame}
+%   \begin{center}
+%     Danke für ihre Aufmerksamkeit!
+%   \end{center}
+% \end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 % % ---------------------------------------------------------------------
 % \section{Aufbau eines Vortrags}
 % % ---------------------------------------------------------------------
