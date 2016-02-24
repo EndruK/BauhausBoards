@@ -203,19 +203,67 @@
 %     # Remote-Änderung des Contents
 %     # Remote-Einsicht von Messages da per Mail
 \begin{frame}{Bauhausboards}
-  - Web-Applikation
-    - Serverseitig
-      - NodeJS für Serversprache
-      - SQLite für Datenbank
-    - Clientseite
-      - HTML+CSS Webseite ausgeliefert
-      - Javascript mit JQuery für HTML-DOM Manipulation und Funktionalitäten
+  Bauhausboards als Webapplikation\\
+  \note<1>{
+    Entscheidung fiel auf Web-Applikation\\(andere Möglichkeit wäre Android-/iOS-/Windows-App gewesen - Stichwort Portierung)
+  }
+  \pause
+  \only<2> {
+    \todo{hier eine Grafik für die Server-Client Architektur}
+  }
+  \note<2>{
+    \begin{itemize}
+      \item Server
+      \begin{itemize}
+        \item NodeJS als Serversprache auf Basis von Express.js (Framework zum Erstellen einer einfachen Webseite/Webanwendung)
+        \item SQLite als Datenbanksystem
+      \end{itemize}
+      \item Client
+      \begin{itemize}
+        \item HTML+CSS Webseite (grobes Gerüst)
+        \item Javascript mit JQuery für HTML-DOM Manipulation
+        \item Paper.js als Framework für die Editorkomponente
+      \end{itemize}
+    \end{itemize}
+  }
+  % - Web-Applikation
+  %   - Serverseitig
+  %     - NodeJS für Serversprache
+  %     - SQLite für Datenbank
+  %   - Clientseite
+  %     - HTML+CSS Webseite ausgeliefert
+  %     - Javascript mit JQuery für HTML-DOM Manipulation und Funktionalitäten
 \end{frame}
-\begin{frame}{Funktion}
-    - Kommunikation Client-Server
-      - erster Aufruf liefert Webseite und Funktionalitäten (JS) aus
-      - Dynamisches Nachladen von Daten per Ajax (CRUD Prinzip)
+\begin{frame}{Bauhausboards - Kommunikation}
+  \todo{Grafik für die Interaktion Client-Server (Sequenzdiagramm oder so)}
+  \note<1>{
+    Kommunikation zwischen Client und Server:
+    \begin{itemize}
+      \item erster Aufruf: Auslieferung der Webseite (Grundgerüst mit CSS und allen Javascript Funktionen)
+      \item alle dynamischen Daten: Nachladen auf Client-Seite per ajax (Asynchronous Javascript and XML)
+      \item CRUD-Prinzip kommt zum Einsatz
+    \end{itemize}
+  }
+    % - Kommunikation Client-Server
+    %   - erster Aufruf liefert Webseite und Funktionalitäten (JS) aus
+    %   - Dynamisches Nachladen von Daten per Ajax (CRUD Prinzip)
 \end{frame}
+\begin{frame}{CRUD-Prinzip}
+  \todo{überflüssig? - vllt so einfach erklären}\\
+  \textbf{C}reate\\
+  \textbf{R}ead\\
+  \textbf{U}pdate\\
+  \textbf{D}elete
+  \note<1>{
+    \begin{itemize}
+      \item basiert auf Standard HTTP-Anfragen
+      \item C(create) R(ead) U(pdate) D(elete)
+      \item Server hat Interface für diese Anfragen
+      \item wartet auf Anfragen + liefert anfragenspezifisch Daten aus / ändert Serverzustand
+    \end{itemize}
+  }
+\end{frame}
+
 \begin{frame}{Komponenten}
       - Editor - Da Simulation von Tafel/Whiteboard
         - Editorfunktionen
