@@ -12,10 +12,10 @@
 % Title
 % ---------------------------------------------------------------------
 
-\title[Bauhausboards]{Bauhausboards}
-\subtitle{Interactive Door Signs for the Office}
+\title[Bauhausboards]{Bauhausboards\\Interactive Door Signs for the Office}
+\subtitle{Bachelorverteidigung}
 \author[André Karge]{André Karge}
-\institute[Bauhaus-Universität Weimar]{}
+\institute[Bauhaus-Universität Weimar]{\includegraphics[width=0.5\textwidth]{buw-logo}}
 \date[29.02.2016]{29.02.2016}
 
 \raggedright
@@ -84,8 +84,19 @@
 \end{frame}
 
 \begin{frame}
-  \todo{hier ein Bild von einem Whiteboard in der B11}
-  \note<1>{\todo{say something to pic}}
+  % \todo{hier ein Bild von einem Whiteboard in der B11}
+  \begin{center}
+    aktuelle Situation?\\~\\
+    \pause
+    \visible<2>{
+      \includegraphics[width=0.7\textwidth]{pinnwand}
+    }
+  \end{center}
+  \note<1-2>{
+    Aber: Wie sieht das aktuell aus? -click-\\
+    Aushänge erzeugen periphere Aufmerksamkeit\\
+    \todo{bild schöner machen}
+  }
 \end{frame}
 
 \begin{frame}{Nachteile}
@@ -96,6 +107,7 @@
   \pause
   \begin{itemize}
     \item Man muss persönlich vor Ort sein
+    \pause
     \item ungewünschtes Entfernen / Hinzufügen / Ändern von Information durch Dritte
   \end{itemize}
   \note<2>{
@@ -106,7 +118,7 @@
       \item selbes auch bei hinterlassenen Nachrichten
     \end{itemize}
   }
-  \note<2>{
+  \note<3>{
     Vandalismus:
     \begin{itemize}
       \item jeder Vorbeigehende kann nach Belieben Texte/Bilder ändern/hinzufügen/entfernen
@@ -141,23 +153,40 @@
     % - Nutzer müssen nicht mehr persönlich vor Ort sein, um Content zu ändern / Nachrichten zu empfangen
     % - Vandalismus wird eingeschränkt
 \end{frame}
-\begin{frame}{Vorarbeit}
-  \note<1>{
+
+\begin{frame}[t]{Vorarbeit}
+  \note<1-3>{
     Dazu: einige Projekte mit ähnlichem Ansatz:
     \begin{itemize}
-      \item Hermes (2003) Universität Lancaster
-      \item NetBoards (2014) Universität Cambridge
+      \item Hermes (2003) Universität Lancaster (etwas älteres Projekt)
+      \item NetBoards (2014) Universität Cambridge (aktuelleres Projekt)
     \end{itemize}
     NetBoards am Anfang der Arbeit in einer Vorstudie aufgesetzt.\\
     Ergebnis $\rightarrow$ eigenes Projekt\\
     (da Interaktion zu offen und Vandalismusmöglichkeit zu hoch)
   }
-  Projekte mit ähnlichem Ansatz:
-  \begin{itemize}
-    \item Hermes Projekt (2003)
-    \item NetBoards Projekt (2014)
-  \end{itemize}
-  \todo{hier Bilder von beiden Projekten}
+  \pause
+  \begin{columns}[t]
+    \begin{column}{0.49\textwidth}
+      \begin{center}
+        \visible<2-3>{
+          Hermes (2003)\\
+          \includegraphics[width=0.7\textwidth]{hermes_display}\\
+          \quelle{Quelle: Keith Cheverest et. al. - Ambient Intelligence 2003}
+        }
+      \end{center}
+    \end{column}
+    \pause
+    \visible<3>{
+      \begin{column}{0.49\textwidth}
+        \begin{center}
+          NetBoards (2014)\\
+          \includegraphics[width=0.705\textwidth]{netboards}\\
+          \quelle{Quelle: Errol Wood et. al. - ACM ITS 2014}\\
+        \end{center}
+      \end{column}
+    }
+  \end{columns}
   % \pause
   % NetBoards in kleiner Studie aufgesetzt\\
   % Als Ergebnis: eigenes Projekt
@@ -203,93 +232,147 @@
 %     # Remote-Änderung des Contents
 %     # Remote-Einsicht von Messages da per Mail
 \begin{frame}{Bauhausboards}
-  Bauhausboards als Webapplikation\\
-  \note<1>{
-    Entscheidung fiel auf Web-Applikation\\(andere Möglichkeit wäre Android-/iOS-/Windows-App gewesen - Stichwort Portierung)
-  }
   \pause
-  \only<2> {
-    \todo{hier eine Grafik für die Server-Client Architektur}
+  \begin{center}
+    \includegraphics[width=0.9\textwidth]{presBaBo-1.pdf}
+  \end{center}
+  \note<1>{
+    \begin{itemize}
+      \item andere Möglichkeiten: Tablet-App (Android, iOS, Windows-Mobile)
+      \item Problem: Erhöhter Aufwand durch Portierung
+      \item Deswegen: Entscheidung: Entwurf von Web-Applikation
+      \item System besteht aus: -click-
+    \end{itemize}
   }
   \note<2>{
     \begin{itemize}
-      \item Server
+      \item einfacher Webserver (NodeJS Serversprache)
+      \item besteht aus mehreren Bibliotheken
       \begin{itemize}
-        \item NodeJS als Serversprache auf Basis von Express.js (Framework zum Erstellen einer einfachen Webseite/Webanwendung)
-        \item SQLite als Datenbanksystem
-      \end{itemize}
-      \item Client
-      \begin{itemize}
-        \item HTML+CSS Webseite (grobes Gerüst)
-        \item Javascript mit JQuery für HTML-DOM Manipulation
-        \item Paper.js als Framework für die Editorkomponente
+        \item Express = Framework zum Erstellen des Grundgerüsts einer Webseite
+        \item SQLite = Datenbank-Bibliothek
+        \item mehreren anderen Bibliotheken (Email.js, Crypto.js, twitter.js)
       \end{itemize}
     \end{itemize}
   }
-  % - Web-Applikation
-  %   - Serverseitig
-  %     - NodeJS für Serversprache
-  %     - SQLite für Datenbank
-  %   - Clientseite
-  %     - HTML+CSS Webseite ausgeliefert
-  %     - Javascript mit JQuery für HTML-DOM Manipulation und Funktionalitäten
 \end{frame}
-\begin{frame}{Bauhausboards - Kommunikation}
-  \todo{Grafik für die Interaktion Client-Server (Sequenzdiagramm oder so)}
+\begin{frame}[noframenumbering]{Bauhausboards}
+  \begin{center}
+    \includegraphics[width=0.9\textwidth]{presBaBo-2.pdf}
+  \end{center}
   \note<1>{
-    Kommunikation zwischen Client und Server:
     \begin{itemize}
-      \item erster Aufruf: Auslieferung der Webseite (Grundgerüst mit CSS und allen Javascript Funktionen)
-      \item alle dynamischen Daten: Nachladen auf Client-Seite per ajax (Asynchronous Javascript and XML)
-      \item CRUD-Prinzip kommt zum Einsatz
+      \item Webserver liefert Webseite an Clients aus
+      \item Webseite besteht aus dem Express-Grundgerüst + CSS + allen Javascript Funktionen
+      \item Javascript-Funktionalität hauptsächlich:
+      \begin{itemize}
+        \item JQuery zur Manipulation des Seitenaufbaus+Datenaustausch mit Server -click-
+        % \item Paper.js als Vector-Grafik-Framework (Editor basiert darauf)
+        % \item andere kleinere Bibliotheken
+      \end{itemize}
     \end{itemize}
   }
-    % - Kommunikation Client-Server
-    %   - erster Aufruf liefert Webseite und Funktionalitäten (JS) aus
-    %   - Dynamisches Nachladen von Daten per Ajax (CRUD Prinzip)
 \end{frame}
-\begin{frame}{CRUD-Prinzip}
-  \todo{überflüssig? - vllt so einfach erklären}\\
-  \textbf{C}reate\\
-  \textbf{R}ead\\
-  \textbf{U}pdate\\
-  \textbf{D}elete
+\begin{frame}[noframenumbering]{Bauhausboards}
+  \begin{center}
+    \includegraphics[width=0.9\textwidth]{presBaBo-3.pdf}
+  \end{center}
   \note<1>{
     \begin{itemize}
-      \item basiert auf Standard HTTP-Anfragen
-      \item C(create) R(ead) U(pdate) D(elete)
-      \item Server hat Interface für diese Anfragen
-      \item wartet auf Anfragen + liefert anfragenspezifisch Daten aus / ändert Serverzustand
+      \item \textcolor{gray}{JQuery zur Manipulation des Seitenaufbaus+Datenaustausch mit Server -click-}
+      \item Paper.js als Vector-Grafik-Framework (Editor basiert darauf)
+      \item andere kleinere Bibliotheken
+      \item Datenaustausch mit Server über CRUD-Prinzip\\(C(create) R(ead) U(pdate) D(elete))
     \end{itemize}
   }
 \end{frame}
 
-\begin{frame}{Komponenten}
+\begin{frame}{Editor}
+  % Funktionen:
+  % \begin{itemize}
+  %   \item Zeichnen mit Stiften
+  %   \item Anheftung von Bildern
+  %   \item Entfernung von Elementen
+  %   \item Neuanordnung angehefteter Elemente
+  % \end{itemize}
+  Funktionen:\\
+  \todo{color here}
+  \pause
+  \begin{columns}[t]
+  % \hline
+  % \vrule{}
+    \begin{column}{0.24\textwidth}
+      \begin{center}
+        \textbf{Zeichnen}\\mit\\verschieden-\\farbigen Stiften
+      \end{center}
+    \end{column}
+    % \vrule{}
+    \pause
+    \begin{column}{0.24\textwidth}
+      \begin{center}
+        \textbf{Anheften}\\von\\Bildern und Zetteln
+      \end{center}
+    \end{column}
+    % \vrule{}
+    \pause
+    \begin{column}{0.24\textwidth}
+      \begin{center}
+        \textbf{Neuanordnen}\\von\\Bildern und Zetteln
+      \end{center}
+    \end{column}
+    % \vrule{}
+    \pause
+    \begin{column}{0.24\textwidth}
+      \begin{center}
+        \textbf{Entfernen}\\von\\Zeichnungen, Bildern und Zetteln
+      \end{center}
+    \end{column}
+    % \vrule{}
+    % \hline
+  \end{columns}
+
+  % \todo{Step by Step Icons - Stift,Schwamm,Pinnnadel,Hand}
+
+  \note<1-5>{
+    \begin{itemize}
+      \item Hauptkomponente von Bauhausboards = Editor
+      \item sollte annähernd Funktionen von Tafel/Whiteboard haben -click-
+      \begin{itemize}
+        \item Zeichnen mit verschiedenfarbigen Stiften (unterschiedlicher Dicke)
+        \item Anheften von Bildern/Zetteln (per Magnet oder Pinnadel)
+        \item Entfernen von gezeichneten Elementen (Schwammfunktion / Zettel entfernen)
+        \item Neuanordnung angehefteter Elemente
+      \end{itemize}
+    \end{itemize}
+  }
+\end{frame}
+\begin{frame}{Editor}
+  % \pause
+  \todo{folie fertig machen}\\
+  \todo{Bilder vom Editor}\\
   \note<1>{
     \begin{itemize}
-      \item Editor - Da Simulation von Tafel/Whiteboard
-      \begin{itemize}
-        \item Editorfunktionen
-          \begin{itemize}
-            \item Zeichnen mit verschiedenfarbigen Stiften
-            \item Schwammfunktion zum Entfernen von gezeichneten/geschriebenen Elementen
-            \item Anheften von Bildern/Zetteln per bspw.: Magneten
-            \item Neuanordnung von angehefteten Elementen
-          \end{itemize}
-        \item realisiert mit dem Javascript-Framework Paper.js
-      \end{itemize}
+      \item realisiert mit dem Javascript-Framework Paper.js
       \item Nutzerinhalt(auf Basis von Editor)
       \item Nachrichtensystem(auf Basis von Editor)
     \end{itemize}
   }
 \end{frame}
 \begin{frame}{Vorteile}
-  \note<1>{
-  - Da man von Überall auf den Server zugreifen kann: nicht notwendig direkt vor Ort zu sein\\
-  - Sicherheitsaspekt, da nur angemeldete Nutzer präsentierten Inhalt ändern können\\
-  - Präsentation von Animierten Inhalten (zur Zeit nur Gifs)\\
-  - Überleitung zur Studie\\
-    - Das System musste auf Nutzbarkeit getestet werden\\
+  \begin{itemize}
+    \item Von Überall erreichbar
+    \pause
+    \item Erhöhte Sicherheit vor Vandalismus
+    \pause
+    \item Darstellung von animiertem Inhalt
+  \end{itemize}
+  \note<1-3>{
+    \begin{itemize}
+      \item Da man von Überall auf den Server zugreifen kann: nicht notwendig direkt vor Ort zu sein
+      \item Sicherheitsaspekt, da nur angemeldete Nutzer präsentierten Inhalt ändern können
+      \item Präsentation von Animierten Inhalten (zur Zeit nur Gifs)
+      \item (System musste auf Nutzbarkeit getestet werden)
+    \end{itemize}
   }
 \end{frame}
 
