@@ -86,16 +86,15 @@
 \begin{frame}
   % \todo{hier ein Bild von einem Whiteboard in der B11}
   \begin{center}
-    aktuelle Situation?\\~\\
+    Aktuelle Situation?\\~\\
     \pause
     \visible<2>{
-      \includegraphics[width=0.7\textwidth]{pinnwand}
+      \includegraphics[width=0.65\textwidth]{pinnwand}
     }
   \end{center}
   \note<1-2>{
     Aber: Wie sieht das aktuell aus? -click-\\
     Aushänge erzeugen periphere Aufmerksamkeit\\
-    \todo{bild schöner machen}
   }
 \end{frame}
 
@@ -108,7 +107,7 @@
   \begin{itemize}
     \item Man muss persönlich vor Ort sein
     \pause
-    \item ungewünschtes Entfernen / Hinzufügen / Ändern von Information durch Dritte
+    \item Ungewünschtes Entfernen / Hinzufügen / Ändern von Information durch Dritte
   \end{itemize}
   \note<2>{
     Vor Ort sein:
@@ -133,15 +132,13 @@
   \note<1>{
     Eine Lösung ist das Anbringen von interaktiven digitalen Türschildern
   }
-  \begin{itemize}
-    \item Anbringung von digitalen Türschildern
+  Anbringung von digitalen Türschildern
     \pause
     \begin{itemize}
       \item Änderung von präsentierten Inhalten aus der Ferne
       \item Erhalten von Mitteilungen ohne vor Ort zu sein
       \item Einschränkung von Vandalismus
     \end{itemize}
-  \end{itemize}
   \note<2>{
     \begin{itemize}
       \item Vorteil: man muss nicht mehr selbst vor Ort sein um Inhalt zu ändern / Nachrichten zu erhalten
@@ -232,9 +229,8 @@
 %     # Remote-Änderung des Contents
 %     # Remote-Einsicht von Messages da per Mail
 \begin{frame}{Bauhausboards}
-  \pause
   \begin{center}
-    \includegraphics[width=0.9\textwidth]{presBaBo-1.pdf}
+    \includegraphics[width=0.9\textwidth]{babo}
   \end{center}
   \note<1>{
     \begin{itemize}
@@ -244,7 +240,12 @@
       \item System besteht aus: -click-
     \end{itemize}
   }
-  \note<2>{
+\end{frame}
+\begin{frame}[noframenumbering]{Bauhausboards}
+  \begin{center}
+    \includegraphics[width=0.9\textwidth]{presBaBo-1.pdf}
+  \end{center}
+  \note<1>{
     \begin{itemize}
       \item einfacher Webserver (NodeJS Serversprache)
       \item besteht aus mehreren Bibliotheken
@@ -295,8 +296,8 @@
   %   \item Entfernung von Elementen
   %   \item Neuanordnung angehefteter Elemente
   % \end{itemize}
-  Funktionen:\\
-  \todo{color here}
+  Anforderungen:\\
+  % \todo{color here}
   \pause
   \begin{columns}[t]
   % \hline
@@ -348,17 +349,26 @@
 \end{frame}
 \begin{frame}{Editor}
   % \pause
-  \todo{folie fertig machen}\\
-  \todo{Bilder vom Editor}\\
+  % \todo{folie fertig machen}\\
+  % \todo{Bilder vom Editor}\\
+  \begin{center}
+    \includegraphics[width=0.9\textwidth]{editor}
+  \end{center}
   \note<1>{
     \begin{itemize}
-      \item realisiert mit dem Javascript-Framework Paper.js
-      \item Nutzerinhalt(auf Basis von Editor)
-      \item Nachrichtensystem(auf Basis von Editor)
+      \item realisiert Javascript-Framework: Paper.js
+      \item Hauptkomponenten basierend auf Editor:
+      \begin{itemize}
+        \item Nutzerinhalt (Nutzer können Informationen darbieten)
+        \item Nachrichtensystem (Gäste können Nutzern Nachrichten schicken)
+        \item (Feedback)
+      \end{itemize}
+      \item Alle Anforderungen an Whiteboard/Tafel erfüllt
+      \item + Zusatzfunktionen (UNDO+REDO, nachträgliches Ändern von Farbe, Neuanordnung von Zeichnungen)
     \end{itemize}
   }
 \end{frame}
-\begin{frame}{Vorteile}
+\begin{frame}{Vorteile Bauhausboards}
   \begin{itemize}
     \item Von Überall erreichbar
     \pause
@@ -415,33 +425,116 @@
 %     # Interview zum Sammeln von Feedback (Anzahl von Fragen mit angeben vllt noch Beispielfragen)
 %     # UEQ Fragebogen
 \begin{frame}{Testsystem}
+  \begin{columns}
+    \begin{column}{0.49\textwidth}
+      \begin{itemize}
+        \item 1 Webserver
+        \item 4 Tablets
+        \item 9 Probanden
+        \item 2 Wochen Laufzeit
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \begin{center}
+        \includegraphics[width=0.9\textwidth]{schild2}
+      \end{center}
+    \end{column}
+  \end{columns}
   \note<1>{
-  - Testsystem aufgesetzt\\
-    - Webserver\\
-    - 4 Tablets mit Webprowser im Kiosk-Modus\\
-  - How-To-Pdf aufgestzt, mit allen Funktionen des System und wie sie zu benutzen sind\\
-  - Tablets vor Büros in der Bauhausstraße 11 angebracht\\
-  - Studienlaufzeit: 2 Wochen\\
-    - dabei:\\
-      - Nutzer erzeugten diverse Inhalte(meistens Fun aber auch informativ)\\
-      - Gäste hinterließen Nutzern Nachrichten (dabei aber auch ab und an ohne Kontext/ temporäres Graffiti)\\
+    \begin{itemize}
+      \item Dazu: Testsystem aufgesetzt
+      \item 1 Webserver + 4 Tablets mit Webrowser im Kiosk-Mode
+      \item Probanden gesucht
+      \item Tablets vor 4 Räumen in der Bauhausstraße 11 angebracht (9 Probanden)
+      \item Tutorial-Dokument mit Erklärung zu allen Funktionen aufgesetzt
+      \item Laufzeit: 2 Wochen
+    \end{itemize}
+  % - Testsystem aufgesetzt\\
+  %   - Webserver\\
+  %   - 4 Tablets mit Webprowser im Kiosk-Modus\\
+  % - How-To-Pdf aufgestzt, mit allen Funktionen des System und wie sie zu benutzen sind\\
+  % - Tablets vor Büros in der Bauhausstraße 11 angebracht\\
+  % - Studienlaufzeit: 2 Wochen\\
   }
 \end{frame}
+
 \begin{frame}{Auswertung}
-  \note<1>{
-  - Auswertung der Studie durch Interviews + Fragebogen\\
-    - 5h 30min an Interview-Mitschnitten zur besseren Analyse\\
-    - Fragenkatalog mit Fragen zu bestimmten Systemfunktionen\\
-    - UEQ (User-Experience-Questionaire) als Standardevaluationsmethode\\
+  % \begin{columns}
+  %   \begin{column}{0.49\textwidth}
+  %     \begin{center}
+  %       {\large Interview}
+  %     \end{center}
+  %   \end{column}
+  %   \begin{column}{0.49\textwidth}
+  %     \begin{center}
+  %       {\large UEQ}
+  %     \end{center}
+  %   \end{column}
+  % \end{columns}
+  Interview
+  \begin{itemize}
+    \item Probanden mit Fragenkatalog befragt
+    \item 5h 30min an Mitschnitten
+  \end{itemize}
+  \pause
+  UEQ (User-Experience-Questionaire)
+  \begin{itemize}
+    \item zusätzliche Auswertung
+  \end{itemize}
+  \note<1-2>{
+    \begin{itemize}
+      \item Um Studie auszuwerten:
+      \item Entwurf Interview
+      \item $\rightarrow$ Fragenkatalog - Fragen zu bestimmten Systemfunktionen
+      \item Probanden wurden nach Studie befragt
+      \item 5h 30min Interview Mitschnitte (spätere Analyse)
+      \item Dazu: Ausfüllen von UEQ(User-Experience-Questionaire) Fragebogen als zusätzliche Auswertung
+    \end{itemize}
   }
 \end{frame}
+
 \begin{frame}{Studienergebnisse}
-  \note<1>{
-    - wurde größtenteils wegen der Möglichkeit bewegten Inhalt zu erstellen genutzt (das heißt viele Gifs usw.)\\
-    - 2 Eingebaute Authentisierungsmethoden waren hinderlich\\
-    - einigen Nutzern waren manche Schritte zu kompliziert\\
-    - Authorenkennzeichnung in Nachrichten hat gefehlt (größtes Manko)\\
-    - Emails bekommen durch Skizzen eine persönliche Note\\
+  % \begin{columns}
+  %   \begin{column}[t]{0.49\textwidth}
+  %     \begin{center}
+  %       \textbf{Nutzer}
+  %       \begin{itemize}
+  %         \item Spaßnachrichten
+  %         \item 
+  %       \end{itemize}
+  %     \end{center}
+  %   \end{column}
+  %   \begin{column}[t]{0.49\textwidth}
+  %     \begin{center}
+  %       \textbf{Gäste}
+  %       \begin{itemize}
+
+  %       \end{itemize}
+  %     \end{center}
+  %   \end{column}
+  % \end{columns}
+  Pro:
+  \begin{itemize}
+    \item Nutzer erzeugten diverse Inhalte
+    \item Gäste hinterließen Nutzern viele Nachrichten
+    \item Bestes Feature: Darstellung von Gifs
+    \item Nachrichten mit persönlicher Note
+  \end{itemize}
+  \pause
+  Contra:
+  \begin{itemize}
+    \item Keine Autorenkennzeichnung in Mitteilungen
+    \item Authentisierungsmethoden hinderlich
+  \end{itemize}
+  \note<1-2>{
+    \begin{itemize}
+      \item Nutzer: diverse Inhalte (größtenteils Spaß-Inhalte / auch: Information zu aktueller Arbeit)
+      \item Gäste: hinterließen Nutzern viele Nachrichten (zum Teil mit Kontext / aber: zum teil ohne)
+      \item bestes Feature laut Interviews: Darstellung von Gifs
+      \item Emails durch Skizzen: persönliche Note
+      \item größtes Manko: fehlen von Authorenkennzeichnung in Nachrichten
+      \item zudem: hinderlich mit 2 unterschiedlichen Authentisierungsmethoden zu interagieren
+    \end{itemize}
   }
 \end{frame}
 %   - Testsystem aufgesetzt
@@ -471,13 +564,23 @@
 %   * Poweruser Einstellung
 %   * Audio-/Video-/Fotonachrichten
 \begin{frame}{Ausblick}
-  \note<1>{
-  - Als Schlussfolgerung:\\
-    - Änderungen am System müssen durchgeführt werden\\
-      - Poweruserfunktion\\
-      - Audio-/Video-/Fotonachrichten\\
-      - Strukturänderungen - Trennung Frontend-Backend\\
-    - erneute (längere+größere) Studie mit eingebauten Änderungen\\
+  Änderungen am System\pause:
+  \begin{itemize}
+    \item Neue Nachrichtentypen
+    \item Strukturänderungen
+  \end{itemize}
+  \pause
+  \bigskip
+  Durchführung einer weiteren, größeren Studie
+  \note<1-3>{
+    \begin{itemize}
+      \item aus Studienergebnissen: Schlussfolgerungen:
+      \item Änderungen am System
+      \item Audio-/Video-/Fotonachrichten (Autorenproblem)
+      \item Strukturänderungen am System: Trennung Frontend-Backend (Authentisierungsproblem)
+      \item Hinzufügung einer Poweruser-Funktion (Kapselung komplexerer Funktionen)
+      \item Durchführung einer weiteren Studie (länger + mehr Probanden) 
+    \end{itemize}
   }
 \end{frame}
 % ---------------------------------------------------------------------
