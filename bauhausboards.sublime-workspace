@@ -27,7 +27,7 @@
 			"file": "BA/tex/einleitung.tex",
 			"settings":
 			{
-				"buffer_size": 4026,
+				"buffer_size": 4025,
 				"line_ending": "Unix"
 			}
 		},
@@ -35,7 +35,7 @@
 			"file": "BA/tex/relatedWork.tex",
 			"settings":
 			{
-				"buffer_size": 14924,
+				"buffer_size": 14922,
 				"line_ending": "Unix"
 			}
 		},
@@ -43,7 +43,7 @@
 			"file": "BA/tex/vorstudie.tex",
 			"settings":
 			{
-				"buffer_size": 8871,
+				"buffer_size": 8868,
 				"line_ending": "Unix"
 			}
 		},
@@ -59,15 +59,32 @@
 			"file": "BA/tex/studie.tex",
 			"settings":
 			{
-				"buffer_size": 34452,
+				"buffer_size": 35823,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "BA/Nachrichten",
+			"settings":
+			{
+				"buffer_size": 610,
+				"line_ending": "Unix",
+				"name": "informativ"
 			}
 		},
 		{
 			"file": "BA/tex/fazit.tex",
 			"settings":
 			{
-				"buffer_size": 5007,
+				"buffer_size": 5003,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/andre/Documents/disraptor/index.html",
+			"settings":
+			{
+				"buffer_size": 27352,
 				"line_ending": "Unix"
 			}
 		},
@@ -111,17 +128,17 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "di",
+		"height": 154.0,
+		"last_filter": "insta",
 		"selected_items":
 		[
 			[
-				"di",
-				"Dictionaries: Set Language"
-			],
-			[
 				"insta",
 				"Package Control: Install Package"
+			],
+			[
+				"di",
+				"Dictionaries: Set Language"
 			]
 		],
 		"width": 449.0
@@ -154,6 +171,9 @@
 	],
 	"file_history":
 	[
+		"/home/andre/Documents/BA_CD/BA/studienauswertung",
+		"/home/andre/Documents/BA_CD/BA/UEQ/notes.txt",
+		"/home/andre/Github/BauhausBoards/BA/tex/webisthesis.cls",
 		"/mnt/LinuxDrive/Dropbox/TABAK",
 		"/home/andre/Documents/xorg.conf",
 		"/home/andre/xorg.conf",
@@ -161,7 +181,6 @@
 		"/home/andre/Github/BauhausBoards/BA/tex/anhang.fls",
 		"/home/andre/Github/BauhausBoards/BA/tex/anhang.tex",
 		"/home/andre/Github/BauhausBoards/BA/glossar",
-		"/home/andre/Github/BauhausBoards/BA/tex/webisthesis.cls",
 		"/run/media/andre/Games/SpellForce/Spellforce Platinum key.txt",
 		"/home/andre/Github/BauhausBoards/BA/tex/ausblick.tex",
 		"/mnt/LinuxDrive/Dropbox/games_after_BA.txt",
@@ -250,7 +269,7 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 9,
 			"sheets":
 			[
 				{
@@ -272,7 +291,7 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX-Plus/syntax/LaTeX+.tmLanguage",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -280,7 +299,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -308,7 +327,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
@@ -317,15 +336,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4026,
+						"buffer_size": 4025,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								821,
-								821
+								734,
+								734
 							]
 						],
 						"settings":
@@ -336,7 +355,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -345,15 +364,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14924,
+						"buffer_size": 14922,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14924,
-								14924
+								12644,
+								12644
 							]
 						],
 						"settings":
@@ -363,10 +382,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2921.0,
+						"translation.y": 2874.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -375,15 +394,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8871,
+						"buffer_size": 8868,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7507,
-								7507
+								4490,
+								4490
 							]
 						],
 						"settings":
@@ -393,10 +412,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1981.0,
+						"translation.y": 961.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -412,8 +431,8 @@
 						"selection":
 						[
 							[
-								23646,
-								23646
+								22251,
+								22251
 							]
 						],
 						"settings":
@@ -421,10 +440,10 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 9281.0,
+						"translation.y": 6414.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -433,15 +452,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 34452,
+						"buffer_size": 35823,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								33904,
-								33904
+								9006,
+								9006
 							]
 						],
 						"settings":
@@ -449,32 +468,89 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 9581.0,
+						"translation.y": 2614.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
 					"buffer": 7,
-					"file": "BA/tex/fazit.tex",
+					"file": "BA/Nachrichten",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5007,
+						"buffer_size": 610,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2229,
-								2229
+								420,
+								420
+							]
+						],
+						"settings":
+						{
+							"auto_name": "informativ",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "BA/tex/fazit.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5003,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2297,
+								2297
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 661.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/home/andre/Documents/disraptor/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 27352,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								176,
+								176
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -484,7 +560,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 10,
 					"file": "BA/tex/anhang.tex",
 					"semi_transient": false,
 					"settings":
@@ -510,11 +586,11 @@
 						"translation.y": 1581.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 11,
 					"file": "BA/tex/literature.bib",
 					"semi_transient": false,
 					"settings":
@@ -540,7 +616,7 @@
 						"translation.y": 180.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 9,
 					"type": "text"
 				}
 			]
@@ -579,7 +655,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 36.0
+		"height": 101.0
 	},
 	"output.find_results":
 	{
