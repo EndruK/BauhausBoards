@@ -1,3 +1,0 @@
-Bekannte Fehler:
-- Texteingabe String läuft über Seitenrand -> Lösung: Umbruch nach gewisser Anzahl Zeichen + Max Zeichen length
-- Hintergrund wird immer Nachgeladen -> Lösung: Caching
