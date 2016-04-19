@@ -18,6 +18,9 @@ var email = require('emailjs');
 var crypto = require('crypto');
 var banquo = require('banquo');
 
+var Config = require('./config');
+var conf = new Config();
+
 var routes = require('./routes/index');
 var functions = require('./routes/functions');
 var message = require('./routes/message');

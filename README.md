@@ -11,6 +11,10 @@ This tool is the result of the bachelor thesis of André Karge at the Bauhaus Un
 - Install the latest version of Node.js
 
 <!--
+TODO:
+- mailserver or mailcatcher??
+
+
 install this packages before:
 libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential
 
