@@ -1,6 +1,6 @@
 # Bauhausboards - a tool to present personalized content on public situated displays in offices
 
-This tool is the result of the [bachelor thesis](endruk.github.io/thesis.pdf) (in german) of André Karge at the Bauhaus Universität Weimar.
+This tool is the result of the [bachelor thesis](http://endruk.github.io/thesis.pdf) (in german) of André Karge at the Bauhaus Universität Weimar.
 
 ## Installation Guide
 - Install the latest version of Node.js
