@@ -2,26 +2,25 @@
 
 This tool is the result of the bachelor thesis of André Karge at the Bauhaus Universität Weimar.
 
-## Pre-Requirements:
-- Node.js v5.10+
-- npm v3.8+
-- Cairo Graphics Lib
-
 ## Installation Guide
 - Install the latest version of Node.js
+- Install the latest version of npm
+- Install sqlite3
+- Install the dependencies of the canvas package (https://www.npmjs.com/package/canvas)
+- Install other dependencies by ```npm install``` (may take a while)
+- Run the setup.sh script
+- Change the config.js
+
+## Installation on Arch Linux
+```
+sudo pacman -S nodejs npm sqlite3 cairo libjpeg-turbo libjpeg6-turbo giflib libpango
+cd /path/to/BauhausBoards
+npm install
+sh ./setup.sh
+nano ./config.js # change all parameters for your environment
+```
 
 <!--
 TODO:
 - mailserver or mailcatcher??
-
-
-install this packages before:
-libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential
-
-Requierements:
-- Node.js
-- NPM
-- Cairo Graphics library
-
-npm install
 -->
