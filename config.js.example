@@ -1,0 +1,22 @@
+var config = {};
+config.twitter = {};
+config.session = {};
+config.mail    = {};
+
+// Change the following lines:
+config.twitter.consumer_key = "0000000000000000000000000";
+config.twitter.consumer_secret = "00000000000000000000000000000000000000000000000000";
+config.twitter.access_token_key = "00000000000000000000000000000000000000000000000000";
+config.twitter.access_token_secret = "000000000000000000000000000000000000000000000";
+config.session.session_name = "Session";
+config.session.secret_hash = "00000000000000000000000000000000000000000000";
+config.session.session_time = 900000; //time in ms
+config.mail.host = "localhost";
+config.mail.port = 25;
+config.mail.user = "";
+config.mail.pass = "";
+config.mail.ssl_enable = false;
+
+
+
+module.exports = config;

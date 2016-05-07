@@ -7,9 +7,9 @@ This tool is the result of the bachelor thesis of André Karge at the Bauhaus Un
 - Install the latest version of npm
 - Install sqlite3
 - Install the dependencies of the canvas package (https://www.npmjs.com/package/canvas)
-- Install other dependencies by ```npm install``` (may take a while)
+- Install other dependencies (```npm install```) (may take a while)
 - Run the setup.sh script
-- Change the config.js
+- Change the config file
 
 ## Installation on Arch Linux
 ```
@@ -17,6 +17,7 @@ sudo pacman -S nodejs npm sqlite3 cairo libjpeg-turbo libjpeg6-turbo giflib libp
 cd /path/to/BauhausBoards
 npm install
 sh ./setup.sh
+mv ./config.js.example ./config.js
 nano ./config.js # change all parameters for your environment
 ```
 
