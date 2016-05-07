@@ -8,7 +8,7 @@ var sessionTimeUser = 1000*60*5; //5min
 router.get('/getRoomUsers', function(req, res, next) {
   var db = req.db;
   var roomID = req.query.roomID;
-  var query = 
+  var query =
     "SELECT " +
       "user.u_id AS userID, "+
       "user.u_name AS userName, "+
@@ -145,7 +145,7 @@ router.get('/getUserStatus', function(req, res, next) {
   var db = req.db;
   var userID = req.query.userID;
 
-  var query = 
+  var query =
     "SELECT "+
       "s_text AS text, s_since AS since, s_until AS until " +
     "FROM status " +
@@ -195,7 +195,7 @@ router.get('/getUserContent', function(req,res,next) {
   var db = req.db;
   var userID = req.query.userID;
 
-  var query = 
+  var query =
     "SELECT "+
       "c_contentJSON as content, c_date as date "+
     "FROM "+
@@ -234,7 +234,7 @@ router.get('/getUserTwitter', function(req,res,next) {
         var params = {screen_name: row.twitter}
         twitter.get('statuses/user_timeline', params, function(err,tweets,response) {
           if(!err) {
-            
+
             res.send({
               "twitterName" : row.twitter,
               "tweetID": tweets[0].id_str
@@ -319,7 +319,7 @@ router.post('/setBoardDim', function(req,res,next) {
   var boardID = req.body.boardID;
   var width = req.body.width;
   var height = req.body.height;
-  query = 
+  query =
     "UPDATE board SET b_resX=$width, b_resY=$height "+
     "WHERE b_id=$boardID";
   db.run(query,{
@@ -376,37 +376,13 @@ router.post('/createMessage', function(req,res,next) {
         });
       });
       res.send("successfully created new message");
-      sendMail(users,req.mail,db,req.banquo);
+      sendMail(users,req.mail,db);
     }
   });
 });
 
-function sendMail(users,mail,db,banquo) {
+function sendMail(users,mail,db) {
   //TODO:render image
-  //webshot("localhost:3000/getMessage?token="+users[0].token, "image.png" function(err) {});
-  /*var renderStream = webshot("localhost:3000/getMessage?token="+users[0].token);
-  renderStream.on('data', function(data) {
-    var binImage = data.toString('binary');
-    console.log(binImage);
-    
-  });*/
-  /*var url = "http://localhost:3000/message?token="+users[0].token;
-  //var url = "http://www.google.de";
-  var opts = {
-    mode : 'save',
-    url: url,
-    delay: 10000,
-    selector: "#EditorCanvas",
-    scrape: true
-  };
-  //banquo.capture(opts, function(err, imageData) {
-  banquo.capture(opts, function(err, bodyMarkup) {
-    if(err) {
-      console.log(err);
-    }
-    else {
-      
-    }*/
   users.forEach(function(key) {
     var query = "SELECT u_mail FROM user WHERE u_id=$userID";
     db.get(query,{
@@ -438,7 +414,7 @@ function sendMail(users,mail,db,banquo) {
 
 router.get('/getUserMessages', restrictUser, function(req,res) {
   var db = req.db;
-  var query = 
+  var query =
     "SELECT "+
       "message.m_id AS messageID, "+
       "message.m_contentJSON AS content, "+
@@ -503,7 +479,7 @@ router.post('/markMessageUnseen', restrictUser, function(req,res) {
 router.get('/getBoard', function(req,res,next) {
   var db = req.db;
   var boardID = req.query.boardID;
-  var query = 
+  var query =
     "SELECT "+
       "b_resX AS boardResX, "+
       "b_resY AS boardResY, "+
@@ -526,7 +502,7 @@ router.get('/getBoard', function(req,res,next) {
 //backend and frontend
 router.get('/getBoards', function(req,res,next) {
   var db = req.db;
-  var query = 
+  var query =
     "SELECT "+
       "board.b_id AS id, "+
       "board.b_resX AS resX, "+
@@ -748,7 +724,7 @@ router.post('/setRoomDescription', restrictAdmin, function(req,res) {
 //backend
 router.get('/getUsers', restrictAdmin, function(req,res) {
   var db = req.db;
-  var query = 
+  var query =
     "SELECT "+
       "user.u_id AS userID, "+
       "user.u_name AS userName, "+
@@ -832,7 +808,7 @@ router.post('/createNewUser', restrictAdmin, function(req,res) {
   if(adminFlag) adminFlag = 1;
   else adminFlag = 0;
   var pin = req.body.userPin;
-  var query = 
+  var query =
     "INSERT INTO user (u_name,u_pw,u_date,u_mail,u_profilePic,u_descr,u_twitter,u_adminFlag,u_pin) "+
     "VALUES ($name,$pw,$jsonDate,$mail,$profilePic,$description,$twitter,$adminFlag,$pin)";
   db.run(query,{
@@ -922,7 +898,7 @@ router.post('/removeUser',restrictAdmin,function(req,res) {
 router.get('/getUsersForRoom',function(req,res,next) {
   var db = req.db;
   var roomID = req.query.roomID;
-  var query = 
+  var query =
     "SELECT "+
       "user.u_id AS userID, "+
       "user.u_profilePic AS userProfilePic, "+
@@ -948,7 +924,7 @@ router.get('/getUsersForRoom',function(req,res,next) {
 router.get('/getUsersNotInRoom',restrictAdmin,function(req,res) {
   var db = req.db;
   var roomID = req.query.roomID;
-  var query = 
+  var query =
   "SELECT "+
     "u_id AS userID, u_name AS userName, u_profilePic AS userProfilePic "+
   "FROM user "+
@@ -973,7 +949,7 @@ router.post('/addUserToRoom',restrictAdmin,function(req,res) {
   var db = req.db;
   var roomID = req.body.roomID;
   var userID = req.body.userID;
-  var query = 
+  var query =
     "INSERT INTO roomusers (ru_user,ru_room) VALUES($userID,$roomID)";
   db.run(query,{
     $userID:userID,
@@ -994,7 +970,7 @@ router.post('/removeUserFromRoom',restrictAdmin,function(req,res) {
   var db = req.db;
   var roomID = req.body.roomID;
   var userID = req.body.userID;
-  var query = 
+  var query =
     "DELETE FROM roomusers WHERE ru_user=$userID AND ru_room=$roomID";
   db.run(query,{
     $userID:userID,
@@ -1069,7 +1045,7 @@ router.post('/changeUser',restrictAdmin,function(req,res) {
   else adminFlag = 0;
   var pin = req.body.userPin;
 
-  var query = 
+  var query =
     "UPDATE user "+
     "SET "+
       "u_name=$name, ";
@@ -1098,7 +1074,7 @@ router.post('/changeUser',restrictAdmin,function(req,res) {
     $userID:userID};
   if(pw) {
     queryArray["$pw"] = pw;
-  } 
+  }
   if(pin) {
     queryArray["$pin"] = pin;
   }
@@ -1235,7 +1211,7 @@ router.post('/changeUserInfo', restrictUserPW, function(req,res) {
   var userDescription = req.body.userDescription;
   var userTwitter = req.body.userTwitter;
   var userProfilePic = req.body.userProfilePic;
-  var query = 
+  var query =
   "UPDATE user "+
   "SET "+
     "u_name=$userName, "+

@@ -16,10 +16,8 @@ var Twitter = require("twitter");
 var paper = require('paper');
 var email = require('emailjs');
 var crypto = require('crypto');
-var banquo = require('banquo');
 
-var Config = require('./config');
-var conf = new Config();
+var conf = require('./config');
 
 var routes = require('./routes/index');
 var functions = require('./routes/functions');
@@ -34,31 +32,31 @@ function compile(str, path) {
 };
 
 var client = new Twitter({
-  consumer_key: 'QOjRYvg42VpTcMwb5dDIJqvIA',
-  consumer_secret: '1v18gCaVPvO5aR7xUN0NC1XhIOAquGufKF0dXWIj6nJxvZOGjM',
-  access_token_key: '2317344978-UvpuDUFdgqIjmwR2XX5eV6NDW9PeJXLOK2397f1',
-  access_token_secret: 'j9s6ZgUCwcE0LwrKuKCbWWUVtv5HzlSHXGpB30etNc094'
+  consumer_key: conf.twitter.consumer_key,
+  consumer_secret: conf.twitter.consumer_secret,
+  access_token_key: conf.twitter.access_token_key,
+  access_token_secret: conf.twitter.access_token_secret
 });
 
 var server = email.server.connect({
-  host: "igor.medien.uni-weimar.de",
-  //user: "",
-  //password: "",
-  port: 25,
-  ssl: false
+  host: conf.mail.host,
+  user: conf.mail.host,
+  password: conf.mail.pass,
+  port: conf.mail.port,
+  ssl: conf.mail.ssl
 });
 
 
 app.use(session({
-  secret: 'ZMhX5IwFS9agS32KjR7iRKKR9bpsYUXvg7QRvaBSrfY=', //TODO: set this in setupFile
-  name: 'BauhausBoardSession',
+  secret: conf.session.secret_hash, //TODO: set this in setupFile
+  name: conf.session.name,
   genid: function(req) {
     return uuid.v4();
   },
   resave: true,
   saveUninitialized: true,
   cookie:{
-    maxAge: 15*60*1000 //15min
+    maxAge: conf.session.session_time //15min
   },
   rolling:true
 }));
@@ -95,7 +93,7 @@ app.use(function(req, res, next) {
   req.twitter = client;
   req.mail = server;
   req.crypto = crypto;
-  req.banquo = banquo;
+  // req.banquo = banquo;
   next();
 });
 
@@ -136,7 +134,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 
 module.exports = paper;
