@@ -9,7 +9,7 @@ This tool is the result of the [bachelor thesis](http://endruk.github.io/thesis.
 - Install the dependencies of the canvas package (https://www.npmjs.com/package/canvas)
 - Install other dependencies (```npm install```) (may take a while)
 - Run the setup.sh script
-- Change the config file
+- Copy and change the config file
 
 ## Installation on Arch Linux
 ```
@@ -17,7 +17,7 @@ sudo pacman -S nodejs npm sqlite3 cairo libjpeg-turbo libjpeg6-turbo giflib libp
 cd /path/to/BauhausBoards
 npm install
 sh ./setup.sh
-mv ./config.js.example ./config.js
+cp ./config.js.example ./config.js
 nano ./config.js # change all parameters for your environment
 ```
 

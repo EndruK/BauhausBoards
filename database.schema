@@ -1,4 +1,4 @@
-CREATE TABLE content(
+CREATE TABLE IF NOT EXISTS content(
   c_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   c_user INTEGER NOT NULL,
   c_date DATETIME,
@@ -6,43 +6,43 @@ CREATE TABLE content(
   c_background TEXT,
   FOREIGN KEY(c_user) REFERENCES user(u_id)
 );
-CREATE TABLE groups(
+CREATE TABLE IF NOT EXISTS groups(
   g_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   g_name VARCHAR(80),
   g_descr TEXT,
   g_head INTEGER,
   FOREIGN KEY(g_head) REFERENCES user(u_id)
 );
-CREATE TABLE usergroup(
+CREATE TABLE IF NOT EXISTS usergroup(
   ug_user INTEGER NOT NULL,
   ug_group INTEGER NOT NULL,
   FOREIGN KEY(ug_user) REFERENCES user(u_id),
   FOREIGN KEY(ug_group) REFERENCES groups(g_id)
 );
-CREATE TABLE message(
+CREATE TABLE IF NOT EXISTS message(
   m_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   m_date DATETIME,
   m_contentJSON TEXT
 );
-CREATE TABLE room(
+CREATE TABLE IF NOT EXISTS room(
   r_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   r_name VARCHAR(40),
   r_descr TEXT
 );
-CREATE TABLE board(
+CREATE TABLE IF NOT EXISTS board(
   b_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   b_resX INTEGER,
   b_resY INTEGER,
   b_room INTEGER,
   FOREIGN KEY(b_room) REFERENCES room(r_id)
 );
-CREATE TABLE "_roomusers_old"(
+CREATE TABLE IF NOT EXISTS "_roomusers_old"(
   ru_room INTEGER NOT NULL,
   ru_user INTEGER NOT NULL,
   FOREIGN KEY(ru_room) REFERENCES room(r_id),
   FOREIGN KEY(ru_user) REFERENCES user(u_id)
 );
-CREATE TABLE "_user_old"(
+CREATE TABLE IF NOT EXISTS "_user_old"(
   u_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   u_name VARCHAR(30) NOT NULL,
   u_pw CHAR(64) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE "_user_old"(
   u_twitter TEXT,
   u_adminFlag INTEGER DEFAULT 0,
   u_pin INTEGER);
-CREATE TABLE status(
+CREATE TABLE IF NOT EXISTS status(
   s_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   s_user INTEGER NOT NULL,
   s_text VARCHAR(30),
@@ -61,7 +61,7 @@ CREATE TABLE status(
   s_until DATETIME,
   FOREIGN KEY(s_user) REFERENCES user(u_id)
 );
-CREATE TABLE user(
+CREATE TABLE IF NOT EXISTS user(
   u_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   u_name VARCHAR(30) NOT NULL,
   u_pw CHAR(64) NOT NULL,
@@ -72,12 +72,12 @@ CREATE TABLE user(
   u_twitter TEXT,
   u_adminFlag INTEGER DEFAULT 0,
   u_pin VARCHAR(64));
-CREATE TABLE feedback(
+CREATE TABLE IF NOT EXISTS feedback(
   f_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   f_content TEXT,
   f_date DATETIME
 );
-CREATE TABLE msgTo(
+CREATE TABLE IF NOT EXISTS msgTo(
   mt_user INTEGER NOT NULL,
   mt_message INTEGER NOT NULL,
   mt_seen INTEGER DEFAULT 0,
@@ -85,14 +85,14 @@ CREATE TABLE msgTo(
   FOREIGN KEY(mt_user) REFERENCES user(u_id),
   FOREIGN KEY(mt_message) REFERENCES message(m_id)
 );
-CREATE TABLE roomusers(
+CREATE TABLE IF NOT EXISTS roomusers(
   ru_room INTEGER NOT NULL,
   ru_user INTEGER NOT NULL,
   ru_available INTEGER DEFAULT 1,
   FOREIGN KEY(ru_room) REFERENCES room(r_id),
   FOREIGN KEY(ru_user) REFERENCES user(u_id)
 );
-CREATE TABLE background(
+CREATE TABLE IF NOT EXISTS background(
   bg_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   bg_user INTEGER NOT NULL,
   bg_url TEXT,

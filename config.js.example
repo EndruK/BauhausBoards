@@ -3,14 +3,16 @@ config.twitter = {};
 config.session = {};
 config.mail    = {};
 
-// Change the following lines:
+//twitter config:
 config.twitter.consumer_key = "0000000000000000000000000";
 config.twitter.consumer_secret = "00000000000000000000000000000000000000000000000000";
 config.twitter.access_token_key = "00000000000000000000000000000000000000000000000000";
 config.twitter.access_token_secret = "000000000000000000000000000000000000000000000";
-config.session.session_name = "Session";
-config.session.secret_hash = "00000000000000000000000000000000000000000000";
+//session config
+config.session.session_name = "Session"; //session name
+config.session.secret_hash = "00000000000000000000000000000000000000000000"; //phrase to sign session cookie with
 config.session.session_time = 900000; //time in ms
+//mail config
 config.mail.host = "localhost";
 config.mail.port = 25;
 config.mail.user = "";

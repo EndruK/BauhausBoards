@@ -48,7 +48,7 @@ var server = email.server.connect({
 
 
 app.use(session({
-  secret: conf.session.secret_hash, //TODO: set this in setupFile
+  secret: conf.session.secret_hash,
   name: conf.session.name,
   genid: function(req) {
     return uuid.v4();
@@ -56,7 +56,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   cookie:{
-    maxAge: conf.session.session_time //15min
+    maxAge: conf.session.session_time
   },
   rolling:true
 }));
@@ -93,7 +93,6 @@ app.use(function(req, res, next) {
   req.twitter = client;
   req.mail = server;
   req.crypto = crypto;
-  // req.banquo = banquo;
   next();
 });
 
