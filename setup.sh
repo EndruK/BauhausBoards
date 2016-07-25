@@ -1,6 +1,5 @@
 #!/bin/sh
 
-#TODO: create a sample board-room-user
 Check_dir() {
   directory=${PWD##*/}
   if [ "$directory" == "BauhausBoards" ]; then
