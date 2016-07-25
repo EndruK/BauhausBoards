@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var stylus  = require('stylus');
 var nib     = require('nib');
-var sqlite3 = require('sqlite3').verbose();
+var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database('data/bauhausboards.db');
 var session = require('express-session');
 var uuid = require('uuid');
@@ -60,6 +60,11 @@ app.use(session({
   },
   rolling:true
 }));
+
+// set app port to configured port
+var listener = app.listen(conf.app.port, function() {
+  console.log("\nListening on port " + listener.address().port);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

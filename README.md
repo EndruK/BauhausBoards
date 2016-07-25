@@ -19,11 +19,11 @@ npm install
 sh ./setup.sh
 cp ./config.js.example ./config.js
 nano ./config.js # change all parameters for your environment
-npm start server # start the server
+node app.js # start the server
 ```
 Addresses:
-- Mainpage: 127.0.0.1:3000
-- Adminpage: 127.0.0.1:3000/admin
+- Mainpage: 127.0.0.1:8080
+- Adminpage: 127.0.0.1:8080/admin
 
 
 <!--

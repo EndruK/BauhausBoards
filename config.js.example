@@ -4,6 +4,7 @@ config.session = {};
 config.mail    = {};
 
 //twitter config:
+config.app.port = 8080;
 config.twitter.consumer_key = "0000000000000000000000000";
 config.twitter.consumer_secret = "00000000000000000000000000000000000000000000000000";
 config.twitter.access_token_key = "00000000000000000000000000000000000000000000000000";
