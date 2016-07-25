@@ -1,4 +1,5 @@
 var config = {};
+config.app     = {};
 config.twitter = {};
 config.session = {};
 config.mail    = {};
