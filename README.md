@@ -25,6 +25,11 @@ Addresses:
 - Mainpage: 127.0.0.1:8080
 - Adminpage: 127.0.0.1:8080/admin
 
+admin user:
+admin@example.com
+
+password:
+password
 
 <!--
 TODO:
