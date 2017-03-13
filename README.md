@@ -16,7 +16,7 @@ This tool is the result of the [bachelor thesis](http://endruk.github.io/thesis.
 sudo pacman -S nodejs npm sqlite3 cairo libjpeg-turbo libjpeg6-turbo giflib libpango
 cd /path/to/BauhausBoards
 npm install
-sh ./setup.sh
+bash ./setup.sh
 cp ./config.js.example ./config.js
 nano ./config.js # change all parameters for your environment
 node app.js # start the server
